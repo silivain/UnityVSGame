@@ -2,8 +2,10 @@
 
 public class PlayerSpawn : MonoBehaviour
 {
+    public string ID;
+
     private void Awake()
     {
-      GameObject.FindGameObjectWithTag("Player").transform.position = transform.position;
+      GameObject.FindGameObjectWithTag(ID).transform.position = transform.position;
     }
 }

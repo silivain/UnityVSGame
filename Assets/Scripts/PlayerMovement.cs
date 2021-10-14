@@ -26,24 +26,64 @@ public class PlayerMovement : MonoBehaviour {
     private float horizontalMovement;
     private float verticalMovement;
 
+    public string horizontalAxis;
+    public KeyCode jump;
+    public KeyCode fire;
+
+    public GameObject bullet;
+    public Transform throwPoint;
+    private Vector3 throwPointPosition;
+    private Vector3 playerPosition;
+    private Vector3 direction;
+
     public static PlayerMovement instance;
 
-    private void Awake() {  //mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de PlayerMovement
-                            //permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
+    /*
+    mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de PlayerMovement
+    permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
+    */
+    private void Awake() {
+      /*
       if(instance != null) {
         Debug.LogWarning("Il y a plus d'une instance de PlayerMovement dans la scène.");
         return;
       }
-
       instance = this;
+      */
+      throwPointPosition = throwPoint.transform.position;
+      playerPosition = transform.position;
+      direction = new Vector3(1, 1, 1);
     }
 
+
     void Update() {
-      if (Input.GetKeyDown(KeyCode.V) && isGrounded && !isClimbing) {
+      throwPointPosition = throwPoint.position;
+      playerPosition = transform.position;
+
+      if (Input.GetKeyDown(jump) && isGrounded && !isClimbing) {
         isJumping = true;
       }
 
-      horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+      if (Input.GetAxis(horizontalAxis) > 0 && throwPointPosition.x < playerPosition.x) { // on va vers la droite mais le throwpoint est à gauche
+        playerPosition = transform.position;  // on update la position du perso
+        direction = new Vector3(1, 1, 1);     // direction dans laquelle le perso regarde
+        throwPointPosition.x = playerPosition.x + Mathf.Abs(playerPosition.x - throwPointPosition.x); // on recalcule le throwpoint
+        throwPoint.position = throwPointPosition; // et on le met à jour
+      }
+      if (Input.GetAxis(horizontalAxis) < 0 && throwPointPosition.x > playerPosition.x) { // on va vers la gauche mais le throwpoint est à droite
+        playerPosition = transform.position;  // on update la position du perso
+        direction = new Vector3(-1, 1, 1);   // direction dans laquelle le perso regarde
+        throwPointPosition.x = playerPosition.x - Mathf.Abs(playerPosition.x - throwPointPosition.x); // on recalcule le throwpoint
+        throwPoint.position = throwPointPosition; // et on le met à jour
+      }
+
+      if (Input.GetKeyDown(fire)) {
+        GameObject bulletClone = (GameObject) Instantiate(bullet, throwPoint.position, throwPoint.rotation);
+        bulletClone.transform.localScale = direction;
+        //anim.SetTrigger("fire anim");
+      }
+
+      horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
       verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
       Flip(rb.velocity.x);

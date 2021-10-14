@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerLives : MonoBehaviour
 {
     private Transform playerSpawn;
-    private Animator fadeSystem;
+    //private Animator fadeSystem;
 
     public int maxLivesCount;
     public int livesCount;
@@ -22,7 +22,7 @@ public class PlayerLives : MonoBehaviour
       instance = this;
 
       playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
-      fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+      //fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
 
     public void AddLives(int count)
@@ -62,7 +62,7 @@ public class PlayerLives : MonoBehaviour
       }
       else
       {
-        fadeSystem.SetTrigger("FadeIn");
+        //fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         PlayerLives.instance.RemoveLives(1);
         PlayerHealth.instance.Respawn();
@@ -78,7 +78,7 @@ public class PlayerLives : MonoBehaviour
       }
       else
       {
-        fadeSystem.SetTrigger("FadeIn");
+        //fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         PlayerLives.instance.RemoveLives(1);
         player.position = playerSpawn.position;

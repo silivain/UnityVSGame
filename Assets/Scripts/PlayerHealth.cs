@@ -17,9 +17,12 @@ public class PlayerHealth : MonoBehaviour
 
     public static PlayerHealth instance;
 
+    /*
+    mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de
+    permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
+
     private void Awake()
-    {                       //mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de PlayerHealth
-                            //permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
+    {}
       if(instance != null)
       {
         Debug.LogWarning("Il y a plus d'une instance de PlayerHealth dans la scène.");
@@ -28,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
       instance = this;
     }
+    */
 
     void Start()
     {
