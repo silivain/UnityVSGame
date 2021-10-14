@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool isGrounded;
     [HideInInspector]
     public bool isClimbing;
+    private bool m_FacingRight = true;  //Pour determiner la direction dans laquelle se trouve le perso (et ses enfants)
 
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -46,7 +47,17 @@ public class PlayerMovement : MonoBehaviour {
       horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.fixedDeltaTime;
       verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
-      Flip(rb.velocity.x);
+      //Si le personnage se deplace vers la droite, mais n'est pas dirigé vers la droite
+      if (horizontalMovement > 0 && !m_FacingRight)
+			{
+				Flip(); // on le retourne
+			}
+			// idem dans le sens contraire (va à gauche, dirigé à droite)
+			else if (horizontalMovement < 0 && m_FacingRight)
+			{
+				Flip();
+			}
+
 
       animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
       animator.SetBool("isClimbing", isClimbing);
@@ -77,13 +88,13 @@ public class PlayerMovement : MonoBehaviour {
       }
     }
 
-    void Flip(float _velocity) {
-      if(_velocity > 0.1f) {
-        spriteRenderer.flipX = false;
-      }else if(_velocity < -0.1f) {
-        spriteRenderer.flipX = true;
-      }
-    }
+    private void Flip()
+	{
+		// Change la direction suposé du personnage
+		m_FacingRight = !m_FacingRight;
+
+		transform.Rotate(0f, 180f, 0f);
+	}
 
     private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
       Gizmos.color = Color.red;
