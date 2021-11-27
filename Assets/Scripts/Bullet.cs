@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
 
    public float bulletSpeed;
+   public int damageOnCollision = 5;
    //public GameObject bulletEffect;
    private Rigidbody2D rb;
 
@@ -24,6 +25,10 @@ public class Bullet : MonoBehaviour
 
    void OnTriggerEnter2D(Collider2D other) {
        //Instantiate(bulletEffect, transform.position, transform.position);
+       if(other.transform.CompareTag("Player 1") || other.transform.CompareTag("Player 2")) {
+         PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
+         playerHealth.TakeDamage(damageOnCollision);
+       }
        Destroy(gameObject);
    }
 }

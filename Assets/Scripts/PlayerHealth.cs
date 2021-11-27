@@ -7,11 +7,13 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    /*
     public float invincibilityTimeAfterHit = 3f;
     public float invincibilityFlashDelay = 0.15f;
     public bool isInvincible = false;
+    */
 
-    public SpriteRenderer graphics;
+    //public SpriteRenderer graphics;
     public HealthBar healthBar;
     public Transform player;
 
@@ -43,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
       if(Input.GetKeyDown(KeyCode.H))
       {
-        TakeDamage(100);
+        TakeDamage(5);
       }
     }
 
@@ -55,6 +57,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+      currentHealth = Mathf.Max(0, currentHealth - damage);
+      healthBar.SetHealth(currentHealth);
+
+      /*
       if(!isInvincible)
       {
         currentHealth = Mathf.Max(0, currentHealth - damage);
@@ -70,6 +76,7 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(InvincibilityFlash()); //mecanisme pour gerer des durees
         StartCoroutine(HandleInvincibilityDelay());
       }
+      */
     }
 
     public void Respawn() //video16
@@ -82,6 +89,7 @@ public class PlayerHealth : MonoBehaviour
       healthBar.SetHealth(currentHealth);
     }
 
+    /*
     public IEnumerator InvincibilityFlash()
     {
       while(isInvincible)
@@ -92,10 +100,13 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(invincibilityFlashDelay);
       }
     }
+    */
 
+    /*
     public IEnumerator HandleInvincibilityDelay()
     {
       yield return new WaitForSeconds(invincibilityTimeAfterHit);
       isInvincible = false;
     }
+    */
 }
