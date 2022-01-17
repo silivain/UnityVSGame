@@ -44,3 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerPresentByDefault: 0
+  coinsPickedUpInThisSceneCount: 0
+  maxPowerUp: 1
+  newPowerUp:
+  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
+  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
+  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
+  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
+  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
+  powerUpSpawnPosition:
+  - {x: 40, y: -13.2, z: 0}
+  - {x: 65, y: -13.2, z: 0}
+  - {x: 80, y: -13.2, z: 0}
+  PowerUpSpawnTime: 2

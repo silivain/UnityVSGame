@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour {
       if (Input.GetKeyDown(fire)) {
         GameObject bulletClone = (GameObject) Instantiate(bullet, throwPoint.position, throwPoint.rotation);
         bulletClone.transform.localScale = direction;
+        Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84");
         //anim.SetTrigger("fire anim");
       }
 
