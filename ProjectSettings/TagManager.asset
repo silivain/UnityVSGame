@@ -8,6 +8,8 @@ TagManager:
   - Player 1
   - Player 2
   - Item
+  - Weapon
+  - Equipement
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,8 @@ public class ItemStats : MonoBehaviour
 {
   // nombre total d'item dans le jeu
   private static int nbItem = 5;
+
+  // nombre de stats (commun aux items, armes et équipements)
   private static int nbStats = 3;
 
   // tableau contenant le nom de tous les items
@@ -37,7 +39,7 @@ public class ItemStats : MonoBehaviour
   }
 
   /* Renvoie les stats correspondant à l'item 's'
-  * Si aucun n'item ne correspond à la string passée en argument :
+  * Si aucun item ne correspond à la string passée en argument :
   * debug et return null <- TODO perror au lieu de debug
   */
   public float[] getStats(string s) {
