@@ -7,6 +7,7 @@ TagManager:
   - PlayerSpawn
   - Player 1
   - Player 2
+  - Item
   layers:
   - Default
   - TransparentFX

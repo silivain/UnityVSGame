@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131177716760367125}
   - component: {fileID: 131177716760367124}
+  - component: {fileID: 1537449751}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -45,15 +46,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerPresentByDefault: 0
   coinsPickedUpInThisSceneCount: 0
-  maxPowerUp: 1
-  newPowerUp:
+  maxItem: 1
+  newItem:
   - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
   - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
   - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
   - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
   - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  powerUpSpawnPosition:
+  itemSpawnPosition:
   - {x: 40, y: -13.2, z: 0}
   - {x: 65, y: -13.2, z: 0}
   - {x: 80, y: -13.2, z: 0}
-  PowerUpSpawnTime: 2
+  itemSpawnTime: 2
+--- !u!114 &1537449751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131177716760367127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4372c0dd18b18d7a2d2f11ae2cbdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

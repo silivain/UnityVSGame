@@ -162,6 +162,24 @@ MonoBehaviour:
   currentHealth: 0
   healthBar: {fileID: 1218352826}
   player: {fileID: 219905127}
+--- !u!114 &219905122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219905120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3b57a0441067cefad51471ddc67fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: []
+  itemStats:
+  - 0
+  - 0
+  - 0
+  weapon: {fileID: 0}
 --- !u!4 &219905127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8265003993854808600, guid: f1ea53d5aa3f320b78e820aa9b6df962,
@@ -2753,7 +2771,7 @@ PrefabInstance:
     - target: {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74,
         type: 3}
       propertyPath: m_Name
-      value: SpawningItem
+      value: item1
       objectReference: {fileID: 0}
     - target: {fileID: 77745769944575332, guid: 762415c09c340074e91f893e1aec9e74,
         type: 3}

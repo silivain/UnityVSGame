@@ -88,17 +88,11 @@ public class PlayerMovement : MonoBehaviour {
       horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
       verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
-      //Si le personnage se deplace vers la droite, mais n'est pas dirigé vers la droite
-      if (horizontalMovement > 0 && !m_FacingRight)
+      // Si le personnage se déplace dans un sens mais est tourné vers l'autre
+      if ((horizontalMovement > 0 && !m_FacingRight) || (horizontalMovement < 0 && m_FacingRight))
 			{
 				Flip(); // on le retourne
 			}
-			// idem dans le sens contraire (va à gauche, dirigé à droite)
-			else if (horizontalMovement < 0 && m_FacingRight)
-			{
-				Flip();
-			}
-
 
       animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
       animator.SetBool("isClimbing", isClimbing);
