@@ -3,9 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class DontDestroyOnLoadScene : MonoBehaviour
 {
-    public GameObject[] objects;
+    // list of gameobjects that must not be detroyed between scences
+    // TODO this script is not used yet
+    /* TODO not sure we should use it, since players will reselect their
+                                              characters between games */
 
-    public static DontDestroyOnLoadScene instance;
+
+    public GameObject[] objects;                    // list of gameobjects to preserve
+
+    public static DontDestroyOnLoadScene instance;  // class instance (only 1 in the entire game)
 
     private void Awake()
     {
@@ -18,10 +24,12 @@ public class DontDestroyOnLoadScene : MonoBehaviour
 
       foreach(var element in objects)
       {
-        DontDestroyOnLoad(element);
+        DontDestroyOnLoad(element);   // sets the gameobjects to 'DontDestroyOnLoad'
       }
     }
 
+    /* Remove gameobjects from the 'DontDestroyOnLoad' list
+    */
     public void RemoveFromDontDestroyOnLoad() //video 16
     {
       foreach(var element in objects)
