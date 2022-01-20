@@ -140,47 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: Player 2
---- !u!1 &219905120 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8265003993854808606, guid: f1ea53d5aa3f320b78e820aa9b6df962,
-    type: 3}
-  m_PrefabInstance: {fileID: 8265003994522593581}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &219905121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219905120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629b36b5dff70b213839c98c633e214a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 1218352826}
-  player: {fileID: 219905127}
---- !u!114 &219905122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219905120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3b57a0441067cefad51471ddc67fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: []
---- !u!4 &219905127 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8265003993854808600, guid: f1ea53d5aa3f320b78e820aa9b6df962,
-    type: 3}
-  m_PrefabInstance: {fileID: 8265003994522593581}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &353654845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 131177716760367127, guid: 86ed43ec948a4d168af606ebc8a97104,
@@ -23746,6 +23705,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 219905121, guid: f1ea53d5aa3f320b78e820aa9b6df962, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 404257702}
     - target: {fileID: 8265003993854808600, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
       propertyPath: m_RootOrder
@@ -23828,34 +23791,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1ea53d5aa3f320b78e820aa9b6df962, type: 3}
---- !u!1 &1280596681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8265003993854808606, guid: f1ea53d5aa3f320b78e820aa9b6df962,
-    type: 3}
-  m_PrefabInstance: {fileID: 1280596680}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1280596682 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8265003993854808600, guid: f1ea53d5aa3f320b78e820aa9b6df962,
-    type: 3}
-  m_PrefabInstance: {fileID: 1280596680}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1280596683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280596681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629b36b5dff70b213839c98c633e214a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 404257702}
-  player: {fileID: 1280596682}
 --- !u!1 &1335244394
 GameObject:
   m_ObjectHideFlags: 0
@@ -24405,6 +24340,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 219905121, guid: f1ea53d5aa3f320b78e820aa9b6df962, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1218352826}
     - target: {fileID: 8265003993854808600, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
       propertyPath: m_RootOrder
@@ -24459,11 +24398,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
-        type: 3}
-      propertyPath: fire
-      value: 323
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808606, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
