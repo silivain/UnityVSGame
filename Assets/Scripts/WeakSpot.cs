@@ -1,13 +1,17 @@
-//video 4
-
 ﻿using UnityEngine;
 
-public class WeakSpot : MonoBehaviour
+// point faible des mobs
+// zone qui les tue si le joueur entre en contact
+// TODO script pas encore utilisé
+public class WeakSpot : MonoBehaviour	//video 4
 {
-    public GameObject objectToDestroy;
+    public GameObject objectToDestroy;	// mob dont le collider est l'enfant
 
+
+	/* détruit le mob
+	*/
     private void OnTriggerEnter2D(Collider2D collision) {
-      if(collision.CompareTag("Player")) { //le tag se trouve en haut à droite, sous le nom du gameobject dans l'interface unity (l'objet doit être sélectionné)
+      if(collision.CompareTag("Player")) {
         Destroy(objectToDestroy);
       }
     }

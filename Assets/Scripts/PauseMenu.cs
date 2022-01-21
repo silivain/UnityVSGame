@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// menu pause et ses bouttons
+// TODO script pas encore utilisé
 public class PauseMenu : MonoBehaviour
 {
-    public static bool gameIsPaused = false;
-    public GameObject pauseMenuUI;
-    public GameObject settingsWindow;
+    public static bool gameIsPaused = false;	// vrai si le jeu est en pause
+    public GameObject pauseMenuUI;				// fenêtre du menu pause
+    public GameObject settingsWindow;			// fenêtre des paramètres
 
-    void Update()
-    {
-      if(Input.GetKeyDown(KeyCode.Escape))
-      {
-        if(gameIsPaused)
-        {
+
+	/* active ou désactive la pause
+	*/
+    void Update() {
+      if(Input.GetKeyDown(KeyCode.Escape)) {
+        if(gameIsPaused) {
           Resume();
         }
-        else
-        {
+        else {
           Paused();
         }
       }
     }
 
+	/* déclenche la pause
+	* freeze le temps et le joueur, affiche le menu pause
+	*/
     public void Paused()
     {
       PlayerMovement.instance.enabled = false;
@@ -30,6 +34,8 @@ public class PauseMenu : MonoBehaviour
       gameIsPaused = true;
     }
 
+	/* désactive la pause
+	*/
     public void Resume()
     {
       PlayerMovement.instance.enabled = true;
@@ -38,16 +44,23 @@ public class PauseMenu : MonoBehaviour
       gameIsPaused = false;
     }
 
+	/* affiche le menu des paramètres
+	*/
     public void SettingsButton()
     {
       settingsWindow.SetActive(true);
     }
 
+	/* ferme le menu des paramètres
+	*/
     public void CloseSettingsWindow()
     {
       settingsWindow.SetActive(false);
     }
 
+	/* charge le main menu
+	* supprime tous les gameObjects de la scène
+	*/
     public void LoadMainMenu()
     {
       DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();

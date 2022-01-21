@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// stats des joueurs, de leurs items et de leurs armes
+// TODO classe mère de PlayerStats, ItemStats et WeaponStats (Stats ?)
+// -> éviter les multiples définitions de nbItem, weapon, equip et stats
 public class PlayerStats : MonoBehaviour
 {
-    // TODO classe mère de PlayerStats, ItemStats et WeaponStats (Stats ?)
-    // -> éviter les multiples définitions de nbItem, weapon, equip et stats
-
-    // nombre de stats (commun aux items, armes et équipements)
+	// nombre de stats (commun aux items, armes et équipements)
     private static int nbStats = 3;
 
     // nombre total d'armes dans le jeu
@@ -38,6 +38,7 @@ public class PlayerStats : MonoBehaviour
     // stats cumulées de tous les équipements montés
     private float[] equipStats;
 
+
     void Awake() {
       // TODO init tous les tabs de stats (à faire à chaque début de scène ?? -> opti)
       itemStats = new float[nbStats];
@@ -57,16 +58,17 @@ public class PlayerStats : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
+
     /* Équipe l'arme sur le player, ce qui modifie ses stats totales
     * si le player était déjà équipé d'une arme, la remplace
     * les stats de l'arme sont stockées dans la classe 'WeaponStats'
     */
-    public void setWeapon(GameObject w)
-    {
+    public void setWeapon(GameObject w) {
       weapon = w;
       weaponStats = WeaponStats.instance.getWeaponStats(w.name);
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
+
 
     /* Équipe l'équipement sur l'arme du player, ce qui modifie ses stats totales
     * si le player était déjà équipé du même équipement, ne modifie rien
@@ -88,6 +90,7 @@ public class PlayerStats : MonoBehaviour
         equipStats[i] += tab[i];
       }
     }
+
 
     /* Fonction déclenchée par la récupération d'un item dans la scène
     * le paramètre 'other' correspondau collider de l'item collecté

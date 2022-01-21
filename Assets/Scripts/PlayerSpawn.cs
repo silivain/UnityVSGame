@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
+// spawn des joueurs sur la scène
 public class PlayerSpawn : MonoBehaviour
 {
-    public string ID;
+    public string ID;	// tag du joueur concerné par le spawn
 
-    private void Awake()
-    {
+	/* place le joueur de tag 'ID' sur le spawn
+	*/
+    private void Awake() {
       GameObject.FindGameObjectWithTag(ID).transform.position = transform.position;
     }
 }

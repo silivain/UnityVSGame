@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// répertorie les stats des différents items
 public class ItemStats : MonoBehaviour
 {
   // nombre total d'item dans le jeu
@@ -10,15 +11,16 @@ public class ItemStats : MonoBehaviour
   // nombre de stats (commun aux items, armes et équipements)
   private static int nbStats = 3;
 
-  // tableau contenant le nom de tous les items
-  // l'index du nom de l'item correspond à l'index des stats de cet item dans 'itemStats'
+  /* tableau contenant le nom de tous les items
+    l'index du nom de l'item correspond à l'index des stats de cet item dans 'itemStats' */
   private string[] itemNames = new string[nbItem];
 
   // tableau contenant les stats de tous les items
   private float[][] itemStats = new float[nbItem][];
 
-  public static ItemStats instance;
+  public static ItemStats instance; // instance de la classe
 
+  // évite les doublons -> classe "statique"
   private void Awake()
   {
     if (instance != null)
@@ -37,6 +39,7 @@ public class ItemStats : MonoBehaviour
       itemStats[i] = tab;
     }
   }
+
 
   /* Renvoie les stats correspondant à l'item 's'
   * Si aucun item ne correspond à la string passée en argument :

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// gère les items dans la scène
 public class CurrentSceneManager : MonoBehaviour
 {
   public bool isPlayerPresentByDefault = false;
@@ -13,15 +14,16 @@ public class CurrentSceneManager : MonoBehaviour
   private int currentItem;             // nb courant d'items présents dans la scène
 
   public GameObject [] newItem;        // tableau contenant les différents items pouvant apparaître sur la scène
-                                          // TODO à fusionner avec itemNames ?
+                                       // TODO à fusionner avec itemNames ?
 
   public Vector3 [] itemSpawnPosition; // emplacements dans la scène où faire apparaître les items
 
   public int itemSpawnTime;            // temps d'attente une fois un item collecté, avant l'apparition du prochain
 
-  // évite les doublons -> classe "statique"
-  public static CurrentSceneManager instance;
 
+  public static CurrentSceneManager instance; // instance de la classe
+
+  // évite les doublons -> classe "statique"
   private void Awake()
   {
     if (instance != null)
@@ -51,7 +53,8 @@ public class CurrentSceneManager : MonoBehaviour
   * l'item est généré à un emplacement aléatoire parmi ceux définis dans la scène
   */
   private GameObject InstantiateItem() {
-    GameObject nb = (GameObject) Instantiate(newItem[Random.Range(0, newItem.Length)], itemSpawnPosition[Random.Range(0, itemSpawnPosition.Length)], new Quaternion(0, 0, 0, 1));
+    GameObject nb = (GameObject) Instantiate(newItem[Random.Range(0, newItem.Length)],
+      itemSpawnPosition[Random.Range(0, itemSpawnPosition.Length)], new Quaternion(0, 0, 0, 1));
     BoxCollider2D m_collider = nb.GetComponent<BoxCollider2D>();
 
     // le collider était désactivé lors de mes test (Brett)

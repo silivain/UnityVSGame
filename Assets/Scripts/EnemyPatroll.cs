@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
+// create a path for mobs to follow, mobs will loop on this path
+// TODO this script is not used yet
+// TODO create trapped items like bombs that run on defined zones before exploding for ex ?
 public class EnemyPatroll : MonoBehaviour
 {
-    // create a path for mobs to follow, mobs will loop on this path
-    // TODO this script is not used yet
-    // TODO create trapped items like bombs that run on defined zones before exploding for ex ?
-
     public float speed;                 // mob speed
     public Transform[] waypoints;       // points the mob will pass through
 

@@ -1,136 +1,128 @@
-//video 2
-
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+// mécanismes de mouvements des joueurs
+public class PlayerMovement : MonoBehaviour {	//video 2
 
-    public float moveSpeed;
-    public float climbSpeed;
-    public float jumpForce;
+    public float moveSpeed;		// vitesse de déplacement latéral
+    public float climbSpeed;	// vitesse sur échelles
+    public float jumpForce;		// puissance de saut
 
-    private bool isJumping;
-    private bool isGrounded;
-    [HideInInspector]
-    public bool isClimbing;
-    private bool m_FacingRight = true;  //Pour determiner la direction dans laquelle se trouve le perso (et ses enfants)
+    private bool isJumping;		// vrai si le perso est en l'air
+    private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask collisionLayers;
+	[HideInInspector]			// cache les variables suivantes dans l'inspecteur d'unity
+    public bool isClimbing;						// vrai si le joueur grimpe
 
-    public Rigidbody2D rb;
-    public Animator animator;
-    public SpriteRenderer spriteRenderer;
-    public CapsuleCollider2D playerCollider;
+    public Transform groundCheck;				// détecte la présence du sol (tilemap 0)
+    public float groundCheckRadius;				// marge de détection
+    public LayerMask collisionLayers;			// layers pris en compte par le groundCheck
 
-    private Vector3 velocity = Vector3.zero;
-    private float horizontalMovement;
-    private float verticalMovement;
+    public Rigidbody2D rb;						// rigidbody du joueur
+    public Animator animator;					// animator
+    public SpriteRenderer spriteRenderer;		// spriteRenderer
+    public CapsuleCollider2D playerCollider;	// collider
 
-    public string horizontalAxis;
-    public KeyCode jump;
-    public KeyCode fire;
+    private Vector3 velocity = Vector3.zero;	// vitesse courante du joueur (3D)
+    private float horizontalMovement;			// vitesse horizontale
+    private float verticalMovement;				// vitesse verticale
 
-    public GameObject bullet;
-    public Transform throwPoint;
-    private Vector3 throwPointPosition;
-    private Vector3 playerPosition;
-    private Vector3 direction;
+    public string horizontalAxis;				// axe horizontal (utile pour les controles)
+    public KeyCode jump;						// touche de saut
+    public KeyCode fire;						// touche de tir
 
-    public static PlayerMovement instance;
+    public GameObject bullet;					// gameobject tiré lorsque 'fire' pressed
+    public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
+    private Vector3 throwPointPosition;			// position du point ci-dessus
+    private Vector3 playerPosition;				// position du joueur
+	private float powSign;						// 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
+	private float sign;							// -1 ou 1, direction du joueur sur l'axe x
 
-    /*
-    mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de PlayerMovement
-    permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
-    */
+    public static PlayerMovement instance;		// instance de la classe
+
+	/* init de variables
+	*/
     private void Awake() {
-      /*
-      if(instance != null) {
-        Debug.LogWarning("Il y a plus d'une instance de PlayerMovement dans la scène.");
-        return;
-      }
-      instance = this;
-      */
-      throwPointPosition = throwPoint.transform.position;
-      playerPosition = transform.position;
-      direction = new Vector3(1, 1, 1);
+		throwPointPosition = throwPoint.transform.position;
+		playerPosition = transform.position;
+		powSign = 0f;
+		sign = Mathf.Pow(-1f, powSign);
     }
 
 
+	/* détecte les différents inputs et appelle les fonctions appropriées
+	*/
     void Update() {
       throwPointPosition = throwPoint.position;
       playerPosition = transform.position;
 
+	  // saut
       if (Input.GetKeyDown(jump) && isGrounded && !isClimbing) {
         isJumping = true;
       }
 
-      if (Input.GetAxis(horizontalAxis) > 0 && throwPointPosition.x < playerPosition.x) { // on va vers la droite mais le throwpoint est à gauche
-        playerPosition = transform.position;  // on update la position du perso
-        direction = new Vector3(1, 1, 1);     // direction dans laquelle le perso regarde
-        throwPointPosition.x = playerPosition.x + Mathf.Abs(playerPosition.x - throwPointPosition.x); // on recalcule le throwpoint
-        throwPoint.position = throwPointPosition; // et on le met à jour
-      }
-      if (Input.GetAxis(horizontalAxis) < 0 && throwPointPosition.x > playerPosition.x) { // on va vers la gauche mais le throwpoint est à droite
-        playerPosition = transform.position;  // on update la position du perso
-        direction = new Vector3(-1, 1, 1);   // direction dans laquelle le perso regarde
-        throwPointPosition.x = playerPosition.x - Mathf.Abs(playerPosition.x - throwPointPosition.x); // on recalcule le throwpoint
-        throwPoint.position = throwPointPosition; // et on le met à jour
-      }
-
+	  // tir
       if (Input.GetKeyDown(fire)) {
         GameObject bulletClone = (GameObject) Instantiate(bullet, throwPoint.position, throwPoint.rotation);
-        bulletClone.transform.localScale = direction;
-        //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84");
-        //anim.SetTrigger("fire anim");
+        bulletClone.transform.localScale = new Vector3(sign, 1, 1);
+        //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
+        //anim.SetTrigger("fire anim"); animation
       }
 
+	  // maj des vitesses horizontales et verticales
       horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
       verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
-      // Si le personnage se déplace dans un sens mais est tourné vers l'autre
-      if ((horizontalMovement > 0 && !m_FacingRight) || (horizontalMovement < 0 && m_FacingRight))
-			{
-				Flip(); // on le retourne
-			}
+      // changement de direction du joueur
+	  if ((horizontalMovement > 0 && sign < 0) || (horizontalMovement < 0 && sign > 0)) {
+		Flip();
+	  }
 
-      animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+	  // huh ? lié à l'animation, mais sert à quoi ?
+	  animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
       animator.SetBool("isClimbing", isClimbing);
     }
 
-    void FixedUpdate()
-    {
+
+	/* appelé à un taux de frames fixé, et pas à chaque frame
+	* maj du controle par rapport au sol et déplace le joueur
+	*/
+    void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
       MovePlayer(horizontalMovement, verticalMovement);
     }
 
+
+	/* déplace le joueur en fonction de sa situation et des forces qui lui sont appliquées
+	*/
     void MovePlayer(float _horizontalMovement, float _verticalMovement) {
-      if(!isClimbing)
-      {
+      if(!isClimbing) {
         Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 
-        if(isJumping)
-        {
+        if(isJumping) {
           rb.AddForce(new Vector2(0f, jumpForce));
           isJumping = false;
         }
       }
-      else  //video 12
-      {
+      else {	//video 12
         Vector3 targetVelocity = new Vector2(0, _verticalMovement);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
       }
     }
 
-    private void Flip()
-	{
-		// Change la direction suposé du personnage
-		m_FacingRight = !m_FacingRight;
-
+	/* retourne la transform du personnage ainsi que son throwPoint
+	*/
+    private void Flip() {
 		transform.Rotate(0f, 180f, 0f);
+
+		powSign = (++powSign) % 2;
+		sign = Mathf.Pow(-1f, powSign);
+		throwPointPosition.x += sign * 2 * Mathf.Abs(playerPosition.x - throwPointPosition.x);
+        //throwPoint.position = throwPointPosition;	refresh, semble pas nécessaire
 	}
 
+	/* affiche le groundCheck à l'écran (debug)
+	*/
     private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
       Gizmos.color = Color.red;
       Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);

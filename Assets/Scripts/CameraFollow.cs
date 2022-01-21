@@ -1,14 +1,10 @@
-//fin video 3
-
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+// set a smooth camera follow when the player moves on screen
+// TODO this script is not used yet
+// TODO this script is made for one player
+public class CameraFollow : MonoBehaviour	//fin video 3
 {
-    // set a smooth camera follow when the player moves on screen
-    // TODO this script is not used yet
-    // TODO this script is made for one player
-
-
     public GameObject player; // player the camera is focused on
     private Vector3 velocity; // camera speed
 

@@ -2,45 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// système de vie des joueurs
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public int maxHealth = 100;	// vie max du joueur
+    public int currentHealth;	// vie courante du joueur
 
-    /*
+    /* système d'invincibilité après prise de dégats
     public float invincibilityTimeAfterHit = 3f;
     public float invincibilityFlashDelay = 0.15f;
     public bool isInvincible = false;
     */
 
     //public SpriteRenderer graphics;
-    public HealthBar healthBar;
-    public Transform player;
+    public HealthBar healthBar;	// barre de vie du joueur
+    public Transform player;	// transform du joueur
 
-    public static PlayerHealth instance;
+    public static PlayerHealth instance;	// instance de la classe
 
-    /*
-    mécanisme de singleton : garantit qu'il n'y ait qu'une seule instance de
-    permet aussi d'appeler ce script de puis n'importe quel autre script sans utiliser de ref
 
-    private void Awake()
-    {}
-      if(instance != null)
-      {
-        Debug.LogWarning("Il y a plus d'une instance de PlayerHealth dans la scène.");
-        return;
-      }
-
-      instance = this;
-    }
-    */
-
-    void Start()
-    {
+	/* remplit la vie et la barre de vie du joueur au démarrage
+	*/
+    void Start() {
       currentHealth = maxHealth;
       healthBar.SetMaxHealth(maxHealth);
     }
 
+
+	/* système de debug : inflige des dégats au joueur lorsque 'H' est utilisée
+	* TODO à retirer lorsque implem finie
+	*/
     void Update()
     {
       if(Input.GetKeyDown(KeyCode.H))
@@ -49,12 +40,18 @@ public class PlayerHealth : MonoBehaviour
       }
     }
 
+
+	/* heal le joueur de 'amount' pv, et met à jour la barre de vie
+	*/
     public void HealPlayer(int amount)
     {
       currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
       healthBar.SetHealth(currentHealth);
     }
 
+
+	/* inflige 'damage' dégats au joueur, et met à jour la barre de vie
+	*/
     public void TakeDamage(int damage)
     {
       currentHealth = Mathf.Max(0, currentHealth - damage);
@@ -79,6 +76,9 @@ public class PlayerHealth : MonoBehaviour
       */
     }
 
+	/* respawn le joueur au respawn point courant à la mort du joueur
+	* reset ses stats
+	*/
     public void Respawn() //video16
     {
       PlayerMovement.instance.enabled = true;
@@ -90,6 +90,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     /*
+	* affichage d'un clignotement pdnt la période d'invincibilité
     public IEnumerator InvincibilityFlash()
     {
       while(isInvincible)
@@ -103,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
     */
 
     /*
+	* mécanisme de durée de l'invincibilité
     public IEnumerator HandleInvincibilityDelay()
     {
       yield return new WaitForSeconds(invincibilityTimeAfterHit);
