@@ -34,6 +34,9 @@ public class Bullet : MonoBehaviour
 		if(other.transform.CompareTag("Player 1") || other.transform.CompareTag("Player 2")) {
 			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
 			playerHealth.TakeDamage(damageOnCollision);
+			// TODO appel à la fonction de recul en passant les arguments nécessaires
+			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
+			PlayerMovement.instance.Recoil(other, rb);
 		}
 		Destroy(gameObject);
 	}

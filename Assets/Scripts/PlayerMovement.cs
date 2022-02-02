@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 		playerPosition = transform.position;
 		powSign = 0f;
 		sign = Mathf.Pow(-1f, powSign);
+		instance = this;
     }
 
 
@@ -119,6 +120,16 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 		sign = Mathf.Pow(-1f, powSign);
 		throwPointPosition.x += sign * 2 * Mathf.Abs(playerPosition.x - throwPointPosition.x);
         //throwPoint.position = throwPointPosition;	refresh, semble pas nécessaire
+	}
+
+
+	/* Applique une force de recul au joueur après avoir été touché par un projectile
+	*/
+	public void Recoil(Collider2D targetHit, Rigidbody2D bulletRB) {
+		// Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
+		// TODO possible vector3 et composante z pour le projectile si traj non horizontale
+		// TODO remplacer la constante 0.5f par une valeur recup dans les stats de l'arme
+		targetHit.attachedRigidbody.AddForce(0.5f * bulletRB.velocity, ForceMode2D.Impulse);
 	}
 
 	/* affiche le groundCheck à l'écran (debug)
