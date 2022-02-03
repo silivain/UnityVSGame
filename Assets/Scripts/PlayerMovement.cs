@@ -6,8 +6,10 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
+	public float dashForce;		// puissance de dash
 
     private bool isJumping;		// vrai si le perso est en l'air
+	private bool isDashing;		// vrai si le perso est en train de dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
 	[HideInInspector]			// cache les variables suivantes dans l'inspecteur d'unity
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
+	public KeyCode dash;						// touche de dash
     public KeyCode fire;						// touche de tir
 
     public GameObject bullet;					// gameobject tiré lorsque 'fire' pressed
@@ -61,10 +64,16 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         isJumping = true;
       }
 
+	  // dash
+	  if (Input.GetKeyDown(dash) && !isClimbing) {
+		  isDashing = true;
+      }
+
 	  // tir
       if (Input.GetKeyDown(fire)) {
         GameObject bulletClone = (GameObject) Instantiate(bullet, throwPoint.position, throwPoint.rotation);
         bulletClone.transform.localScale = new Vector3(sign, 1, 1);
+		// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
         //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
         //anim.SetTrigger("fire anim"); animation
       }
@@ -103,6 +112,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         if(isJumping) {
           rb.AddForce(new Vector2(0f, jumpForce));
           isJumping = false;
+        }
+
+		if(isDashing) {
+			rb.AddForce(new Vector2(sign * dashForce, 0f));
+			isDashing = false;
         }
       }
       else {	//video 12

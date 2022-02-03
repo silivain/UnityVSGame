@@ -163,6 +163,7 @@ MonoBehaviour:
   moveSpeed: 250
   climbSpeed: 150
   jumpForce: 300
+  dashForce: 300
   isClimbing: 0
   groundCheck: {fileID: 8265003993909638400}
   groundCheckRadius: 0.4
@@ -175,6 +176,7 @@ MonoBehaviour:
   playerCollider: {fileID: 8265003993854808597}
   horizontalAxis: Horizontal 1
   jump: 32
+  dash: 304
   fire: 323
   bullet: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8, type: 3}
   throwPoint: {fileID: 8265003994093004045}

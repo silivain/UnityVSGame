@@ -23766,6 +23766,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
+      propertyPath: dash
+      value: 303
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
       propertyPath: fire
       value: 305
       objectReference: {fileID: 0}
@@ -23773,6 +23778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: jump
       value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: dashForce
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
@@ -24398,6 +24408,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: dashForce
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808606, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
