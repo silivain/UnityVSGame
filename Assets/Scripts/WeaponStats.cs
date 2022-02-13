@@ -18,7 +18,9 @@ public class WeaponStats : MonoBehaviour
 	// l'index du nom de l'arme correspond à l'index des stats de cette arme dans 'weaponStats'
 	private string[] weaponNames = new string[nbWeapon];
 
-	// tableau contenant les stats de toutes les armes
+	/* tableau contenant les stats de toutes les armes
+	* 1 : objet instancié
+	*/
 	private float[][] weaponStats = new float[nbWeapon][];
 
 	// tableau contenant le nom de tous les équipements

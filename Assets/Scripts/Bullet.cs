@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 	private Rigidbody2D rb;            // bullet rigidbody
 
 
-   	// Start is called before the first frame update
+  // Start is called before the first frame update
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 	void Update()
 	{
 		// keeps the bullet movin
-		rb.velocity = new Vector2(bulletSpeed * transform.localScale.x, 0f);
+		rb.velocity = transform.right * bulletSpeed;
 	}
 
 	/* When a bullet hit a collider, check the tag of the hit object

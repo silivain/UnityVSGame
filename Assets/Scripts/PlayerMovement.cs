@@ -6,18 +6,18 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
-	public float dashForce;		// puissance de dash
+	  public float dashForce;		// puissance de dash
 
     private bool isJumping;		// vrai si le perso est en l'air
-	private bool isDashing;		// vrai si le perso est en train de dash
+	  private bool isDashing;		// vrai si le perso est en train de dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
-	[HideInInspector]			// cache les variables suivantes dans l'inspecteur d'unity
-    public bool isClimbing;						// vrai si le joueur grimpe
+	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
+    public bool isClimbing;						 // vrai si le joueur grimpe
 
-    public Transform groundCheck;				// détecte la présence du sol (tilemap 0)
-    public float groundCheckRadius;				// marge de détection
-    public LayerMask collisionLayers;			// layers pris en compte par le groundCheck
+    public Transform groundCheck;				   // détecte la présence du sol (tilemap 0)
+    public float groundCheckRadius;				 // marge de détection
+    public LayerMask collisionLayers;			 // layers pris en compte par le groundCheck
 
     public Rigidbody2D rb;						// rigidbody du joueur
     public Animator animator;					// animator
@@ -30,26 +30,26 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
-	public KeyCode dash;						// touche de dash
+	  public KeyCode dash;						// touche de dash
     public KeyCode fire;						// touche de tir
 
-    public GameObject bullet;					// gameobject tiré lorsque 'fire' pressed
-    public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
+    public GameObject bullet;					      // gameobject tiré lorsque 'fire' pressed
+    public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
-    private Vector3 playerPosition;				// position du joueur
-	private float powSign;						// 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
-	private float sign;							// -1 ou 1, direction du joueur sur l'axe x
+    private Vector3 playerPosition;			  	// position du joueur
+	  private float powSign;						      // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
+	  public float xDirection;						          // -1 ou 1, direction du joueur sur l'axe x
 
     public static PlayerMovement instance;		// instance de la classe
 
 	/* init de variables
 	*/
     private void Awake() {
-		throwPointPosition = throwPoint.transform.position;
-		playerPosition = transform.position;
-		powSign = 0f;
-		sign = Mathf.Pow(-1f, powSign);
-		instance = this;
+  		throwPointPosition = throwPoint.transform.position;
+  		playerPosition = transform.position;
+  		powSign = 0f;
+  		xDirection = Mathf.Pow(-1f, powSign);
+  		instance = this;
     }
 
 
@@ -67,24 +67,15 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	  // dash
 	  if (Input.GetKeyDown(dash) && !isClimbing) {
 		  isDashing = true;
-      }
-
-	  // tir
-      if (Input.GetKeyDown(fire)) {
-        GameObject bulletClone = (GameObject) Instantiate(bullet, throwPoint.position, throwPoint.rotation);
-        bulletClone.transform.localScale = new Vector3(sign, 1, 1);
-		// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
-        //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
-        //anim.SetTrigger("fire anim"); animation
-      }
+    }
 
 	  // maj des vitesses horizontales et verticales
       horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
       verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
       // changement de direction du joueur
-	  if ((horizontalMovement > 0 && sign < 0) || (horizontalMovement < 0 && sign > 0)) {
-		Flip();
+	  if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0)) {
+		  Flip();
 	  }
 
 	  // huh ? lié à l'animation, mais sert à quoi ?
@@ -115,7 +106,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         }
 
 		if(isDashing) {
-			rb.AddForce(new Vector2(sign * dashForce, 0f));
+			rb.AddForce(new Vector2(xDirection * dashForce, 0f));
 			isDashing = false;
         }
       }
@@ -131,9 +122,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 		transform.Rotate(0f, 180f, 0f);
 
 		powSign = (++powSign) % 2;
-		sign = Mathf.Pow(-1f, powSign);
-		throwPointPosition.x += sign * 2 * Mathf.Abs(playerPosition.x - throwPointPosition.x);
-        //throwPoint.position = throwPointPosition;	refresh, semble pas nécessaire
+		xDirection = Mathf.Pow(-1f, powSign);
+
 	}
 
 
