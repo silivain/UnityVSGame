@@ -28,6 +28,9 @@ public class PlayerShoot : MonoBehaviour
           case 1:
             clarinet();
             break;
+          case 2:
+            // GRANADA
+            break;
           default:
             bullet();
             break;
