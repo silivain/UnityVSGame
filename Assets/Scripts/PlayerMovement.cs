@@ -31,9 +31,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
 	  public KeyCode dash;						// touche de dash
-    public KeyCode fire;						// touche de tir
-
-    public GameObject bullet;					      // gameobject tiré lorsque 'fire' pressed
+    
     public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
     private Vector3 playerPosition;			  	// position du joueur

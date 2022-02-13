@@ -26225,7 +26225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire1: 305
-  playerBullet: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8,
+  playerBullet: {fileID: 3531582923568293830, guid: b72b65363a269474d87ea5e08f1b3225,
     type: 3}
   bulletID: 0
   throwPoint: {fileID: 1561205928}
@@ -26487,7 +26487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire1: 323
-  playerBullet: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8,
+  playerBullet: {fileID: 3531582923568293830, guid: b72b65363a269474d87ea5e08f1b3225,
     type: 3}
   bulletID: 0
   throwPoint: {fileID: 2092515031}

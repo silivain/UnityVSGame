@@ -7,7 +7,7 @@ public class PlayerShoot : MonoBehaviour
   public KeyCode fire1;						        // touche de tir
 
   public GameObject playerBullet;					// gameobject tiré lorsque 'fire1' pressed
-  public int bulletID = 0;                // ID du projectile
+  public int bulletID = 1;                // ID du projectile
   public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
 
   public static PlayerShoot instance;     // instance de la classe
@@ -43,8 +43,14 @@ public class PlayerShoot : MonoBehaviour
     }
 
     void clarinet() {
-      GameObject bulletClone = (GameObject) Instantiate(playerBullet, throwPoint.position, throwPoint.rotation);
-      // TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
+      Vector3 vectorClarinet = throwPoint.position;
+      GameObject clarinetClone1 = (GameObject)Instantiate(playerBullet, vectorClarinet, throwPoint.rotation);
+      vectorClarinet.y += 0.5f;
+      GameObject clarinetClone2 = (GameObject)Instantiate(playerBullet, vectorClarinet, throwPoint.rotation);
+      vectorClarinet.y += 0.5f;
+      GameObject clarinetClone3 = (GameObject)Instantiate(playerBullet, vectorClarinet, throwPoint.rotation);
+
+      //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
       //anim.SetTrigger("fire anim"); animation
     }
