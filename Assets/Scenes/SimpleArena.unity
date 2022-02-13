@@ -523,6 +523,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
+        type: 3}
+      propertyPath: newItem.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
+        type: 3}
+      propertyPath: newItem.Array.data[0]
+      value: 
+      objectReference: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8,
+        type: 3}
+    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
+        type: 3}
+      propertyPath: newItem.Array.data[1]
+      value: 
+      objectReference: {fileID: 3531582923568293830, guid: b72b65363a269474d87ea5e08f1b3225,
+        type: 3}
     - target: {fileID: 131177716760367125, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: m_RootOrder
@@ -26227,7 +26244,7 @@ MonoBehaviour:
   fire1: 305
   playerBullet: {fileID: 3531582923568293830, guid: b72b65363a269474d87ea5e08f1b3225,
     type: 3}
-  bulletID: 0
+  bulletID: 1
   throwPoint: {fileID: 1561205928}
 --- !u!1001 &1280596680
 PrefabInstance:
@@ -26489,7 +26506,7 @@ MonoBehaviour:
   fire1: 323
   playerBullet: {fileID: 3531582923568293830, guid: b72b65363a269474d87ea5e08f1b3225,
     type: 3}
-  bulletID: 0
+  bulletID: 1
   throwPoint: {fileID: 2092515031}
 --- !u!4 &2092515031 stripped
 Transform:
