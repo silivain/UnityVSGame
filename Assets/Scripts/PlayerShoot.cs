@@ -9,8 +9,14 @@ public class PlayerShoot : MonoBehaviour
   public GameObject playerBullet;					// gameobject tiré lorsque 'fire1' pressed
   public int bulletID = 1;                // ID du projectile
   public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
-
+  public KeyCode changeWeapon; // changement d'arme (debug)
+  public GameObject grenadeGO;
   public static PlayerShoot instance;     // instance de la classe
+  public float force;
+
+  private float startTime =0f;
+  private float endTime=0f;
+  
 
   private void Awake() {
     instance = this;
@@ -20,6 +26,15 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
       // tir
+      if (Input.GetKeyDown(changeWeapon)){
+        bulletID++;
+        if(bulletID>2)
+        {
+          bulletID = 0;
+        }
+      }
+
+
       if (Input.GetKeyDown(fire1)) {
         switch(bulletID) {
           case 0:
@@ -29,7 +44,8 @@ public class PlayerShoot : MonoBehaviour
             clarinet();
             break;
           case 2:
-            // GRANADA
+            startTime = Time.time;
+            grenadeLaunch();
             break;
           default:
             bullet();
@@ -56,5 +72,16 @@ public class PlayerShoot : MonoBehaviour
       //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
       //anim.SetTrigger("fire anim"); animation
+    }
+
+    void grenadeLaunch(){
+      //lengthTime = endTime-startTime;
+      float lengthTime = 3;
+      Vector3 vectorClarinet = throwPoint.position;
+      GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
+      Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
+      projRb.AddForce(new Vector2(1*force*lengthTime,2*force*lengthTime));
+      projRb.angularVelocity = -180;
+      Destroy(grenade,Random.Range(1,10)); 
     }
 }
