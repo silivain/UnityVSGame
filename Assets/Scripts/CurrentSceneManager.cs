@@ -42,9 +42,10 @@ public class CurrentSceneManager : MonoBehaviour
   * on peut donc détruire le gameObject appelant (car Coroutine started depuis class statique)
   */
   public void CollectedItem() {
-    if (-- currentItem == 0) {
+    if (currentItem == 1) {
       // plus d'items dans la scène :
       // on en génère un nouveau après avoir attendu
+	  currentItem--;
       StartCoroutine(SpawnAfterTime());
     }
   }
@@ -52,7 +53,7 @@ public class CurrentSceneManager : MonoBehaviour
   /* génère un nouvel item aléatoire
   * l'item est généré à un emplacement aléatoire parmi ceux définis dans la scène
   */
-  private GameObject InstantiateItem() {
+  private void InstantiateItem() {
     GameObject nb = (GameObject) Instantiate(newItem[Random.Range(0, newItem.Length)],
       itemSpawnPosition[Random.Range(0, itemSpawnPosition.Length)], new Quaternion(0, 0, 0, 1));
     BoxCollider2D m_collider = nb.GetComponent<BoxCollider2D>();
@@ -60,8 +61,7 @@ public class CurrentSceneManager : MonoBehaviour
     // le collider était désactivé lors de mes test (Brett)
     // réactivation manuelle pour que l'item soit collectable
     m_collider.enabled = true;
-    ++ currentItem;
-    return nb;
+    currentItem++;
   }
 
   /* Attend 'itemSpawnTime' secondes avant de générer l'item suivant

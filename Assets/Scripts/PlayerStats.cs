@@ -59,17 +59,6 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    /* Équipe l'arme sur le player, ce qui modifie ses stats totales
-    * si le player était déjà équipé d'une arme, la remplace
-    * les stats de l'arme sont stockées dans la classe 'WeaponStats'
-    */
-    public void setWeapon(GameObject w) {
-      weapon = w;
-      weaponStats = WeaponStats.instance.getWeaponStats(w.name);
-      // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
-    }
-
-
     /* Équipe l'équipement sur l'arme du player, ce qui modifie ses stats totales
     * si le player était déjà équipé du même équipement, ne modifie rien
     * les stats de l'équipement sont stockées dans la classe 'WeaponStats'
@@ -94,7 +83,6 @@ public class PlayerStats : MonoBehaviour
 
     /* Fonction déclenchée par la récupération d'un item dans la scène
     * le paramètre 'other' correspondau collider de l'item collecté
-    */
     void OnTriggerEnter2D(Collider2D other) {
         // appel au CurrentSceneManager pour tenir le compte du nombre de PowerUp dans la scène
         CurrentSceneManager.instance.CollectedItem();
@@ -102,12 +90,11 @@ public class PlayerStats : MonoBehaviour
         // appel au buffer pour équiper le buff/l'objet sur le player
         if (other.transform.CompareTag("Item")) {
           setItem(other.gameObject);
-        }else if (other.transform.CompareTag("Weapon")) {
-          setWeapon(other.gameObject);
         }else if (other.transform.CompareTag("Equipement")) {
           equip(other.gameObject);
         }
 
         Destroy(other.gameObject);
     }
+    */
 }
