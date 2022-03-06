@@ -18,10 +18,15 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar healthBar;	// barre de vie du joueur
     public Transform player;	// transform du joueur
 
-    public static PlayerHealth instance;	// instance de la classe
+    public static PlayerHealth instance;    // instance de la classe
 
 
-	/* remplit la vie et la barre de vie du joueur au démarrage
+    public GameObject shield;                   // shield du joueur
+    public KeyCode shieldKey;                   // touche du shield
+    private bool shielded;                      // booléen rendant vrai si le shield du joueur est activé
+
+
+    /* remplit la vie et la barre de vie du joueur au démarrage
 	*/
     void Start() {
       currentHealth = maxHealth;
@@ -38,10 +43,26 @@ public class PlayerHealth : MonoBehaviour
       {
         TakeDamage(5);
       }
+
+
+
+     // shield
+     if (Input.GetKeyDown(shieldKey) && !shielded)
+        {
+            shielded = true;
+            shield.SetActive(true);
+        }
+
+        // désactivation shield
+        if (Input.GetKeyUp(shieldKey) && shielded)
+        {
+            shielded = false;
+            shield.SetActive(false);
+        }
     }
 
 
-	/* heal le joueur de 'amount' pv, et met à jour la barre de vie
+    /* heal le joueur de 'amount' pv, et met à jour la barre de vie
 	*/
     public void HealPlayer(int amount)
     {
@@ -54,8 +75,12 @@ public class PlayerHealth : MonoBehaviour
 	*/
     public void TakeDamage(int damage)
     {
-      currentHealth = Mathf.Max(0, currentHealth - damage);
-      healthBar.SetHealth(currentHealth);
+      
+      if (!shielded)
+        {
+            currentHealth = Mathf.Max(0, currentHealth - damage);
+            healthBar.SetHealth(currentHealth);
+        }
 
       /*
       if(!isInvincible)
