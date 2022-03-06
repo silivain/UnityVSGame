@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
     public bool isClimbing;						 // vrai si le joueur grimpe
 
-    public Transform groundCheck;				   // détecte la présence du sol (tilemap 0)
-    public float groundCheckRadius;				 // marge de détection
-    public LayerMask collisionLayers;			 // layers pris en compte par le groundCheck
+    public Transform groundCheck;				// détecte la présence du sol (tilemap 0)
+    public float groundCheckRadius;			    // marge de détection
+    public LayerMask collisionLayers;			// layers pris en compte par le groundCheck
 
     public Rigidbody2D rb;						// rigidbody du joueur
     public Animator animator;					// animator
@@ -32,11 +32,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public KeyCode jump;						// touche de saut
 	  public KeyCode dash;						// touche de dash
     
-    public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
+    public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
     private Vector3 playerPosition;			  	// position du joueur
-	  private float powSign;						      // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
-	  public float xDirection;						          // -1 ou 1, direction du joueur sur l'axe x
+	  private float powSign;				    // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
+	  public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
 
     public static PlayerMovement instance;		// instance de la classe
 
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	  // dash
 	  if (Input.GetKeyDown(dash) && !isClimbing) {
 		  isDashing = true;
-    }
+      }
 
 	  // maj des vitesses horizontales et verticales
       horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
@@ -121,17 +121,24 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
 		powSign = (++powSign) % 2;
 		xDirection = Mathf.Pow(-1f, powSign);
-
 	}
 
 
 	/* Applique une force de recul au joueur après avoir été touché par un projectile
 	*/
 	public void Recoil(Collider2D targetHit, Rigidbody2D bulletRB) {
-		// Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
-		// TODO possible vector3 et composante z pour le projectile si traj non horizontale
-		// TODO remplacer la constante 0.5f par une valeur recup dans les stats de l'arme
-		targetHit.attachedRigidbody.AddForce(0.5f * bulletRB.velocity, ForceMode2D.Impulse);
+        // Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
+        // TODO possible vector3 et composante z pour le projectile si traj non horizontale
+        // TODO remplacer la constante 0.5f par une valeur recup dans les stats de l'arme
+        Transform playerShield = targetHit.transform.Find("Shield");
+        bool isShieldActive = playerShield.gameObject.activeSelf;
+
+        if(isShieldActive) {
+            targetHit.attachedRigidbody.AddForce(0.1f * bulletRB.velocity, ForceMode2D.Impulse);
+        }else {
+            targetHit.attachedRigidbody.AddForce(0.5f * bulletRB.velocity, ForceMode2D.Impulse);
+        }
+		
 	}
 
 	/* affiche le groundCheck à l'écran (debug)
