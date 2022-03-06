@@ -134,9 +134,24 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 		targetHit.attachedRigidbody.AddForce(0.5f * bulletRB.velocity, ForceMode2D.Impulse);
 	}
 
-	/* affiche le groundCheck à l'écran (debug)
-	*/
-    private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
+    public void RecoilCac(Collider2D targetHit, Transform shooter) 
+    {
+        // Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
+        // TODO possible vector3 et composante z pour le projectile si traj non horizontale
+        // TODO remplacer la constante 0.5f par une valeur recup dans les stats de l'arme
+        Transform target = targetHit.transform;
+        Vector3 force = new Vector3(50f, 0f, 0f);
+        if (shooter.position.x > target.position.x)
+        {
+            force *= -1;
+        }
+
+            targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
+	}
+
+/* affiche le groundCheck à l'écran (debug)
+*/
+private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
       Gizmos.color = Color.red;
       Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
