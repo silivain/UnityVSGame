@@ -14,9 +14,13 @@ public class PlayerWeapon : MonoBehaviour
   public KeyCode changeWeapon; 					// changement d'arme (debug)
   public GameObject grenadeGO;					// TODO
   public static PlayerWeapon instance;     		// instance de la classe
-  public float force;							// TODO
+  public float force;                           // TODO
+  public Transform tromboneRangePoint;
+  public LayerMask playerLayers;
+  public int tromboneDamage = 10;
+  public SpriteRenderer tromboneSprite;
 
-  public static string[] weapons= {"Bullet", "Clarinet", "Grenade"};	// armes du jeu, l'ordre des armes doit match leur weaponID
+  public static string[] weapons= {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint" };	// armes du jeu, l'ordre des armes doit match leur weaponID
 
   private float startTime =0f;
   //private float endTime=0f; TODO
@@ -30,12 +34,10 @@ public class PlayerWeapon : MonoBehaviour
     void Update()
     {
       // tir
-      if (Input.GetKeyDown(changeWeapon)){
-        weaponID++;
-        if(weaponID>2)
-        {
-          weaponID = 0;
-        }
+      if (Input.GetKeyDown(changeWeapon)){      
+            weaponID = 3;
+            setWeapon(weaponsGO[3]);
+            
       }
 
 
@@ -50,6 +52,9 @@ public class PlayerWeapon : MonoBehaviour
           case 2:
             startTime = Time.time;
             grenadeLaunch();
+            break;
+          case 3:
+            trombone();
             break;
           default:
             bullet();
@@ -89,8 +94,31 @@ public class PlayerWeapon : MonoBehaviour
       //Destroy(grenade,Random.Range(1,10));
     }
 
+    void trombone()
+    {
+        StartCoroutine(tromboneAppear());
+        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position, tromboneRangePoint.position, playerLayers);
+        foreach(Collider2D enemy in tromboneHitbox)
+        {
+            Debug.Log("we hit " + enemy.name);
+            PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(tromboneDamage);
+            // TODO appel à la fonction de recul en passant les arguments nécessaires
+            // le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
+            PlayerMovement.instance.RecoilCac(enemy, transform);
+        }
 
-	/* Équipe l'arme sur le player
+        
+    }
+
+    IEnumerator tromboneAppear()
+    {
+        tromboneSprite.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        tromboneSprite.enabled = false;
+    }
+
+    /* Équipe l'arme sur le player
     * si le player était déjà équipé d'une arme, la remplace
     */
     public void setWeapon(GameObject w) {
@@ -107,7 +135,8 @@ public class PlayerWeapon : MonoBehaviour
 
 	  Predicate<string> checkWeapon = arrayEl => arrayEl == wName;
       weaponID = Array.FindIndex(weapons, checkWeapon);
-	  weapon = weaponsGO[weaponID];
+        Debug.Log("ID de l'arme équipée : " + weapon);
+        weapon = weaponsGO[weaponID];
 
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
