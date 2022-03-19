@@ -24,23 +24,23 @@ public class clarinet : MonoBehaviour
 	void Update()
 	{
 		// keeps the bullet movin
-		rb.SetRotation(transform.right.x * 3f*rb.velocity.y);
+		rb.SetRotation(transform.right.x * 3f * rb.velocity.y);
 	}
 
 	/* When a bullet hit a collider, check the tag of the hit object
 	* if the object is a player, deals damage
 	*/
-	void OnTriggerEnter2D(Collider2D other)
-	{
+	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
-		if (other.transform.CompareTag("Player 1") || other.transform.CompareTag("Player 2"))
-		{
+		if(other.transform.tag != transform.tag && other.transform.tag.Substring(0, 6) == "Player") {
 			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
 			playerHealth.TakeDamage(damageOnCollision);
 			// TODO appel à la fonction de recul en passant les arguments nécessaires
 			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
 			PlayerMovement.instance.Recoil(other, rb);
 		}
-		Destroy(gameObject);
+		if(other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
+			Destroy(gameObject);
+		}
 	}
 }

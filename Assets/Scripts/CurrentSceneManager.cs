@@ -69,7 +69,6 @@ public class CurrentSceneManager : MonoBehaviour
   private IEnumerator SpawnAfterTime()
   {
     yield return new WaitForSeconds(CurrentSceneManager.instance.itemSpawnTime);
-
     InstantiateItem();
   }
 }

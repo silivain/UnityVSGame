@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// manage instantiated bullet in game
-// deals damage when needed or destroy bullet
-// bullets are instantiated in 'PlayerMovement.cs'
-public class Bullet : MonoBehaviour
+// gère le déplacement des projectiles du souba ingame
+// applique des dégats le cas échéant ou détruit le projectile après un temps donné (et donc une distance donnée)
+// les projectiles sont instancés dans 'PlayerWeapon.cs'
+public class Sousa : MonoBehaviour
 {
-	public float bulletSpeed;          // bullet speed
-	public int damageOnCollision = 5;  // bullet damage
-	//public GameObject bulletEffect;  // TODO bullet visual effect
-	private Rigidbody2D rb;            // bullet rigidbody
+	public float sousaSpeed;           	// sousa bullet speed
+	public int damageOnCollision = 5;  	// sousa bullet damage
+	//public GameObject bulletEffect;  	// TODO bullet visual effect
+	private Rigidbody2D rb;            	// sousa bullet rigidbody
 
 
   // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 	void Update()
 	{
 		// keeps the bullet movin
-		rb.velocity = transform.right * bulletSpeed;
+		rb.velocity = transform.right * sousaSpeed;
 	}
 
 	/* When a bullet hit a collider, check the tag of the hit object
@@ -39,6 +39,7 @@ public class Bullet : MonoBehaviour
 			PlayerMovement.instance.Recoil(other, rb);
 		}
 		if(other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
+			Debug.Log("destroying after collision\nother.transform.tag = " + other.transform.tag + "\ntransform.tag = " + transform.tag);
 			Destroy(gameObject);
 		}
 	}
