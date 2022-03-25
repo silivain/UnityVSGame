@@ -654,7 +654,7 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: newItem.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -673,6 +673,12 @@ PrefabInstance:
       propertyPath: newItem.Array.data[2]
       value: 
       objectReference: {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06,
+        type: 3}
+    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
+        type: 3}
+      propertyPath: newItem.Array.data[3]
+      value: 
+      objectReference: {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7,
         type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -24062,6 +24068,7 @@ MonoBehaviour:
   - {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee, type: 3}
   - {fileID: 1672149607}
   - {fileID: 3369721942537162579, guid: cd70ad92f7223460a9f22c88f10272d1, type: 3}
+  - {fileID: 6149424749668777758, guid: cbcfbc4ebc7413ad2891888ef460b7b9, type: 3}
   weaponID: 0
   throwPoint: {fileID: 1280596683}
   highThrowPoint: {fileID: 1050868961}
@@ -25010,6 +25017,7 @@ MonoBehaviour:
   - {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee, type: 3}
   - {fileID: 671038773}
   - {fileID: 3369721942537162579, guid: cd70ad92f7223460a9f22c88f10272d1, type: 3}
+  - {fileID: 6149424749668777758, guid: cbcfbc4ebc7413ad2891888ef460b7b9, type: 3}
   weaponID: 0
   throwPoint: {fileID: 8265003994522593584}
   highThrowPoint: {fileID: 738272882}

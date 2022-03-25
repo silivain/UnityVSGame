@@ -21,7 +21,7 @@ public class PlayerWeapon : MonoBehaviour
   public int tromboneDamage = 10;
   public SpriteRenderer tromboneSprite;
 
-  public static string[] weapons= {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa"};	// armes du jeu, l'ordre des armes doit match leur weaponID
+  public static string[] weapons= {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
 
   private float startTime =0f;
   //private float endTime=0f; TODO
@@ -58,6 +58,9 @@ public class PlayerWeapon : MonoBehaviour
 		  case 4:
 		  	StartCoroutine(sousa());
 			break;
+		  case 5:
+  		  	StartCoroutine(tuba());
+  			break;
           default:
             bullet();
             break;
@@ -140,6 +143,13 @@ public class PlayerWeapon : MonoBehaviour
 		Destroy(sousa1);
 		Destroy(sousa2);
 		Destroy(sousa3);
+	}
+
+	IEnumerator tuba() {
+		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	  	tuba.tag = transform.tag;
+		yield return new WaitForSeconds(0.75f);
+		Destroy(tuba);
 	}
 
     /* Équipe l'arme sur le player
