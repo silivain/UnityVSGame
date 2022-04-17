@@ -6,10 +6,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
-	  public float dashForce;		// puissance de dash
+	public float dashForce;		// puissance de dash
+    public const float  fallMultiplier = 1.05f;
+    public float lowJumpMultiplier = 2f;
 
     private bool isJumping;		// vrai si le perso est en l'air
-	  private bool isDashing;		// vrai si le perso est en train de dash
+	private bool isDashing;		// vrai si le perso est en train de dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
 	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
@@ -57,8 +59,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       throwPointPosition = throwPoint.position;
       playerPosition = transform.position;
 
-	  // saut
-      if (Input.GetKeyDown(jump) && isGrounded && !isClimbing) {
+        // saut
+        if (Input.GetKeyDown(jump) && isGrounded && !isClimbing && rb.velocity.y < 0.1) {
         isJumping = true;
       }
 
@@ -88,6 +90,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
       MovePlayer(horizontalMovement, verticalMovement);
+
+
     }
 
 
@@ -95,10 +99,21 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	*/
     void MovePlayer(float _horizontalMovement, float _verticalMovement) {
       if(!isClimbing) {
-        Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 
-        if(isJumping) {
+            Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
+
+
+        if (rb.velocity.y < -0.1f)
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f) * fallMultiplier;
+        }
+        else
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+        }
+
+        if (isJumping) {
+    
           rb.AddForce(new Vector2(0f, jumpForce));
           isJumping = false;
         }
