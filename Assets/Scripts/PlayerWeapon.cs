@@ -2,6 +2,7 @@ using System;
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerWeapon : MonoBehaviour
   public SpriteRenderer tromboneSprite;
 
   private int ammunition = 1000;
+  public Text ammunitionCountText;		// texte d'affichage du nb de mun
 
   private Transform playerShield;   // shield du joueur
 
@@ -80,8 +82,13 @@ public class PlayerWeapon : MonoBehaviour
 
     // consomme une mun, rééquipe la cymbale si plus de mun
     if (ammunition-- == 1) {
-      weapon = weaponsGO[0];
+      weaponID = 0;
+      weapon = weaponsGO[weaponID];
       ammunition = maxAmmunition[0];
+      ammunitionCountText.text = "∞";
+    }
+    if (weaponID != 0) {
+      ammunitionCountText.text = ammunition.ToString();
     }
       // TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
@@ -101,8 +108,13 @@ public class PlayerWeapon : MonoBehaviour
 
     // consomme une mun, rééquipe la cymbale si plus de mun
     if (ammunition-- == 1) {
-      weapon = weaponsGO[0];
+      weaponID = 0;
+      weapon = weaponsGO[weaponID];
       ammunition = maxAmmunition[0];
+      ammunitionCountText.text = "∞";
+    }
+    if (weaponID != 0) {
+      ammunitionCountText.text = ammunition.ToString();
     }
 
       //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
@@ -122,8 +134,13 @@ public class PlayerWeapon : MonoBehaviour
 
       // consomme une mun, rééquipe la cymbale si plus de mun
       if (ammunition-- == 1) {
-        weapon = weaponsGO[0];
+        weaponID = 0;
+        weapon = weaponsGO[weaponID];
         ammunition = maxAmmunition[0];
+        ammunitionCountText.text = "∞";
+      }
+      if (weaponID != 0) {
+        ammunitionCountText.text = ammunition.ToString();
       }
       //Destroy(grenade,Random.Range(1,10));
     }
@@ -150,8 +167,13 @@ public class PlayerWeapon : MonoBehaviour
 
         // consomme une mun, rééquipe la cymbale si plus de mun
         if (ammunition-- == 1) {
-          weapon = weaponsGO[0];
+          weaponID = 0;
+          weapon = weaponsGO[weaponID];
           ammunition = maxAmmunition[0];
+          ammunitionCountText.text = "∞";
+        }
+        if (weaponID != 0) {
+          ammunitionCountText.text = ammunition.ToString();
         }
     }
 
@@ -172,8 +194,13 @@ public class PlayerWeapon : MonoBehaviour
 
     // consomme une mun, rééquipe la cymbale si plus de mun
     if (ammunition-- == 1) {
-      weapon = weaponsGO[0];
+      weaponID = 0;
+      weapon = weaponsGO[weaponID];
       ammunition = maxAmmunition[0];
+      ammunitionCountText.text = "∞";
+    }
+    if (weaponID != 0) {
+      ammunitionCountText.text = ammunition.ToString();
     }
 
 		yield return new WaitForSeconds(0.15f);
@@ -188,8 +215,13 @@ public class PlayerWeapon : MonoBehaviour
 
     // consomme une mun, rééquipe la cymbale si plus de mun
     if (ammunition-- == 1) {
-      weapon = weaponsGO[0];
+      weaponID = 0;
+      weapon = weaponsGO[weaponID];
       ammunition = maxAmmunition[0];
+      ammunitionCountText.text = "∞";
+    }
+    if (weaponID != 0) {
+      ammunitionCountText.text = ammunition.ToString();
     }
 
 		yield return new WaitForSeconds(0.75f);
@@ -215,6 +247,11 @@ public class PlayerWeapon : MonoBehaviour
       weaponID = Array.FindIndex(weapons, checkWeapon);
         weapon = weaponsGO[weaponID];
         ammunition = maxAmmunition[weaponID];
+        if (weaponID == 0) {
+          ammunitionCountText.text = "∞";
+        }else{
+          ammunitionCountText.text = ammunition.ToString();
+        }
           //Debug.Log("ID de l'arme équipée : " + weapon.name);
 
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
