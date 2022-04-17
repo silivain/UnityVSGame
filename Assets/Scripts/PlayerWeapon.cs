@@ -73,7 +73,7 @@ public class PlayerWeapon : MonoBehaviour
 
     void bullet() {
       GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-	  bulletClone.tag = transform.tag;
+	  bulletClone.tag = "Projectile";
       // TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
       //anim.SetTrigger("fire anim"); animation
@@ -82,13 +82,13 @@ public class PlayerWeapon : MonoBehaviour
     void clarinet() {
       Vector3 vectorClarinet = throwPoint.position;
       GameObject clarinetClone1 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone1.tag = transform.tag;
+	  clarinetClone1.tag = "Projectile";
       vectorClarinet.y += 0.5f;
       GameObject clarinetClone2 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone2.tag = transform.tag;
+	  clarinetClone2.tag = "Projectile";
       vectorClarinet.y += 0.5f;
       GameObject clarinetClone3 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone3.tag = transform.tag;
+	  clarinetClone3.tag = "Projectile";
 
       //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
@@ -100,7 +100,7 @@ public class PlayerWeapon : MonoBehaviour
       float lengthTime = 3;
       Vector3 vectorClarinet = throwPoint.position;
       GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
-	  grenade.tag = transform.tag;
+	  grenade.tag = "Projectile";
       Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
       projRb.AddForce(new Vector2(1*force*lengthTime,2*force*lengthTime));
       projRb.angularVelocity = -180;
@@ -131,15 +131,15 @@ public class PlayerWeapon : MonoBehaviour
 	IEnumerator sousa() {
 		Vector3 vectorSousa = highThrowPoint.position;
 		GameObject sousa1 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa1.tag = transform.tag;
+  	  	sousa1.tag = "Projectile";
 		vectorSousa.y -= 0.3f;
 		GameObject sousa2 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa2.tag = transform.tag;
+  	  	sousa2.tag = "Projectile";
 		Rigidbody2D rbSousa2 = sousa2.GetComponent<Rigidbody2D>();
 		rbSousa2.SetRotation(transform.rotation.y >= 0 ? (rbSousa2.rotation - 3f) : (rbSousa2.rotation + 3f));
 		vectorSousa.y -= 0.3f;
 		GameObject sousa3 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa3.tag = transform.tag;
+  	  	sousa3.tag = "Projectile";
 		Rigidbody2D rbSousa3 = sousa3.GetComponent<Rigidbody2D>();
 		rbSousa3.SetRotation(transform.rotation.y >= 0 ? (rbSousa3.rotation - 6f) : (rbSousa3.rotation + 6f));
 		yield return new WaitForSeconds(0.15f);
@@ -150,7 +150,7 @@ public class PlayerWeapon : MonoBehaviour
 
 	IEnumerator tuba() {
 		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-  	  	tuba.tag = transform.tag;
+  	  	tuba.tag = "Projectile";
 		yield return new WaitForSeconds(0.75f);
 		Destroy(tuba);
 	}
