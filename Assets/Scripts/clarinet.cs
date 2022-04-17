@@ -39,7 +39,7 @@ public class clarinet : MonoBehaviour
 			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
 			PlayerMovement.instance.Recoil(other, rb);
 		}
-		if(other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
+		if (/*other.transform.tag != transform.tag && */other.transform.tag != "Weapon") {
 			Destroy(gameObject);
 		}
 	}

@@ -168,9 +168,9 @@ public class PlayerWeapon : MonoBehaviour
 	  if (wName.Substring(Math.Max(0, wName.Length - 7), Math.Min(7, wName.Length)) == "(Clone)") {
 		  wName = wName.Substring(0, wName.Length - 7);
 	  }
-	  //Debug.Log("ID de l'arme équipée : " + wName);
+        //Debug.Log("ID de l'arme équipée : " + wName);
 
-	  Predicate<string> checkWeapon = arrayEl => arrayEl == wName;
+        Predicate<string> checkWeapon = arrayEl => arrayEl.Substring(0, 3) == wName.Substring(0, 3) ;
       weaponID = Array.FindIndex(weapons, checkWeapon);
         weapon = weaponsGO[weaponID];
           Debug.Log("ID de l'arme équipée : " + weapon.name);
