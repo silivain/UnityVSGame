@@ -7,8 +7,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
 	public float dashForce;		// puissance de dash
-    public const float  fallMultiplier = 1.05f;
-    public float lowJumpMultiplier = 2f;
+    public const float  fallMultiplier = 1.03f;
 
     private bool isJumping;		// vrai si le perso est en l'air
 	private bool isDashing;		// vrai si le perso est en train de dash
@@ -107,9 +106,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
           shieldMod = .1f;
         }
         Vector3 targetVelocity = new Vector2(_horizontalMovement * shieldMod, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 
-        if (rb.velocity.y < -0.1f)
+        if (rb.velocity.y < -0.1f && rb.velocity.y > -30f)
         {
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f) * fallMultiplier;
         }
