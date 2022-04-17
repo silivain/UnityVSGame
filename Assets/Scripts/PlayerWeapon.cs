@@ -21,6 +21,8 @@ public class PlayerWeapon : MonoBehaviour
   public int tromboneDamage = 10;
   public SpriteRenderer tromboneSprite;
 
+  private Transform playerShield;   // shield du joueur
+
   public static string[] weapons= {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
 
   private float startTime =0f;
@@ -29,6 +31,7 @@ public class PlayerWeapon : MonoBehaviour
 
   private void Awake() {
     instance = this;
+    playerShield = transform.Find("Shield");
   }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class PlayerWeapon : MonoBehaviour
 			setWeapon(weaponsGO[3]);
       }
 
-      if (Input.GetKeyDown(fire1)) {
+      if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf) {
         switch(weaponID) {
           case 0:
             bullet();
