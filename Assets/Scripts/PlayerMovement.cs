@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     void MovePlayer(float _horizontalMovement, float _verticalMovement) {
       if(!isClimbing) {
         float shieldMod = 1f;
-        if(playerShield.gameObject.activeSelf) {
+        if(playerShield.gameObject.activeSelf && isGrounded) {
           shieldMod = .1f;
         }
         Vector3 targetVelocity = new Vector2(_horizontalMovement * shieldMod, rb.velocity.y);
