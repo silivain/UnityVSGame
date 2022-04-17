@@ -109,9 +109,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         Vector3 targetVelocity = new Vector2(_horizontalMovement * shieldMod, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 
-            Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
-
-
         if (rb.velocity.y < -0.1f)
         {
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f) * fallMultiplier;
