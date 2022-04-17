@@ -26644,7 +26644,17 @@ PrefabInstance:
     - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
       propertyPath: dashForce
-      value: 1000
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: jumpForce
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808602, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
@@ -26660,6 +26670,16 @@ PrefabInstance:
         type: 3}
       propertyPath: shieldDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808603, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265003993854808603, guid: f1ea53d5aa3f320b78e820aa9b6df962,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8265003993854808606, guid: f1ea53d5aa3f320b78e820aa9b6df962,
         type: 3}
