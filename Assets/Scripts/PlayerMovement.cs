@@ -6,10 +6,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
-	  public float dashForce;		// puissance de dash
+	public float dashForce;		// puissance de dash
+    public const float  fallMultiplier = 1.03f;
 
     private bool isJumping;		// vrai si le perso est en l'air
-	  private bool isDashing;		// vrai si le perso est en train de dash
+	private bool isDashing;		// vrai si le perso est en train de dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
 	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
@@ -31,12 +32,14 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
 	  public KeyCode dash;						// touche de dash
-    
+
     public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
     private Vector3 playerPosition;			  	// position du joueur
 	  private float powSign;				    // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
 	  public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
+
+    private Transform playerShield;   // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
 
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
   		powSign = 0f;
   		xDirection = Mathf.Pow(-1f, powSign);
   		instance = this;
+      playerShield = transform.Find("Shield");
     }
 
 
@@ -57,8 +61,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       throwPointPosition = throwPoint.position;
       playerPosition = transform.position;
 
-	  // saut
-      if (Input.GetKeyDown(jump) && isGrounded && !isClimbing) {
+        // saut
+        if (Input.GetKeyDown(jump) && isGrounded && !isClimbing && rb.velocity.y < 0.1) {
         isJumping = true;
       }
 
@@ -88,6 +92,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
       MovePlayer(horizontalMovement, verticalMovement);
+
+
     }
 
 
@@ -95,10 +101,23 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	*/
     void MovePlayer(float _horizontalMovement, float _verticalMovement) {
       if(!isClimbing) {
-        Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+        float shieldMod = 1f;
+        if(playerShield.gameObject.activeSelf && isGrounded) {
+          shieldMod = .1f;
+        }
+        Vector3 targetVelocity = new Vector2(_horizontalMovement * shieldMod, rb.velocity.y);
 
-        if(isJumping) {
+        if (rb.velocity.y < -0.1f && rb.velocity.y > -30f)
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f) * fallMultiplier;
+        }
+        else
+        {
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+        }
+
+        if (isJumping) {
+    
           rb.AddForce(new Vector2(0f, jumpForce));
           isJumping = false;
         }
@@ -130,18 +149,18 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         // Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
         // TODO possible vector3 et composante z pour le projectile si traj non horizontale
         // TODO remplacer la constante 0.5f par une valeur recup dans les stats de l'arme
-        Transform playerShield = targetHit.transform.Find("Shield");
-        bool isShieldActive = playerShield.gameObject.activeSelf;
+        Transform playerHitShield = targetHit.transform.Find("Shield");
+        bool isShieldActive = playerHitShield.gameObject.activeSelf;
 
         if(isShieldActive) {
             targetHit.attachedRigidbody.AddForce(0.1f * bulletRB.velocity, ForceMode2D.Impulse);
         }else {
             targetHit.attachedRigidbody.AddForce(0.5f * bulletRB.velocity, ForceMode2D.Impulse);
         }
-		
+
 	}
 
-    public void RecoilCac(Collider2D targetHit, Transform shooter) 
+    public void RecoilCac(Collider2D targetHit, Transform shooter)
     {
         // Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
         // TODO possible vector3 et composante z pour le projectile si traj non horizontale

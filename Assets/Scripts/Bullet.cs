@@ -31,14 +31,14 @@ public class Bullet : MonoBehaviour
 	*/
 	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
-		if(other.transform.tag != transform.tag && other.transform.tag.Substring(0, 6) == "Player") {
+		if(other.transform.tag != transform.tag &&other.transform.tag.Substring(0, 6) == "Player") {
 			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
 			playerHealth.TakeDamage(damageOnCollision);
 			// TODO appel à la fonction de recul en passant les arguments nécessaires
 			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
 			PlayerMovement.instance.Recoil(other, rb);
 		}
-		if(other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
+		if(/*other.transform.tag != transform.tag && */other.transform.tag != "Weapon") {
 			Destroy(gameObject);
 		}
 	}
