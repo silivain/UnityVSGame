@@ -10,6 +10,7 @@ public class PlayerWeapon : MonoBehaviour
 
   public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
   public GameObject[] weaponsGO;				// armes du jeu
+  public Sprite[] weaponsItems;					// images des items des armes (les collectables)
   public int weaponID;							// ID de l'arme du player
   public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
   public Transform highThrowPoint;				// throwPoint haut (souba etc)
@@ -23,6 +24,7 @@ public class PlayerWeapon : MonoBehaviour
   public SpriteRenderer tromboneSprite;
 
   private int ammunition = 1000;
+  public Image ammunitionBar;			// barre d'affichage des munitions
   public Text ammunitionCountText;		// texte d'affichage du nb de mun
 
   private Transform playerShield;   // shield du joueur
@@ -80,16 +82,8 @@ public class PlayerWeapon : MonoBehaviour
       GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
 	  bulletClone.tag = "Projectile";
 
-    // consomme une mun, rééquipe la cymbale si plus de mun
-    if (ammunition-- == 1) {
-      weaponID = 0;
-      weapon = weaponsGO[weaponID];
-      ammunition = maxAmmunition[0];
-      ammunitionCountText.text = "∞";
-    }
-    if (weaponID != 0) {
-      ammunitionCountText.text = ammunition.ToString();
-    }
+	  UseAmmo();
+
       // TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
       //anim.SetTrigger("fire anim"); animation
@@ -106,16 +100,7 @@ public class PlayerWeapon : MonoBehaviour
       GameObject clarinetClone3 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
 	  clarinetClone3.tag = "Projectile";
 
-    // consomme une mun, rééquipe la cymbale si plus de mun
-    if (ammunition-- == 1) {
-      weaponID = 0;
-      weapon = weaponsGO[weaponID];
-      ammunition = maxAmmunition[0];
-      ammunitionCountText.text = "∞";
-    }
-    if (weaponID != 0) {
-      ammunitionCountText.text = ammunition.ToString();
-    }
+	  UseAmmo();
 
       //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
       //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
@@ -132,16 +117,8 @@ public class PlayerWeapon : MonoBehaviour
       projRb.AddForce(new Vector2(1*force*lengthTime,2*force*lengthTime));
       projRb.angularVelocity = -180;
 
-      // consomme une mun, rééquipe la cymbale si plus de mun
-      if (ammunition-- == 1) {
-        weaponID = 0;
-        weapon = weaponsGO[weaponID];
-        ammunition = maxAmmunition[0];
-        ammunitionCountText.text = "∞";
-      }
-      if (weaponID != 0) {
-        ammunitionCountText.text = ammunition.ToString();
-      }
+	  UseAmmo();
+	  
       //Destroy(grenade,Random.Range(1,10));
     }
 
@@ -165,16 +142,7 @@ public class PlayerWeapon : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         tromboneSprite.enabled = false;
 
-        // consomme une mun, rééquipe la cymbale si plus de mun
-        if (ammunition-- == 1) {
-          weaponID = 0;
-          weapon = weaponsGO[weaponID];
-          ammunition = maxAmmunition[0];
-          ammunitionCountText.text = "∞";
-        }
-        if (weaponID != 0) {
-          ammunitionCountText.text = ammunition.ToString();
-        }
+		UseAmmo();
     }
 
 	IEnumerator sousa() {
@@ -192,16 +160,7 @@ public class PlayerWeapon : MonoBehaviour
 		Rigidbody2D rbSousa3 = sousa3.GetComponent<Rigidbody2D>();
 		rbSousa3.SetRotation(transform.rotation.y >= 0 ? (rbSousa3.rotation - 6f) : (rbSousa3.rotation + 6f));
 
-    // consomme une mun, rééquipe la cymbale si plus de mun
-    if (ammunition-- == 1) {
-      weaponID = 0;
-      weapon = weaponsGO[weaponID];
-      ammunition = maxAmmunition[0];
-      ammunitionCountText.text = "∞";
-    }
-    if (weaponID != 0) {
-      ammunitionCountText.text = ammunition.ToString();
-    }
+		UseAmmo();
 
 		yield return new WaitForSeconds(0.15f);
 		Destroy(sousa1);
@@ -212,20 +171,26 @@ public class PlayerWeapon : MonoBehaviour
 	IEnumerator tuba() {
 		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
   	tuba.tag = "Projectile";
-
-    // consomme une mun, rééquipe la cymbale si plus de mun
-    if (ammunition-- == 1) {
-      weaponID = 0;
-      weapon = weaponsGO[weaponID];
-      ammunition = maxAmmunition[0];
-      ammunitionCountText.text = "∞";
-    }
-    if (weaponID != 0) {
-      ammunitionCountText.text = ammunition.ToString();
-    }
+	UseAmmo();
 
 		yield return new WaitForSeconds(0.75f);
 		Destroy(tuba);
+	}
+
+	/* Utilise une munition de l'arme équipée
+	* Si le joueur n'a plus de munitions, rééquipe l'arme de base
+	*/
+	void UseAmmo() {
+		if (ammunition-- == 1) {
+	      weaponID = 0;
+	      weapon = weaponsGO[weaponID];
+	      ammunition = maxAmmunition[0];
+	      ammunitionCountText.text = "∞";
+		  ammunitionBar.sprite = weaponsItems[weaponID];
+	    }
+	    if (weaponID != 0) {
+	      ammunitionCountText.text = ammunition.ToString();
+	    }
 	}
 
     /* Équipe l'arme sur le player
@@ -244,9 +209,10 @@ public class PlayerWeapon : MonoBehaviour
         //Debug.Log("ID de l'arme équipée : " + wName);
 
         Predicate<string> checkWeapon = arrayEl => arrayEl.Substring(0, 3) == wName.Substring(0, 3) ;
-      weaponID = Array.FindIndex(weapons, checkWeapon);
+      	weaponID = Array.FindIndex(weapons, checkWeapon);
         weapon = weaponsGO[weaponID];
         ammunition = maxAmmunition[weaponID];
+  	  	ammunitionBar.sprite = weaponsItems[weaponID];
         if (weaponID == 0) {
           ammunitionCountText.text = "∞";
         }else{
