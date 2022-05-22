@@ -80,7 +80,7 @@ public class PlayerWeapon : MonoBehaviour
 
     void bullet() {
       GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-	  bulletClone.tag = "Projectile";
+  	  bulletClone.tag = "Projectile";
 
 	  UseAmmo();
 
