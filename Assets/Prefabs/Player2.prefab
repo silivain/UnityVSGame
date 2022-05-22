@@ -374,6 +374,7 @@ MonoBehaviour:
   player: {fileID: 453807249256408533}
   shield: {fileID: 6183162953050307924}
   shieldKey: 305
+  GameOver_Screen: {fileID: 0}
 --- !u!114 &453807249256408494
 MonoBehaviour:
   m_ObjectHideFlags: 0

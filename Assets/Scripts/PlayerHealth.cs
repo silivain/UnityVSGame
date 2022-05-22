@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject shield;                   // shield du joueur
     public KeyCode shieldKey;                   // touche du shield
     private bool shielded;                      // booléen rendant vrai si le shield du joueur est activé
-
+    public GameOver_screen GameOver_Screen;     // Gestion de l'affichage de GameOver
 
     /* remplit la vie et la barre de vie du joueur au démarrage
 	*/
@@ -47,18 +47,21 @@ public class PlayerHealth : MonoBehaviour
 
 
      // shield
-     if (Input.GetKeyDown(shieldKey) && !shielded)
-        {
-            shielded = true;
-            shield.SetActive(true);
-        }
+      if (Input.GetKeyDown(shieldKey) && !shielded)
+      {
+          shielded = true;
+          shield.SetActive(true);
+      }
 
-        // désactivation shield
-        if (Input.GetKeyUp(shieldKey) && shielded)
-        {
-            shielded = false;
-            shield.SetActive(false);
-        }
+      // désactivation shield
+      if (Input.GetKeyUp(shieldKey) && shielded)
+      {
+          shielded = false;
+          shield.SetActive(false);
+      }
+
+      
+        
     }
 
 
@@ -68,6 +71,10 @@ public class PlayerHealth : MonoBehaviour
     {
       currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
       healthBar.SetHealth(currentHealth);
+    }
+
+    public void GameOver(){
+      GameOver_Screen.Setup(120); 
     }
 
 
@@ -81,6 +88,10 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
         }
+
+      if(currentHealth<=0){
+        GameOver();
+      }
 
       /*
       if(!isInvincible)
@@ -136,4 +147,7 @@ public class PlayerHealth : MonoBehaviour
       isInvincible = false;
     }
     */
+
+
+    
 }
