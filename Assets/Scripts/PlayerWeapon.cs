@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
-  public KeyCode fire1;						    // touche de tir
+    public KeyCode fire1;						    // touche de tir
 
   public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
   public GameObject[] weaponsGO;				// armes du jeu
@@ -23,6 +23,7 @@ public class PlayerWeapon : MonoBehaviour
   public int tromboneDamage = 10;
   public SpriteRenderer tromboneSprite;
 
+  private Boolean isWeaponReady = true;
   private int ammunition = 1000;
   public Image ammunitionBar;			// barre d'affichage des munitions
   public Text ammunitionCountText;		// texte d'affichage du nb de mun
@@ -31,6 +32,7 @@ public class PlayerWeapon : MonoBehaviour
 
   public static string[] weapons = {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
   private static int[] maxAmmunition = {1000, 13, 7, 25, 21, 15};                                             // nombre de munitions max/de départ pour chaque arme
+  private static float[] cooldownTime = {.5f, 1f, 2f, .5f, 1f, 1f};                                             // Cooldown de chaque arme
 
   private float startTime =0f;
   //private float endTime=0f; TODO
@@ -50,8 +52,14 @@ public class PlayerWeapon : MonoBehaviour
 			setWeapon(weaponsGO[3]);
       }
 
-      if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf) {
-        switch(weaponID) {
+        
+
+        if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf && isWeaponReady) {
+            //cooldown du tir
+            isWeaponReady = false;
+            StartCoroutine(cooldownWeapon());
+            //tir en fonction de l'arme équipée
+            switch (weaponID) {
           case 0:
             bullet();
             break;
@@ -74,8 +82,8 @@ public class PlayerWeapon : MonoBehaviour
           default:
             bullet();
             break;
+            }
         }
-      }
     }
 
     void bullet() {
@@ -162,11 +170,21 @@ public class PlayerWeapon : MonoBehaviour
 
 		UseAmmo();
 
-		yield return new WaitForSeconds(0.15f);
+		yield return new WaitForSeconds(1f);
 		Destroy(sousa1);
 		Destroy(sousa2);
 		Destroy(sousa3);
 	}
+
+    IEnumerator cooldownWeapon()
+    {
+        if (!isWeaponReady)
+        {
+            yield return new WaitForSeconds(cooldownTime[weaponID]);
+            isWeaponReady = true;
+        }
+
+    }
 
 	IEnumerator tuba() {
 		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
