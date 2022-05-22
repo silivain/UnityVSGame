@@ -176,6 +176,15 @@ public class PlayerWeapon : MonoBehaviour
 		Destroy(sousa3);
 	}
 
+	IEnumerator tuba() {
+		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	tuba.tag = "Projectile";
+	UseAmmo();
+
+		yield return new WaitForSeconds(0.75f);
+		Destroy(tuba);
+	}
+
     IEnumerator cooldownWeapon()
     {
         if (!isWeaponReady)
@@ -186,19 +195,10 @@ public class PlayerWeapon : MonoBehaviour
 
     }
 
-	IEnumerator tuba() {
-		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-  	tuba.tag = "Projectile";
-	UseAmmo();
-
-		yield return new WaitForSeconds(0.75f);
-		Destroy(tuba);
-	}
-
-	/* Utilise une munition de l'arme équipée
+    /* Utilise une munition de l'arme équipée
 	* Si le joueur n'a plus de munitions, rééquipe l'arme de base
 	*/
-	void UseAmmo() {
+    void UseAmmo() {
 		if (ammunition-- == 1) {
 	      weaponID = 0;
 	      weapon = weaponsGO[weaponID];

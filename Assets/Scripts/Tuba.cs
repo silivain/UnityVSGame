@@ -10,7 +10,8 @@ public class Tuba : MonoBehaviour
 	public float tubaSpeed;           	// sousa bullet speed
 	public int damageOnCollision = 15;  	// sousa bullet damage
 	//public GameObject bulletEffect;  	// TODO bullet visual effect
-	private Rigidbody2D rb;            	// sousa bullet rigidbody
+	private Rigidbody2D rb;             // sousa bullet rigidbody
+	private float splashRange = 4f;
 
 
   // Start is called before the first frame update
@@ -31,16 +32,22 @@ public class Tuba : MonoBehaviour
 	*/
 	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
-		if(other.transform.tag != transform.tag && other.transform.tag.Substring(0, 6) == "Player") {
-			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
-			playerHealth.TakeDamage(damageOnCollision);
-			// TODO appel à la fonction de recul en passant les arguments nécessaires
-			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
-			PlayerMovement.instance.Recoil(other, rb);
+		var hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
+		foreach (var hitCollider in hitColliders)
+		{
+			if (other.transform.tag != transform.tag && other.transform.tag.Substring(0, 6) == "Player")
+			{
+				PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
+				playerHealth.TakeDamage(damageOnCollision);
+				// TODO appel à la fonction de recul en passant les arguments nécessaires
+				// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
+				PlayerMovement.instance.Recoil(other, rb);
+			}
 		}
-		if(other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
+		if (other.transform.tag != transform.tag && other.transform.tag != "Weapon") {
 			Debug.Log("destroying after collision\nother.transform.tag = " + other.transform.tag + "\ntransform.tag = " + transform.tag);
 			Destroy(gameObject);
 		}
+
 	}
 }
