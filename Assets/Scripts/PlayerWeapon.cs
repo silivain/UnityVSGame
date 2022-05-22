@@ -44,12 +44,15 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      // tir
+      // Debug Key pour le changement d'arme
       if (Input.GetKeyDown(changeWeapon)){
             weaponID = 3;
 			setWeapon(weaponsGO[3]);
       }
 
+	  /* Changement d'arme en fonction de son 'weaponID'
+	  *	'weaponID' = position dans le tableau 'weapons'
+	  */
       if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf) {
         switch(weaponID) {
           case 0:
@@ -80,7 +83,7 @@ public class PlayerWeapon : MonoBehaviour
 
     void bullet() {
       GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-	  bulletClone.tag = "Projectile";
+	  bulletClone.tag = "Proj" + transform.tag;
 
 	  UseAmmo();
 
@@ -92,13 +95,13 @@ public class PlayerWeapon : MonoBehaviour
     void clarinet() {
       Vector3 vectorClarinet = throwPoint.position;
       GameObject clarinetClone1 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone1.tag = "Projectile";
+	  clarinetClone1.tag = "Proj" + transform.tag;
       vectorClarinet.y += 0.5f;
       GameObject clarinetClone2 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone2.tag = "Projectile";
+	  clarinetClone2.tag = "Proj" + transform.tag;
       vectorClarinet.y += 0.5f;
       GameObject clarinetClone3 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-	  clarinetClone3.tag = "Projectile";
+	  clarinetClone3.tag = "Proj" + transform.tag;
 
 	  UseAmmo();
 
@@ -112,13 +115,13 @@ public class PlayerWeapon : MonoBehaviour
       float lengthTime = 3;
       Vector3 vectorClarinet = throwPoint.position;
       GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
-	  grenade.tag = "Projectile";
+	  grenade.tag = "Proj" + transform.tag;
       Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
       projRb.AddForce(new Vector2(1*force*lengthTime,2*force*lengthTime));
       projRb.angularVelocity = -180;
 
 	  UseAmmo();
-	  
+
       //Destroy(grenade,Random.Range(1,10));
     }
 
@@ -148,15 +151,15 @@ public class PlayerWeapon : MonoBehaviour
 	IEnumerator sousa() {
 		Vector3 vectorSousa = highThrowPoint.position;
 		GameObject sousa1 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa1.tag = "Projectile";
+  	  	sousa1.tag = "Proj" + transform.tag;
 		vectorSousa.y -= 0.3f;
 		GameObject sousa2 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa2.tag = "Projectile";
+  	  	sousa2.tag = "Proj" + transform.tag;
 		Rigidbody2D rbSousa2 = sousa2.GetComponent<Rigidbody2D>();
 		rbSousa2.SetRotation(transform.rotation.y >= 0 ? (rbSousa2.rotation - 3f) : (rbSousa2.rotation + 3f));
 		vectorSousa.y -= 0.3f;
 		GameObject sousa3 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-  	  	sousa3.tag = "Projectile";
+  	  	sousa3.tag = "Proj" + transform.tag;
 		Rigidbody2D rbSousa3 = sousa3.GetComponent<Rigidbody2D>();
 		rbSousa3.SetRotation(transform.rotation.y >= 0 ? (rbSousa3.rotation - 6f) : (rbSousa3.rotation + 6f));
 
@@ -170,7 +173,7 @@ public class PlayerWeapon : MonoBehaviour
 
 	IEnumerator tuba() {
 		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-  	tuba.tag = "Projectile";
+  	tuba.tag = "Proj" + transform.tag;
 	UseAmmo();
 
 		yield return new WaitForSeconds(0.75f);
@@ -206,19 +209,22 @@ public class PlayerWeapon : MonoBehaviour
 	  if (wName.Substring(Math.Max(0, wName.Length - 7), Math.Min(7, wName.Length)) == "(Clone)") {
 		  wName = wName.Substring(0, wName.Length - 7);
 	  }
-        //Debug.Log("ID de l'arme équipée : " + wName);
 
-        Predicate<string> checkWeapon = arrayEl => arrayEl.Substring(0, 3) == wName.Substring(0, 3) ;
-      	weaponID = Array.FindIndex(weapons, checkWeapon);
-        weapon = weaponsGO[weaponID];
-        ammunition = maxAmmunition[weaponID];
-  	  	ammunitionBar.sprite = weaponsItems[weaponID];
-        if (weaponID == 0) {
-          ammunitionCountText.text = "∞";
-        }else{
-          ammunitionCountText.text = ammunition.ToString();
-        }
-          //Debug.Log("ID de l'arme équipée : " + weapon.name);
+	  /* on récupère le weaponID correspondant au nom de l'arme
+	  * on équipe la bonne arme
+	  * on met à jour les munitions et l'affichage
+	  */
+	  Predicate<string> checkWeapon = arrayEl => arrayEl.Substring(0, 3) == wName.Substring(0, 3) ;
+	  weaponID = Array.FindIndex(weapons, checkWeapon);
+	  weapon = weaponsGO[weaponID];
+	  ammunition = maxAmmunition[weaponID];
+	  	ammunitionBar.sprite = weaponsItems[weaponID];
+	  if (weaponID == 0) {
+	    ammunitionCountText.text = "∞";
+	  }else{
+	    ammunitionCountText.text = ammunition.ToString();
+	  }
+
 
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }

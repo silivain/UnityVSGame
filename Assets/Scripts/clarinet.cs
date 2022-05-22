@@ -27,19 +27,29 @@ public class clarinet : MonoBehaviour
 		rb.SetRotation(transform.right.x * 3f * rb.velocity.y);
 	}
 
-	/* When a bullet hit a collider, check the tag of the hit object
-	* if the object is a player, deals damage
-	*/
+	// Gestion de la collision avec un obstacle
 	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
-		if(other.transform.tag != transform.tag && other.transform.tag.Substring(0, 6) == "Player") {
+
+		/* Inflige les dégats du projectile à un joueur lorsque collision
+		* - check pour pas se prendre son propre proj
+		* - check que la cible est bien un player avant d'appliquer les dégats
+		*/
+		if(other.transform.tag[other.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+		&& other.transform.tag.Substring(0, 4) == "Play") {
 			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
 			playerHealth.TakeDamage(damageOnCollision);
 			// TODO appel à la fonction de recul en passant les arguments nécessaires
 			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
 			PlayerMovement.instance.Recoil(other, rb);
 		}
-		if (/*other.transform.tag != transform.tag && */other.transform.tag != "Weapon") {
+
+		/* Détruit le projectile lorsque collision avec un obstacle
+		* - check que les proj ne s'annulent pas entre eux
+		* - check qu'on a pas trigger un item ramassable
+		*/
+		if(other.transform.tag.Substring(0, 4) != "Proj"
+		&& other.transform.tag != "Weapon") {
 			Destroy(gameObject);
 		}
 	}
