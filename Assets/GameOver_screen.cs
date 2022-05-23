@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver_screen : MonoBehaviour
@@ -11,4 +12,13 @@ public class GameOver_screen : MonoBehaviour
         pointsText.text = score.ToString() + " Points";  
         
     } 
+
+    public void Restart(){
+        SceneManager.LoadScene("SimpleArena");
+    }
+
+    public void MainMenu(){
+        SceneManager.LoadScene("MainMenu");
+        
+    }
 }
