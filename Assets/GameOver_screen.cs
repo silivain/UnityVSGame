@@ -8,16 +8,19 @@ public class GameOver_screen : MonoBehaviour
 {
     public Text pointsText;
     public void Setup(int score){
+        Time.timeScale = 0f; //si le temps a été arreté , il est maintenant en vitesse normale.
         gameObject.SetActive(true);
         pointsText.text = score.ToString() + " Points";  
         
     } 
 
     public void Restart(){
+        Time.timeScale = 1f; //si le temps a été arreté , il est maintenant en vitesse normale.
         SceneManager.LoadScene("SimpleArena");
     }
 
     public void MainMenu(){
+        Time.timeScale = 1f; //si le temps a été arreté , il est maintenant en vitesse normale.
         SceneManager.LoadScene("MainMenu");
         
     }

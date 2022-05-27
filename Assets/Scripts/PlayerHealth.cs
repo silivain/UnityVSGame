@@ -74,6 +74,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void GameOver(){
+      
       GameOver_Screen.Setup(120); 
     }
 

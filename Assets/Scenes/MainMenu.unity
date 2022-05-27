@@ -1218,5 +1218,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f9b0217d3fcc55193688d298395e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: SimpleArena
+  levelToLoad: Select_player
   settingsWindow: {fileID: 0}

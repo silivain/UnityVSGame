@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 // main menu et ses bouttons
 public class MainMenu : MonoBehaviour //video 17
 {
-    public string levelToLoad;			// scène à charger lors de l'utilisation du boutton start
+  public string levelToLoad;			// scène à charger lors de l'utilisation du boutton start
 	public GameObject settingsWindow;	// fenêtre des paramètres
 
 	/* boutton start : charge la scène 'levelToLoad'
