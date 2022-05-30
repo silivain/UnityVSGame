@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 // mécanismes de mouvements des joueurs
 public class PlayerMovement : MonoBehaviour {	//video 2
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     private bool isJumping;		// vrai si le perso est en l'air
 	private bool isDashing;		// vrai si le perso est en train de dash
+    private bool isDashReady=true; //cooldown du Dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
 	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
 	  public KeyCode dash;						// touche de dash
+    public float dashCooldownTime = 2f; //nb de second entre 2 dashs
 
     public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
@@ -123,9 +126,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
           isJumping = false;
         }
 
-		if(isDashing) {
-			rb.AddForce(new Vector2(xDirection * dashForce, 0f));
-			isDashing = false;
+		    if(isDashing && isDashReady) {
+          isDashReady=false;
+          StartCoroutine(cooldownDash());
+          rb.AddForce(new Vector2(xDirection * dashForce, 0f));
+          isDashing = false;
         }
       }
       else {	//video 12
@@ -178,8 +183,19 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
 /* affiche le groundCheck à l'écran (debug)
 */
-private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+  private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+  }
+
+  IEnumerator cooldownDash()
+    {
+        if (!isDashReady)
+        {
+            yield return new WaitForSeconds(dashCooldownTime);
+            isDashReady = true;
+        }
+
     }
+
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // gère les items dans la scène
 public class CurrentSceneManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class CurrentSceneManager : MonoBehaviour
 
 
   public static CurrentSceneManager instance; // instance de la classe
-  public Text text_counter;
+ 
 
   // évite les doublons -> classe "statique"
   private void Awake()
@@ -39,29 +40,8 @@ public class CurrentSceneManager : MonoBehaviour
     currentItem = maxItem;
   }
 
-  private void Start() { //START COUNT DOWN
-    Time.timeScale = 0f;
-    float timeStart = Time.realtimeSinceStartup;
-    
-    while(Time.realtimeSinceStartup - timeStart<=30)
-    {
-      if(Time.realtimeSinceStartup - timeStart<1){
-        text_counter.text="3";
-      }
-      else if(Time.realtimeSinceStartup - timeStart>=1 && Time.realtimeSinceStartup - timeStart<2)
-      {
-        text_counter.text = "2";
-      }
-      else if(Time.realtimeSinceStartup - timeStart>=2 && Time.realtimeSinceStartup - timeStart<3)
-      {
-        text_counter.text = "1";
-      }
-    }
-    text_counter.text = "";
-    Time.timeScale = 1f;
-    
-    
-  }
+ 
+
 
   /* Lance le mécanisme d'apparition d'items
   * StartCoroutine permet de paralléliser le processus
