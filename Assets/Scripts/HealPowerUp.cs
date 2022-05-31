@@ -13,10 +13,11 @@ public class HealPowerUp : MonoBehaviour  //video 14
     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player1") || collision.CompareTag("Player2"))
+        if (collision.CompareTag("Player 1") || collision.CompareTag("Player 2"))
         {
-          PlayerHealth.instance.HealPlayer(healthPoints);
-          Destroy(gameObject);
+			PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
+        	playerHealth.HealPlayer(healthPoints);
+        	Destroy(gameObject);
         }
     }
 }
