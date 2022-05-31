@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour //video 17
 	*/
     public void StartGame()
     {
-      SceneManager.LoadScene(levelToLoad);
+      //SceneManager.LoadScene(levelToLoad);
     }
 
 	/* boutton settings : ouvre les paramètres
