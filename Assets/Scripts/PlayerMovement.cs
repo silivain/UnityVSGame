@@ -7,12 +7,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
     public float jumpForce;		// puissance de saut
-	public float dashForce;		// puissance de dash
-	private float fallSpeed = -18f;
+    public float dashForce;		// puissance de dash
+    private float fallSpeed = -18f;
     private float fallIncreaseSpeed = -1.5f;
 
     private bool isJumping;		// vrai si le perso est en l'air
-	private bool isDashing;		// vrai si le perso est en train de dash
+	  private bool isDashing;		// vrai si le perso est en train de dash
     private bool isDashReady=true; //cooldown du Dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       }
 
 	  // dash
-	  if (Input.GetKeyDown(dash) && !isClimbing) {
+	  if (Input.GetKeyDown(dash) && !isClimbing && isDashReady) {
 		  isDashing = true;
       }
 
