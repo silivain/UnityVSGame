@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,9 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar healthBar;	// barre de vie du joueur
     public Transform player;	// transform du joueur
 
-    public static PlayerHealth instance;    // instance de la classe
+    public static PlayerHealth instance;    	// instance de la classe
+	public static string[] heals = {"Bandage"};	// noms des différents heals
+	private static int[] healValues = {20};		// puissance des différents heals
 
 
     public GameObject shield;                   // shield du joueur
@@ -44,9 +47,7 @@ public class PlayerHealth : MonoBehaviour
         TakeDamage(5);
       }
 
-
-
-     // shield
+      // shield
       if (Input.GetKeyDown(shieldKey) && !shielded)
       {
           shielded = true;
@@ -60,8 +61,6 @@ public class PlayerHealth : MonoBehaviour
           shield.SetActive(false);
       }
 
-      
-        
     }
 
 
@@ -73,24 +72,54 @@ public class PlayerHealth : MonoBehaviour
       healthBar.SetHealth(currentHealth);
     }
 
+	/* heal le joueur en fonction du GO ramassé
+	*/
+    public void HealPlayerGO(GameObject heal)
+    {
+	  // on récupère le nom du heal ramassé
+  	  string hName = heal.name;
+  	  if (hName.Substring(0, Math.Min(4, hName.Length)) == "Heal") {
+  		  hName = hName.Substring(4, hName.Length - 4);
+  	  }
+  	  if (hName.Substring(Math.Max(0, hName.Length - 5), Math.Min(5, hName.Length)) == "(Clone)") {
+  		  hName = hName.Substring(0, hName.Length - 5);
+  	  }
+
+	  // on récupère la taille du plus petit nom de heal
+	  int shortestHealName = heals[0].Length;
+	  for(int i = 1; i < heals.Length; ++i) {
+		  if (heals[i].Length < shortestHealName) {
+			  shortestHealName = heals[i].Length;
+		  }
+	  }
+
+	  /* on récupère le healID correspondant au nom du heal
+	  * on applique le soin correspondant
+	  */
+	  Predicate<string> checkHeal = arrayEl => arrayEl.Substring(0, shortestHealName) == hName.Substring(0, shortestHealName);
+	  int healID = Array.FindIndex(heals, checkHeal);
+	  int healingValue = healValues[healID];
+
+      currentHealth = Mathf.Min(maxHealth, currentHealth + healingValue);
+      healthBar.SetHealth(currentHealth);
+    }
+
     public void GameOver(){
-      
-      GameOver_Screen.Setup(120); 
+
+      GameOver_Screen.Setup(120);
     }
 
 
 	/* inflige 'damage' dégats au joueur, et met à jour la barre de vie
 	*/
-    public void TakeDamage(int damage)
-    {
-      
-      if (!shielded)
-        {
+    public void TakeDamage(int damage) {
+
+      if (!shielded) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
         }
 
-      if(currentHealth<=0){
+      if(currentHealth<=0) {
         GameOver();
       }
 
@@ -116,8 +145,7 @@ public class PlayerHealth : MonoBehaviour
 	/* respawn le joueur au respawn point courant à la mort du joueur
 	* reset ses stats
 	*/
-    public void Respawn() //video16
-    {
+    public void Respawn() { //video16
       PlayerMovement.instance.enabled = true;
       PlayerMovement.instance.animator.SetTrigger("Respawn");
       PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Dynamic;
@@ -150,5 +178,16 @@ public class PlayerHealth : MonoBehaviour
     */
 
 
-    
+	/* appelle la méthode de heal avec le nom du GO
+    * lorsque le joueur entre en contact avec un heal
+    * détruit le heal après l'appel
+    */
+	private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.transform.CompareTag("Heal")) {
+			HealPlayerGO(collision.gameObject);
+			CurrentSceneManager.instance.CollectedHeal();
+        }
+		Destroy(collision.gameObject);
+    }
+
 }
