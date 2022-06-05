@@ -254,8 +254,7 @@ public class PlayerWeapon : MonoBehaviour
           setWeapon(other.gameObject);
 	      // appel au CurrentSceneManager pour tenir le compte du nombre de PowerUp dans la scène
 	      CurrentSceneManager.instance.CollectedItem();
+          Destroy(other.gameObject);
         }
-
-        Destroy(other.gameObject);
     }
 }
