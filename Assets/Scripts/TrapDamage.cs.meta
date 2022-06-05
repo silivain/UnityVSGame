@@ -1,15 +1,11 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scripts/game_paused.cs.meta
-guid: 08577f8a44845664f952e101b0e08326
-=======
 guid: f78e407dd77f7c2a88e29a0f35f3e7b2
->>>>>>> shield:Assets/Scripts/TrapDamage.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
