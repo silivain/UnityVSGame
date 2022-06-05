@@ -110,36 +110,34 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-	/* inflige 'damage' dégats au joueur, et met à jour la barre de vie
-	*/
+    /* inflige 'damage' dégats au joueur, et met à jour la barre de vie
+    */
     public void TakeDamage(int damage) {
 
-      if (!shielded) {
+        if (!shielded) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
         }
 
-      if(currentHealth<=0) {
-        GameOver();
-      }
-
-      /*
-      if(!isInvincible)
-      {
-        currentHealth = Mathf.Max(0, currentHealth - damage);
-        healthBar.SetHealth(currentHealth);
-
-        if(currentHealth <= 0)
-        {
-          PlayerLives.instance.Die(player);
-          return;
+        if(currentHealth<=0) {
+            GameOver();
         }
 
-        isInvincible = true;
-        StartCoroutine(InvincibilityFlash()); //mecanisme pour gerer des durees
-        StartCoroutine(HandleInvincibilityDelay());
-      }
-      */
+        /*
+        if(!isInvincible) {
+            currentHealth = Mathf.Max(0, currentHealth - damage);
+            healthBar.SetHealth(currentHealth);
+
+            if(currentHealth <= 0) {
+                PlayerLives.instance.Die(player);
+                return;
+            }
+
+            isInvincible = true;
+            StartCoroutine(InvincibilityFlash()); //mecanisme pour gerer des durees
+            StartCoroutine(HandleInvincibilityDelay());
+        }
+        */
     }
 
 	/* respawn le joueur au respawn point courant à la mort du joueur
@@ -186,8 +184,8 @@ public class PlayerHealth : MonoBehaviour
         if (collision.transform.CompareTag("Heal")) {
 			HealPlayerGO(collision.gameObject);
 			CurrentSceneManager.instance.CollectedHeal();
+    		Destroy(collision.gameObject);
         }
-		Destroy(collision.gameObject);
     }
 
 }
