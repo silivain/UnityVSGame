@@ -141,11 +141,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 453807249042659204, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.794
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: splashRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: splashDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
       propertyPath: ammunitionBar
       value: 
       objectReference: {fileID: 2061057502}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: explosionVisual
+      value: 
+      objectReference: {fileID: 5787354115532521949, guid: dc0af3252b09b9b48b222cf93e951aff,
+        type: 3}
     - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
       propertyPath: ammunitionCountText
@@ -165,6 +186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408532, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: dash
+      value: 323
       objectReference: {fileID: 0}
     - target: {fileID: 453807249256408533, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
@@ -406,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 2392334315787772121, guid: b37c4f4854ea92c458c0881448e07706,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2392334315787772121, guid: b37c4f4854ea92c458c0881448e07706,
         type: 3}
@@ -1873,7 +1899,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806738403
 GameObject:
@@ -27816,7 +27842,7 @@ Transform:
   - {fileID: 806738404}
   - {fileID: 1176746378}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375265011
 GameObject:
@@ -28336,7 +28362,7 @@ PrefabInstance:
     - target: {fileID: 2392334315787772121, guid: b37c4f4854ea92c458c0881448e07706,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2392334315787772121, guid: b37c4f4854ea92c458c0881448e07706,
         type: 3}
@@ -28565,11 +28591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4594055403739195449, guid: 1edcedec53a8ef44cb720e83c79ce5de,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
       propertyPath: healthBar
@@ -28589,11 +28610,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4594055403739195453, guid: 1edcedec53a8ef44cb720e83c79ce5de,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195455, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
@@ -28649,11 +28665,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
