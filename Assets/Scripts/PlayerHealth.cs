@@ -186,8 +186,8 @@ public class PlayerHealth : MonoBehaviour
         if (collision.transform.CompareTag("Heal")) {
 			HealPlayerGO(collision.gameObject);
 			CurrentSceneManager.instance.CollectedHeal();
+    		Destroy(collision.gameObject);
         }
-		Destroy(collision.gameObject);
     }
 
 }
