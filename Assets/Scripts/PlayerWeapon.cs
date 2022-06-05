@@ -30,6 +30,10 @@ public class PlayerWeapon : MonoBehaviour
 
   private Transform playerShield;   // shield du joueur
 
+  public int splashDamage = 10;
+  public float splashRange = 3f;
+  public GameObject explosionVisual;
+
   public static string[] weapons = {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
   private static int[] maxAmmunition = {1000, 13, 7, 25, 21, 15};                                             // nombre de munitions max/de départ pour chaque arme
   private static float[] cooldownTime = {.5f, 1f, 2f, .5f, 1f, 1f};                                             // Cooldown de chaque arme
@@ -48,8 +52,8 @@ public class PlayerWeapon : MonoBehaviour
     {
       // Debug Key pour le changement d'arme
       if (Input.GetKeyDown(changeWeapon)){
-            weaponID = 3;
-			setWeapon(weaponsGO[3]);
+            weaponID = 5;
+			setWeapon(weaponsGO[5]);
       }
 
 
@@ -192,8 +196,8 @@ public class PlayerWeapon : MonoBehaviour
 	UseAmmo();
 
 		yield return new WaitForSeconds(0.75f);
-		Destroy(tuba);
-	}
+        Explosion(tuba);
+    }
 
 	/* Utilise une munition de l'arme équipée
 	* Si le joueur n'a plus de munitions, rééquipe l'arme de base
@@ -244,8 +248,25 @@ public class PlayerWeapon : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
+    public void Explosion(GameObject tuba)
+    {
+        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
+            if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
+            {
+                
+                playerHealth.TakeDamage(splashDamage);
+                hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
+            }
+        }
+        Destroy(tuba);
+    }
 
-	/* Fonction déclenchée par la récupération d'une arme dans la scène
+
+    /* Fonction déclenchée par la récupération d'une arme dans la scène
     * le paramètre 'other' correspond au collider de l'arme collectée
     */
     void OnTriggerEnter2D(Collider2D other) {
