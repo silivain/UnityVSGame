@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &267859473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -694,10 +694,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb1afe9d4d70cf4196143b212f82361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownTime: 3
+  countDownTime: 1
   countDownDisplay: {fileID: 528740929}
   p1: {fileID: 1506128870}
   p2: {fileID: 1529337860}
+  go: 0
+  start: 0
 --- !u!114 &353654848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1126,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1161,9 +1163,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playlist:
-  - {fileID: 8300000, guid: 4c6db1bc64bf26fecba67a864729a77b, type: 3}
+  - {fileID: 8300000, guid: 217063268c5c2844092ce152c9d96927, type: 3}
+  - {fileID: 8300000, guid: e978f61d91f02904782a1997f2976b32, type: 3}
   - {fileID: 8300000, guid: 080eb962889211da89e02371befad723, type: 3}
   audioSource: {fileID: 405694609}
+  countdown: {fileID: 528740927}
+  currentSceneManager: {fileID: 353654845}
+  playlistIsStarted: 0
+  isOn: 0
 --- !u!1 &528740927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1730,7 @@ Camera:
   far clip plane: 1000
   field of view: 4.839141
   orthographic: 1
-  orthographic size: 18.052696
+  orthographic size: 18
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

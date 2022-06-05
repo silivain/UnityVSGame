@@ -6,18 +6,39 @@
 public class AudioManager : MonoBehaviour
 {
 	public AudioClip[] playlist;    // audio list
+	
 	public AudioSource audioSource; // audio source
 	private int musicIndex = 0;     // current index in the audio list
+	public GameObject countdown; //pour check la fin du countdown
+	public GameObject currentSceneManager; 
+	public bool playlistIsStarted=false;
+	public bool isOn=false;
+	
+	
 
 	void Start() {
 		audioSource.clip = playlist[0];  // loads first song in audio list 'playlist'
-		audioSource.Play();              // plays it using 'audioSource'
 	}
 
 	void Update() {
-		// check if a song is currently playing
-		// if it aint the case, plays next song in 'playlist'
-		if(!audioSource.isPlaying) {
+
+		if(!audioSource.isPlaying && currentSceneManager.GetComponent<CountDownTimer>().start==true)
+		{
+			audioSource.Play();
+			
+		}
+		
+		if(!playlistIsStarted && currentSceneManager.GetComponent<CountDownTimer>().go==true)
+		{
+			isOn= true;
+
+			audioSource.clip = playlist[1]; 
+			Debug.Log("go theme");             
+			playlistIsStarted=true;
+		}
+		if(!audioSource.isPlaying && playlistIsStarted == true) {
+			// check if a song is currently playing
+			// if it aint the case, plays next song in 'playlist'
 			PlayNextSong();
 		}
 	}
