@@ -26,87 +26,79 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject shield;                   // shield du joueur
     public KeyCode shieldKey;                   // touche du shield
-    private bool shielded;                      // booléen rendant vrai si le shield du joueur est activé
+    private bool shieldReady = true;                   // booléen vrai si le bouclier est prêt à être utilisé
+    public float shieldCooldown = 5f;           // délai avant réactivation possible du bouclier
+
     public GameOver_screen GameOver_Screen;     // Gestion de l'affichage de GameOver
+
+    public AudioClip shieldAudio;               // audio list
+    public AudioSource audioSource;             // audio source
+
 
     /* remplit la vie et la barre de vie du joueur au démarrage
 	*/
     void Start() {
-      currentHealth = maxHealth;
-      healthBar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
 
-	/* système de debug : inflige des dégats au joueur lorsque 'H' est utilisée
-	* TODO à retirer lorsque implem finie
-	*/
-    void Update()
-    {
-      if(Input.GetKeyDown(KeyCode.H))
-      {
-        TakeDamage(5);
-      }
-
-      // shield
-      if (Input.GetKeyDown(shieldKey) && !shielded)
-      {
-          shielded = true;
-          shield.SetActive(true);
-      }
-
-      // désactivation shield
-      if (Input.GetKeyUp(shieldKey) && shielded)
-      {
-          shielded = false;
-          shield.SetActive(false);
-      }
-
+    void Update() {
+        // shield
+        if (Input.GetKeyDown(shieldKey) && !shield.activeSelf && shieldReady) {
+            shield.SetActive(true);
+            shieldReady = false;
+            StartCoroutine(cooldownShield());
+        }
     }
 
 
     /* heal le joueur de 'amount' pv, et met à jour la barre de vie
-	*/
-    public void HealPlayer(int amount)
-    {
-      currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
-      healthBar.SetHealth(currentHealth);
+    */
+    public void HealPlayer(int amount) {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        healthBar.SetHealth(currentHealth);
     }
 
-	/* heal le joueur en fonction du GO ramassé
-	*/
-    public void HealPlayerGO(GameObject heal)
-    {
-	  // on récupère le nom du heal ramassé
-  	  string hName = heal.name;
-  	  if (hName.Substring(0, Math.Min(4, hName.Length)) == "Heal") {
-  		  hName = hName.Substring(4, hName.Length - 4);
-  	  }
-  	  if (hName.Substring(Math.Max(0, hName.Length - 5), Math.Min(5, hName.Length)) == "(Clone)") {
-  		  hName = hName.Substring(0, hName.Length - 5);
-  	  }
 
-	  // on récupère la taille du plus petit nom de heal
-	  int shortestHealName = heals[0].Length;
-	  for(int i = 1; i < heals.Length; ++i) {
-		  if (heals[i].Length < shortestHealName) {
-			  shortestHealName = heals[i].Length;
-		  }
-	  }
+    /* heal le joueur en fonction du GO ramassé
+    */
+    public void HealPlayerGO(GameObject heal) {
 
-	  /* on récupère le healID correspondant au nom du heal
-	  * on applique le soin correspondant
-	  */
-	  Predicate<string> checkHeal = arrayEl => arrayEl.Substring(0, shortestHealName) == hName.Substring(0, shortestHealName);
-	  int healID = Array.FindIndex(heals, checkHeal);
-	  int healingValue = healValues[healID];
+        // on récupère le nom du heal ramassé
+        string hName = heal.name;
+        if (hName.Substring(0, Math.Min(4, hName.Length)) == "Heal") {
+            hName = hName.Substring(4, hName.Length - 4);
+        }
 
-      currentHealth = Mathf.Min(maxHealth, currentHealth + healingValue);
-      healthBar.SetHealth(currentHealth);
+        if (hName.Substring(Math.Max(0, hName.Length - 5), Math.Min(5, hName.Length)) == "(Clone)") {
+            hName = hName.Substring(0, hName.Length - 5);
+        }
+
+        // on récupère la taille du plus petit nom de heal
+        int shortestHealName = heals[0].Length;
+        for(int i = 1; i < heals.Length; ++i) {
+            if (heals[i].Length < shortestHealName) {
+                shortestHealName = heals[i].Length;
+            }
+        }
+
+        /* on récupère le healID correspondant au nom du heal
+        * on applique le soin correspondant
+        */
+        Predicate<string> checkHeal = arrayEl => arrayEl.Substring(0, shortestHealName) == hName.Substring(0, shortestHealName);
+        int healID = Array.FindIndex(heals, checkHeal);
+        int healingValue = healValues[healID];
+
+        currentHealth = Mathf.Min(maxHealth, currentHealth + healingValue);
+        healthBar.SetHealth(currentHealth);
     }
 
-    public void GameOver(){
 
-      GameOver_Screen.Setup(120);
+    /* Appele l'écran de GameOver
+    */
+    public void GameOver() {
+        GameOver_Screen.Setup(120);
     }
 
 
@@ -114,9 +106,13 @@ public class PlayerHealth : MonoBehaviour
     */
     public void TakeDamage(int damage) {
 
-        if (!shielded) {
+        if (!shield.activeSelf) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
+        }
+
+        if (shield.activeSelf) {
+            AudioManager.instance.PlayClipAt(shieldAudio, transform.position);
         }
 
         if(currentHealth<=0) {
@@ -174,6 +170,16 @@ public class PlayerHealth : MonoBehaviour
       isInvincible = false;
     }
     */
+
+    IEnumerator cooldownShield() {
+        if (!shieldReady) {
+            yield return new WaitForSeconds(1f);
+            shield.SetActive(false);
+            yield return new WaitForSeconds(shieldCooldown - 1f);
+            shieldReady = true;
+        }
+
+    }
 
 
 	/* appelle la méthode de heal avec le nom du GO

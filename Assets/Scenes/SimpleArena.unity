@@ -154,6 +154,16 @@ PrefabInstance:
       objectReference: {fileID: 1971942906}
     - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 405694609}
+    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: shieldAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 34bb21647de73dcabb99892ab3f2299c, type: 3}
+    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: GameOver_Screen
       value: 
       objectReference: {fileID: 394849165}
@@ -909,7 +919,7 @@ AudioSource:
   m_GameObject: {fileID: 405694608}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 8ab383efe4f3f6c5aacfeb31071eac03,
+  OutputAudioMixerGroup: {fileID: 2180809563462411921, guid: 8ab383efe4f3f6c5aacfeb31071eac03,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1027,6 +1037,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4c6db1bc64bf26fecba67a864729a77b, type: 3}
   - {fileID: 8300000, guid: 080eb962889211da89e02371befad723, type: 3}
   audioSource: {fileID: 405694609}
+  soundEffectMixer: {fileID: 8607023994453580078, guid: 8ab383efe4f3f6c5aacfeb31071eac03,
+    type: 2}
 --- !u!1 &528740927
 GameObject:
   m_ObjectHideFlags: 0
@@ -28242,6 +28254,16 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1681209589}
+    - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 405694609}
+    - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
+      propertyPath: shieldAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
     - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
       propertyPath: GameOver_Screen
