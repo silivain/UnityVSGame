@@ -7,6 +7,7 @@ public class game_paused : MonoBehaviour
     
     public GameObject gamePaused;
     public GameObject countdown;
+    public GameObject GOAduio;
     private bool isGamePausedActive = false;
 
 
@@ -14,6 +15,7 @@ public class game_paused : MonoBehaviour
     void Start()
     {
         gamePaused.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -24,6 +26,8 @@ public class game_paused : MonoBehaviour
             if(Input.GetKeyDown("g") && isGamePausedActive==false ){ //si on appuie sur la touche G, le menu pause s'active
             gamePaused.SetActive(true);
             isGamePausedActive = true;
+            GOAduio.GetComponent<AudioSource>().Pause();
+            Debug.Log("into Pause Menu");
             Time.timeScale=0f;
             
             }else if(Input.GetKeyDown("g") && isGamePausedActive==true) // si on appuie a nouveau le jeu se relance
@@ -31,6 +35,7 @@ public class game_paused : MonoBehaviour
                 gamePaused.SetActive(false);
                 isGamePausedActive = false; 
                 Time.timeScale=1f;
+                GOAduio.GetComponent<AudioSource>().Play();
             }
         }
         
