@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # Packages can vary depending on the OS
 /[Pp]ackages/
+
+#Project Setting modif
+/[Pp]rojectSettings/
