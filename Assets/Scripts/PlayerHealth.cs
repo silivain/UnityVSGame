@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     public static PlayerHealth instance;    	// instance de la classe
 	public static string[] heals = {"Bandage"};	// noms des différents heals
-	private static int[] healValues = {20};		// puissance des différents heals
+	private static int[] healValues = {5};		// puissance des différents heals
 
 
     public GameObject shield;                   // shield du joueur
