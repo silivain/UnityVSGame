@@ -52,8 +52,8 @@ public class PlayerWeapon : MonoBehaviour
     {
       // Debug Key pour le changement d'arme
       if (Input.GetKeyDown(changeWeapon)){
-            weaponID = 5;
-			setWeapon(weaponsGO[5]);
+            weaponID = 3;
+			setWeapon(weaponsGO[3]);
       }
 
 
@@ -257,7 +257,7 @@ public class PlayerWeapon : MonoBehaviour
             PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
             if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
             {
-                
+
                 playerHealth.TakeDamage(splashDamage);
                 hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
             }

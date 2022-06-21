@@ -32,6 +32,7 @@ public class TrapDamage : MonoBehaviour
 
         // FallackForce
         Vector3 FoePos = other.transform.position;
-        other.attachedRigidbody.AddForce(FallBackForce * (FoePos - TrapPos), ForceMode2D.Impulse);
+        Vector3 FallBackDirection = FoePos - TrapPos;
+        other.attachedRigidbody.AddForce(FallBackForce * FallBackDirection.normalized, ForceMode2D.Impulse);
     }
 }
