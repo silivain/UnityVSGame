@@ -90,6 +90,9 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+
+    /* TODO
+    */
     void bullet() {
       GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
 	  bulletClone.tag = "Proj" + transform.tag;
@@ -101,6 +104,11 @@ public class PlayerWeapon : MonoBehaviour
       //anim.SetTrigger("fire anim"); animation
     }
 
+
+    /* Tire 3 projs de clarinette
+    * les projs suivent une traj courbée
+    * ils sont instantiés les uns sous les autres ingame
+    */
     void clarinet() {
       Vector3 vectorClarinet = throwPoint.position;
       GameObject clarinetClone1 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
@@ -119,6 +127,10 @@ public class PlayerWeapon : MonoBehaviour
       //anim.SetTrigger("fire anim"); animation
     }
 
+
+    /* Tire une grenade
+    * TODO : commenter pls
+    */
     void grenadeLaunch(){
       //lengthTime = endTime-startTime;
       float lengthTime = 3;
@@ -134,6 +146,11 @@ public class PlayerWeapon : MonoBehaviour
       //Destroy(grenade,Random.Range(1,10));
     }
 
+
+    /* Coup de trombone au cac
+    * on récupère tous les collider entre le joueur et 'tromboneRangePoint'
+    * on applique les dégats du trombone à tous les joueurs récupérés
+    */
     void trombone() {
         StartCoroutine(tromboneAppear());
         Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position, tromboneRangePoint.position, playerLayers);
@@ -148,6 +165,9 @@ public class PlayerWeapon : MonoBehaviour
         }
 	}
 
+
+    /* Animation du coup de trombone
+    */
     IEnumerator tromboneAppear()
     {
         tromboneSprite.enabled = true;
@@ -157,6 +177,11 @@ public class PlayerWeapon : MonoBehaviour
 		UseAmmo();
     }
 
+
+    /* Tire 3 projs de sousa
+    * les projs disparaissent au bout de 1 sec
+    * TODO : faire une var pour déterminer la range = durée avant destroy
+    */
 	IEnumerator sousa() {
 		Vector3 vectorSousa = highThrowPoint.position;
 		GameObject sousa1 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
@@ -180,24 +205,32 @@ public class PlayerWeapon : MonoBehaviour
 		Destroy(sousa3);
 	}
 
-    IEnumerator cooldownWeapon()
-    {
-        if (!isWeaponReady)
-        {
+
+    /* Gère le cooldown de l'arme actuelle en fonction des valeurs de 'cooldownTime'
+    */
+    IEnumerator cooldownWeapon() {
+        if (!isWeaponReady) {
             yield return new WaitForSeconds(cooldownTime[weaponID]);
             isWeaponReady = true;
         }
-
     }
 
+
+    /* Crée un projectile 'tuba'
+    * le projectile explose :
+    * - au contact d'un collider
+    * - au bout de 0.75 sec sinon
+    * TODO : faire une var pour la durée avant explo
+    */
 	IEnumerator tuba() {
 		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-  	tuba.tag = "Proj" + transform.tag;
-	UseAmmo();
+  	    tuba.tag = "Proj" + transform.tag;
+	    UseAmmo();
 
 		yield return new WaitForSeconds(0.75f);
         Explosion(tuba);
     }
+
 
 	/* Utilise une munition de l'arme équipée
 	* Si le joueur n'a plus de munitions, rééquipe l'arme de base
@@ -214,6 +247,7 @@ public class PlayerWeapon : MonoBehaviour
 	      ammunitionCountText.text = ammunition.ToString();
 	    }
 	}
+
 
     /* Équipe l'arme sur le player
     * si le player était déjà équipé d'une arme, la remplace
@@ -248,6 +282,10 @@ public class PlayerWeapon : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
+
+    /* Explosion du tuba
+    * TODO : commenter pls
+    */
     public void Explosion(GameObject tuba)
     {
         Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);

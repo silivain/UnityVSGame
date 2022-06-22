@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapTrombone : MonoBehaviour
 {
-    public int Damage = 10;                         // Dégats par défaut
+    public int Damage = 5;                         // Dégats par défaut
     public float FallBackForce = 50;                // Force repoussant le joueur par défaut
     public BoxCollider2D tromboneHitbox;            // collider servant de hitbox
     public Transform CoulisseRangePoint;            // Range de la coulisse
@@ -13,7 +13,7 @@ public class TrapTrombone : MonoBehaviour
     /*private bool Extended = false;                  // Vrai si la coulisse est tendue*/
 
     void Start() {
-        HittingLoop();
+        StartCoroutine(HittingLoop());
     }
 
     IEnumerator HittingLoop() {
@@ -53,9 +53,10 @@ public class TrapTrombone : MonoBehaviour
         PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
         playerHealth.TakeDamage(Damage);
 
-        // FallbackForce
-        Vector3 FoePos = other.transform.position;
-        Vector3 FallBackDirection = FoePos - transform.position;
+        /* FallackForce
+        * Vecteur calculé selon la diff entre position du joueur et position du piège
+        */
+        Vector3 FallBackDirection = other.transform.position - transform.position;
         other.attachedRigidbody.AddForce(FallBackForce * FallBackDirection.normalized, ForceMode2D.Impulse);
     }
 }

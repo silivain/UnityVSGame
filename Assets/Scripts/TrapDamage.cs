@@ -12,12 +12,6 @@ public class TrapDamage : MonoBehaviour
     public int Damage = 15;                        // Dégats par défaut
     public float FallBackForce = 50;               // Force repoussant le joueur par défaut
 
-    private Vector3 TrapPos;                       // Position du piège
-
-    void Start() {
-        TrapPos = transform.position;
-    }
-
     // Gestion de la collision avec un GO
     void OnTriggerEnter2D(Collider2D other) {
 
@@ -30,9 +24,10 @@ public class TrapDamage : MonoBehaviour
         PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
         playerHealth.TakeDamage(Damage);
 
-        // FallackForce
-        Vector3 FoePos = other.transform.position;
-        Vector3 FallBackDirection = FoePos - TrapPos;
+        /* FallackForce
+        * Vecteur calculé selon la diff entre position du joueur et position du piège
+        */
+        Vector3 FallBackDirection = other.transform.position - transform.position;
         other.attachedRigidbody.AddForce(FallBackForce * FallBackDirection.normalized, ForceMode2D.Impulse);
     }
 }

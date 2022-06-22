@@ -1283,7 +1283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532874172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.28, y: 0, z: 0}
+  m_LocalPosition: {x: 3.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 638965090}
@@ -1593,7 +1593,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 0.32}
+    oldSize: {x: 8, y: 1}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1610,7 +1610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638965087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 87.05, y: -12.97, z: 0}
+  m_LocalPosition: {x: 76.66, y: -12.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 532874173}
@@ -1629,13 +1629,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533225772b14213ee8c386980d0b5d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 5
   FallBackForce: 50
   tromboneHitbox: {fileID: 638965089}
-  CoulisseRangePoint: {fileID: 0}
+  CoulisseRangePoint: {fileID: 532874173}
   playerLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1 &664652434
 GameObject:
   m_ObjectHideFlags: 0

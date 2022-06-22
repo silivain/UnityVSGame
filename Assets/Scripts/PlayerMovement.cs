@@ -4,15 +4,16 @@ using System.Collections;
 // mécanismes de mouvements des joueurs
 public class PlayerMovement : MonoBehaviour {	//video 2
 
-    public float moveSpeed;		// vitesse de déplacement latéral
-    public float climbSpeed;	// vitesse sur échelles
-    public float jumpForce;		// puissance de saut
-    public float dashForce;		// puissance de dash
-    private float fallSpeed = -18f;
-    private float fallIncreaseSpeed = -1.5f;
+    public float moveSpeed;                     // vitesse de déplacement latéral
+    public float currentSpeedBonus = 0;        // bonus de vitesse actuel
+    public float climbSpeed;                    // vitesse sur échelles
+    public float jumpForce;                     // puissance de saut
+    public float dashForce;                     // puissance de dash
+    private float fallSpeed = -18f;             // vitesse à laquelle le jouer tombe
+    private float fallIncreaseSpeed = -1.5f;    // accélération de la vitesse de chute jusqu'à vitesse max
 
     private bool isJumping;		// vrai si le perso est en l'air
-	  private bool isDashing;		// vrai si le perso est en train de dash
+	private bool isDashing;		// vrai si le perso est en train de dash
     private bool isDashReady=true; //cooldown du Dash
     private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
 
@@ -34,16 +35,16 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public KeyCode jump;						// touche de saut
-	  public KeyCode dash;						// touche de dash
-    public float dashCooldownTime = 2f; //nb de second entre 2 dashs
+	public KeyCode dash;						// touche de dash
+    public float dashCooldownTime = 2f;         //nb de second entre 2 dashs
 
     public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
     private Vector3 playerPosition;			  	// position du joueur
-	  private float powSign;				    // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
-	  public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
+	private float powSign;				        // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
+	public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
 
-    private Transform playerShield;   // shield du joueur
+    private Transform playerShield;             // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
 
@@ -76,8 +77,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       }
 
 	  // maj des vitesses horizontales et verticales
-      horizontalMovement = Input.GetAxis(horizontalAxis) * moveSpeed * Time.fixedDeltaTime;
-      verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+      horizontalMovement = Input.GetAxis(horizontalAxis) * (moveSpeed + currentSpeedBonus) * Time.fixedDeltaTime;
+      verticalMovement = Input.GetAxis("Vertical") * (climbSpeed + currentSpeedBonus) * Time.fixedDeltaTime;
 
       // changement de direction du joueur
 	  if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0)) {
@@ -178,7 +179,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             force *= -1;
         }
 
-            targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
+        targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
 	}
 
 /* affiche le groundCheck à l'écran (debug)
