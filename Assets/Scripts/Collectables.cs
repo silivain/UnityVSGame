@@ -9,29 +9,9 @@ public class Collectables : MonoBehaviour
     public float speedBonus = 5;           	// valeur du bonus de vitesse
     public float speedDuration = 10;        // durée du bonus de vitesse
 
-    public float currentDamageBonus;        // bonus de dégats actuel
     public float damageBonus = 3;           // bonus de dégats
     public float damageDuration = 10;       // durée du bonus de dégats
 
-    public GameObject player;               // le joueur qui récupère le bonus
-
-
-	// Gestion de la collision avec un collectable
-	void OnTriggerEnter2D(Collider2D other) {
-
-        /* Bonus de vitesse
-        * augmente la vitesse du joueur de 'speedBonus' pendant 'speedDuration' secondes
-        */
-		if (other.transform.tag == "SpeedBonus") {
-            StartCoroutine(speedFunction(other.transform.GetComponent<PlayerMovement>()));
-
-        }else if (other.transform.tag == "DamageBonus") {
-            StartCoroutine(damageFunction());
-
-        }else if (other.transform.tag == "HealDelayed") {
-            //TODO
-        }
-	}
 
     /* Applique le bonus de vitesse pendant 'speedDuration' secondes
     */
@@ -41,12 +21,47 @@ public class Collectables : MonoBehaviour
         pMovement.currentSpeedBonus = 0;
     }
 
+
     /* Applique le bonus de dégats pendant 'damageDuration' secondes
     */
-    IEnumerator damageFunction() {
-        //TODO on veut pas modif 'currentDamageBonus', mais la var dans 'PlayerWeapon'
-        currentDamageBonus = damageBonus;
+    IEnumerator damageFunction(PlayerWeapon pWeapon) {
+        pWeapon.currentDamageBonus = damageBonus;
+        Debug.Log("currentDamageBonus = " + pWeapon.currentDamageBonus);
         yield return new WaitForSeconds(damageDuration);
-        currentDamageBonus = 0;
+        pWeapon.currentDamageBonus = 0;
     }
+
+
+    /* Réaprovisionne le joueur en munitions
+    * le nombre exact de munitions bonus pour chaque arme
+    * est donné dans 'PlayerWeapon.bonusAmmunition'
+    */
+    IEnumerator ammunitionFunction(PlayerWeapon pWeapon) {
+        pWeapon.ammunition += pWeapon.bonusAmmunition[pWeapon.weaponID];
+        pWeapon.AmmoDisplay();
+        yield return new WaitForSeconds(0f);    // dégueu, pas moyen de faire autrement ?
+    }
+
+
+	// Gestion de la collision avec un collectable
+	void OnTriggerEnter2D(Collider2D other) {
+
+        if (other.transform.tag == "SpeedBonus") {
+            CurrentSceneManager.instance.CollectedBonus(other.transform.position);
+            StartCoroutine(speedFunction(gameObject.GetComponent<PlayerMovement>()));
+            Destroy(other.gameObject);
+
+        }else if (other.transform.tag == "DamageBonus") {
+            CurrentSceneManager.instance.CollectedBonus(other.transform.position);
+            StartCoroutine(damageFunction(gameObject.GetComponent<PlayerWeapon>()));
+            Destroy(other.gameObject);
+
+        }else if (other.transform.tag == "HealDelayed") {
+            //TODO
+        }else if (other.transform.tag == "AmmunitionBonus") {
+            CurrentSceneManager.instance.CollectedBonus(other.transform.position);
+            StartCoroutine(ammunitionFunction(gameObject.GetComponent<PlayerWeapon>()));
+            Destroy(other.gameObject);
+        }
+	}
 }

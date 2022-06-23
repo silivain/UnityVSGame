@@ -109,6 +109,8 @@ public class PlayerHealth : MonoBehaviour
         if (!shield.activeSelf) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
+            Debug.Log("dégats infligés : " + damage
+                + "\ncurrentHealth = " + currentHealth);
         }
 
         if (shield.activeSelf) {
@@ -189,7 +191,7 @@ public class PlayerHealth : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Heal")) {
 			HealPlayerGO(collision.gameObject);
-			CurrentSceneManager.instance.CollectedHeal();
+			CurrentSceneManager.instance.CollectedHeal(collision.transform.position);
     		Destroy(collision.gameObject);
         }
     }

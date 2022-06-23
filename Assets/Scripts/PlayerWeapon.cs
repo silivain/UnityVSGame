@@ -24,7 +24,7 @@ public class PlayerWeapon : MonoBehaviour
   public SpriteRenderer tromboneSprite;
 
   private Boolean isWeaponReady = true;
-  private int ammunition = 1000;
+  public int ammunition = 1000;
   public Image ammunitionBar;			// barre d'affichage des munitions
   public Text ammunitionCountText;		// texte d'affichage du nb de mun
 
@@ -34,11 +34,14 @@ public class PlayerWeapon : MonoBehaviour
   public float splashRange = 3f;
   public GameObject explosionVisual;
 
-  public static string[] weapons = {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
-  private static int[] maxAmmunition = {1000, 13, 7, 25, 21, 15};                                             // nombre de munitions max/de départ pour chaque arme
-  private static float[] cooldownTime = {.5f, 1f, 2f, .5f, 1f, 1f};                                             // Cooldown de chaque arme
+  public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
+  private static int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15};                                                  // nombre de munitions max/de départ pour chaque arme
+  public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7};                                                    // nombre du munitions apportés par l'item 'Ammunition'
+  private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f};                                                 // Cooldown de chaque arme
 
-  private float startTime =0f;
+  public float currentDamageBonus = 0;        // bonus de dégats actuel
+
+  private float startTime = 0f;
   //private float endTime=0f; TODO
 
 
@@ -156,12 +159,16 @@ public class PlayerWeapon : MonoBehaviour
         Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position, tromboneRangePoint.position, playerLayers);
         foreach(Collider2D enemy in tromboneHitbox)
         {
-            Debug.Log("we hit " + enemy.name);
-            PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(tromboneDamage);
-            // TODO appel à la fonction de recul en passant les arguments nécessaires
-            // le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
-            PlayerMovement.instance.RecoilCac(enemy, transform);
+            // on applique les dégats au CapsuleCollider2D
+            // pour éviter de taper ds plusieurs colliders d'un même joueur
+            if (enemy is CapsuleCollider2D) {
+                //Debug.Log("we hit " + enemy.name);
+                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+                playerHealth.TakeDamage(tromboneDamage + (int) currentDamageBonus);
+                // TODO appel à la fonction de recul en passant les arguments nécessaires
+                // le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
+                PlayerMovement.instance.RecoilCac(enemy, transform);
+            }
         }
 	}
 
@@ -270,16 +277,22 @@ public class PlayerWeapon : MonoBehaviour
 	  Predicate<string> checkWeapon = arrayEl => arrayEl.Substring(0, 3) == wName.Substring(0, 3) ;
 	  weaponID = Array.FindIndex(weapons, checkWeapon);
 	  weapon = weaponsGO[weaponID];
-	  ammunition = maxAmmunition[weaponID];
-	  	ammunitionBar.sprite = weaponsItems[weaponID];
-	  if (weaponID == 0) {
-	    ammunitionCountText.text = "∞";
-	  }else{
-	    ammunitionCountText.text = ammunition.ToString();
-	  }
+      ammunition = maxAmmunition[weaponID];
+      AmmoDisplay();
 
 
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
+    }
+
+
+    // met à jour l'affichage des munitions
+    public void AmmoDisplay() {
+        ammunitionBar.sprite = weaponsItems[weaponID];
+        if (weaponID == 0) {
+            ammunitionCountText.text = "∞";
+        }else{
+            ammunitionCountText.text = ammunition.ToString();
+        }
     }
 
 
@@ -293,10 +306,10 @@ public class PlayerWeapon : MonoBehaviour
         foreach (Collider2D hitCollider in hitColliders)
         {
             PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
-            if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
+            if (hitCollider is CapsuleCollider2D && hitCollider.transform.tag.Substring(0, 4) == "Play")
             {
 
-                playerHealth.TakeDamage(splashDamage);
+                playerHealth.TakeDamage(splashDamage + (int) currentDamageBonus);
                 hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
             }
         }
@@ -312,7 +325,7 @@ public class PlayerWeapon : MonoBehaviour
         if (other.transform.CompareTag("Weapon")) {
           setWeapon(other.gameObject);
 	      // appel au CurrentSceneManager pour tenir le compte du nombre de PowerUp dans la scène
-	      CurrentSceneManager.instance.CollectedItem();
+	      CurrentSceneManager.instance.CollectedWeapon(other.transform.position);
           Destroy(other.gameObject);
         }
     }

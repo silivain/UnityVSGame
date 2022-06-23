@@ -12,20 +12,27 @@ public class TrapTrombone : MonoBehaviour
 
     /*private bool Extended = false;                  // Vrai si la coulisse est tendue*/
 
+
+    // on lance la machine
     void Start() {
         StartCoroutine(HittingLoop());
     }
 
+
+    // frappe toutes les 3-4 sec
     IEnumerator HittingLoop() {
         while(true) {
-            yield return new WaitForSeconds(5f);
+
+            // on génère un random pour faire varier le cooldown entre 3 et 4 sec
+            float alea = Random.Range(1, 10) / 10;
+            yield return new WaitForSeconds(3f + alea);
 
             StartCoroutine(CoulisseAnim());
 
             Collider2D[] coulisseHitbox = Physics2D.OverlapAreaAll(transform.position, CoulisseRangePoint.position, playerLayers);
 
             foreach(Collider2D enemy in coulisseHitbox) {
-                Debug.Log("we hit " + enemy.name);
+                //Debug.Log("we hit " + enemy.name);
                 PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
                 playerHealth.TakeDamage(Damage);
                 // TODO appel à la fonction de recul en passant les arguments nécessaires
@@ -35,11 +42,14 @@ public class TrapTrombone : MonoBehaviour
     	}
     }
 
+
+    // Animation de la coulisse
     IEnumerator CoulisseAnim()
     {
         //TODO
         yield return new WaitForSeconds(0.2f);
     }
+
 
     // Gestion de la collision avec un GO
     void OnTriggerEnter2D(Collider2D other) {

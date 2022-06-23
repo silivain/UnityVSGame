@@ -11,7 +11,7 @@ public class Tuba : MonoBehaviour
 	public float tubaSpeed;           	// tuba bullet speed
 	//public GameObject bulletEffect;  	// TODO bullet visual effect
 	private Rigidbody2D rb;             // tuba bullet rigidbody
-	
+
 
 
   // Start is called before the first frame update
@@ -30,20 +30,24 @@ public class Tuba : MonoBehaviour
 	// Gestion de la collision avec un obstacle
 	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
-		/* 
+		/*
 		* - Détruit le projectile lorsque collision
 		* - check que les proj ne s'annulent pas entre eux
 		* - check qu'on a pas trigger un item ramassable
 		* - check que la cible est bien un player avant d'appliquer les dégats
 		*/
-		if (other.GetType() != typeof(BoxCollider2D) && other.transform.tag.Substring(0, 4) != "Proj" && other.transform.tag != "Weapon"
-		&& other.transform.tag[other.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1])
+		if (other.GetType() != typeof(BoxCollider2D) && other.transform.tag.Substring(0, 4) != "Proj"
+		&& other.transform.tag != "Weapon"
+		&& other.transform.tag[other.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+		&& other.transform.tag != "SpeedBonus"
+		&& other.transform.tag != "DamageBonus"
+		&& other.transform.tag != "AmmunitionBonus"
+		&& other.transform.tag != "Heal"
+		&& other.transform.tag != "HealDelayed")
 		{
-			// de rien ducon
 			GameObject  player = GameObject.FindGameObjectWithTag("Player 1");
 			PlayerWeapon playerWeapon = player.transform.GetComponent<PlayerWeapon>();
 			playerWeapon.Explosion(gameObject);
 		}
 	}
 }
-
