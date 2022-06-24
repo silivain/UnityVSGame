@@ -124,6 +124,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &30898453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1408699445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &73962713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8953197184342650633, guid: 81a532ff440db2bc8b95485f7b29fa6f,
@@ -141,6 +147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.794
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: fire1
+      value: 305
       objectReference: {fileID: 0}
     - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
@@ -1850,12 +1861,12 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: healSpawnTime
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: bonusSpawnTime
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -1880,7 +1891,7 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: newBonus.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -1915,7 +1926,7 @@ PrefabInstance:
         type: 3}
       propertyPath: newBonus.Array.data[0]
       value: 
-      objectReference: {fileID: 1490002812300720274, guid: 38bc9fd3af81701dca060a485a8635f7,
+      objectReference: {fileID: 4720647494406509854, guid: abefd5b3a1bd8912fb5e0d623b004ca1,
         type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -1966,7 +1977,7 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: bonusSpawnPosition.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
@@ -2007,7 +2018,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bonusSpawnPosition.Array.data[0]
       value: 
-      objectReference: {fileID: 1771741270}
+      objectReference: {fileID: 30898453}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: bonusSpawnPosition.Array.data[1]
@@ -4829,6 +4840,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1088441029}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1032618500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6760287151957572320, guid: 40873c8bba898dde88cda6ed26e0edd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6760287151183206931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1032618501
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032618500}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0029232025, y: -0.007795334}
+  serializedVersion: 2
+  m_Radius: 0.17174187
 --- !u!1001 &1035689636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28527,7 +28560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65a37e13993295568c21b857145dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBonus: 5
+  speedBonus: 300
   speedDuration: 10
   damageBonus: 5
   damageDuration: 15
@@ -28549,7 +28582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65a37e13993295568c21b857145dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBonus: 5
+  speedBonus: 300
   speedDuration: 10
   damageBonus: 5
   damageDuration: 15
@@ -29045,6 +29078,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 596156944}
     - target: {fileID: 4594055403739195461, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594055405112959773, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -29680,6 +29718,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TrapCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760287151957572325, guid: 40873c8bba898dde88cda6ed26e0edd1,
+        type: 3}
+      propertyPath: Damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760287151957572325, guid: 40873c8bba898dde88cda6ed26e0edd1,
+        type: 3}
+      propertyPath: FallBackForce
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760287151957572326, guid: 40873c8bba898dde88cda6ed26e0edd1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.23410377
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760287151957572326, guid: 40873c8bba898dde88cda6ed26e0edd1,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.005846787
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760287151957572326, guid: 40873c8bba898dde88cda6ed26e0edd1,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0048719407
       objectReference: {fileID: 0}
     - target: {fileID: 6760287151957572327, guid: 40873c8bba898dde88cda6ed26e0edd1,
         type: 3}

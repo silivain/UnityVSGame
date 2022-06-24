@@ -35,6 +35,8 @@ public class Tuba : MonoBehaviour
 		* - check que les proj ne s'annulent pas entre eux
 		* - check qu'on a pas trigger un item ramassable
 		* - check que la cible est bien un player avant d'appliquer les dégats
+		* - check que le collider est un 'CapsuleCollider2D' pour appliquer
+		*   une seule fois les dégats
 		*/
 		if (other.GetType() != typeof(BoxCollider2D) && other.transform.tag.Substring(0, 4) != "Proj"
 		&& other.transform.tag != "Weapon"

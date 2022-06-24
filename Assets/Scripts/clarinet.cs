@@ -34,14 +34,17 @@ public class clarinet : MonoBehaviour
 		/* Inflige les dégats du projectile à un joueur lorsque collision
 		* - check pour pas se prendre son propre proj
 		* - check que la cible est bien un player avant d'appliquer les dégats
+		* - check que le collider est un 'CapsuleCollider2D' pour appliquer
+		*   une seule fois les dégats
 		*/
 		if(other.transform.tag[other.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
 		&& other.transform.tag.Substring(0, 4) == "Play"
 		&& other is CapsuleCollider2D) {
 			PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
 			PlayerWeapon PlayerWeapon = other.transform.GetComponent<PlayerWeapon>();
+			PlayerWeapon tireur = GameObject.FindWithTag(transform.tag.Substring(4, transform.tag.Length - 4)).GetComponent<PlayerWeapon>();
 
-			playerHealth.TakeDamage(damageOnCollision + (int) PlayerWeapon.currentDamageBonus);
+			playerHealth.TakeDamage(damageOnCollision + (int) tireur.currentDamageBonus);
 			// TODO appel à la fonction de recul en passant les arguments nécessaires
 			// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
 			PlayerMovement.instance.Recoil(other, rb);

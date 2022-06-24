@@ -26,8 +26,9 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject shield;                   // shield du joueur
     public KeyCode shieldKey;                   // touche du shield
-    private bool shieldReady = true;                   // booléen vrai si le bouclier est prêt à être utilisé
+    private bool shieldReady = true;            // booléen vrai si le bouclier est prêt à être utilisé
     public float shieldCooldown = 5f;           // délai avant réactivation possible du bouclier
+    public bool trapResistance = false;         // vrai si le joueur est invulnérable aux pièges
 
     public GameOver_screen GameOver_Screen;     // Gestion de l'affichage de GameOver
 
@@ -109,8 +110,8 @@ public class PlayerHealth : MonoBehaviour
         if (!shield.activeSelf) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
-            Debug.Log("dégats infligés : " + damage
-                + "\ncurrentHealth = " + currentHealth);
+            /*Debug.Log("dégats infligés : " + damage
+                + "\ncurrentHealth = " + currentHealth);*/
         }
 
         if (shield.activeSelf) {

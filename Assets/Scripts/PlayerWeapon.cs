@@ -159,8 +159,7 @@ public class PlayerWeapon : MonoBehaviour
         Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position, tromboneRangePoint.position, playerLayers);
         foreach(Collider2D enemy in tromboneHitbox)
         {
-            // on applique les dégats au CapsuleCollider2D
-            // pour éviter de taper ds plusieurs colliders d'un même joueur
+            // CapsuleCollider2D pour éviter d'appliquer les dégats à plusieurs colliders du même perso
             if (enemy is CapsuleCollider2D) {
                 //Debug.Log("we hit " + enemy.name);
                 PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
@@ -306,6 +305,8 @@ public class PlayerWeapon : MonoBehaviour
         foreach (Collider2D hitCollider in hitColliders)
         {
             PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
+
+            // CapsuleCollider2D pour éviter d'appliquer les dégats à plusieurs colliders du même perso
             if (hitCollider is CapsuleCollider2D && hitCollider.transform.tag.Substring(0, 4) == "Play")
             {
 
