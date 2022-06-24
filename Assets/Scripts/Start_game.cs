@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Start_game : MonoBehaviour
 {
+    public PlayerControls controls;
     
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,8 @@ public class Start_game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.G)){
+       if(controls.Gameplay.Start.triggered)
+        {
            SceneManager.LoadScene("SimpleArena");
        } 
     }

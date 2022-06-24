@@ -8,13 +8,17 @@ public class OneWayPlatform : MonoBehaviour
     [SerializeField] private CapsuleCollider2D playerCollider;
     [SerializeField] private BoxCollider2D boxCollider1;
     [SerializeField] private BoxCollider2D boxCollider2;
-    public KeyCode down;
-       
+    public PlayerControls controls;
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(down)){
+        if(controls.Gameplay.GoDown.triggered){
             if(currentOneWayPlatform !=null){
                 StartCoroutine( DisableCollision() );
             }

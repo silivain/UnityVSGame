@@ -34,6 +34,8 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
 
+    public PlayerControls controls;
+
 
     /* remplit la vie et la barre de vie du joueur au démarrage
 	*/
@@ -41,11 +43,14 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
+    private void Awake()
+    {
+        controls = new PlayerControls();
+    }
 
-
-    void Update() {
+        void Update() {
         // shield
-        if (Input.GetKeyDown(shieldKey) && !shield.activeSelf && shieldReady) {
+        if (controls.Gameplay.Shield.triggered && !shield.activeSelf && shieldReady) {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());

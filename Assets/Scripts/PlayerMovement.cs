@@ -33,8 +33,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     private float verticalMovement;				// vitesse verticale
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
-    public KeyCode jump;						// touche de saut
-	  public KeyCode dash;						// touche de dash
     public float dashCooldownTime = 2f; //nb de second entre 2 dashs
 
     public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
@@ -46,11 +44,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     private Transform playerShield;   // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
-
+    public PlayerControls controls;
 	/* init de variables
 	*/
     private void Awake() {
-  		throwPointPosition = throwPoint.transform.position;
+        controls = new PlayerControls();
+        throwPointPosition = throwPoint.transform.position;
   		playerPosition = transform.position;
   		powSign = 0f;
   		xDirection = Mathf.Pow(-1f, powSign);
@@ -66,12 +65,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       playerPosition = transform.position;
 
         // saut
-        if (Input.GetKeyDown(jump) && isGrounded && !isClimbing && rb.velocity.y < 0.1) {
+        if (controls.Gameplay.Jump.triggered && isGrounded && !isClimbing && rb.velocity.y < 0.1) {
         isJumping = true;
       }
 
 	  // dash
-	  if (Input.GetKeyDown(dash) && !isClimbing && isDashReady) {
+	  if (controls.Gameplay.Dash.triggered && !isClimbing && isDashReady) {
 		  isDashing = true;
       }
 
