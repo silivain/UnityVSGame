@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.InputSystem;
 
 // mécanismes de mouvements des joueurs
-public class PlayerMovement : MonoBehaviour {	//video 2
+public class PlayerMovementPlayerMovement : MonoBehaviour {	//video 2
 
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
@@ -47,8 +48,20 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public static PlayerMovement instance;		// instance de la classe
     public PlayerControls controls;
-	/* init de variables
-	*/
+
+    /* init de variables
+    */
+
+    private void Start()
+    {
+        //for (int i = 0; i < InputSystem.devices.Count; i++)
+        //{
+        //    Debug.Log(i);
+        //    Debug.Log(InputSystem.devices[i].name);
+        //}
+
+
+    }
     private void Awake() {
         controls = new PlayerControls();
         throwPointPosition = throwPoint.transform.position;
@@ -59,8 +72,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
       playerShield = transform.Find("Shield");
     }
 
-
-	/* détecte les différents inputs et appelle les fonctions appropriées
+    /* détecte les différents inputs et appelle les fonctions appropriées
 	*/
     void Update()
     {
@@ -74,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
         // maj des vitesses horizontales et verticales
         horizontalMovement = horizontalWay * moveSpeed * Time.fixedDeltaTime;
-        verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
