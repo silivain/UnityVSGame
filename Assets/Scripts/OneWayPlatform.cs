@@ -18,13 +18,18 @@ public class OneWayPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(controls.Gameplay.GoDown.triggered){
-            if(currentOneWayPlatform !=null){
-                StartCoroutine( DisableCollision() );
-            }
+        controls.Gameplay.GoDown.performed += ctx => GoDown();
+
+    }
+
+    private void GoDown()
+    {
+        if (currentOneWayPlatform != null)
+        {
+            StartCoroutine(DisableCollision());
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("OneWayPlatform")){
                 currentOneWayPlatform = collision.gameObject;
@@ -51,5 +56,13 @@ public class OneWayPlatform : MonoBehaviour
         Physics2D.IgnoreCollision(boxCollider1,plaformCollider,false);
         Physics2D.IgnoreCollision(boxCollider2, plaformCollider,false);
     }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 }

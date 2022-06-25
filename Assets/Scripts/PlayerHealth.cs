@@ -48,9 +48,16 @@ public class PlayerHealth : MonoBehaviour
         controls = new PlayerControls();
     }
 
-        void Update() {
+        void Update()
+    {
+        controls.Gameplay.Shield.performed += ctx => Shield();
+    }
+
+    private void Shield()
+    {
         // shield
-        if (controls.Gameplay.Shield.triggered && !shield.activeSelf && shieldReady) {
+        if (!shield.activeSelf && shieldReady)
+        {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());
@@ -198,5 +205,13 @@ public class PlayerHealth : MonoBehaviour
     		Destroy(collision.gameObject);
         }
     }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 }

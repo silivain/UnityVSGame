@@ -43,7 +43,8 @@ public class PlayerWeapon : MonoBehaviour
     //private float endTime=0f; TODO
 
   private void Awake() {
-        controls = new PlayerControls();
+    controls = new PlayerControls();
+    
     instance = this;
     playerShield = transform.Find("Shield");
   }
@@ -51,34 +52,41 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controls.Gameplay.Shoot.triggered && !playerShield.gameObject.activeSelf && isWeaponReady) {
+        controls.Gameplay.Shoot.performed += ctx => Shoot();
+    }
+
+    private void Shoot()
+    {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady)
+        {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());
             //tir en fonction de l'arme équipée
-            switch (weaponID) {
-          case 0:
-            bullet();
-            break;
-          case 1:
-            clarinet();
-            break;
-          case 2:
-            startTime = Time.time;
-            grenadeLaunch();
-            break;
-          case 3:
-            trombone();
-            break;
-		  case 4:
-		  	StartCoroutine(sousa());
-			break;
-		  case 5:
-  		  	StartCoroutine(tuba());
-  			break;
-          default:
-            bullet();
-            break;
+            switch (weaponID)
+            {
+                case 0:
+                    bullet();
+                    break;
+                case 1:
+                    clarinet();
+                    break;
+                case 2:
+                    startTime = Time.time;
+                    grenadeLaunch();
+                    break;
+                case 3:
+                    trombone();
+                    break;
+                case 4:
+                    StartCoroutine(sousa());
+                    break;
+                case 5:
+                    StartCoroutine(tuba());
+                    break;
+                default:
+                    bullet();
+                    break;
             }
         }
     }
@@ -270,5 +278,15 @@ public class PlayerWeapon : MonoBehaviour
 	      CurrentSceneManager.instance.CollectedItem();
           Destroy(other.gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
     }
 }

@@ -26,23 +26,38 @@ public class game_paused : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
+        controls.Gameplay.Start.performed += ctx => Pause();
+    }
+
+    private void Pause()
+    {
         if (!countdown.activeSelf)//si le countdown de départ est terminé, on peux mettre en pause
         {
-            if(controls.Gameplay.Start.triggered && isGamePausedActive==false ){ //si on appuie sur la touche G, le menu pause s'active
-            gamePaused.SetActive(true);
-            isGamePausedActive = true;
-            GOAduio.GetComponent<AudioSource>().Pause();
-            Debug.Log("into Pause Menu");
-            Time.timeScale=0f;
-            
-            }else if(controls.Gameplay.Start.triggered && isGamePausedActive==true) // si on appuie a nouveau le jeu se relance
+            if (isGamePausedActive == false)
+            { //si on appuie sur la touche G, le menu pause s'active
+                gamePaused.SetActive(true);
+                isGamePausedActive = true;
+                GOAduio.GetComponent<AudioSource>().Pause();
+                Debug.Log("into Pause Menu");
+                Time.timeScale = 0f;
+
+            }
+            else if (controls.Gameplay.Start.triggered && isGamePausedActive == true) // si on appuie a nouveau le jeu se relance
             {
                 gamePaused.SetActive(false);
-                isGamePausedActive = false; 
-                Time.timeScale=1f;
+                isGamePausedActive = false;
+                Time.timeScale = 1f;
                 GOAduio.GetComponent<AudioSource>().Play();
             }
         }
-        
+    }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
     }
 }
