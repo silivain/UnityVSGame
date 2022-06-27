@@ -41,9 +41,11 @@ public class PlayerWeapon : MonoBehaviour
 
   private float startTime =0f;
     //private float endTime=0f; TODO
+    public int deviceNumber;            //Numero de device du gamepad
 
-  private void Awake() {
+    private void Awake() {
     controls = new PlayerControls();
+    controls.devices = new[] { InputSystem.devices[deviceNumber] };
     
     instance = this;
     playerShield = transform.Find("Shield");

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OneWayPlatform : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class OneWayPlatform : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider1;
     [SerializeField] private BoxCollider2D boxCollider2;
     public PlayerControls controls;
+    public int deviceNumber;            //Numero de device du gamepad
 
     private void Awake()
     {
         controls = new PlayerControls();
+        controls.devices = new[] { InputSystem.devices[deviceNumber] };
     }
 
     // Update is called once per frame

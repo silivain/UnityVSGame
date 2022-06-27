@@ -149,6 +149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
+      propertyPath: deviceNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: splashDamage
       value: 10
       objectReference: {fileID: 0}
@@ -185,6 +190,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 34bb21647de73dcabb99892ab3f2299c, type: 3}
     - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
+      propertyPath: deviceNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: GameOver_Screen
       value: 
       objectReference: {fileID: 394849165}
@@ -197,6 +207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dash
       value: 323
+      objectReference: {fileID: 0}
+    - target: {fileID: 453807249256408532, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: deviceNumber
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 453807249256408533, guid: ca07fb7c9346bee658b67afdb1922df2,
         type: 3}
@@ -267,6 +282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147078881749913061, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: deviceNumber
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca07fb7c9346bee658b67afdb1922df2, type: 3}
@@ -28568,6 +28588,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 290958905, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
+      propertyPath: deviceNumber
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
       propertyPath: healthBar
@@ -28585,6 +28609,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
     - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
+      propertyPath: deviceNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
       propertyPath: GameOver_Screen
       value: 
       objectReference: {fileID: 394849165}
@@ -28597,6 +28626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594055403739195454, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
+      propertyPath: deviceNumber
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195455, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}
@@ -28652,6 +28686,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de,
+        type: 3}
+      propertyPath: deviceNumber
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de,
         type: 3}

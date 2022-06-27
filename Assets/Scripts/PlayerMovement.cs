@@ -4,7 +4,7 @@ using System;
 using UnityEngine.InputSystem;
 
 // mécanismes de mouvements des joueurs
-public class PlayerMovementPlayerMovement : MonoBehaviour {	//video 2
+public class PlayerMovement : MonoBehaviour {	//video 2
 
     public float moveSpeed;		// vitesse de déplacement latéral
     public float climbSpeed;	// vitesse sur échelles
@@ -48,22 +48,14 @@ public class PlayerMovementPlayerMovement : MonoBehaviour {	//video 2
 
     public static PlayerMovement instance;		// instance de la classe
     public PlayerControls controls;
+    public int deviceNumber;            //Numero de device du gamepad
 
     /* init de variables
     */
 
-    private void Start()
-    {
-        //for (int i = 0; i < InputSystem.devices.Count; i++)
-        //{
-        //    Debug.Log(i);
-        //    Debug.Log(InputSystem.devices[i].name);
-        //}
-
-
-    }
     private void Awake() {
         controls = new PlayerControls();
+        controls.devices = new[] { InputSystem.devices[deviceNumber] };
         throwPointPosition = throwPoint.transform.position;
   		playerPosition = transform.position;
   		powSign = 0f;
@@ -86,7 +78,7 @@ public class PlayerMovementPlayerMovement : MonoBehaviour {	//video 2
 
         // maj des vitesses horizontales et verticales
         horizontalMovement = horizontalWay * moveSpeed * Time.fixedDeltaTime;
-        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+        verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
