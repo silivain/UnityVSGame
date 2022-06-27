@@ -41,7 +41,7 @@ public class CountDownTimer : MonoBehaviour
                 yield return new  WaitForSeconds(1.413f);
             }else if(SceneManager.GetActiveScene().name == "SimpleSceneSwing")
             {
-                yield return new  WaitForSeconds(0.3f);
+                yield return new  WaitForSeconds(0.544f);
             }
 
             
