@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
         // maj des vitesses horizontales et verticales
         horizontalMovement = horizontalWay * moveSpeed * Time.fixedDeltaTime;
-        verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9a16f1fd9032ea443b53dd01c6756182
   - enabled: 1
-    path: Assets/Scenes/SimpleArena.unity
-    guid: 3beb6990ea8690e48b83a271c45a6fcc
+    path: Assets/Scenes/SimpleSceneOmen.unity
+    guid: 61a680bdd32fd20438c3c03396d7d621
+  - enabled: 1
+    path: Assets/Scenes/SimpleSceneLalaland.unity
+    guid: aedfd9600cffe674191b0e49bc23d8a3
   m_configObjects: {}

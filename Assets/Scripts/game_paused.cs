@@ -21,31 +21,35 @@ public class game_paused : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControls();
+        controls.Gameplay.Start.performed += ctx => PauseGame();
     }
 
         // Update is called once per frame
         void Update()
     {
-        controls.Gameplay.Start.performed += ctx => Pause();
+        
     }
 
-    private void Pause()
+    private void PauseGame()
     {
         if (!countdown.activeSelf)//si le countdown de départ est terminé, on peux mettre en pause
         {
-            if(Input.GetKeyDown("g") && isGamePausedActive==false ){ //si on appuie sur la touche G, le menu pause s'active
-            gamePaused.SetActive(true);
-            isGamePausedActive = true;
-            GOAudio.GetComponent<AudioSource>().Pause();
-            Debug.Log("into Pause Menu");
-            Time.timeScale=0f;
+            if(isGamePausedActive==false )
+            { //si on appuie sur la touche G, le menu pause s'active
+                gamePaused.SetActive(true);
+                isGamePausedActive = true;
+                GOAudio.GetComponent<AudioSource>().Pause();
+                Debug.Log("into Pause Menu");
+                Time.timeScale=0f;
             
-            }else if(Input.GetKeyDown("g") && isGamePausedActive==true) // si on appuie a nouveau le jeu se relance
+            }
+            else  // si on appuie a nouveau le jeu se relance
             {
                 gamePaused.SetActive(false);
                 isGamePausedActive = false;
                 Time.timeScale = 1f;
                 GOAudio.GetComponent<AudioSource>().Play();
+                Debug.Log("out Pause Menu");
             }
         }
     }

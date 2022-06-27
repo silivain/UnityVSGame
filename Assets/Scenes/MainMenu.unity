@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 17583092}
   - component: {fileID: 17583091}
   - component: {fileID: 17583090}
+  - component: {fileID: 17583093}
   m_Layer: 5
   m_Name: ButtonStart
   m_TagString: Untagged
@@ -268,6 +269,93 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17583088}
   m_CullTransparentMesh: 0
+--- !u!114 &17583093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17583088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
+    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
+    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
+    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
+    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
+    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
+    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1512260072}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2053949747}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
+    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
+    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!850595691 &42171683
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -669,7 +757,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518448198
 GameObject:
@@ -683,6 +771,7 @@ GameObject:
   - component: {fileID: 518448202}
   - component: {fileID: 518448201}
   - component: {fileID: 518448200}
+  - component: {fileID: 518448203}
   m_Layer: 5
   m_Name: ButtonL
   m_TagString: Untagged
@@ -803,6 +892,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518448198}
   m_CullTransparentMesh: 0
+--- !u!114 &518448203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518448198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
+    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
+    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1157143360}
+        m_TargetAssemblyTypeName: ImageTab, Assembly-CSharp
+        m_MethodName: previousImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
+    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
+    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
+    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
+    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
+    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
+    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &525337605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1368,7 @@ GameObject:
   - component: {fileID: 951346733}
   - component: {fileID: 951346732}
   - component: {fileID: 951346731}
+  - component: {fileID: 951346734}
   m_Layer: 5
   m_Name: ButtonStart
   m_TagString: Untagged
@@ -1337,6 +1502,93 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951346729}
   m_CullTransparentMesh: 0
+--- !u!114 &951346734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951346729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
+    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
+    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
+    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
+    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
+    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
+    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2053949747}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2099172715}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
+    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
+    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1017893937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,72 +1955,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309101301}
   m_CullTransparentMesh: 0
---- !u!1 &1330203598
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1330203601}
-  - component: {fileID: 1330203600}
-  - component: {fileID: 1330203599}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1330203599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330203598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1330203600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330203598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1330203601
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330203598}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1378186617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,6 +2298,7 @@ GameObject:
   - component: {fileID: 1561380973}
   - component: {fileID: 1561380972}
   - component: {fileID: 1561380971}
+  - component: {fileID: 1561380974}
   m_Layer: 5
   m_Name: ButtonR
   m_TagString: Untagged
@@ -2232,6 +2419,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561380969}
   m_CullTransparentMesh: 0
+--- !u!114 &1561380974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561380969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
+    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
+    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
+    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1157143360}
+        m_TargetAssemblyTypeName: ImageTab, Assembly-CSharp
+        m_MethodName: nextImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
+    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
+    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
+    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
+    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
+    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1714900194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,10 +3215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f9b0217d3fcc55193688d298395e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Select_player
+  levelToLoad: 0
   settingsWindow: {fileID: 0}
-  P1: {fileID: 0}
-  P2: {fileID: 0}
 --- !u!1 &2023936865
 GameObject:
   m_ObjectHideFlags: 0
