@@ -8,12 +8,13 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;	// vrai si le jeu est en pause
     public GameObject pauseMenuUI;				// fenêtre du menu pause
     public GameObject settingsWindow;			// fenêtre des paramètres
+    public PlayerControls controls;
 
 
 	/* active ou désactive la pause
 	*/
     void Update() {
-      if(Input.GetKeyDown(KeyCode.Escape)) {
+      if(controls.Gameplay.Start.triggered) {
         if(gameIsPaused) {
           Resume();
         }

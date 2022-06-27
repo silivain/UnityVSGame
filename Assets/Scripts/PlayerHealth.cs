@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // système de vie des joueurs
 public class PlayerHealth : MonoBehaviour
@@ -34,6 +35,10 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
 
+    public PlayerControls controls;
+    public int deviceNumber;            //Numero de device du gamepad
+
+
 
     /* remplit la vie et la barre de vie du joueur au démarrage
 	*/
@@ -41,11 +46,22 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
+    private void Awake()
+    {
+        controls = new PlayerControls();
+        controls.devices = new[] { InputSystem.devices[deviceNumber] };
+    }
 
+        void Update()
+    {
+        controls.Gameplay.Shield.performed += ctx => Shield();
+    }
 
-    void Update() {
+    private void Shield()
+    {
         // shield
-        if (Input.GetKeyDown(shieldKey) && !shield.activeSelf && shieldReady) {
+        if (!shield.activeSelf && shieldReady)
+        {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());
@@ -193,5 +209,13 @@ public class PlayerHealth : MonoBehaviour
     		Destroy(collision.gameObject);
         }
     }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 }
