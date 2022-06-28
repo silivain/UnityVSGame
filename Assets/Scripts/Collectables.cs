@@ -16,21 +16,52 @@ public class Collectables : MonoBehaviour
     private bool collectingDamageBonus = false;  // vrai si a recup un bonus de dégats il y a moins de 0.5 sec
     private bool collectingAmmunition  = false;  // vrai si a recup une munn il y a moins de 0.5 sec
 
+    public GameObject AmmunitionBonusP1;
+    public GameObject AmmunitionBonusP2;
+    public GameObject DamageBonusP1;
+    public GameObject DamageBonusP2;
+    public GameObject SpeedBonusP1;
+    public GameObject SpeedBonusP2;
+
 
     /* Applique le bonus de vitesse pendant 'speedDuration' secondes
+    * active l'affichage du bonus de vitesse pour le joueur concerné
     */
     IEnumerator speedFunction(PlayerMovement pMovement) {
+        string numPlayer = pMovement.transform.name[pMovement.transform.name.Length - 1].ToString();
+
+        if (numPlayer == "1") {
+            SpeedBonusP1.SetActive(true);
+        }else{
+            SpeedBonusP2.SetActive(true);
+        }
+
         pMovement.currentSpeedBonus = speedBonus;
         yield return new WaitForSeconds(0.5f);
         collectingSpeedBonus = false;
         yield return new WaitForSeconds(speedDuration - 0.5f);
         pMovement.currentSpeedBonus = 0;
+
+        if (numPlayer == "1") {
+            SpeedBonusP1.SetActive(false);
+        }else{
+            SpeedBonusP2.SetActive(false);
+        }
     }
 
 
     /* Applique le bonus de dégats pendant 'damageDuration' secondes
+    * active l'affichage du bonus de dégats pour le joueur concerné
     */
     IEnumerator damageFunction(PlayerWeapon pWeapon) {
+        string numPlayer = pWeapon.transform.name[pWeapon.transform.name.Length - 1].ToString();
+
+        if (numPlayer == "1") {
+            DamageBonusP1.SetActive(true);
+        }else{
+            DamageBonusP2.SetActive(true);
+        }
+
         pWeapon.currentDamageBonus = damageBonus;
         Debug.Log("currentDamageBonus = " + pWeapon.currentDamageBonus);
         yield return new WaitForSeconds(0.5f);
@@ -38,6 +69,12 @@ public class Collectables : MonoBehaviour
         yield return new WaitForSeconds(damageDuration - 0.5f);
         Debug.Log("avant fin du damageBonus, pWeapon.currentDamageBonus = " + pWeapon.currentDamageBonus);
         pWeapon.currentDamageBonus = 0;
+
+        if (numPlayer == "1") {
+            DamageBonusP1.SetActive(false);
+        }else{
+            DamageBonusP2.SetActive(false);
+        }
     }
 
 
@@ -46,10 +83,26 @@ public class Collectables : MonoBehaviour
     * est donné dans 'PlayerWeapon.bonusAmmunition'
     */
     IEnumerator ammunitionFunction(PlayerWeapon pWeapon) {
-        pWeapon.ammunition += pWeapon.bonusAmmunition[pWeapon.weaponID];
+        string numPlayer = pWeapon.transform.name[pWeapon.transform.name.Length - 1].ToString();
+
+        if (numPlayer == "1") {
+            AmmunitionBonusP1.SetActive(true);
+        }else{
+            AmmunitionBonusP2.SetActive(true);
+        }
+
+        pWeapon.ammunition = Mathf.Min(pWeapon.ammunition + pWeapon.bonusAmmunition[pWeapon.weaponID],
+            pWeapon.maxAmmunition[pWeapon.weaponID]);
         pWeapon.AmmoDisplay();
         yield return new WaitForSeconds(0.5f);
         collectingAmmunition = false;
+        yield return new WaitForSeconds(1.5f);
+
+        if (numPlayer == "1") {
+            AmmunitionBonusP1.SetActive(false);
+        }else{
+            AmmunitionBonusP2.SetActive(false);
+        }
     }
 
 

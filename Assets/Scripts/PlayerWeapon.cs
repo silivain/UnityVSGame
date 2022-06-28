@@ -23,6 +23,17 @@ public class PlayerWeapon : MonoBehaviour
   public int tromboneDamage = 10;
   public SpriteRenderer tromboneSprite;
 
+  private GameObject AnimTrb0;    // GameObject animation du coup de coulisse
+  private GameObject AnimTrb1;
+  private GameObject AnimTrb2;
+  private GameObject AnimTrb3;
+  private GameObject AnimTrb4;
+  public bool immunTromboneHit = false;         // vrai si le joueur vient d'être frappé par un coup de trb
+
+  public bool solo = false;                     // vrai si le joueur équipé d'une flute fait un solo
+  public float timeBeforeSolo;                  // durée avant le solo de flute
+  public float timeSolo;                        // durée du solo de flute
+
   private Boolean isWeaponReady = true;
   public int ammunition = 1000;
   public Image ammunitionBar;			// barre d'affichage des munitions
@@ -34,10 +45,10 @@ public class PlayerWeapon : MonoBehaviour
   public float splashRange = 3f;
   public GameObject explosionVisual;
 
-  public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "tromboneRangePoint", "Sousa", "Tuba"};	// armes du jeu, l'ordre des armes doit match leur weaponID
-  private static int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15};                                                  // nombre de munitions max/de départ pour chaque arme
-  public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7};                                                    // nombre du munitions apportés par l'item 'Ammunition'
-  private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f};                                                 // Cooldown de chaque arme
+  public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "Trombone", "Sousa", "Tuba", "Flute"};	// armes du jeu, l'ordre des armes doit match leur weaponID
+  public         int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15, 1000};                                                  // nombre de munitions max/de départ pour chaque arme
+  public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7, 1000};                                                    // nombre du munitions apportés par l'item 'Ammunition'
+  private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                                 // Cooldown de chaque arme
 
   public float currentDamageBonus = 0;        // bonus de dégats actuel
 
@@ -78,7 +89,7 @@ public class PlayerWeapon : MonoBehaviour
             grenadeLaunch();
             break;
           case 3:
-            trombone();
+            StartCoroutine(trombone());
             break;
 		  case 4:
 		  	StartCoroutine(sousa());
@@ -86,6 +97,9 @@ public class PlayerWeapon : MonoBehaviour
 		  case 5:
   		  	StartCoroutine(tuba());
   			break;
+          case 6:
+		  	flute();
+			break;
           default:
             bullet();
             break;
@@ -102,8 +116,6 @@ public class PlayerWeapon : MonoBehaviour
 
 	  UseAmmo();
 
-      // TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
-      //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
       //anim.SetTrigger("fire anim"); animation
     }
 
@@ -154,35 +166,42 @@ public class PlayerWeapon : MonoBehaviour
     * on récupère tous les collider entre le joueur et 'tromboneRangePoint'
     * on applique les dégats du trombone à tous les joueurs récupérés
     */
-    void trombone() {
-        StartCoroutine(tromboneAppear());
-        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position, tromboneRangePoint.position, playerLayers);
-        foreach(Collider2D enemy in tromboneHitbox)
-        {
-            // CapsuleCollider2D pour éviter d'appliquer les dégats à plusieurs colliders du même perso
-            if (enemy is CapsuleCollider2D) {
-                //Debug.Log("we hit " + enemy.name);
-                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
-                playerHealth.TakeDamage(tromboneDamage + (int) currentDamageBonus);
-                // TODO appel à la fonction de recul en passant les arguments nécessaires
-                // le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
-                PlayerMovement.instance.RecoilCac(enemy, transform);
-            }
-        }
+    IEnumerator trombone() {
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb0.SetActive(false);
+        AnimTrb1.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb1.SetActive(false);
+        AnimTrb2.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb2.SetActive(false);
+        AnimTrb3.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb3.SetActive(false);
+        AnimTrb4.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb4.SetActive(false);
+        AnimTrb3.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb3.SetActive(false);
+        AnimTrb2.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb2.SetActive(false);
+        AnimTrb1.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+        AnimTrb1.SetActive(false);
+        AnimTrb0.SetActive(true);
+
+        UseAmmo();
 	}
-
-
-    /* Animation du coup de trombone
-    */
-    IEnumerator tromboneAppear()
-    {
-        tromboneSprite.enabled = true;
-        yield return new WaitForSeconds(0.2f);
-        tromboneSprite.enabled = false;
-
-		UseAmmo();
-    }
-
 
     /* Tire 3 projs de sousa
     * les projs disparaissent au bout de 1 sec
@@ -212,16 +231,6 @@ public class PlayerWeapon : MonoBehaviour
 	}
 
 
-    /* Gère le cooldown de l'arme actuelle en fonction des valeurs de 'cooldownTime'
-    */
-    IEnumerator cooldownWeapon() {
-        if (!isWeaponReady) {
-            yield return new WaitForSeconds(cooldownTime[weaponID]);
-            isWeaponReady = true;
-        }
-    }
-
-
     /* Crée un projectile 'tuba'
     * le projectile explose :
     * - au contact d'un collider
@@ -235,6 +244,53 @@ public class PlayerWeapon : MonoBehaviour
 
 		yield return new WaitForSeconds(0.75f);
         Explosion(tuba);
+    }
+
+
+    /* Explosion du tuba
+    * TODO : commenter pls
+    */
+    public void Explosion(GameObject tuba)
+    {
+        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
+
+            // CapsuleCollider2D pour éviter d'appliquer les dégats à plusieurs colliders du même perso
+            if (hitCollider is CapsuleCollider2D && hitCollider.transform.tag.Substring(0, 4) == "Play")
+            {
+
+                playerHealth.TakeDamage(splashDamage + (int) currentDamageBonus);
+                hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
+            }
+        }
+        Destroy(tuba);
+    }
+
+
+    /* TODO
+    */
+    void flute() {
+      GameObject fluteClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+	  fluteClone.tag = "Proj" + transform.tag;
+
+	  UseAmmo();
+
+      //anim.SetTrigger("fire anim"); animation
+    }
+
+
+    /* Gère le cooldown de la flute
+    */
+    IEnumerator cooldownFlute() {
+        while(weapon.name == "Flute") {
+            solo = false;
+            yield return new WaitForSeconds(timeBeforeSolo);
+            solo = true;
+            yield return new WaitForSeconds(timeSolo);
+        }
     }
 
 
@@ -253,6 +309,16 @@ public class PlayerWeapon : MonoBehaviour
 	      ammunitionCountText.text = ammunition.ToString();
 	    }
 	}
+
+
+    /* Gère le cooldown de l'arme actuelle en fonction des valeurs de 'cooldownTime'
+    */
+    IEnumerator cooldownWeapon() {
+        if (!isWeaponReady) {
+            yield return new WaitForSeconds(cooldownTime[weaponID]);
+            isWeaponReady = true;
+        }
+    }
 
 
     /* Équipe l'arme sur le player
@@ -280,6 +346,24 @@ public class PlayerWeapon : MonoBehaviour
       AmmoDisplay();
 
 
+      /* Lorsqu'on récup le trombone :
+      * on récup les GO d'animation
+      */
+      if (weaponID == 3) {
+          string num = gameObject.name.Substring(gameObject.name.Length - 1, 1);
+          Transform trb = transform.Find("tromboneRangePoint");
+
+          AnimTrb0 = trb.Find("AnimTrb0P" + num).gameObject;
+          AnimTrb1 = trb.Find("AnimTrb1P" + num).gameObject;
+          AnimTrb2 = trb.Find("AnimTrb2P" + num).gameObject;
+          AnimTrb3 = trb.Find("AnimTrb3P" + num).gameObject;
+          AnimTrb4 = trb.Find("AnimTrb4P" + num).gameObject;
+
+          AnimTrb0.SetActive(true);
+      }else if (weaponID != 3 && AnimTrb0 != null) {
+          AnimTrb0.SetActive(false);
+      }
+
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
@@ -292,29 +376,6 @@ public class PlayerWeapon : MonoBehaviour
         }else{
             ammunitionCountText.text = ammunition.ToString();
         }
-    }
-
-
-    /* Explosion du tuba
-    * TODO : commenter pls
-    */
-    public void Explosion(GameObject tuba)
-    {
-        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
-        foreach (Collider2D hitCollider in hitColliders)
-        {
-            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
-
-            // CapsuleCollider2D pour éviter d'appliquer les dégats à plusieurs colliders du même perso
-            if (hitCollider is CapsuleCollider2D && hitCollider.transform.tag.Substring(0, 4) == "Play")
-            {
-
-                playerHealth.TakeDamage(splashDamage + (int) currentDamageBonus);
-                hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
-            }
-        }
-        Destroy(tuba);
     }
 
 
