@@ -17,14 +17,12 @@ public class PlayerWeapon : MonoBehaviour
   public KeyCode changeWeapon; 					// changement d'arme (debug)
   public GameObject grenadeGO;					// TODO
   public static PlayerWeapon instance;     		// instance de la classe
-  public float force;                           // TODO
-  public Transform tromboneRangePoint;
-  public LayerMask playerLayers;
-  public int tromboneDamage = 10;
-  public SpriteRenderer tromboneSprite;
 
-  private GameObject AnimTrb0;    // GameObject animation du coup de coulisse
-  private GameObject AnimTrb1;
+  public Transform tromboneRangePoint;          // transform délimitant la portée de la coulisse
+  public LayerMask playerLayers;                // layers définissant la catégorie d'objets ciblés par la coulisse
+  public int tromboneDamage = 8;                // dégats d'un coup de trombone
+  public GameObject AnimTrb0;                   // GameObject animation du coup de coulisse
+  public GameObject AnimTrb1;
 
   public bool solo = false;                     // vrai si le joueur équipé d'une flute fait un solo
   public float timeBeforeSolo;                  // durée avant le solo de flute
@@ -149,7 +147,7 @@ public class PlayerWeapon : MonoBehaviour
       GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
 	  grenade.tag = "Proj" + transform.tag;
       Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
-      projRb.AddForce(new Vector2(1*force*lengthTime,2*force*lengthTime));
+      projRb.AddForce(new Vector2(1*lengthTime,2*lengthTime));
       projRb.angularVelocity = -180;
 
 	  UseAmmo();
@@ -168,7 +166,19 @@ public class PlayerWeapon : MonoBehaviour
         AnimTrb1.SetActive(true);
         yield return new WaitForSeconds(0.133f);
 
+        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
+            tromboneRangePoint.position, playerLayers);
+        foreach(Collider2D enemy in tromboneHitbox) {
+            if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+    		&& enemy.transform.tag.Substring(0, 4) == "Play"
+    		&& enemy is CapsuleCollider2D) {
+                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+                PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
 
+                playerHealth.TakeDamage(tromboneDamage);
+                playerMovement.RecoilCac(enemy, transform);
+            }
+        }
 
         yield return new WaitForSeconds(0.36f);
         AnimTrb1.SetActive(false);
@@ -272,16 +282,17 @@ public class PlayerWeapon : MonoBehaviour
 	* Si le joueur n'a plus de munitions, rééquipe l'arme de base
 	*/
 	void UseAmmo() {
-		if (ammunition-- == 1) {
-	      weaponID = 0;
-	      weapon = weaponsGO[weaponID];
-	      ammunition = maxAmmunition[0];
-	      ammunitionCountText.text = "∞";
-		  ammunitionBar.sprite = weaponsItems[weaponID];
-	    }
-	    if (weaponID != 0) {
-	      ammunitionCountText.text = ammunition.ToString();
-	    }
+        if (ammunition-- == 1) {
+            weaponID = 0;
+            weapon = weaponsGO[weaponID];
+            ammunition = maxAmmunition[0];
+            AnimTrb0.SetActive(false);
+            ammunitionCountText.text = "∞";
+            ammunitionBar.sprite = weaponsItems[weaponID];
+        }
+        if (weaponID != 0) {
+            ammunitionCountText.text = ammunition.ToString();
+        }
 	}
 
 
@@ -324,14 +335,8 @@ public class PlayerWeapon : MonoBehaviour
       * on récup les GO d'animation
       */
       if (weaponID == 3) {
-          string num = gameObject.name.Substring(gameObject.name.Length - 1, 1);
-          Transform trb = transform.Find("tromboneRangePoint");
-
-          AnimTrb0 = trb.Find("AnimTrb0P" + num).gameObject;
-          AnimTrb1 = trb.Find("AnimTrb1P" + num).gameObject;
-
           AnimTrb0.SetActive(true);
-      }else if (weaponID != 3 && AnimTrb0 != null) {
+      }else {
           AnimTrb0.SetActive(false);
       }
 
