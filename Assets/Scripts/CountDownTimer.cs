@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour
 {
@@ -32,7 +33,18 @@ public class CountDownTimer : MonoBehaviour
             Debug.Log(Time.realtimeSinceStartup);
             start=true;
             countDownDisplay.text = countDownTime .ToString();
-            yield return new  WaitForSeconds(0.970f);
+            if(SceneManager.GetActiveScene().name == "SimpleSceneLalaland")
+            {
+                yield return new  WaitForSeconds(0.968f);
+            }else if(SceneManager.GetActiveScene().name == "SimpleSceneOmen")
+            {
+                yield return new  WaitForSeconds(1.413f);
+            }else if(SceneManager.GetActiveScene().name == "SimpleSceneSwing")
+            {
+                yield return new  WaitForSeconds(0.3f);
+            }
+
+            
             
             countDownTime++;
         }

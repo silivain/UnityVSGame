@@ -1,12 +1,14 @@
 using System;
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+//Si UnityEngine.InputSystem introuvable, aller dans préférnces, external tools tout cocher et regenerate project files
+using UnityEngine.InputSystem;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    public KeyCode fire1;						    // touche de tir
+
+  public PlayerControls controls;
 
   public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
   public GameObject[] weaponsGO;				// armes du jeu
@@ -14,7 +16,6 @@ public class PlayerWeapon : MonoBehaviour
   public int weaponID;							// ID de l'arme du player
   public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
   public Transform highThrowPoint;				// throwPoint haut (souba etc)
-  public KeyCode changeWeapon; 					// changement d'arme (debug)
   public GameObject grenadeGO;					// TODO
   public static PlayerWeapon instance;     		// instance de la classe
   public float force;                           // TODO
@@ -39,10 +40,13 @@ public class PlayerWeapon : MonoBehaviour
   private static float[] cooldownTime = {.5f, 1f, 2f, .5f, 1f, 1f};                                             // Cooldown de chaque arme
 
   private float startTime =0f;
-  //private float endTime=0f; TODO
+    //private float endTime=0f; TODO
+    public int deviceNumber;            //Numero de device du gamepad
 
-
-  private void Awake() {
+    private void Awake() {
+    controls = new PlayerControls();
+    controls.devices = new[] { InputSystem.devices[deviceNumber] };
+    
     instance = this;
     playerShield = transform.Find("Shield");
   }
@@ -50,42 +54,41 @@ public class PlayerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      // Debug Key pour le changement d'arme
-      if (Input.GetKeyDown(changeWeapon)){
-            weaponID = 5;
-			setWeapon(weaponsGO[5]);
-      }
+        controls.Gameplay.Shoot.performed += ctx => Shoot();
+    }
 
-
-
-        if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf && isWeaponReady) {
+    private void Shoot()
+    {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady)
+        {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());
             //tir en fonction de l'arme équipée
-            switch (weaponID) {
-          case 0:
-            bullet();
-            break;
-          case 1:
-            clarinet();
-            break;
-          case 2:
-            startTime = Time.time;
-            grenadeLaunch();
-            break;
-          case 3:
-            trombone();
-            break;
-		  case 4:
-		  	StartCoroutine(sousa());
-			break;
-		  case 5:
-  		  	StartCoroutine(tuba());
-  			break;
-          default:
-            bullet();
-            break;
+            switch (weaponID)
+            {
+                case 0:
+                    bullet();
+                    break;
+                case 1:
+                    clarinet();
+                    break;
+                case 2:
+                    startTime = Time.time;
+                    grenadeLaunch();
+                    break;
+                case 3:
+                    trombone();
+                    break;
+                case 4:
+                    StartCoroutine(sousa());
+                    break;
+                case 5:
+                    StartCoroutine(tuba());
+                    break;
+                default:
+                    bullet();
+                    break;
             }
         }
     }
@@ -277,5 +280,15 @@ public class PlayerWeapon : MonoBehaviour
 	      CurrentSceneManager.instance.CollectedItem();
           Destroy(other.gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
     }
 }
