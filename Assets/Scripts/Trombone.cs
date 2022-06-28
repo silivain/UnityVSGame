@@ -7,27 +7,6 @@ public class Trombone : MonoBehaviour
     public int damageOnCollision = 8;  	// trombone damage
 
 
-    /* immunitée après un coup de trombone
-    * évite de se manger les dégats de plusieurs colliders
-    * (l'animation du coup de trb active 4 colliders différents)
-    IEnumerator immunTromboneCD(PlayerWeapon playerWeapon) {
-        Debug.Log("beginning immunTromboneCD");
-        yield return new WaitForSeconds(0.4f);  // why the fck is it returning and not continuing code
-        playerWeapon.immunTromboneHit = false;
-        Debug.Log("immunTromboneHit after immunTromboneCD = " + playerWeapon.immunTromboneHit);
-    }
-    */
-
-
-    IEnumerator immunTromboneCD(PlayerWeapon playerWeapon) {
-        Debug.Log("step 1 ok");
-        yield return new WaitForSeconds(1f);
-        Debug.Log("tryin step 2");
-        yield return new WaitForSeconds(0.4f);
-        Debug.Log("step 2 ok");
-    }
-
-
     // Gestion de la collision avec un obstacle
 	void OnTriggerEnter2D(Collider2D other) {
 		//Instantiate(bulletEffect, transform.position, transform.position); TODO visual effect
@@ -48,17 +27,10 @@ public class Trombone : MonoBehaviour
 			PlayerWeapon playerWeapon = other.transform.GetComponent<PlayerWeapon>();
 			PlayerMovement playerMovement = other.transform.GetComponent<PlayerMovement>();
 			PlayerWeapon tireur = transform.parent.parent.GetComponent<PlayerWeapon>();
-
-            Debug.Log("immunTromboneHit = " + playerWeapon.immunTromboneHit);
-
-            if (!playerWeapon.immunTromboneHit) {
-                playerWeapon.immunTromboneHit = true;
-        		playerHealth.TakeDamage(damageOnCollision + (int) tireur.currentDamageBonus);
-        		// TODO appel à la fonction de recul en passant les arguments nécessaires
-        		// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
-        		playerMovement.RecoilCac(other, transform.parent.parent);
-                StartCoroutine(immunTromboneCD(playerWeapon));
-            }
+    		playerHealth.TakeDamage(damageOnCollision + (int) tireur.currentDamageBonus);
+    		// TODO appel à la fonction de recul en passant les arguments nécessaires
+    		// le collider 'other', le rigidbody du go bullet (pour pouvoir recup sa velocity)
+    		playerMovement.RecoilCac(other, transform.parent.parent);
 		}
     }
 }

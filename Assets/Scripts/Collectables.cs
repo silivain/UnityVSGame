@@ -81,6 +81,7 @@ public class Collectables : MonoBehaviour
     /* Réaprovisionne le joueur en munitions
     * le nombre exact de munitions bonus pour chaque arme
     * est donné dans 'PlayerWeapon.bonusAmmunition'
+    * met à jour le nombre de munitions pour l'arme du joueur concerné
     */
     IEnumerator ammunitionFunction(PlayerWeapon pWeapon) {
         string numPlayer = pWeapon.transform.name[pWeapon.transform.name.Length - 1].ToString();

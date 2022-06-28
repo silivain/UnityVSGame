@@ -25,10 +25,6 @@ public class PlayerWeapon : MonoBehaviour
 
   private GameObject AnimTrb0;    // GameObject animation du coup de coulisse
   private GameObject AnimTrb1;
-  private GameObject AnimTrb2;
-  private GameObject AnimTrb3;
-  private GameObject AnimTrb4;
-  public bool immunTromboneHit = false;         // vrai si le joueur vient d'être frappé par un coup de trb
 
   public bool solo = false;                     // vrai si le joueur équipé d'une flute fait un solo
   public float timeBeforeSolo;                  // durée avant le solo de flute
@@ -168,35 +164,13 @@ public class PlayerWeapon : MonoBehaviour
     */
     IEnumerator trombone() {
 
-        yield return new WaitForSeconds(0.01f);
         AnimTrb0.SetActive(false);
         AnimTrb1.SetActive(true);
+        yield return new WaitForSeconds(0.133f);
 
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb1.SetActive(false);
-        AnimTrb2.SetActive(true);
 
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb2.SetActive(false);
-        AnimTrb3.SetActive(true);
 
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb3.SetActive(false);
-        AnimTrb4.SetActive(true);
-
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb4.SetActive(false);
-        AnimTrb3.SetActive(true);
-
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb3.SetActive(false);
-        AnimTrb2.SetActive(true);
-
-        yield return new WaitForSeconds(0.01f);
-        AnimTrb2.SetActive(false);
-        AnimTrb1.SetActive(true);
-
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.36f);
         AnimTrb1.SetActive(false);
         AnimTrb0.SetActive(true);
 
@@ -355,9 +329,6 @@ public class PlayerWeapon : MonoBehaviour
 
           AnimTrb0 = trb.Find("AnimTrb0P" + num).gameObject;
           AnimTrb1 = trb.Find("AnimTrb1P" + num).gameObject;
-          AnimTrb2 = trb.Find("AnimTrb2P" + num).gameObject;
-          AnimTrb3 = trb.Find("AnimTrb3P" + num).gameObject;
-          AnimTrb4 = trb.Find("AnimTrb4P" + num).gameObject;
 
           AnimTrb0.SetActive(true);
       }else if (weaponID != 3 && AnimTrb0 != null) {
