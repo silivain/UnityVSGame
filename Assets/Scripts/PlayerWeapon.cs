@@ -58,15 +58,12 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-      // Debug Key pour le changement d'arme
-      if (Input.GetKeyDown(changeWeapon)){
+    void Update() {
+        // Debug Key pour le changement d'arme
+        if (Input.GetKeyDown(changeWeapon)){
             weaponID = 3;
-			setWeapon(weaponsGO[3]);
-      }
-
-
+            setWeapon(weaponsGO[3]);
+        }
 
         if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf && isWeaponReady) {
             //cooldown du tir
@@ -74,31 +71,31 @@ public class PlayerWeapon : MonoBehaviour
             StartCoroutine(cooldownWeapon());
             //tir en fonction de l'arme équipée
             switch (weaponID) {
-          case 0:
-            bullet();
-            break;
-          case 1:
-            clarinet();
-            break;
-          case 2:
-            startTime = Time.time;
-            grenadeLaunch();
-            break;
-          case 3:
-            StartCoroutine(trombone());
-            break;
-		  case 4:
-		  	StartCoroutine(sousa());
-			break;
-		  case 5:
-  		  	StartCoroutine(tuba());
-  			break;
-          case 6:
-		  	flute();
-			break;
-          default:
-            bullet();
-            break;
+                case 0:
+                    bullet();
+                    break;
+                case 1:
+                    clarinet();
+                    break;
+                case 2:
+                    startTime = Time.time;
+                    grenadeLaunch();
+                    break;
+                case 3:
+                    StartCoroutine(trombone());
+                    break;
+                case 4:
+                	StartCoroutine(sousa());
+                    break;
+                case 5:
+                  	StartCoroutine(tuba());
+                	break;
+                case 6:
+                	flute();
+                    break;
+                default:
+                    bullet();
+                    break;
             }
         }
     }
@@ -274,6 +271,23 @@ public class PlayerWeapon : MonoBehaviour
             GameObject fluteClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
             fluteClone.tag = "Proj" + transform.tag;
             UseAmmo();
+
+            GameObject flute1 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+      	  	flute1.tag = "Proj" + transform.tag;
+
+    		GameObject flute2 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+      	  	flute2.tag = "Proj" + transform.tag;
+    		Rigidbody2D rbFlute2 = flute2.GetComponent<Rigidbody2D>();
+    		rbFlute2.SetRotation(transform.rotation.y >= 0 ? (rbFlute2.rotation - 3f) : (rbFlute2.rotation + 3f));
+
+    		GameObject flute3 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+      	  	flute3.tag = "Proj" + transform.tag;
+    		Rigidbody2D rbFlute3 = flute3.GetComponent<Rigidbody2D>();
+    		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
+
+    		UseAmmo();
+    		UseAmmo();
+    		UseAmmo();
         }
     }
 

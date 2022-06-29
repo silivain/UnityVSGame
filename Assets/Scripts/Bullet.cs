@@ -19,12 +19,14 @@ public class Bullet : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 	}
 
+
 	// Update is called once per frame
 	void Update()
 	{
 		// keeps the bullet movin
 		rb.velocity = transform.right * bulletSpeed;
 	}
+
 
 	// Gestion de la collision avec un obstacle
 	void OnTriggerEnter2D(Collider2D other) {
