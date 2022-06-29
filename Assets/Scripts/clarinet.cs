@@ -21,7 +21,7 @@ public class clarinet : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void Update() 
 	{
 		// keeps the bullet movin
 		rb.SetRotation(transform.right.x * 3f * rb.velocity.y);

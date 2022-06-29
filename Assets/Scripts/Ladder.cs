@@ -21,6 +21,7 @@ public class Ladder : MonoBehaviour //video 12
 	/* débute ou met fin à l'interaction lors de l'utilisation de la touche dédiée
 	*/
 	void Update() {
+		/*
 		if(isInRange && playerMovement.isClimbing && Input.GetKeyDown(KeyCode.E)) {
 			playerMovement.isClimbing = false;
 			topCollider.isTrigger = false;
@@ -33,6 +34,7 @@ public class Ladder : MonoBehaviour //video 12
 			topCollider.isTrigger = true;
 			interactUI.enabled = false;
 		}
+		*/
 	}
 
 

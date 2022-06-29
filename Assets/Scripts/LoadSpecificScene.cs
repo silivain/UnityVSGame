@@ -13,6 +13,8 @@ public class LoadSpecificScene : MonoBehaviour
 
     private PlayerMovement playerMovement;	// script 'PlayerMovement'
 
+    public PlayerControls controls;
+
 
 	/*	récupère le script 'PlayerMovement' et le système de fondu
 	*/
@@ -28,7 +30,7 @@ public class LoadSpecificScene : MonoBehaviour
 	*/
     private void Update()
     {
-      if(isInRange && Input.GetKeyDown(KeyCode.E))
+      if(isInRange && controls.Gameplay.Start.triggered)
       {
         interactUI.enabled = false;
         isInRange = false;

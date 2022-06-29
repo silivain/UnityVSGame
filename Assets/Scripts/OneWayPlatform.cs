@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OneWayPlatform : MonoBehaviour
 {
@@ -8,19 +9,30 @@ public class OneWayPlatform : MonoBehaviour
     [SerializeField] private CapsuleCollider2D playerCollider;
     [SerializeField] private BoxCollider2D boxCollider1;
     [SerializeField] private BoxCollider2D boxCollider2;
-    public KeyCode down;
-       
+    public PlayerControls controls;
+    public int deviceNumber;            //Numero de device du gamepad
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+        controls.devices = new[] { InputSystem.devices[deviceNumber] };
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(down)){
-            if(currentOneWayPlatform !=null){
-                StartCoroutine( DisableCollision() );
-            }
+        controls.Gameplay.GoDown.performed += ctx => GoDown();
+
+    }
+
+    private void GoDown()
+    {
+        if (currentOneWayPlatform != null)
+        {
+            StartCoroutine(DisableCollision());
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("OneWayPlatform")){
                 currentOneWayPlatform = collision.gameObject;
@@ -47,5 +59,13 @@ public class OneWayPlatform : MonoBehaviour
         Physics2D.IgnoreCollision(boxCollider1,plaformCollider,false);
         Physics2D.IgnoreCollision(boxCollider2, plaformCollider,false);
     }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 }

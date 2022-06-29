@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//Si UnityEngine.InputSystem introuvable, aller dans préférnces, external tools tout cocher et regenerate project files
+using UnityEngine.InputSystem;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    public KeyCode fire1;						    // touche de tir
+
+  public PlayerControls controls;
 
   public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
   public GameObject[] weaponsGO;				// armes du jeu
@@ -49,23 +52,28 @@ public class PlayerWeapon : MonoBehaviour
   public float currentDamageBonus = 0;        // bonus de dégats actuel
 
   private float startTime = 0f;
-  //private float endTime=0f; TODO
+    //private float endTime=0f; TODO
+    public int deviceNumber;            //Numero de device du gamepad
 
 
     private void Awake() {
-        instance = this;
-        playerShield = transform.Find("Shield");
-    }
+    controls = new PlayerControls();
+    controls.devices = new[] { InputSystem.devices[deviceNumber] };
+    
+    instance = this;
+    playerShield = transform.Find("Shield");
+  }
 
     // Update is called once per frame
-    void Update() {
-        // Debug Key pour le changement d'arme
-        if (Input.GetKeyDown(changeWeapon)){
-            weaponID = 3;
-            setWeapon(weaponsGO[3]);
-        }
+    void Update()
+    {
+        controls.Gameplay.Shoot.performed += ctx => Shoot();
+    }
 
-        if (Input.GetKeyDown(fire1) && !playerShield.gameObject.activeSelf && isWeaponReady) {
+    private void Shoot()
+    {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady)
+        {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());
@@ -171,19 +179,23 @@ public class PlayerWeapon : MonoBehaviour
             AnimTrb1.SetActive(true);
             yield return new WaitForSeconds(0.133f);
 
-            Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
-                tromboneRangePoint.position, playerLayers);
-            foreach(Collider2D enemy in tromboneHitbox) {
-                if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
-        		&& enemy.transform.tag.Substring(0, 4) == "Play"
-        		&& enemy is CapsuleCollider2D) {
-                    PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
-                    PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
+        AnimTrb0.SetActive(false);
+        AnimTrb1.SetActive(true);
+        yield return new WaitForSeconds(0.133f);
 
-                    playerHealth.TakeDamage(tromboneDamage);
-                    playerMovement.RecoilCac(enemy, transform);
-                }
+        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
+            tromboneRangePoint.position, playerLayers);
+        foreach(Collider2D enemy in tromboneHitbox) {
+            if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+    		&& enemy.transform.tag.Substring(0, 4) == "Play"
+    		&& enemy is CapsuleCollider2D) {
+                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+                PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
+
+                playerHealth.TakeDamage(tromboneDamage);
+                playerMovement.RecoilCac(enemy, transform);
             }
+        }
 
             yield return new WaitForSeconds(0.36f);
             AnimTrb1.SetActive(false);
@@ -404,5 +416,15 @@ public class PlayerWeapon : MonoBehaviour
 	      CurrentSceneManager.instance.CollectedWeapon(other.transform.position);
           Destroy(other.gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
     }
 }
