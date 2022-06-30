@@ -13,10 +13,10 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     private float fallSpeed = -18f;
     private float fallIncreaseSpeed = -1.5f;
 
-    private bool isJumping;		// vrai si le perso est en l'air
-	  private bool isDashing;		// vrai si le perso est en train de dash
+    private bool isJumping;		   // vrai si le perso est en l'air
+    private bool isDashing;		   // vrai si le perso est en train de dash
     private bool isDashReady=true; //cooldown du Dash
-    private bool isGrounded;	// vrai si le perso touche le sol ou un échelle
+    private bool isGrounded;	   // vrai si le perso touche le sol ou un échelle
 
 	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
     public bool isClimbing;						 // vrai si le joueur grimpe
