@@ -91,7 +91,7 @@ public class PlayerWeapon : MonoBehaviour
                   	StartCoroutine(tuba());
                 	break;
                 case 6:
-                	flute();
+                	StartCoroutine(flute());
                     break;
                 default:
                     bullet();
@@ -266,12 +266,8 @@ public class PlayerWeapon : MonoBehaviour
 
     /* TODO
     */
-    void flute() {
+    IEnumerator flute() {
         if (mySolo) {
-            GameObject fluteClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-            fluteClone.tag = "Proj" + transform.tag;
-            UseAmmo();
-
             GameObject flute1 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
       	  	flute1.tag = "Proj" + transform.tag;
 
@@ -286,8 +282,11 @@ public class PlayerWeapon : MonoBehaviour
     		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
 
     		UseAmmo();
-    		UseAmmo();
-    		UseAmmo();
+
+    		yield return new WaitForSeconds(1f);
+    		Destroy(flute1);
+    		Destroy(flute2);
+    		Destroy(flute3);
         }
     }
 
