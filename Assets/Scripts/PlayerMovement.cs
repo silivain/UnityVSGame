@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     private Vector3 velocity = Vector3.zero;	// vitesse courante du joueur (3D)
     private float horizontalMovement;			// vitesse horizontale
-    private float verticalMovement;				// vitesse verticale
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public int horizontalWay;
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
   		powSign = 0f;
   		xDirection = Mathf.Pow(-1f, powSign);
   		instance = this;
-      playerShield = transform.Find("Shield");
+        playerShield = transform.Find("Shield");
     }
 
     /* détecte les différents inputs et appelle les fonctions appropriées
@@ -76,9 +75,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         controls.Gameplay.GoRight.performed += ctx => GoRight();
 
 
-        // maj des vitesses horizontales et verticales
+        // maj de la vitesse horizontale
         horizontalMovement = horizontalWay * moveSpeed * Time.fixedDeltaTime;
-        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
@@ -87,8 +85,8 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         }
 
         // huh ? lié à l'animation, mais sert à quoi ?
-        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-        animator.SetBool("isClimbing", isClimbing);
+        //animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        //animator.SetBool("isClimbing", isClimbing);
     }
 
     private void GoRight()
@@ -125,48 +123,36 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	*/
     void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
-      MovePlayer(horizontalMovement, verticalMovement);
-
-
+      MovePlayer(horizontalMovement);
     }
 
 
 	/* déplace le joueur en fonction de sa situation et des forces qui lui sont appliquées
 	*/
-    void MovePlayer(float _horizontalMovement, float _verticalMovement) {
-      if(!isClimbing) {
+    void MovePlayer(float _horizontalMovement) {
         float shieldMod = 1f;
         if(playerShield.gameObject.activeSelf && isGrounded) {
-          shieldMod = .1f;
+            shieldMod = .1f;
         }
+
         Vector3 targetVelocity = new Vector2(_horizontalMovement * shieldMod, rb.velocity.y);
 
-        if (rb.velocity.y < -0.1f && rb.velocity.y > fallSpeed)
-        {
+        if (rb.velocity.y < -0.1f && rb.velocity.y > fallSpeed) {
             rb.velocity = Vector3.SmoothDamp(new Vector2(rb.velocity.x, rb.velocity.y + fallIncreaseSpeed), targetVelocity, ref velocity, .05f);
-        }
-        else
-        {
+        }else {
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
         }
 
         if (isJumping) {
-
-          rb.AddForce(new Vector2(0f, jumpForce));
-          isJumping = false;
+            rb.AddForce(new Vector2(0f, jumpForce));
+            isJumping = false;
         }
-
-		    if(isDashing && isDashReady) {
-          isDashReady=false;
-          StartCoroutine(cooldownDash());
-          rb.AddForce(new Vector2(xDirection * dashForce, 0f));
-          isDashing = false;
+        if(isDashing && isDashReady) {
+            isDashReady=false;
+            StartCoroutine(cooldownDash());
+            rb.AddForce(new Vector2(xDirection * dashForce, 0f));
+            isDashing = false;
         }
-      }
-      else {	//video 12
-        Vector3 targetVelocity = new Vector2(0, _verticalMovement);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
-      }
     }
 
 	/* retourne la transform du personnage ainsi que son throwPoint

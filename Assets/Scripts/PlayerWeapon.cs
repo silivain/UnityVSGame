@@ -46,7 +46,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Awake() {
     controls = new PlayerControls();
     controls.devices = new[] { InputSystem.devices[deviceNumber] };
-    
+
     instance = this;
     playerShield = transform.Find("Shield");
   }
@@ -194,12 +194,14 @@ public class PlayerWeapon : MonoBehaviour
     }
 
 	IEnumerator tuba() {
-		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-  	tuba.tag = "Proj" + transform.tag;
-	UseAmmo();
+        GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+        tuba.tag = "Proj" + transform.tag;
+        UseAmmo();
 
-		yield return new WaitForSeconds(0.75f);
-        Explosion(tuba);
+        yield return new WaitForSeconds(0.75f);
+        if(tuba != null) {
+            Explosion(tuba);
+        }
     }
 
 	/* Utilise une munition de l'arme équipée
@@ -260,7 +262,7 @@ public class PlayerWeapon : MonoBehaviour
             PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
             if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
             {
-                
+
                 playerHealth.TakeDamage(splashDamage);
                 hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
             }
