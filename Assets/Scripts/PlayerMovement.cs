@@ -125,9 +125,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	*/
     void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
-      MovePlayer(horizontalMovement, verticalMovement);
-
-
+      //MovePlayer(horizontalMovement, verticalMovement);
     }
 
 
