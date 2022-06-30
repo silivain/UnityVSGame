@@ -59,7 +59,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Awake() {
     controls = new PlayerControls();
     controls.devices = new[] { InputSystem.devices[deviceNumber] };
-    
+
     instance = this;
     playerShield = transform.Find("Shield");
   }
@@ -310,12 +310,15 @@ public class PlayerWeapon : MonoBehaviour
     */
     IEnumerator cooldownFlute() {
         while(weaponID == 6) {
+            Debug.Log("debut loop cd flute");
             yield return new WaitForSeconds(timeBeforeSolo);
             mySolo = true;
             enemyPW.enemySolo = true;
+            Debug.Log("solo time");
             yield return new WaitForSeconds(soloDuration);
             mySolo = false;
             enemyPW.enemySolo = false;
+            Debug.Log("fin solo");
         }
     }
 

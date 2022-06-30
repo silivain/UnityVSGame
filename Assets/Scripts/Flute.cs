@@ -8,6 +8,7 @@ public class Flute : MonoBehaviour
 	public int damageOnCollision = 5;  // bullet damage
 	//public GameObject bulletEffect;  // TODO bullet visual effect
 	private Rigidbody2D rb;            // bullet rigidbody
+    private Transform transformParent;
 
 
     // Start is called before the first frame update
@@ -15,6 +16,8 @@ public class Flute : MonoBehaviour
     {
         Debug.Log(transform.name + " rotation = " + transform.rotation);
         rb = GetComponent<Rigidbody2D>();
+        transformParent = GameObject.FindWithTag(transform.tag.Substring(4, transform.tag.Length - 4)).transform;
+        reverseDelay();
     }
 
 
@@ -22,15 +25,29 @@ public class Flute : MonoBehaviour
     void Update()
     {
         rb.velocity = transform.right * fluteSpeed;
-        /*
-        idée :
-        instantier 3 projs
-        1 traj tout droit
-        1 traj courbée haut
-        1 traj courbée bas
-        on augmente la courbe des trajs haut et bas en continu pdnt un tps aléatoire
-        puis on inverse la courbe
-        */
+    }
+
+
+    IEnumerator reverse() {
+        float modif = 0.1f;
+        if (transform.rotation.y >= transformParent.rotation.y) {
+            modif = -0.1f;
+        }
+        for(int i = 0; i < 60; ++i) {
+            rb.SetRotation(rb.rotation + modif);
+            yield return null;
+        }
+    }
+
+
+    IEnumerator reverseDelay() {
+        float alea = Random.Range(0f, 0.15f);
+        yield return new WaitForSeconds(0.25f + alea);
+        reverse();
+
+        alea = Random.Range(0f, 0.15f);
+        yield return new WaitForSeconds(0.25f + alea);
+        reverse();
     }
 
 
