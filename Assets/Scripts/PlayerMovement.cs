@@ -72,7 +72,9 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         controls.Gameplay.Jump.performed += ctx => Jump();
         controls.Gameplay.Dash.performed += ctx => Dash();
         controls.Gameplay.GoLeft.performed += ctx => GoLeft();
+        controls.Gameplay.GoLeft.canceled += ctx => Freeze();
         controls.Gameplay.GoRight.performed += ctx => GoRight();
+        controls.Gameplay.GoRight.canceled += ctx => Freeze();
 
 
         // maj de la vitesse horizontale
@@ -97,6 +99,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     private void GoLeft()
     {
         horizontalWay = -1;
+    }
+
+    private void Freeze()
+    {
+        horizontalWay = 0;
     }
 
     private void Dash()
