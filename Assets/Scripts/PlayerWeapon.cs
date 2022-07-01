@@ -38,7 +38,7 @@ public class PlayerWeapon : MonoBehaviour
   public Image ammunitionBar;			        // barre d'affichage des munitions
   public Text ammunitionCountText;		        // texte d'affichage du nb de mun
 
-  private Transform playerShield;               // shield du joueur
+  public Transform playerShield;               // shield du joueur
 
   public int splashDamage = 10;                 // dégats de zone de l'explosion du tuba
   public float splashRange = 3f;                // taille de la zone de dégats
@@ -61,7 +61,6 @@ public class PlayerWeapon : MonoBehaviour
         controls.devices = new[] { InputSystem.devices[deviceNumber] };
 
         instance = this;
-        playerShield = transform.Find("Shield");
     }
 
     // Update is called once per frame

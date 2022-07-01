@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	private float powSign;				        // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
 	public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
 
-    private Transform playerShield;             // shield du joueur
+    public Transform playerShield;             // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
     public PlayerControls controls;
@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
   		powSign = 0f;
   		xDirection = Mathf.Pow(-1f, powSign);
   		instance = this;
-      playerShield = transform.Find("Shield");
     }
 
     /* détecte les différents inputs et appelle les fonctions appropriées

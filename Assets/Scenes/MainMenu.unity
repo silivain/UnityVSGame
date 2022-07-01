@@ -281,8 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
-    type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -477,8 +476,7 @@ MonoBehaviour:
   m_text: Select your player
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
-  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37,
-    type: 2}
+  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -657,8 +655,7 @@ AudioSource:
   m_GameObject: {fileID: 328877266}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 2180809563462411921, guid: 8ab383efe4f3f6c5aacfeb31071eac03,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 2180809563462411921, guid: 8ab383efe4f3f6c5aacfeb31071eac03, type: 2}
   m_audioClip: {fileID: 8300000, guid: ed2e58bb164cbc648a3336b085a50748, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -904,8 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
-    type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -1027,8 +1023,7 @@ MonoBehaviour:
   m_text: Fanf' & Fight
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
-  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37,
-    type: 2}
+  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1514,8 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
-    type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -2431,8 +2425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c,
-    type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -2674,8 +2667,7 @@ MonoBehaviour:
   m_text: 'Choose your Stage : '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
-  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37,
-    type: 2}
+  m_sharedMaterial: {fileID: 6759292338417486172, guid: 4ee2fb31b400bf64e9a16a4d5f4fff37, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

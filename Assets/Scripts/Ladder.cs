@@ -5,7 +5,7 @@ using UnityEngine.UI;
 // TODO script pas encore utilisé
 public class Ladder : MonoBehaviour //video 12
 {
-	private bool isInRange;					// vrai si joueur suffisamment proche pour emprunter l'échelle
+	//private bool isInRange;					// vrai si joueur suffisamment proche pour emprunter l'échelle
 	private PlayerMovement playerMovement;	// script playerMovement
 	public BoxCollider2D topCollider;		// collider du haut de l'échelle, évite au joueur de retomber
 	public Text interactUI;					// texte s'affichant pour indiquer avec quelle touche interagir
@@ -44,7 +44,7 @@ public class Ladder : MonoBehaviour //video 12
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if(collision.CompareTag("Player")) {
 			interactUI.enabled = true;
-			isInRange = true;
+			//isInRange = true;
 		}
 	}
 
@@ -55,7 +55,7 @@ public class Ladder : MonoBehaviour //video 12
 	private void OnTriggerExit2D(Collider2D collision) {
 		if(collision.CompareTag("Player")) {
 			interactUI.enabled = false;
-			isInRange = false;
+			//isInRange = false;
 			playerMovement.isClimbing = false;
 			topCollider.isTrigger = false;
 		}
