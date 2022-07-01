@@ -502,15 +502,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 75ff1b05814cfdd9f8eb559158d2a364, type: 3}
   - {fileID: 21300000, guid: 2592ea99b71c23af4bfb12e40f5e0e9d, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 120c335656aa45e088df5420b9852db0, type: 3}
   - {fileID: 21300000, guid: 92e592c659695b508bc3075c171b0378, type: 3}
   - {fileID: 21300000, guid: c55044c6655f8dd9b998c36f0c7385a5, type: 3}
   weaponID: 0
   throwPoint: {fileID: 4594055403994946158}
   highThrowPoint: {fileID: 4594055404759871956}
+  changeWeapon: 36
   grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee,
     type: 3}
-  force: 0
+  enemyPW: {fileID: 0}
   tromboneRangePoint: {fileID: 1666972785565178579}
   playerLayers:
     serializedVersion: 2
@@ -518,9 +519,10 @@ MonoBehaviour:
   tromboneDamage: 8
   AnimTrb0: {fileID: 2056519634}
   AnimTrb1: {fileID: 727129328}
-  solo: 0
+  mySolo: 0
+  enemySolo: 0
   timeBeforeSolo: 0
-  timeSolo: 0
+  soloDuration: 0
   ammunition: 1000
   ammunitionBar: {fileID: 0}
   ammunitionCountText: {fileID: 0}
@@ -646,7 +648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4594055405112959762
 Transform:
   m_ObjectHideFlags: 0

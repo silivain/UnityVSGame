@@ -320,6 +320,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+
+    /* Gère le cooldown de la flute
+    * attends 'timeBeforeSolo' secondes avant de pouvoir tirer
+    * le solo dure 'soloDuration' secondes
+    */
     IEnumerator cooldownFlute() {
         while(weaponID == 6) {
             Debug.Log("debut boucle cd flute");
@@ -407,6 +412,7 @@ public class PlayerWeapon : MonoBehaviour
 
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
+
 
     // met à jour l'affichage des munitions
     public void AmmoDisplay() {

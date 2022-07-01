@@ -168,15 +168,23 @@ PrefabInstance:
       propertyPath: ammunitionBar
       value: 
       objectReference: {fileID: 2061057502}
-    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2, type: 3}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
+      propertyPath: ammunitionBar
+      value: 
+      objectReference: {fileID: 2061057502}
+    - target: {fileID: 453807249256408494, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: ammunitionCountText
       value: 
       objectReference: {fileID: 870522920}
-    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2, type: 3}
+    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1971942906}
-    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2, type: 3}
+    - target: {fileID: 453807249256408528, guid: ca07fb7c9346bee658b67afdb1922df2,
+        type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 405694609}

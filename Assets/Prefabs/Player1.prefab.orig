@@ -200,7 +200,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 7426165765632372993, guid: 18b38af59e2920138abff5cb1467d866, type: 3}
+=======
+  m_Sprite: {fileID: 7426165765632372993, guid: 18b38af59e2920138abff5cb1467d866,
+    type: 3}
+>>>>>>> shield
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -328,10 +333,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
 <<<<<<< HEAD
-  m_Sprite: {fileID: -4031619653288768660, guid: 510720d2d46f1ddd8a77416b05549251, type: 3}
-=======
   m_Sprite: {fileID: 21300000, guid: a88ee5f11f23410448e26d4e855639e6, type: 3}
->>>>>>> master
+=======
+  m_Sprite: {fileID: -4031619653288768660, guid: 510720d2d46f1ddd8a77416b05549251,
+    type: 3}
+>>>>>>> shield
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -456,11 +462,7 @@ MonoBehaviour:
   dashCooldownTime: 2
   throwPoint: {fileID: 4594055403994946158}
   xDirection: 0
-<<<<<<< HEAD
-  deviceNumber: 0
-=======
   deviceNumber: 2
->>>>>>> master
 --- !u!114 &4594055403739195450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,18 +482,14 @@ MonoBehaviour:
   shield: {fileID: 7800907144316940478}
   shieldKey: 308
   shieldCooldown: 5
-<<<<<<< HEAD
   trapResistance: 0
   GameOver_Screen: {fileID: 0}
   shieldAudio: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
   audioSource: {fileID: 0}
-  deviceNumber: 0
-=======
-  GameOver_Screen: {fileID: 0}
-  shieldAudio: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
-  audioSource: {fileID: 0}
+<<<<<<< HEAD
   deviceNumber: 2
->>>>>>> master
+=======
+>>>>>>> shield
 --- !u!114 &4594055403739195460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97a57679a9626b0a83bbc7e5805dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fire1: 116
   weapon: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8, type: 3}
   weaponsGO:
   - {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8, type: 3}
@@ -523,12 +522,12 @@ MonoBehaviour:
   throwPoint: {fileID: 4594055403994946158}
   highThrowPoint: {fileID: 4594055404759871956}
 <<<<<<< HEAD
-  grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee, type: 3}
 =======
+  changeWeapon: 36
+>>>>>>> shield
   grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee,
     type: 3}
-  force: 0
->>>>>>> master
+  enemyPW: {fileID: 0}
   tromboneRangePoint: {fileID: 1666972785565178579}
   playerLayers:
     serializedVersion: 2
@@ -536,9 +535,16 @@ MonoBehaviour:
   tromboneDamage: 8
   AnimTrb0: {fileID: 2056519634}
   AnimTrb1: {fileID: 727129328}
+<<<<<<< HEAD
   solo: 0
   timeBeforeSolo: 0
   timeSolo: 0
+=======
+  mySolo: 0
+  enemySolo: 0
+  timeBeforeSolo: 0
+  soloDuration: 0
+>>>>>>> shield
   ammunition: 1000
   ammunitionBar: {fileID: 0}
   ammunitionCountText: {fileID: 0}
@@ -553,8 +559,10 @@ MonoBehaviour:
 =======
   explosionVisual: {fileID: 5787354115532521949, guid: dc0af3252b09b9b48b222cf93e951aff,
     type: 3}
-  deviceNumber: 2
->>>>>>> master
+  maxAmmunition: e80300000d0000000700000019000000150000000f000000e8030000
+  bonusAmmunition: e803000006000000030000000c0000000a00000007000000e8030000
+  currentDamageBonus: 0
+>>>>>>> shield
 --- !u!114 &290958905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +581,9 @@ MonoBehaviour:
   boxCollider2: {fileID: 4594055405112959773}
 <<<<<<< HEAD
   deviceNumber: 0
+=======
+  down: 115
+>>>>>>> shield
 --- !u!114 &1506128871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,9 +606,6 @@ MonoBehaviour:
   DamageBonusP2: {fileID: 0}
   SpeedBonusP1: {fileID: 0}
   SpeedBonusP2: {fileID: 0}
-=======
-  deviceNumber: 2
->>>>>>> master
 --- !u!1 &4594055403994946159
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +721,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4689407, y: 0.21982002}
+  m_Size: {x: 0.4091753, y: 0.06259014}
   m_EdgeRadius: 0
 --- !u!1001 &4594055403189678764
 PrefabInstance:
@@ -848,6 +856,11 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: f0de72a92926fb84b9bf9f7e41fc5db8, type: 3}
 --- !u!4 &1666972785565178579 stripped
 Transform:
+<<<<<<< HEAD
   m_CorrespondingSourceObject: {fileID: 2946229257963528951, guid: f0de72a92926fb84b9bf9f7e41fc5db8, type: 3}
+=======
+  m_CorrespondingSourceObject: {fileID: 2946229257963528951, guid: f0de72a92926fb84b9bf9f7e41fc5db8,
+    type: 3}
+>>>>>>> shield
   m_PrefabInstance: {fileID: 4594055404876232740}
   m_PrefabAsset: {fileID: 0}
