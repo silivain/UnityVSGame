@@ -57,12 +57,12 @@ public class PlayerWeapon : MonoBehaviour
 
 
     private void Awake() {
-    controls = new PlayerControls();
-    controls.devices = new[] { InputSystem.devices[deviceNumber] };
+        controls = new PlayerControls();
+        controls.devices = new[] { InputSystem.devices[deviceNumber] };
 
-    instance = this;
-    playerShield = transform.Find("Shield");
-  }
+        instance = this;
+        playerShield = transform.Find("Shield");
+    }
 
     // Update is called once per frame
     void Update()
@@ -99,7 +99,7 @@ public class PlayerWeapon : MonoBehaviour
                   	StartCoroutine(tuba());
                 	break;
                 case 6:
-                	flute();
+                	StartCoroutine(flute());
                     break;
                 default:
                     bullet();
@@ -196,7 +196,6 @@ public class PlayerWeapon : MonoBehaviour
                 playerMovement.RecoilCac(enemy, transform);
             }
         }
-	}
 
             yield return new WaitForSeconds(0.36f);
             AnimTrb1.SetActive(false);
@@ -229,9 +228,15 @@ public class PlayerWeapon : MonoBehaviour
     		UseAmmo();
 
     		yield return new WaitForSeconds(1f);
-    		Destroy(sousa1);
-    		Destroy(sousa2);
-    		Destroy(sousa3);
+            if (sousa1 != null) {
+    		          Destroy(sousa1);
+            }
+            if (sousa2 != null) {
+    		          Destroy(sousa2);
+            }
+            if (sousa3 != null) {
+    		          Destroy(sousa3);
+            }
         }
 	}
 
@@ -248,8 +253,10 @@ public class PlayerWeapon : MonoBehaviour
       	    tuba.tag = "Proj" + transform.tag;
     	    UseAmmo();
 
-    		yield return new WaitForSeconds(0.75f);
-            Explosion(tuba);
+            yield return new WaitForSeconds(0.75f);
+            if(tuba != null) {
+                Explosion(tuba);
+            }
         }
     }
 
@@ -279,7 +286,7 @@ public class PlayerWeapon : MonoBehaviour
 
     /* TODO
     */
-    void flute() {
+    IEnumerator flute() {
         if (mySolo) {
             GameObject fluteClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
             fluteClone.tag = "Proj" + transform.tag;
@@ -299,19 +306,31 @@ public class PlayerWeapon : MonoBehaviour
     		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
 
     		UseAmmo();
-    		UseAmmo();
-    		UseAmmo();
+
+    		yield return new WaitForSeconds(1f);
+            if (flute1 != null) {
+    		          Destroy(flute1);
+            }
+            if (flute2 != null) {
+    		          Destroy(flute2);
+            }
+            if (flute3 != null) {
+    		          Destroy(flute3);
+            }
         }
     }
 
-	IEnumerator tuba() {
-        GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-        tuba.tag = "Proj" + transform.tag;
-        UseAmmo();
-
-        yield return new WaitForSeconds(0.75f);
-        if(tuba != null) {
-            Explosion(tuba);
+    IEnumerator cooldownFlute() {
+        while(weaponID == 6) {
+            Debug.Log("debut boucle cd flute");
+            yield return new WaitForSeconds(timeBeforeSolo);
+            Debug.Log("debut solo flute");
+            mySolo = true;
+            enemyPW.enemySolo = true;
+            yield return new WaitForSeconds(soloDuration);
+            mySolo = false;
+            enemyPW.enemySolo = false;
+            Debug.Log("fin solo flute");
         }
     }
 
@@ -389,16 +408,6 @@ public class PlayerWeapon : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
-    public void Explosion(GameObject tuba)
-    {
-        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
-        foreach (Collider2D hitCollider in hitColliders)
-        {
-            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
-            if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
-            {
-
     // met à jour l'affichage des munitions
     public void AmmoDisplay() {
         ammunitionBar.sprite = weaponsItems[weaponID];
@@ -407,7 +416,6 @@ public class PlayerWeapon : MonoBehaviour
         }else{
             ammunitionCountText.text = ammunition.ToString();
         }
-        Destroy(tuba);
     }
 
 
