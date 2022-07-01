@@ -160,12 +160,11 @@ GameObject:
   - component: {fileID: 453807249256408530}
   - component: {fileID: 453807249256408531}
   - component: {fileID: 453807249256408495}
+  - component: {fileID: 1529337861}
   - component: {fileID: 453807249256408532}
   - component: {fileID: 453807249256408528}
   - component: {fileID: 453807249256408494}
   - component: {fileID: 4147078881749913061}
-  - component: {fileID: 1529337861}
-  - component: {fileID: 772766368045529150}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player 2
@@ -310,6 +309,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8395029, y: 2.543301}
   m_EdgeRadius: 0
+--- !u!70 &1529337861
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453807249256408535}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.31340945, y: -0.14481941}
+  m_Size: {x: 1.9095844, y: 5.55161}
+  m_Direction: 0
 --- !u!114 &453807249256408532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 500
+  currentSpeedBonus: 0
   climbSpeed: 150
   jumpForce: 2300
   dashForce: 3000
@@ -361,6 +377,7 @@ MonoBehaviour:
   shield: {fileID: 6183162953050307924}
   shieldKey: 305
   shieldCooldown: 5
+  trapResistance: 0
   GameOver_Screen: {fileID: 0}
   shieldAudio: {fileID: 8300000, guid: 34bb21647de73dcabb99892ab3f2299c, type: 3}
   audioSource: {fileID: 0}
@@ -395,21 +412,31 @@ MonoBehaviour:
   weaponID: 0
   throwPoint: {fileID: 453807249042659204}
   highThrowPoint: {fileID: 453807247589817406}
+  changeWeapon: 0
   grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee,
     type: 3}
-  force: 0
+  enemyPW: {fileID: 0}
   tromboneRangePoint: {fileID: 3363947784194578233}
   playerLayers:
     serializedVersion: 2
     m_Bits: 256
   tromboneDamage: 10
-  tromboneSprite: {fileID: 2872502351387336520}
+  AnimTrb0: {fileID: 0}
+  AnimTrb1: {fileID: 0}
+  mySolo: 0
+  enemySolo: 0
+  timeBeforeSolo: 0
+  soloDuration: 0
+  ammunition: 1000
   ammunitionBar: {fileID: 0}
   ammunitionCountText: {fileID: 0}
   splashDamage: 10
   splashRange: 3
   explosionVisual: {fileID: 5787354115532521949, guid: dc0af3252b09b9b48b222cf93e951aff,
     type: 3}
+  maxAmmunition: e80300000d0000000700000019000000150000000f000000e8030000
+  bonusAmmunition: e803000006000000030000000c0000000a00000007000000e8030000
+  currentDamageBonus: 0
   deviceNumber: 3
 --- !u!114 &4147078881749913061
 MonoBehaviour:
@@ -424,42 +451,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentOneWayPlatform: {fileID: 0}
-  playerCollider: {fileID: 772766368045529150}
+  playerCollider: {fileID: 1529337861}
   boxCollider1: {fileID: 453807249256408495}
   boxCollider2: {fileID: 453807248007950071}
   deviceNumber: 3
---- !u!70 &1529337861
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453807249256408535}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.31340945, y: -0.14481941}
-  m_Size: {x: 1.9095844, y: 5.55161}
-  m_Direction: 0
---- !u!70 &772766368045529150
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453807249256408535}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.31340945, y: -0.14481941}
-  m_Size: {x: 1.9095844, y: 5.55161}
-  m_Direction: 0
 --- !u!1001 &453807248245142990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -532,12 +527,6 @@ PrefabInstance:
 --- !u!4 &3363947784194578233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2946229257963528951, guid: f0de72a92926fb84b9bf9f7e41fc5db8,
-    type: 3}
-  m_PrefabInstance: {fileID: 453807248245142990}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &2872502351387336520 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2418735240685857414, guid: f0de72a92926fb84b9bf9f7e41fc5db8,
     type: 3}
   m_PrefabInstance: {fileID: 453807248245142990}
   m_PrefabAsset: {fileID: 0}
