@@ -288,10 +288,6 @@ public class PlayerWeapon : MonoBehaviour
     */
     IEnumerator flute() {
         if (mySolo) {
-            GameObject fluteClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-            fluteClone.tag = "Proj" + transform.tag;
-            UseAmmo();
-
             GameObject flute1 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
       	  	flute1.tag = "Proj" + transform.tag;
 
@@ -304,8 +300,6 @@ public class PlayerWeapon : MonoBehaviour
       	  	flute3.tag = "Proj" + transform.tag;
     		Rigidbody2D rbFlute3 = flute3.GetComponent<Rigidbody2D>();
     		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
-
-    		UseAmmo();
 
     		yield return new WaitForSeconds(1f);
             if (flute1 != null) {
@@ -417,7 +411,7 @@ public class PlayerWeapon : MonoBehaviour
     // met à jour l'affichage des munitions
     public void AmmoDisplay() {
         ammunitionBar.sprite = weaponsItems[weaponID];
-        if (weaponID == 0) {
+        if (weaponID == 0 || weaponID == 6) {
             ammunitionCountText.text = "∞";
         }else{
             ammunitionCountText.text = ammunition.ToString();
