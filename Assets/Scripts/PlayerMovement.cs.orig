@@ -14,8 +14,13 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     private float fallSpeed = -18f;             // vitesse à laquelle le jouer tombe
     private float fallIncreaseSpeed = -1.5f;    // accélération de la vitesse de chute jusqu'à vitesse max
 
+<<<<<<< HEAD
+    private bool isJumping;		// vrai si le perso est en l'air
+	private bool isDashing;		// vrai si le perso est en train de dash
+=======
     private bool isJumping;		   // vrai si le perso est en l'air
     private bool isDashing;		   // vrai si le perso est en train de dash
+>>>>>>> master
     private bool isDashReady=true; //cooldown du Dash
     private bool isGrounded;	   // vrai si le perso touche le sol ou un échelle
 
@@ -33,7 +38,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     private Vector3 velocity = Vector3.zero;	// vitesse courante du joueur (3D)
     private float horizontalMovement;			// vitesse horizontale
-    private float verticalMovement;				// vitesse verticale
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public int horizontalWay;
@@ -81,7 +85,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
         // maj de la vitesse horizontale
         horizontalMovement = horizontalWay * moveSpeed * Time.fixedDeltaTime;
-        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
@@ -157,7 +160,10 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             rb.AddForce(new Vector2(0f, jumpForce));
             isJumping = false;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         if(isDashing && isDashReady) {
             isDashReady=false;
             StartCoroutine(cooldownDash());
@@ -205,7 +211,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             force *= -1;
         }
 
-            targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
+        targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
 	}
 
 /* affiche le groundCheck à l'écran (debug)

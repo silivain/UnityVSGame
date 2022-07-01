@@ -327,7 +327,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
+  m_Sprite: {fileID: -4031619653288768660, guid: 510720d2d46f1ddd8a77416b05549251, type: 3}
+=======
   m_Sprite: {fileID: 21300000, guid: a88ee5f11f23410448e26d4e855639e6, type: 3}
+>>>>>>> master
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -452,7 +456,11 @@ MonoBehaviour:
   dashCooldownTime: 2
   throwPoint: {fileID: 4594055403994946158}
   xDirection: 0
+<<<<<<< HEAD
+  deviceNumber: 0
+=======
   deviceNumber: 2
+>>>>>>> master
 --- !u!114 &4594055403739195450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,11 +480,18 @@ MonoBehaviour:
   shield: {fileID: 7800907144316940478}
   shieldKey: 308
   shieldCooldown: 5
+<<<<<<< HEAD
   trapResistance: 0
   GameOver_Screen: {fileID: 0}
   shieldAudio: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
   audioSource: {fileID: 0}
+  deviceNumber: 0
+=======
+  GameOver_Screen: {fileID: 0}
+  shieldAudio: {fileID: 8300000, guid: c108c8380b66e19118fbfb3f0134971a, type: 3}
+  audioSource: {fileID: 0}
   deviceNumber: 2
+>>>>>>> master
 --- !u!114 &4594055403739195460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97a57679a9626b0a83bbc7e5805dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fire1: 116
   weapon: {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8, type: 3}
   weaponsGO:
   - {fileID: 6130746024943231, guid: 0fe3b3cd06dd9e346857da80393e45a8, type: 3}
@@ -502,15 +516,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 75ff1b05814cfdd9f8eb559158d2a364, type: 3}
   - {fileID: 21300000, guid: 2592ea99b71c23af4bfb12e40f5e0e9d, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 120c335656aa45e088df5420b9852db0, type: 3}
   - {fileID: 21300000, guid: 92e592c659695b508bc3075c171b0378, type: 3}
   - {fileID: 21300000, guid: c55044c6655f8dd9b998c36f0c7385a5, type: 3}
   weaponID: 0
   throwPoint: {fileID: 4594055403994946158}
   highThrowPoint: {fileID: 4594055404759871956}
+<<<<<<< HEAD
+  grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee, type: 3}
+=======
   grenadeGO: {fileID: 5619807399448694048, guid: 5f1376b9697a430469d9d496c57388ee,
     type: 3}
   force: 0
+>>>>>>> master
   tromboneRangePoint: {fileID: 1666972785565178579}
   playerLayers:
     serializedVersion: 2
@@ -526,11 +544,17 @@ MonoBehaviour:
   ammunitionCountText: {fileID: 0}
   splashDamage: 10
   splashRange: 3
+<<<<<<< HEAD
   explosionVisual: {fileID: 5787354115532521949, guid: dc0af3252b09b9b48b222cf93e951aff, type: 3}
   maxAmmunition: e80300000d0000000700000019000000150000000f000000e8030000
   bonusAmmunition: e803000006000000030000000c0000000a00000007000000e8030000
   currentDamageBonus: 0
   deviceNumber: 0
+=======
+  explosionVisual: {fileID: 5787354115532521949, guid: dc0af3252b09b9b48b222cf93e951aff,
+    type: 3}
+  deviceNumber: 2
+>>>>>>> master
 --- !u!114 &290958905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +571,7 @@ MonoBehaviour:
   playerCollider: {fileID: 4594055403739195451}
   boxCollider1: {fileID: 4594055403739195461}
   boxCollider2: {fileID: 4594055405112959773}
+<<<<<<< HEAD
   deviceNumber: 0
 --- !u!114 &1506128871
 MonoBehaviour:
@@ -570,6 +595,9 @@ MonoBehaviour:
   DamageBonusP2: {fileID: 0}
   SpeedBonusP1: {fileID: 0}
   SpeedBonusP2: {fileID: 0}
+=======
+  deviceNumber: 2
+>>>>>>> master
 --- !u!1 &4594055403994946159
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +713,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4091753, y: 0.06259014}
+  m_Size: {x: 1.4689407, y: 0.21982002}
   m_EdgeRadius: 0
 --- !u!1001 &4594055403189678764
 PrefabInstance:
@@ -752,6 +780,12 @@ Transform:
 --- !u!1 &7800907144316940478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6017722504259617298, guid: ae14f19103c393445ae7858c5938972c, type: 3}
+  m_PrefabInstance: {fileID: 4594055403189678764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7800907144316940478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6017722504259617298, guid: ae14f19103c393445ae7858c5938972c,
+    type: 3}
   m_PrefabInstance: {fileID: 4594055403189678764}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4594055404876232740

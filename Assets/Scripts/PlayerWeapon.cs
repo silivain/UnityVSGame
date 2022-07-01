@@ -196,6 +196,7 @@ public class PlayerWeapon : MonoBehaviour
                 playerMovement.RecoilCac(enemy, transform);
             }
         }
+	}
 
             yield return new WaitForSeconds(0.36f);
             AnimTrb1.SetActive(false);
@@ -303,22 +304,14 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+	IEnumerator tuba() {
+        GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+        tuba.tag = "Proj" + transform.tag;
+        UseAmmo();
 
-    /* Gère le cooldown de la flute
-    * attends 'timeBeforeSolo' secondes avant de pouvoir tirer
-    * le solo dure 'soloDuration' secondes
-    */
-    IEnumerator cooldownFlute() {
-        while(weaponID == 6) {
-            Debug.Log("debut loop cd flute");
-            yield return new WaitForSeconds(timeBeforeSolo);
-            mySolo = true;
-            enemyPW.enemySolo = true;
-            Debug.Log("solo time");
-            yield return new WaitForSeconds(soloDuration);
-            mySolo = false;
-            enemyPW.enemySolo = false;
-            Debug.Log("fin solo");
+        yield return new WaitForSeconds(0.75f);
+        if(tuba != null) {
+            Explosion(tuba);
         }
     }
 
@@ -396,6 +389,15 @@ public class PlayerWeapon : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
+    public void Explosion(GameObject tuba)
+    {
+        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
+            if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
+            {
 
     // met à jour l'affichage des munitions
     public void AmmoDisplay() {
@@ -405,6 +407,7 @@ public class PlayerWeapon : MonoBehaviour
         }else{
             ammunitionCountText.text = ammunition.ToString();
         }
+        Destroy(tuba);
     }
 
 

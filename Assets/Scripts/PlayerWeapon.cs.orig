@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 //Si UnityEngine.InputSystem introuvable, aller dans préférnces, external tools tout cocher et regenerate project files
@@ -16,6 +17,7 @@ public class PlayerWeapon : MonoBehaviour
   public int weaponID;							// ID de l'arme du player
   public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
   public Transform highThrowPoint;				// throwPoint haut (souba etc)
+  public KeyCode changeWeapon; 					// changement d'arme (debug)
   public GameObject grenadeGO;					// TODO
   public static PlayerWeapon instance;     		// instance de la classe
   public PlayerWeapon enemyPW;                  // script PlayerWeapon du joueur adverse
@@ -53,23 +55,11 @@ public class PlayerWeapon : MonoBehaviour
     //private float endTime=0f; TODO
     public int deviceNumber;            //Numero de device du gamepad
 
-    private void Awake() {
-<<<<<<< HEAD
-        instance = this;
-        playerShield = transform.Find("Shield");
-    }
 
-    // Update is called once per frame
-    void Update() {
-        // Debug Key pour le changement d'arme
-        if (Input.GetKeyDown(changeWeapon)){
-            weaponID = 3;
-            setWeapon(weaponsGO[3]);
-        }
-=======
+    private void Awake() {
     controls = new PlayerControls();
     controls.devices = new[] { InputSystem.devices[deviceNumber] };
-    
+
     instance = this;
     playerShield = transform.Find("Shield");
   }
@@ -79,7 +69,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         controls.Gameplay.Shoot.performed += ctx => Shoot();
     }
->>>>>>> cf1b1789718a8ade4cdd84d7c226bf5a3ad0a884
 
     private void Shoot()
     {
@@ -190,19 +179,23 @@ public class PlayerWeapon : MonoBehaviour
             AnimTrb1.SetActive(true);
             yield return new WaitForSeconds(0.133f);
 
-            Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
-                tromboneRangePoint.position, playerLayers);
-            foreach(Collider2D enemy in tromboneHitbox) {
-                if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
-        		&& enemy.transform.tag.Substring(0, 4) == "Play"
-        		&& enemy is CapsuleCollider2D) {
-                    PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
-                    PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
+        AnimTrb0.SetActive(false);
+        AnimTrb1.SetActive(true);
+        yield return new WaitForSeconds(0.133f);
 
-                    playerHealth.TakeDamage(tromboneDamage);
-                    playerMovement.RecoilCac(enemy, transform);
-                }
+        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
+            tromboneRangePoint.position, playerLayers);
+        foreach(Collider2D enemy in tromboneHitbox) {
+            if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+    		&& enemy.transform.tag.Substring(0, 4) == "Play"
+    		&& enemy is CapsuleCollider2D) {
+                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+                PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
+
+                playerHealth.TakeDamage(tromboneDamage);
+                playerMovement.RecoilCac(enemy, transform);
             }
+        }
 
             yield return new WaitForSeconds(0.36f);
             AnimTrb1.SetActive(false);
@@ -310,6 +303,7 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
 
     /* Gère le cooldown de la flute
     * attends 'timeBeforeSolo' secondes avant de pouvoir tirer
@@ -317,12 +311,25 @@ public class PlayerWeapon : MonoBehaviour
     */
     IEnumerator cooldownFlute() {
         while(weaponID == 6) {
+            Debug.Log("debut loop cd flute");
             yield return new WaitForSeconds(timeBeforeSolo);
             mySolo = true;
             enemyPW.enemySolo = true;
+            Debug.Log("solo time");
             yield return new WaitForSeconds(soloDuration);
             mySolo = false;
             enemyPW.enemySolo = false;
+            Debug.Log("fin solo");
+=======
+	IEnumerator tuba() {
+        GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+        tuba.tag = "Proj" + transform.tag;
+        UseAmmo();
+
+        yield return new WaitForSeconds(0.75f);
+        if(tuba != null) {
+            Explosion(tuba);
+>>>>>>> master
         }
     }
 
@@ -400,6 +407,7 @@ public class PlayerWeapon : MonoBehaviour
       // TODO (lancer une anim) + changer l'apparence du player en fonction de l'item
     }
 
+<<<<<<< HEAD
 
     // met à jour l'affichage des munitions
     public void AmmoDisplay() {
@@ -408,6 +416,21 @@ public class PlayerWeapon : MonoBehaviour
             ammunitionCountText.text = "∞";
         }else{
             ammunitionCountText.text = ammunition.ToString();
+=======
+    public void Explosion(GameObject tuba)
+    {
+        Instantiate(explosionVisual, tuba.transform.position, tuba.transform.rotation = Quaternion.identity);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(tuba.transform.position, splashRange);
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            PlayerHealth playerHealth = hitCollider.transform.GetComponent<PlayerHealth>();
+            if (hitCollider.GetType() == typeof(CapsuleCollider2D) && hitCollider.transform.tag.Substring(0, 4) == "Play")
+            {
+
+                playerHealth.TakeDamage(splashDamage);
+                hitCollider.attachedRigidbody.AddForce((hitCollider.transform.position - tuba.transform.position).normalized * 20f, ForceMode2D.Impulse);
+            }
+>>>>>>> master
         }
     }
 
