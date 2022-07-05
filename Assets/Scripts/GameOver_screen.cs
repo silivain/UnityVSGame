@@ -9,23 +9,26 @@ public class GameOver_screen : MonoBehaviour
     public Text pointsText;
     public AudioSource currentMusic;
     public AudioSource gameOverMusic;
+
+
     public void Setup(int score){
         Time.timeScale = 0f; //si le temps a été arreté , il est maintenant en vitesse normale.
         gameObject.SetActive(true);
-        //pointsText.text = "Tué en "+score.ToString() + " secondes !";  
+        //pointsText.text = "Tué en "+score.ToString() + " secondes !";
         currentMusic.Stop();
         gameOverMusic.Play();
-        
-    } 
+        Restart();
+    }
+
 
     public void Restart(){
         Time.timeScale = 1f; //si le temps a été arreté , il est maintenant en vitesse normale.
-        SceneManager.LoadScene("SimpleSceneLalaland");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void MainMenu(){
         Time.timeScale = 1f; //si le temps a été arreté , il est maintenant en vitesse normale.
         SceneManager.LoadScene("MainMenu");
-        
+
     }
 }

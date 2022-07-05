@@ -1,43 +1,37 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
-// main menu et ses bouttons
-public class MainMenu : MonoBehaviour //video 17
+public class MainMenu : MonoBehaviour
 {
-    public int levelToLoad;			// scène à charger lors de l'utilisation du boutton start
-    public GameObject settingsWindow;	// fenêtre des paramètres
-    private GameObject P1; //P1 qui joue
-    private GameObject P2; //P2
+    private string[] levelToLoad= {"MainMenu"};
+    public PlayerControls controls;
 
-
-    /* boutton start : charge la scène 'levelToLoad'
-    */
-    public void StartGame()
+    private void Awake()
     {
-        //SceneManager.LoadScene(levelToLoad);
+        controls = new PlayerControls();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        if(SceneManager.GetActiveScene().name != "MainMenu") {
+            controls.Gameplay.Start.performed += ctx => Launch();
+        }
     }
 
-    /* boutton settings : ouvre les paramètres
-    */
-    public void SettingsButton()
+    private void Launch()
     {
-        settingsWindow.SetActive(true);
+        SceneManager.LoadScene("MainMenu");
+
+    }
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
     }
 
-    /* ferme les paramètres
-    */
-    public void CloseSettingsWindow()
+    private void OnDisable()
     {
-        settingsWindow.SetActive(false);
-    }
-
-
-
-    /* boutton quit : quit l'appli
-    */
-    public void QuitGame()
-    {
-        Application.Quit();
+        controls.Gameplay.Disable();
     }
 }
