@@ -171,50 +171,68 @@ public class PlayerWeapon : MonoBehaviour
 
     /* Coup de trombone au cac
     * on récupère tous les collider entre le joueur et 'tromboneRangePoint'
+	* affiné pour que la range cole avec l'anim
     * on applique les dégats du trombone à tous les joueurs récupérés
+	* on veille à ce qu'un même joueur ne reçoive pas plusieurs fois le même coup
     */
     IEnumerator trombone() {
-        AnimTrb0.SetActive(false);
-        AnimTrb1.SetActive(true);
+		// activation anim coulisse
+        AnimTrb0.SetActive(false);	// anim "au repos"
+        AnimTrb1.SetActive(true);	// anim de tir
 
-        /* TODO clean ca
-        * on veut que le hit soit plus synchro
-        CapsuleCollider2D enemyHit = null;
-        Collider2D[] tromboneHitbox = null;
+        CapsuleCollider2D enemyHit = null;		// le CapsColl du joueur qui prendra les dégats
+        Collider2D[] tromboneHitbox = null;		// tableau des colliders récupérés
+		float animFrame = 1 / 60;				// durée entre chaque frame de l'animation
+												// voir AnimTrb1 dans unity
 
-        for(int i = 0; i < 5; ++i) {
-            yield return new WaitForSeconds(0.1f);
+		/* 7 frames d'animation
+		* on synchro la range du coup avec la frame de l'anim
+		*/
+        for(int i = 1; i <= 7; ++i) {
+            yield return new WaitForSeconds(animFrame);
+
+			// portion de coulisse calquée sur l'anim en jeu
+			Vector3 positionCoulisse = new Vector3 (tromboneRangePoint.position.x / (1 - Math.Abs(i - 4) / 4),
+			    tromboneRangePoint.position.y, tromboneRangePoint.position.z);
+
+			// récupération de tous les colliders en range
             tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
-                tromboneRangePoint.position, playerLayers);
-        }
-        */
+                positionCoulisse, playerLayers);
 
-        yield return new WaitForSeconds(0.133f);
-        Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
-            tromboneRangePoint.position, playerLayers);
-
-        foreach(Collider2D enemy in tromboneHitbox) {
-            if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
-    		&& enemy.transform.tag.Substring(0, 4) == "Play"
-    		&& enemy is CapsuleCollider2D) {
-                PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
-                PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
-
-                playerHealth.TakeDamage(tromboneDamage);
-                playerMovement.RecoilCac(enemy, transform);
-            }
+			/* on vérifie que la cible touchée n'a pas déjà reçu les dégats de ce même coup
+			* puis on applique les dégats
+			*/
+			foreach(Collider2D enemy in tromboneHitbox) {
+				if (enemy is CapsuleCollider2D && enemy != enemyHit) {
+					enemyHit = (CapsuleCollider2D) enemy;
+					tromboneHit(enemyHit);
+					break;
+				}
+			}
         }
 
-        yield return new WaitForSeconds(0.36f);
+		UseAmmo();								// on utilise un munition
+		yield return new WaitForSeconds(0.3f);	// tempo le temps que l'anim finisse
+
+		// on remet l'anim "au repos"
         AnimTrb1.SetActive(false);
         AnimTrb0.SetActive(true);
-
-        UseAmmo();
 	}
 
-    void tromboneHit() {
 
+	/* on applique les dégats du trombone au joueur touché
+	*/
+    void tromboneHit(CapsuleCollider2D enemy) {
+		if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
+		&& enemy.transform.tag.Substring(0, 4) == "Play") {
+			PlayerHealth playerHealth = enemy.transform.GetComponent<PlayerHealth>();
+			PlayerMovement playerMovement = enemy.transform.GetComponent<PlayerMovement>();
+
+			playerHealth.TakeDamage(tromboneDamage);
+			playerMovement.RecoilCac(enemy, transform);
+		}
     }
+
 
     /* Tire 3 projs de sousa
     * les projs disparaissent au bout de 1 sec
@@ -398,7 +416,7 @@ public class PlayerWeapon : MonoBehaviour
       if (weaponID == 3) {
           AnimTrb0.SetActive(true);
       }else {
-          AnimTrb0.SetActive(false);
+		  AnimTrb0.SetActive(false);
       }
 
 
