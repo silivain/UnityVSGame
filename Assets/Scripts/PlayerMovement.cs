@@ -7,20 +7,20 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour {	//video 2
 
     public float moveSpeed;                     // vitesse de déplacement latéral
-    public float currentSpeedBonus = 0;        // bonus de vitesse actuel
+    public float currentSpeedBonus = 0;         // bonus de vitesse actuel
     public float climbSpeed;                    // vitesse sur échelles
     public float jumpForce;                     // puissance de saut
     public float dashForce;                     // puissance de dash
     private float fallSpeed = -18f;             // vitesse à laquelle le jouer tombe
     private float fallIncreaseSpeed = -1.5f;    // accélération de la vitesse de chute jusqu'à vitesse max
 
-    private bool isJumping;		   // vrai si le perso est en l'air
-    private bool isDashing;		   // vrai si le perso est en train de dash
-    private bool isDashReady=true; //cooldown du Dash
-    private bool isGrounded;	   // vrai si le perso touche le sol ou un échelle
+    private bool isJumping;		                // vrai si le perso est en l'air
+    private bool isDashing;		                // vrai si le perso est en train de dash
+    private bool isDashReady=true;              //cooldown du Dash
+    private bool isGrounded;	                // vrai si le perso touche le sol ou un échelle
 
-	[HideInInspector]			               // cache les variables suivantes dans l'inspecteur d'unity
-    public bool isClimbing;						 // vrai si le joueur grimpe
+	[HideInInspector]			                // cache les variables suivantes dans l'inspecteur d'unity
+    public bool isClimbing;					    // vrai si le joueur grimpe
 
     public Transform groundCheck;				// détecte la présence du sol (tilemap 0)
     public float groundCheckRadius;			    // marge de détection
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public string horizontalAxis;				// axe horizontal (utile pour les controles)
     public int horizontalWay;
-    public float dashCooldownTime = 2f; //nb de second entre 2 dashs
+    public float dashCooldownTime = 2f;         //nb de second entre 2 dashs
 
     public Transform throwPoint;				// point depuis lequel les projectiles sont instanciés
     private Vector3 throwPointPosition;			// position du point ci-dessus
@@ -45,15 +45,17 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	private float powSign;				        // 0 ou 1, sert à calculer la direction du joueur (-1^powSign)
 	public float xDirection;					// -1 ou 1, direction du joueur sur l'axe x
 
-    public Transform playerShield;             // shield du joueur
+    public Transform playerShield;              // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
     public PlayerControls controls;
-    public int deviceNumber;            //Numero de device du gamepad
+    public int deviceNumber;                    //Numero de device du gamepad -> dégueu
+    /* TODO détecter les différents inputs connectés et recup leur type
+    * set les inputs selon ceux détectés et automatiser tout ca dans awake
+    */
 
     /* init de variables
     */
-
     private void Awake() {
         controls = new PlayerControls();
         controls.devices = new[] { InputSystem.devices[deviceNumber] };
@@ -63,6 +65,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
   		xDirection = Mathf.Pow(-1f, powSign);
   		instance = this;
     }
+
 
     /* détecte les différents inputs et appelle les fonctions appropriées
 	*/

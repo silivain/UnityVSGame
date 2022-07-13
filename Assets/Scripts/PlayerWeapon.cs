@@ -9,51 +9,51 @@ using UnityEngine.InputSystem;
 public class PlayerWeapon : MonoBehaviour
 {
 
-  public PlayerControls controls;
+    public PlayerControls controls;
 
-  public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
-  public GameObject[] weaponsGO;				// armes du jeu
-  public Sprite[] weaponsItems;					// images des items des armes (les collectables)
-  public int weaponID;							// ID de l'arme du player
-  public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
-  public Transform highThrowPoint;				// throwPoint haut (souba etc)
-  public KeyCode changeWeapon; 					// changement d'arme (debug)
-  public GameObject grenadeGO;					// TODO
-  public static PlayerWeapon instance;     		// instance de la classe
-  public PlayerWeapon enemyPW;                  // script PlayerWeapon du joueur adverse
+    public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
+    public GameObject[] weaponsGO;				// armes du jeu
+    public Sprite[] weaponsItems;					// images des items des armes (les collectables)
+    public int weaponID;							// ID de l'arme du player
+    public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
+    public Transform highThrowPoint;				// throwPoint haut (souba etc)
+    public KeyCode changeWeapon; 					// changement d'arme (debug)
+    public GameObject grenadeGO;					// TODO
+    public static PlayerWeapon instance;     		// instance de la classe
+    public PlayerWeapon enemyPW;                  // script PlayerWeapon du joueur adverse
 
-  public Transform tromboneRangePoint;          // transform délimitant la portée de la coulisse
-  public LayerMask playerLayers;                // layers définissant la catégorie d'objets ciblés par la coulisse
-  public int tromboneDamage = 8;                // dégats d'un coup de trombone
-  public GameObject AnimTrb0;                   // GameObject animation du coup de coulisse
-  public GameObject AnimTrb1;
+    public Transform tromboneRangePoint;          // transform délimitant la portée de la coulisse
+    public LayerMask playerLayers;                // layers définissant la catégorie d'objets ciblés par la coulisse
+    public int tromboneDamage = 8;                // dégats d'un coup de trombone
+    public GameObject AnimTrb0;                   // GameObject animation du coup de coulisse
+    public GameObject AnimTrb1;
 
-  public bool mySolo = false;                   // vrai si mon joueur est équipé d'une flute et fait un solo
-  public bool enemySolo = false;                // vrai si le joueur adverse est équipé d'une flute et fait un solo
-  public float timeBeforeSolo;                  // durée avant le solo de flute
-  public float soloDuration;                    // durée du solo de flute
+    public bool mySolo = false;                     // vrai si mon joueur est équipé d'une flute et fait un solo
+    public bool enemySolo = false;                  // vrai si le joueur adverse est équipé d'une flute et fait un solo
+    public float timeBeforeSolo;                    // durée avant le solo de flute
+    public float soloDuration;                      // durée du solo de flute
 
-  private Boolean isWeaponReady = true;         // vrai si le cooldown de l'arme est à 0
-  public int ammunition = 1000;                 // nombre de munitions restatntes pour l'arme équipée
-  public Image ammunitionBar;			        // barre d'affichage des munitions
-  public Text ammunitionCountText;		        // texte d'affichage du nb de mun
+    private Boolean isWeaponReady = true;           // vrai si le cooldown de l'arme est à 0
+    public int ammunition = 1000;                   // nombre de munitions restatntes pour l'arme équipée
+    public Image ammunitionBar;                     // barre d'affichage des munitions
+    public Text ammunitionCountText;		        // texte d'affichage du nb de mun
 
-  public Transform playerShield;               // shield du joueur
+    public Transform playerShield;                  // shield du joueur
 
-  public int splashDamage = 10;                 // dégats de zone de l'explosion du tuba
-  public float splashRange = 3f;                // taille de la zone de dégats
-  public GameObject explosionVisual;            // visuel de l'explosion
+    public int splashDamage = 10;                   // dégats de zone de l'explosion du tuba
+    public float splashRange = 3f;                  // taille de la zone de dégats
+    public GameObject explosionVisual;              // visuel de l'explosion
 
-  public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "Trombone", "Sousa", "Tuba", "Flute"};	// armes du jeu, l'ordre des armes doit match leur weaponID
-  public         int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15, 1000};                                                  // nombre de munitions max/de départ pour chaque arme
-  public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7, 1000};                                                    // nombre du munitions apportés par l'item 'Ammunition'
-  private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                                 // Cooldown de chaque arme
+    public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "Trombone", "Sousa", "Tuba", "Flute"};	// armes du jeu, l'ordre des armes doit match leur weaponID
+    public         int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15, 1000};                                                  // nombre de munitions max/de départ pour chaque arme
+    public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7, 1000};                                                    // nombre du munitions apportés par l'item 'Ammunition'
+    private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                                 // Cooldown de chaque arme
 
-  public float currentDamageBonus = 0;        // bonus de dégats actuel
+    public float currentDamageBonus = 0;            // bonus de dégats actuel
 
-  private float startTime = 0f;
+    private float startTime = 0f;
     //private float endTime=0f; TODO
-    public int deviceNumber;            //Numero de device du gamepad
+    public int deviceNumber;                        //Numero de device du gamepad
 
 
     private void Awake() {
@@ -63,11 +63,13 @@ public class PlayerWeapon : MonoBehaviour
         instance = this;
     }
 
+
     // Update is called once per frame
     void Update()
     {
         controls.Gameplay.Shoot.performed += ctx => Shoot();
     }
+
 
     private void Shoot()
     {
@@ -76,33 +78,38 @@ public class PlayerWeapon : MonoBehaviour
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());
-            //tir en fonction de l'arme équipée
-            switch (weaponID) {
-                case 0:
-                    bullet();
-                    break;
-                case 1:
-                    clarinet();
-                    break;
-                case 2:
-                    startTime = Time.time;
-                    grenadeLaunch();
-                    break;
-                case 3:
-                    StartCoroutine(trombone());
-                    break;
-                case 4:
-                	StartCoroutine(sousa());
-                    break;
-                case 5:
-                  	StartCoroutine(tuba());
-                	break;
-                case 6:
-                	StartCoroutine(flute());
-                    break;
-                default:
-                    bullet();
-                    break;
+
+            /* tir en fonction de l'arme équipée
+            * si le joueur n'est pas équipé de la flute
+            * et que le joueur ennemi ne fait pas un solo
+            */
+            if (weaponID < 6 && !enemySolo) {
+                switch (weaponID) {
+                    case 0:
+                        bullet();
+                        break;
+                    case 1:
+                        clarinet();
+                        break;
+                    case 2:
+                        startTime = Time.time;
+                        grenadeLaunch();
+                        break;
+                    case 3:
+                        StartCoroutine(trombone());
+                        break;
+                    case 4:
+                    	StartCoroutine(sousa());
+                        break;
+                    case 5:
+                      	StartCoroutine(tuba());
+                    	break;
+                    default:
+                        bullet();
+                        break;
+                }
+            }else if (weaponID == 6 && mySolo) {
+                StartCoroutine(flute());
             }
         }
     }
@@ -111,14 +118,12 @@ public class PlayerWeapon : MonoBehaviour
     /* TODO
     */
     void bullet() {
-        if (!enemySolo) {
-            GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-            bulletClone.tag = "Proj" + transform.tag;
+        GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+        bulletClone.tag = "Proj" + transform.tag;
 
-            UseAmmo();
+        UseAmmo();
 
-            //anim.SetTrigger("fire anim"); animation
-        }
+        //anim.SetTrigger("fire anim"); animation
     }
 
 
@@ -127,23 +132,21 @@ public class PlayerWeapon : MonoBehaviour
     * ils sont instantiés les uns sous les autres ingame
     */
     void clarinet() {
-        if (!enemySolo) {
-            Vector3 vectorClarinet = throwPoint.position;
-            GameObject clarinetClone1 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-            clarinetClone1.tag = "Proj" + transform.tag;
-            vectorClarinet.y += 0.5f;
-            GameObject clarinetClone2 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-            clarinetClone2.tag = "Proj" + transform.tag;
-            vectorClarinet.y += 0.5f;
-            GameObject clarinetClone3 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
-            clarinetClone3.tag = "Proj" + transform.tag;
+        Vector3 vectorClarinet = throwPoint.position;
+        GameObject clarinetClone1 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
+        clarinetClone1.tag = "Proj" + transform.tag;
+        vectorClarinet.y += 0.5f;
+        GameObject clarinetClone2 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
+        clarinetClone2.tag = "Proj" + transform.tag;
+        vectorClarinet.y += 0.5f;
+        GameObject clarinetClone3 = (GameObject)Instantiate(weapon, vectorClarinet, throwPoint.rotation);
+        clarinetClone3.tag = "Proj" + transform.tag;
 
-            UseAmmo();
+        UseAmmo();
 
-            //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
-            //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
-            //anim.SetTrigger("fire anim"); animation
-        }
+        //// TODO indiqué au projectile son parent pour pas se le manger lors d'un dash par ex
+        //Debug.Log("player pos : " + transform.position + "\ndebug depuis PlayerMovement, l84"); debug
+        //anim.SetTrigger("fire anim"); animation
     }
 
 
@@ -151,20 +154,18 @@ public class PlayerWeapon : MonoBehaviour
     * TODO : commenter pls
     */
     void grenadeLaunch(){
-        if (!enemySolo) {
-            //lengthTime = endTime-startTime;
-            float lengthTime = 3;
-            Vector3 vectorClarinet = throwPoint.position;
-            GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
-            grenade.tag = "Proj" + transform.tag;
-            Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
-            projRb.AddForce(new Vector2(1*lengthTime,2*lengthTime));
-            projRb.angularVelocity = -180;
+        //lengthTime = endTime-startTime;
+        float lengthTime = 3;
+        Vector3 vectorClarinet = throwPoint.position;
+        GameObject grenade = Instantiate(grenadeGO, vectorClarinet, throwPoint.rotation);
+        grenade.tag = "Proj" + transform.tag;
+        Rigidbody2D projRb = grenade.GetComponent<Rigidbody2D>();
+        projRb.AddForce(new Vector2(1*lengthTime,2*lengthTime));
+        projRb.angularVelocity = -180;
 
-            UseAmmo();
+        UseAmmo();
 
-            //Destroy(grenade,Random.Range(1,10));
-        }
+        //Destroy(grenade,Random.Range(1,10));
     }
 
 
@@ -173,17 +174,25 @@ public class PlayerWeapon : MonoBehaviour
     * on applique les dégats du trombone à tous les joueurs récupérés
     */
     IEnumerator trombone() {
-        if (!enemySolo) {
-            AnimTrb0.SetActive(false);
-            AnimTrb1.SetActive(true);
-            yield return new WaitForSeconds(0.133f);
-
         AnimTrb0.SetActive(false);
         AnimTrb1.SetActive(true);
-        yield return new WaitForSeconds(0.133f);
 
+        /* TODO clean ca
+        * on veut que le hit soit plus synchro
+        CapsuleCollider2D enemyHit = null;
+        Collider2D[] tromboneHitbox = null;
+
+        for(int i = 0; i < 5; ++i) {
+            yield return new WaitForSeconds(0.1f);
+            tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
+                tromboneRangePoint.position, playerLayers);
+        }
+        */
+
+        yield return new WaitForSeconds(0.133f);
         Collider2D[] tromboneHitbox = Physics2D.OverlapAreaAll(throwPoint.position,
             tromboneRangePoint.position, playerLayers);
+
         foreach(Collider2D enemy in tromboneHitbox) {
             if(enemy.transform.tag[enemy.transform.tag.Length - 1] != transform.tag[transform.tag.Length - 1]
     		&& enemy.transform.tag.Substring(0, 4) == "Play"
@@ -196,46 +205,47 @@ public class PlayerWeapon : MonoBehaviour
             }
         }
 
-            yield return new WaitForSeconds(0.36f);
-            AnimTrb1.SetActive(false);
-            AnimTrb0.SetActive(true);
+        yield return new WaitForSeconds(0.36f);
+        AnimTrb1.SetActive(false);
+        AnimTrb0.SetActive(true);
 
-            UseAmmo();
-        }
+        UseAmmo();
 	}
+
+    void tromboneHit() {
+
+    }
 
     /* Tire 3 projs de sousa
     * les projs disparaissent au bout de 1 sec
     * TODO : faire une var pour déterminer la range = durée avant destroy
     */
 	IEnumerator sousa() {
-        if (!enemySolo) {
-    		Vector3 vectorSousa = highThrowPoint.position;
-    		GameObject sousa1 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-      	  	sousa1.tag = "Proj" + transform.tag;
-    		vectorSousa.y -= 0.3f;
-    		GameObject sousa2 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-      	  	sousa2.tag = "Proj" + transform.tag;
-    		Rigidbody2D rbSousa2 = sousa2.GetComponent<Rigidbody2D>();
-    		rbSousa2.SetRotation(transform.rotation.y >= 0 ? (rbSousa2.rotation - 3f) : (rbSousa2.rotation + 3f));
-    		vectorSousa.y -= 0.3f;
-    		GameObject sousa3 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
-      	  	sousa3.tag = "Proj" + transform.tag;
-    		Rigidbody2D rbSousa3 = sousa3.GetComponent<Rigidbody2D>();
-    		rbSousa3.SetRotation(transform.rotation.y >= 0 ? (rbSousa3.rotation - 6f) : (rbSousa3.rotation + 6f));
+		Vector3 vectorSousa = highThrowPoint.position;
+		GameObject sousa1 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
+  	  	sousa1.tag = "Proj" + transform.tag;
+		vectorSousa.y -= 0.3f;
+		GameObject sousa2 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
+  	  	sousa2.tag = "Proj" + transform.tag;
+		Rigidbody2D rbSousa2 = sousa2.GetComponent<Rigidbody2D>();
+		rbSousa2.SetRotation(transform.rotation.y >= 0 ? (rbSousa2.rotation - 3f) : (rbSousa2.rotation + 3f));
+		vectorSousa.y -= 0.3f;
+		GameObject sousa3 = (GameObject) Instantiate(weapon, vectorSousa, highThrowPoint.rotation);
+  	  	sousa3.tag = "Proj" + transform.tag;
+		Rigidbody2D rbSousa3 = sousa3.GetComponent<Rigidbody2D>();
+		rbSousa3.SetRotation(transform.rotation.y >= 0 ? (rbSousa3.rotation - 6f) : (rbSousa3.rotation + 6f));
 
-    		UseAmmo();
+		UseAmmo();
 
-    		yield return new WaitForSeconds(1f);
-            if (sousa1 != null) {
-    		          Destroy(sousa1);
-            }
-            if (sousa2 != null) {
-    		          Destroy(sousa2);
-            }
-            if (sousa3 != null) {
-    		          Destroy(sousa3);
-            }
+		yield return new WaitForSeconds(1f);
+        if (sousa1 != null) {
+		          Destroy(sousa1);
+        }
+        if (sousa2 != null) {
+		          Destroy(sousa2);
+        }
+        if (sousa3 != null) {
+		          Destroy(sousa3);
         }
 	}
 
@@ -247,15 +257,13 @@ public class PlayerWeapon : MonoBehaviour
     * TODO : faire une var pour la durée avant explo
     */
 	IEnumerator tuba() {
-        if (!enemySolo) {
-    		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-      	    tuba.tag = "Proj" + transform.tag;
-    	    UseAmmo();
+		GameObject tuba = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	    tuba.tag = "Proj" + transform.tag;
+	    UseAmmo();
 
-            yield return new WaitForSeconds(0.75f);
-            if(tuba != null) {
-                Explosion(tuba);
-            }
+        yield return new WaitForSeconds(0.75f);
+        if(tuba != null) {
+            Explosion(tuba);
         }
     }
 
@@ -286,30 +294,28 @@ public class PlayerWeapon : MonoBehaviour
     /* TODO
     */
     IEnumerator flute() {
-        if (mySolo) {
-            GameObject flute1 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-      	  	flute1.tag = "Proj" + transform.tag;
+        GameObject flute1 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	  	flute1.tag = "Proj" + transform.tag;
 
-    		GameObject flute2 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-      	  	flute2.tag = "Proj" + transform.tag;
-    		Rigidbody2D rbFlute2 = flute2.GetComponent<Rigidbody2D>();
-    		rbFlute2.SetRotation(transform.rotation.y >= 0 ? (rbFlute2.rotation - 3f) : (rbFlute2.rotation + 3f));
+		GameObject flute2 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	  	flute2.tag = "Proj" + transform.tag;
+		Rigidbody2D rbFlute2 = flute2.GetComponent<Rigidbody2D>();
+		rbFlute2.SetRotation(transform.rotation.y >= 0 ? (rbFlute2.rotation - 3f) : (rbFlute2.rotation + 3f));
 
-    		GameObject flute3 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
-      	  	flute3.tag = "Proj" + transform.tag;
-    		Rigidbody2D rbFlute3 = flute3.GetComponent<Rigidbody2D>();
-    		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
+		GameObject flute3 = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+  	  	flute3.tag = "Proj" + transform.tag;
+		Rigidbody2D rbFlute3 = flute3.GetComponent<Rigidbody2D>();
+		rbFlute3.SetRotation(transform.rotation.y >= 0 ? (rbFlute3.rotation + 3f) : (rbFlute3.rotation - 3f));
 
-    		yield return new WaitForSeconds(1f);
-            if (flute1 != null) {
-    		          Destroy(flute1);
-            }
-            if (flute2 != null) {
-    		          Destroy(flute2);
-            }
-            if (flute3 != null) {
-    		          Destroy(flute3);
-            }
+		yield return new WaitForSeconds(1f);
+        if (flute1 != null) {
+		          Destroy(flute1);
+        }
+        if (flute2 != null) {
+		          Destroy(flute2);
+        }
+        if (flute3 != null) {
+		          Destroy(flute3);
         }
     }
 
