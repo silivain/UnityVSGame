@@ -49,21 +49,32 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     public static PlayerMovement instance;		// instance de la classe
     public PlayerControls controls;
-    public int deviceNumber;                    //Numero de device du gamepad -> dégueu
-    /* TODO détecter les différents inputs connectés et recup leur type
-    * set les inputs selon ceux détectés et automatiser tout ca dans awake
-    */
 
     /* init de variables
     */
     private void Awake() {
-        controls = new PlayerControls();
-        controls.devices = new[] { InputSystem.devices[deviceNumber] };
-        throwPointPosition = throwPoint.transform.position;
-  		playerPosition = transform.position;
-  		powSign = 0f;
-  		xDirection = Mathf.Pow(-1f, powSign);
-  		instance = this;
+        controls = new PlayerControls();						// on recup le script qui gère les inputs
+
+		InputDevice[] gamepadTab = new InputDevice[2];			// tableau qui stocke les manettes connectées
+		int i = 0;
+		int deviceNumber = transform.tag == "Player 1" ? 0 : 1;	// indice de la manette utilisée selon le joueur
+
+		/* on récupère les 2 premières manettes connectées
+		* on vérifie le type de l'input puis on l'ajoute au tab 'gamepadTab'
+		*/
+		foreach(InputDevice input in InputSystem.devices) {
+			if (input.description.deviceClass == "Gamepad" && i < gamepadTab.Length) {
+				gamepadTab[i++] = input;
+			}
+		}
+
+        controls.devices = new[] { gamepadTab[deviceNumber] };	// on utilise la manette correspondant au joueur
+
+		throwPointPosition = throwPoint.transform.position;		// point de tir du joueur
+  		playerPosition = transform.position;					// position de départ du joueur
+  		powSign = 0f;											// puissance servant à calculer le sens du joueur
+  		xDirection = Mathf.Pow(-1f, powSign);					// sens du joueur (facing left or right)
+  		instance = this;										// instance de la classe TODO : remove ?
     }
 
 
@@ -143,7 +154,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 	*/
     void MovePlayer(float _horizontalMovement) {
         float shieldMod = 1f;
-        if(playerShield.gameObject.activeSelf && isGrounded) {
+        if (playerShield.gameObject.activeSelf && isGrounded) {
             shieldMod = .1f;
         }
 
@@ -161,7 +172,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
         }
 
         if(isDashing && isDashReady) {
-            isDashReady=false;
+            isDashReady = false;
             StartCoroutine(cooldownDash());
             rb.AddForce(new Vector2(xDirection * dashForce, 0f));
             isDashing = false;

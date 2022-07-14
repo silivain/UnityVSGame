@@ -211,7 +211,7 @@ public class PlayerWeapon : MonoBehaviour
 			}
         }
 
-		UseAmmo();								// on utilise un munition
+		UseAmmo();								// on utilise une munition
 		yield return new WaitForSeconds(0.3f);	// tempo le temps que l'anim finisse
 
 		// on remet l'anim "au repos"
