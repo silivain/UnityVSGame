@@ -48,27 +48,13 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public Transform playerShield;              // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
-    public PlayerControls controls;
+    private PlayerControls controls;            // script gérant les inputs du joueur
 
     /* init de variables
     */
     private void Awake() {
-        controls = new PlayerControls();						// on recup le script qui gère les inputs
-
-		InputDevice[] gamepadTab = new InputDevice[2];			// tableau qui stocke les manettes connectées
-		int i = 0;
-		int deviceNumber = transform.tag == "Player 1" ? 0 : 1;	// indice de la manette utilisée selon le joueur
-
-		/* on récupère les 2 premières manettes connectées
-		* on vérifie le type de l'input puis on l'ajoute au tab 'gamepadTab'
-		*/
-		foreach(InputDevice input in InputSystem.devices) {
-			if (input.description.deviceClass == "Gamepad" && i < gamepadTab.Length) {
-				gamepadTab[i++] = input;
-			}
-		}
-
-        controls.devices = new[] { gamepadTab[deviceNumber] };	// on utilise la manette correspondant au joueur
+        controls = new PlayerControls();						    // on recup le script qui gère les inputs
+        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
 
 		throwPointPosition = throwPoint.transform.position;		// point de tir du joueur
   		playerPosition = transform.position;					// position de départ du joueur

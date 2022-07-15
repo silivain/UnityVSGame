@@ -9,8 +9,6 @@ using UnityEngine.InputSystem;
 public class PlayerWeapon : MonoBehaviour
 {
 
-    public PlayerControls controls;
-
     public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
     public GameObject[] weaponsGO;				// armes du jeu
     public Sprite[] weaponsItems;					// images des items des armes (les collectables)
@@ -53,12 +51,13 @@ public class PlayerWeapon : MonoBehaviour
 
     private float startTime = 0f;
     //private float endTime=0f; TODO
-    public int deviceNumber;                        //Numero de device du gamepad
+
+    private PlayerControls controls;                 // script gérant les inputs du joueur
 
 
     private void Awake() {
-        controls = new PlayerControls();
-        controls.devices = new[] { InputSystem.devices[deviceNumber] };
+        controls = new PlayerControls();						    // on recup le script qui gère les inputs
+        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
 
         instance = this;
     }

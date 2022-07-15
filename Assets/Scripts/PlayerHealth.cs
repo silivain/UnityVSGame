@@ -36,9 +36,13 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
 
-    public PlayerControls controls;
-    public int deviceNumber;            //Numero de device du gamepad
+    private PlayerControls controls;             // script gérant les inputs du joueur
 
+
+    private void Awake() {
+        controls = new PlayerControls();						    // on recup le script qui gère les inputs
+        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
+    }
 
 
     /* remplit la vie et la barre de vie du joueur au démarrage
@@ -47,17 +51,18 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
-    private void Awake()
-    {
-        controls = new PlayerControls();
-        controls.devices = new[] { InputSystem.devices[deviceNumber] };
-    }
 
-        void Update()
-    {
+
+    /* capte l'activation du shield
+    */
+    void Update() {
         controls.Gameplay.Shield.performed += ctx => Shield();
     }
 
+
+    /* active le shield lorsque la touche correspondante est activée
+    * déclenche le cooldown de 'shieldCooldown' secondes
+    */
     private void Shield()
     {
         // shield
@@ -155,6 +160,7 @@ public class PlayerHealth : MonoBehaviour
         */
     }
 
+
 	/* respawn le joueur au respawn point courant à la mort du joueur
 	* reset ses stats
 	*/
@@ -166,6 +172,7 @@ public class PlayerHealth : MonoBehaviour
       currentHealth = maxHealth;
       healthBar.SetHealth(currentHealth);
     }
+
 
     /*
 	* affichage d'un clignotement pdnt la période d'invincibilité
