@@ -16,29 +16,30 @@ public class LoadSpecificScene : MonoBehaviour
     public PlayerControls controls;
 
 
-	/*	récupère le script 'PlayerMovement' et le système de fondu
-	*/
-    private void Awake()
-    {
-      playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-      fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+    /*	récupère le script 'PlayerMovement' et le système de fondu
+    */
+    private void Awake() {
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+
+        controls = new PlayerControls();						    // on recup le script qui gère les inputs
+        controls.Player1.Enable();
+        controls.Player2.Enable();
     }
 
 
-	/* si le jouer est à portée et interagit
-	* bloque les mouvements du joueur et appelle le mécanisme de chargement de scène
-	*/
-    private void Update()
-    {
-      if(isInRange && controls.Gameplay.Start.triggered)
-      {
-        interactUI.enabled = false;
-        isInRange = false;
-        PlayerMovement.instance.enabled = false;
-        PlayerMovement.instance.rb.velocity = Vector3.zero;
-        PlayerMovement.instance.animator.SetTrigger("Respawn");
-        StartCoroutine(loadNextScene());
-      }
+    /* si le jouer est à portée et interagit
+    * bloque les mouvements du joueur et appelle le mécanisme de chargement de scène
+    */
+    private void Update() {
+        if(isInRange && (controls.Player1.Start.triggered || controls.Player2.Start.triggered)) {
+            interactUI.enabled = false;
+            isInRange = false;
+            PlayerMovement.instance.enabled = false;
+            PlayerMovement.instance.rb.velocity = Vector3.zero;
+            PlayerMovement.instance.animator.SetTrigger("Respawn");
+            StartCoroutine(loadNextScene());
+        }
     }
 
 

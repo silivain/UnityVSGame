@@ -14,13 +14,22 @@ public class OneWayPlatform : MonoBehaviour
 
     private void Awake() {
         controls = new PlayerControls();						    // on recup le script qui gère les inputs
-        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
+
+        if (transform.tag == "Player 1") {
+            controls.Player1.Enable();
+        }else{
+            controls.Player2.Enable();
+        }
     }
 
 
     // capte la touche descente lorsque le joueur veut descendre d'une plateforme
     void Update() {
-        controls.Gameplay.GoDown.performed += ctx => GoDown();
+        if (transform.tag == "Player 1") {
+            controls.Player1.GoDown.performed += ctx => GoDown();
+        }else if (transform.tag == "Player 2") {
+            controls.Player2.GoDown.performed += ctx => GoDown();
+        }
     }
 
 

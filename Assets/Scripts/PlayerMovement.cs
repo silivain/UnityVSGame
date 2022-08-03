@@ -48,13 +48,17 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public Transform playerShield;              // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
-    private PlayerControls controls;            // script gérant les inputs du joueur
+    private PlayerControls controls;            // script gérant les inputs globales
+    //private InputActionMap controlsPlayer;    // action map correspondant au joueur
+
 
     /* init de variables
     */
     private void Awake() {
-        controls = new PlayerControls();						    // on recup le script qui gère les inputs
-        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
+        controls = new PlayerControls();    // on recup le script qui gère les inputs
+
+        controlPlayer();                    // récupère les inputs du joueur
+                                            // attente passive -> pas besoin d'être dans update
 
 		throwPointPosition = throwPoint.transform.position;		// point de tir du joueur
   		playerPosition = transform.position;					// position de départ du joueur
@@ -70,59 +74,25 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     {
         throwPointPosition = throwPoint.position;
         playerPosition = transform.position;
-        controls.Gameplay.Jump.performed += ctx => Jump();
-        controls.Gameplay.Dash.performed += ctx => Dash();
-        controls.Gameplay.GoLeft.performed += ctx => GoLeft();
-        controls.Gameplay.GoLeft.canceled += ctx => Freeze();
-        controls.Gameplay.GoRight.performed += ctx => GoRight();
-        controls.Gameplay.GoRight.canceled += ctx => Freeze();
 
+        /* maj de la vitesse horizontale
+        * lit la valeur du vecteur responsable du mouvement du joueur
+        * la val du vec2 est gérée par l'input sys en fct des inputs g. et d.
+        */
+        Vector2 inputVector;
 
-        // maj de la vitesse horizontale
-        horizontalMovement = horizontalWay * (moveSpeed + currentSpeedBonus) * Time.fixedDeltaTime;
-        //verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
+        if(transform.tag == "Player 1") {
+            inputVector = controls.Player1.Move.ReadValue<Vector2>();
+        }else {
+            inputVector = controls.Player2.Move.ReadValue<Vector2>();
+        }
+
+        horizontalMovement = inputVector.x * (moveSpeed + currentSpeedBonus) * Time.fixedDeltaTime;
 
         // changement de direction du joueur
         if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
         {
             Flip();
-        }
-
-        // huh ? lié à l'animation, mais sert à quoi ?
-        //animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-        //animator.SetBool("isClimbing", isClimbing);
-    }
-
-    private void GoRight()
-    {
-        horizontalWay = 1;
-    }
-
-    private void GoLeft()
-    {
-        horizontalWay = -1;
-    }
-
-    private void Freeze()
-    {
-        horizontalWay = 0;
-    }
-
-    private void Dash()
-    {
-        // dash
-        if (!isClimbing && isDashReady)
-        {
-            isDashing = true;
-        }
-    }
-
-    private void Jump()
-    {
-        // saut
-        if (isGrounded && !isClimbing && rb.velocity.y < 0.1)
-        {
-            isJumping = true;
         }
     }
 
@@ -133,6 +103,43 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     void FixedUpdate() {
       isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
       MovePlayer(horizontalMovement);
+    }
+
+
+    /* active la bonne InputActionMap selon le joueur
+    * récupère les inputs 'Jump' et 'Dash'
+    */
+    void controlPlayer() {
+        if (transform.tag == "Player 1") {
+            controls.Player1.Enable();
+            controls.Player1.Jump.performed += ctx => Jump();
+            controls.Player1.Dash.performed += ctx => Dash();
+        }else if (transform.tag == "Player 2") {
+            controls.Player2.Enable();
+            controls.Player2.Jump.performed += ctx => Jump();
+            controls.Player2.Dash.performed += ctx => Dash();
+        }
+    }
+
+
+    /* fait dasher le joueur
+    */
+    private void Dash() {
+        // dash
+        if (!isClimbing && isDashReady)
+        {
+            isDashing = true;
+        }
+    }
+
+
+    /* fait sauter le joueur
+    * vérifie qu'il est bien au sol avant
+    */
+    private void Jump() {
+        if (isGrounded && !isClimbing && rb.velocity.y < 0.1) {
+            isJumping = true;
+        }
     }
 
 
@@ -164,6 +171,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             isDashing = false;
         }
     }
+
 
 	/* retourne la transform du personnage ainsi que son throwPoint
 	*/
@@ -207,29 +215,21 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
 	}
 
-/* affiche le groundCheck à l'écran (debug)
-*/
-  private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
-    Gizmos.color = Color.red;
-    Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-  }
+    /* affiche le groundCheck à l'écran (debug)
+    */
+    private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
 
-  IEnumerator cooldownDash()
-    {
-        if (!isDashReady)
-        {
+
+    /* Rend le dash à nouveau disponible
+    * après 'dashCooldownTime' secondes
+    */
+    IEnumerator cooldownDash() {
+        if (!isDashReady) {
             yield return new WaitForSeconds(dashCooldownTime);
             isDashReady = true;
         }
-
-    }
-    private void OnEnable()
-    {
-        controls.Gameplay.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Gameplay.Disable();
     }
 }

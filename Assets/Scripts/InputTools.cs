@@ -39,6 +39,10 @@ public class InputTools : MonoBehaviour
 			}
 		}
 
-        return new[] { gamepadTab[deviceNumber] };	// on utilise la manette correspondant au joueur
+        if (gamepadTab[0] != null) {
+            return new[] { gamepadTab[deviceNumber] };	// on utilise la manette correspondant au joueur
+        }else {
+            return null;
+        }
     }
 }

@@ -11,10 +11,17 @@ public class PauseMenu : MonoBehaviour
     public PlayerControls controls;
 
 
+    private void Awake() {
+        controls = new PlayerControls();						    // on recup le script qui gère les inputs
+        controls.Player1.Enable();
+        controls.Player2.Enable();
+    }
+
+
 	/* active ou désactive la pause
 	*/
     void Update() {
-      if(controls.Gameplay.Start.triggered) {
+      if(controls.Player1.Start.triggered || controls.Player2.Start.triggered) {
         if(gameIsPaused) {
           Resume();
         }

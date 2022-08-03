@@ -56,24 +56,29 @@ public class PlayerWeapon : MonoBehaviour
 
 
     private void Awake() {
-        controls = new PlayerControls();						    // on recup le script qui gère les inputs
-        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
+        controls = new PlayerControls();    // on recup le script qui gère les inputs
+        controlPlayer();                    // on active les inputs correspondant au joueur
 
         instance = this;
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        controls.Gameplay.Shoot.performed += ctx => Shoot();
+    /* active la bonne InputActionMap selon le joueur
+    * récupère l'input 'Shield'
+    */
+    private void controlPlayer() {
+        if (transform.tag == "Player 1") {
+            controls.Player1.Enable();
+            controls.Player1.Shoot.performed += ctx => Shoot();
+        }else if (transform.tag == "Player 2") {
+            controls.Player2.Enable();
+            controls.Player2.Shoot.performed += ctx => Shoot();
+        }
     }
 
 
-    private void Shoot()
-    {
-        if (!playerShield.gameObject.activeSelf && isWeaponReady)
-        {
+    private void Shoot() {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady) {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());
@@ -452,15 +457,5 @@ public class PlayerWeapon : MonoBehaviour
 	      CurrentSceneManager.instance.CollectedWeapon(other.transform.position);
           Destroy(other.gameObject);
         }
-    }
-
-    private void OnEnable()
-    {
-        controls.Gameplay.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Gameplay.Disable();
     }
 }

@@ -40,8 +40,8 @@ public class PlayerHealth : MonoBehaviour
 
 
     private void Awake() {
-        controls = new PlayerControls();						    // on recup le script qui gère les inputs
-        controls.devices = InputTools.inputSelect(transform.tag);   // on utilise la manette correspondant au joueur
+        controls = new PlayerControls();    // on recup le script qui gère les inputs
+        controlPlayer();                    // on active les inputs correspondant au joueur
     }
 
 
@@ -53,10 +53,17 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    /* capte l'activation du shield
+    /* active la bonne InputActionMap selon le joueur
+    * récupère l'input 'Shield'
     */
-    void Update() {
-        controls.Gameplay.Shield.performed += ctx => Shield();
+    private void controlPlayer() {
+        if (transform.tag == "Player 1") {
+            controls.Player1.Enable();
+            controls.Player1.Shield.performed += ctx => Shield();
+        }else if (transform.tag == "Player 2"){
+            controls.Player2.Enable();
+            controls.Player2.Shield.performed += ctx => Shield();
+        }
     }
 
 
@@ -65,9 +72,7 @@ public class PlayerHealth : MonoBehaviour
     */
     private void Shield()
     {
-        // shield
-        if (!shield.activeSelf && shieldReady)
-        {
+        if (!shield.activeSelf && shieldReady) {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());
@@ -218,14 +223,5 @@ public class PlayerHealth : MonoBehaviour
 			CurrentSceneManager.instance.CollectedHeal(collision.transform.position);
     		Destroy(collision.gameObject);
         }
-    }
-    private void OnEnable()
-    {
-        controls.Gameplay.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Gameplay.Disable();
     }
 }
