@@ -41,7 +41,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake() {
         controls = new PlayerControls();    // on recup le script qui gère les inputs
-        controlPlayer();                    // on active les inputs correspondant au joueur
+        controlPlayer();                    // récupère les inputs du joueur
+                                            // attente passive -> pas besoin d'être dans update
+
+        // récupère les devices propres au joueur : clavier, souris et sa manette
+        controls.devices = InputTools.inputSelect(transform.tag);
     }
 
 
