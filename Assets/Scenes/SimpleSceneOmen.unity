@@ -1735,6 +1735,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7f5861be26e50519ffdddf093a40b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &801717599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7329899211145327939, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+  m_PrefabInstance: {fileID: 2016737203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &806738403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5289,7 +5300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9812f7a6ff0bd41958203703369531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsText: {fileID: 741474677}
+  SelectCorners: []
+  textFinPartie: {fileID: 0}
   currentMusic: {fileID: 0}
   gameOverMusic: {fileID: 0}
 --- !u!114 &1016951693
@@ -6356,6 +6368,11 @@ GameObject:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3656079183731955563, guid: fe05d35a61f23a972950c59f244a389f, type: 3}
   m_PrefabInstance: {fileID: 3656079184680550867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1311851448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4583287391755316140, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+  m_PrefabInstance: {fileID: 2016737203}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1324888275
 PrefabInstance:
@@ -16750,6 +16767,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5022432996133964870, guid: b2d582373b6fa84b2a2e5357f8cc6d7c, type: 3}
   m_PrefabInstance: {fileID: 1709512268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1901873338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5065740445588951867, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+  m_PrefabInstance: {fileID: 2016737203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1957932668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79, type: 3}
@@ -16762,6 +16784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2116650901}
     m_Modifications:
+    - target: {fileID: 5065740445588951867, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16792,11 +16818,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 158.67
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 73.052
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16832,7 +16858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16850,9 +16876,29 @@ PrefabInstance:
       propertyPath: currentMusic
       value: 
       objectReference: {fileID: 405694609}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: textFinPartie
+      value: 
+      objectReference: {fileID: 801717599}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: SelectCorners.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: SelectCorners.Array.data[0]
+      value: 
+      objectReference: {fileID: 1901873338}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: SelectCorners.Array.data[1]
+      value: 
+      objectReference: {fileID: 1311851448}
     - target: {fileID: 7329899212154720383, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_Name
       value: GameOver_BG
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329899212154720383, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}

@@ -584,6 +584,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GoUp",
+                    "type": "Button",
+                    "id": "224b894c-fc31-416c-a09b-f1ca595429d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "GoDown",
                     "type": "Button",
                     "id": "1d643f1d-2369-4908-a62c-b6c76cda52c4",
@@ -776,6 +785,50 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7717b6d-720d-4983-8813-8eeed7844b51",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f1ffbbf-5221-42c4-9f52-6769ddd3f3bb",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66b18c49-ee92-4c01-8d3f-6d7de2cf1fe0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c592ea27-63cd-44d2-b531-d2fd882d5553",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "GoUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

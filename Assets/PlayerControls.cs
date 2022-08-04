@@ -606,6 +606,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""GoUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""224b894c-fc31-416c-a09b-f1ca595429d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""GoDown"",
                     ""type"": ""Button"",
                     ""id"": ""1d643f1d-2369-4908-a62c-b6c76cda52c4"",
@@ -800,6 +809,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7717b6d-720d-4983-8813-8eeed7844b51"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f1ffbbf-5221-42c4-9f52-6769ddd3f3bb"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66b18c49-ee92-4c01-8d3f-6d7de2cf1fe0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c592ea27-63cd-44d2-b531-d2fd882d5553"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""GoUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -851,6 +904,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
         m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
+        m_UI_GoUp = m_UI.FindAction("GoUp", throwIfNotFound: true);
         m_UI_GoDown = m_UI.FindAction("GoDown", throwIfNotFound: true);
         m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
     }
@@ -1076,6 +1130,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_GoLeft;
     private readonly InputAction m_UI_GoRight;
+    private readonly InputAction m_UI_GoUp;
     private readonly InputAction m_UI_GoDown;
     private readonly InputAction m_UI_Start;
     public struct UIActions
@@ -1084,6 +1139,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @GoLeft => m_Wrapper.m_UI_GoLeft;
         public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
+        public InputAction @GoUp => m_Wrapper.m_UI_GoUp;
         public InputAction @GoDown => m_Wrapper.m_UI_GoDown;
         public InputAction @Start => m_Wrapper.m_UI_Start;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -1101,6 +1157,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @GoRight.started -= m_Wrapper.m_UIActionsCallbackInterface.OnGoRight;
                 @GoRight.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnGoRight;
                 @GoRight.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnGoRight;
+                @GoUp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnGoUp;
+                @GoUp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnGoUp;
+                @GoUp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnGoUp;
                 @GoDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
                 @GoDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
                 @GoDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
@@ -1117,6 +1176,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @GoRight.started += instance.OnGoRight;
                 @GoRight.performed += instance.OnGoRight;
                 @GoRight.canceled += instance.OnGoRight;
+                @GoUp.started += instance.OnGoUp;
+                @GoUp.performed += instance.OnGoUp;
+                @GoUp.canceled += instance.OnGoUp;
                 @GoDown.started += instance.OnGoDown;
                 @GoDown.performed += instance.OnGoDown;
                 @GoDown.canceled += instance.OnGoDown;
@@ -1169,6 +1231,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnGoLeft(InputAction.CallbackContext context);
         void OnGoRight(InputAction.CallbackContext context);
+        void OnGoUp(InputAction.CallbackContext context);
         void OnGoDown(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
     }

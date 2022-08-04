@@ -128,8 +128,8 @@ public class PlayerHealth : MonoBehaviour
 
     /* Appele l'écran de GameOver
     */
-    public void GameOver() {
-        GameOver_Screen.Setup(120);
+    public void GameOver(string _tag) {
+        GameOver_Screen.Setup(_tag);
     }
 
 
@@ -149,7 +149,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if(currentHealth<=0) {
-            GameOver();
+            GameOver(transform.tag);
         }
 
         /*
