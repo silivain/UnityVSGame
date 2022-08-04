@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Start_game : MonoBehaviour
 {
+    // TODO : script plus utilisé, remplacé par 'SelectSceneMenu' => à supprimer
+
     private string[] levelToLoad= {"SimpleSceneLalaland","SimpleSceneOmen","SimpleSceneSwing"};
     public ImageTab script;
     public PlayerControls controls;

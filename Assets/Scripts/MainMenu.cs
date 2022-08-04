@@ -25,6 +25,8 @@ public class MainMenu : MonoBehaviour
     /* sélectionne le bouton par défaut au démarrage
     */
     private void Start() {
+        SelectCorners[selectIndex].SetActive(false);
+        selectIndex = 0;
         SelectCorners[selectIndex].SetActive(true);
     }
 

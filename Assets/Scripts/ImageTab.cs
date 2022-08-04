@@ -6,6 +6,8 @@ using TMPro;
 
 public class ImageTab : MonoBehaviour
 {
+    // TODO : script plus utilisé, remplacé par 'SelectSceneMenu' => à supprimer
+
     public Sprite[] allImages;
     public string[] imageTitles;
     public GameObject txt;
@@ -25,11 +27,7 @@ public class ImageTab : MonoBehaviour
         if (!_lockNext) {
             _lockNext = true;
             StartCoroutine(lockNext());
-            Debug.Log("in next image");
-            level++;
-            if(level>allImages.Length-1){
-                level=0;
-            }
+            level = (level + 1) % (allImages.Length - 1);
             GetComponent<Image>().sprite = allImages[level];
             txt.GetComponent<TextMeshProUGUI>().text = imageTitles[level];
         }
@@ -40,10 +38,8 @@ public class ImageTab : MonoBehaviour
         if (!_lockPrevious) {
             _lockPrevious = true;
             StartCoroutine(lockPrevious());
-            Debug.Log("in previous image");
-            level--;
-            if(level<0){
-                level=allImages.Length-1;
+            if(--level < 0){
+                level = allImages.Length - 1;
             }
             GetComponent<Image>().sprite = allImages[level];
             txt.GetComponent<TextMeshProUGUI>().text = imageTitles[level];
