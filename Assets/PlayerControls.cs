@@ -106,7 +106,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dbbf76ba-0df5-4444-bab5-e459eaa83efa"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -194,7 +194,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dbc4f5cf-2c37-4fdb-a630-9d71152dc613"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -238,7 +238,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""b3e60e1b-9a62-40a8-abbc-7b5af5065504"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -430,7 +430,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""24335d7e-b609-4ea1-bd14-7dcae1451cc5"",
-                    ""path"": ""<Keyboard>/comma"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -452,7 +452,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d44077c4-3671-4920-bf34-eb69ebcc5d68"",
-                    ""path"": ""<Keyboard>/semicolon"",
+                    ""path"": ""<Keyboard>/comma"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -474,7 +474,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7984c01c-b951-4dde-a86c-ca0799a08d44"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -551,7 +551,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""281b00fa-9298-4721-ac24-3c879624c6be"",
-                    ""path"": ""<Keyboard>/m"",
+                    ""path"": ""<Keyboard>/semicolon"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -613,13 +613,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b774b24-f604-4cf1-bb9b-10125bfc3c80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""38a1c28d-a345-4b93-9e3f-5c865dd1ed87"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -674,7 +683,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""65d02954-6355-492a-959f-9b7057ccd6b4"",
-                    ""path"": ""<Keyboard>/m"",
+                    ""path"": ""<Keyboard>/semicolon"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -747,6 +756,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""GoDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""359cb365-f8a9-4fa0-a4d7-db48c97ce8ee"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37f9eb68-d23e-4d9f-98ed-a423a079bc1d"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2a504e0-0168-42af-ab27-82d7ac375b56"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1582ad4-ce95-4b16-b14c-e0de881ff990"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -799,6 +852,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI_GoLeft = m_UI.FindAction("GoLeft", throwIfNotFound: true);
         m_UI_GoRight = m_UI.FindAction("GoRight", throwIfNotFound: true);
         m_UI_GoDown = m_UI.FindAction("GoDown", throwIfNotFound: true);
+        m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1023,6 +1077,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_GoLeft;
     private readonly InputAction m_UI_GoRight;
     private readonly InputAction m_UI_GoDown;
+    private readonly InputAction m_UI_Start;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -1030,6 +1085,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @GoLeft => m_Wrapper.m_UI_GoLeft;
         public InputAction @GoRight => m_Wrapper.m_UI_GoRight;
         public InputAction @GoDown => m_Wrapper.m_UI_GoDown;
+        public InputAction @Start => m_Wrapper.m_UI_Start;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1048,6 +1104,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @GoDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
                 @GoDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
                 @GoDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnGoDown;
+                @Start.started -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1061,6 +1120,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @GoDown.started += instance.OnGoDown;
                 @GoDown.performed += instance.OnGoDown;
                 @GoDown.canceled += instance.OnGoDown;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
             }
         }
     }
@@ -1108,5 +1170,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnGoLeft(InputAction.CallbackContext context);
         void OnGoRight(InputAction.CallbackContext context);
         void OnGoDown(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }

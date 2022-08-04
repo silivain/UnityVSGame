@@ -608,7 +608,6 @@ GameObject:
   - component: {fileID: 388026737}
   - component: {fileID: 388026736}
   - component: {fileID: 388026735}
-  - component: {fileID: 388026734}
   m_Layer: 5
   m_Name: ButtonSettings
   m_TagString: Untagged
@@ -637,124 +636,6 @@ RectTransform:
   m_AnchoredPosition: {x: 175, y: -10}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &388026734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388026732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
-    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
-    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
-    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
-    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2053949747}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2099172715}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
-    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
-    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 310dc532-e943-4064-8bd2-0f5ec8893dcb
-    m_ActionName: Player1/Move[/Keyboard/q,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 74cb82d8-271a-49ac-948a-5d749b2263d8
-    m_ActionName: Player2/Jump[/Keyboard/o]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 68c6f4fc-9b37-4f6f-8d83-0aa6d9967ea2
-    m_ActionName: Player2/Shoot[/Keyboard/n]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d5870be1-992a-48b2-9484-b4437aaf897d
-    m_ActionName: Player2/Dash[/Keyboard/comma]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 33eb61d5-b9a6-4fb3-9a09-9afd42a72274
-    m_ActionName: Player2/Shield[/Keyboard/semicolon]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4587e3a0-ed8f-4539-856e-d02d56c3d250
-    m_ActionName: Player2/Start[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6c5bf114-0e50-4562-bf8f-0eeb0160fa8b
-    m_ActionName: Player2/GoDown[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 150a8cf6-b6b6-41ca-ac67-ebeada44e02d
-    m_ActionName: Player2/Move[/Keyboard/k,/Keyboard/m]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 879c686b-9432-4bfa-a8d4-67bba2d6a16a
-    m_ActionName: UI/GoLeft[/Keyboard/q,/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d339305c-bdcc-4f9d-9cb8-223dc22e013a
-    m_ActionName: UI/GoRight[/Keyboard/d,/Keyboard/m]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &388026735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,7 +660,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9056604, g: 0.18369527, b: 0.18369527, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -799,9 +680,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053949747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -809,11 +690,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2099172715}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1028,26 +909,6 @@ MonoBehaviour:
     m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
     m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1157143360}
-        m_TargetAssemblyTypeName: ImageTab, Assembly-CSharp
-        m_MethodName: previousImage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
-    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
-    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
     m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
@@ -1063,9 +924,57 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
     m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 310dc532-e943-4064-8bd2-0f5ec8893dcb
+    m_ActionName: Player1/Move[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74cb82d8-271a-49ac-948a-5d749b2263d8
+    m_ActionName: Player2/Jump[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68c6f4fc-9b37-4f6f-8d83-0aa6d9967ea2
+    m_ActionName: Player2/Shoot[/Keyboard/n]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d5870be1-992a-48b2-9484-b4437aaf897d
+    m_ActionName: Player2/Dash[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33eb61d5-b9a6-4fb3-9a09-9afd42a72274
+    m_ActionName: Player2/Shield[/Keyboard/comma]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4587e3a0-ed8f-4539-856e-d02d56c3d250
+    m_ActionName: Player2/Start[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c5bf114-0e50-4562-bf8f-0eeb0160fa8b
+    m_ActionName: Player2/GoDown[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 150a8cf6-b6b6-41ca-ac67-ebeada44e02d
+    m_ActionName: Player2/Move[/Keyboard/k,/Keyboard/semicolon]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 879c686b-9432-4bfa-a8d4-67bba2d6a16a
+    m_ActionName: UI/GoLeft[/Keyboard/a,/Keyboard/k,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d339305c-bdcc-4f9d-9cb8-223dc22e013a
+    m_ActionName: UI/GoRight[/Keyboard/d,/Keyboard/semicolon,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d643f1d-2369-4908-a62c-b6c76cda52c4
+    m_ActionName: UI/GoDown[/Keyboard/s,/Keyboard/l,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b774b24-f604-4cf1-bb9b-10125bfc3c80
+    m_ActionName: UI/Start[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &525337605
@@ -1468,7 +1377,6 @@ GameObject:
   - component: {fileID: 951346733}
   - component: {fileID: 951346732}
   - component: {fileID: 951346731}
-  - component: {fileID: 951346734}
   m_Layer: 5
   m_Name: ButtonStart
   m_TagString: Untagged
@@ -1519,9 +1427,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9056604, g: 0.18369527, b: 0.18369527, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1541,9 +1449,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053949747}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1551,11 +1459,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2099172715}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1603,128 +1511,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951346729}
   m_CullTransparentMesh: 0
---- !u!114 &951346734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951346729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7eed46f9842e0464c90b9e07628e967c, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 806acad3-807c-405e-91b1-485c6cf591f2
-    m_ActionName: Gameplay/Jump[/USB Gamepad /button2,/USB Gamepad /button2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f21dcb9-3836-43a4-930a-fe4def8a75bd
-    m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
-    m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8ae2236b-4011-4ccd-9f3f-76ef6a73613a
-    m_ActionName: Gameplay/Shield[/USB Gamepad /button5,/USB Gamepad /button5]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2053949747}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2099172715}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fd899b5d-72a4-4d37-954d-b5bdae4f5c2f
-    m_ActionName: Gameplay/Start[/USB Gamepad /button10,/USB Gamepad /button10]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
-    m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 310dc532-e943-4064-8bd2-0f5ec8893dcb
-    m_ActionName: Player1/Move[/Keyboard/q,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 74cb82d8-271a-49ac-948a-5d749b2263d8
-    m_ActionName: Player2/Jump[/Keyboard/o]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 68c6f4fc-9b37-4f6f-8d83-0aa6d9967ea2
-    m_ActionName: Player2/Shoot[/Keyboard/n]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d5870be1-992a-48b2-9484-b4437aaf897d
-    m_ActionName: Player2/Dash[/Keyboard/comma]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 33eb61d5-b9a6-4fb3-9a09-9afd42a72274
-    m_ActionName: Player2/Shield[/Keyboard/semicolon]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4587e3a0-ed8f-4539-856e-d02d56c3d250
-    m_ActionName: Player2/Start[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6c5bf114-0e50-4562-bf8f-0eeb0160fa8b
-    m_ActionName: Player2/GoDown[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 150a8cf6-b6b6-41ca-ac67-ebeada44e02d
-    m_ActionName: Player2/Move[/Keyboard/k,/Keyboard/m]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 879c686b-9432-4bfa-a8d4-67bba2d6a16a
-    m_ActionName: UI/GoLeft[/Keyboard/q,/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d339305c-bdcc-4f9d-9cb8-223dc22e013a
-    m_ActionName: UI/GoRight[/Keyboard/d,/Keyboard/m]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1d643f1d-2369-4908-a62c-b6c76cda52c4
-    m_ActionName: UI/GoDown[/Keyboard/s,/Keyboard/l,/Keyboard/downArrow]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: 0c800f80-ea8a-461b-b519-ab16b93db8f3
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1003536578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,26 +2537,6 @@ MonoBehaviour:
     m_ActionName: Gameplay/Shoot[/USB Gamepad /trigger,/USB Gamepad /trigger]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 0ed6cbc6-680a-42ab-8bee-a09ee59983a8
-    m_ActionName: Gameplay/GoLeft[/USB Gamepad /stick/left,/USB Gamepad /stick/left]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1157143360}
-        m_TargetAssemblyTypeName: ImageTab, Assembly-CSharp
-        m_MethodName: nextImage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 64307edc-e6f8-447c-a8b0-663d7b502fee
-    m_ActionName: Gameplay/GoRight[/USB Gamepad /stick/right,/USB Gamepad /stick/right]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 998b6506-bbeb-44b3-87d9-e1fbd95a8933
     m_ActionName: Gameplay/Dash[/USB Gamepad /button6,/USB Gamepad /button6]
   - m_PersistentCalls:
@@ -2785,9 +2551,57 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f5ba77cc-ec5d-4b9f-8f91-0eabc4c23d64
     m_ActionName: Gameplay/GoDown[/USB Gamepad /stick/down,/USB Gamepad /stick/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 310dc532-e943-4064-8bd2-0f5ec8893dcb
+    m_ActionName: Player1/Move[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74cb82d8-271a-49ac-948a-5d749b2263d8
+    m_ActionName: Player2/Jump[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68c6f4fc-9b37-4f6f-8d83-0aa6d9967ea2
+    m_ActionName: Player2/Shoot[/Keyboard/n]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d5870be1-992a-48b2-9484-b4437aaf897d
+    m_ActionName: Player2/Dash[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33eb61d5-b9a6-4fb3-9a09-9afd42a72274
+    m_ActionName: Player2/Shield[/Keyboard/comma]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4587e3a0-ed8f-4539-856e-d02d56c3d250
+    m_ActionName: Player2/Start[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c5bf114-0e50-4562-bf8f-0eeb0160fa8b
+    m_ActionName: Player2/GoDown[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 150a8cf6-b6b6-41ca-ac67-ebeada44e02d
+    m_ActionName: Player2/Move[/Keyboard/k,/Keyboard/semicolon]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 879c686b-9432-4bfa-a8d4-67bba2d6a16a
+    m_ActionName: UI/GoLeft[/Keyboard/a,/Keyboard/k,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d339305c-bdcc-4f9d-9cb8-223dc22e013a
+    m_ActionName: UI/GoRight[/Keyboard/d,/Keyboard/semicolon,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d643f1d-2369-4908-a62c-b6c76cda52c4
+    m_ActionName: UI/GoDown[/Keyboard/s,/Keyboard/l,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b774b24-f604-4cf1-bb9b-10125bfc3c80
+    m_ActionName: UI/Start[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1578618488
@@ -3006,7 +2820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1737908022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3033,7 +2847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737908021}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -3342,7 +3156,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9056604, g: 0.18369527, b: 0.18369527, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3362,9 +3176,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1995671418}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
-        m_MethodName: QuitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3558,7 +3372,6 @@ GameObject:
   - component: {fileID: 1995671416}
   - component: {fileID: 1995671415}
   - component: {fileID: 1995671414}
-  - component: {fileID: 1995671418}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3650,22 +3463,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1995671418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995671413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f9b0217d3fcc55193688d298395e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectCorners:
-  - {fileID: 1737908021}
-  - {fileID: 1003536578}
-  - {fileID: 325133461}
 --- !u!1 &2053949747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,7 +3500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -17}
   m_SizeDelta: {x: 1923.9741, y: 1680.9935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2091835355
@@ -3835,6 +3632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099172716}
+  - component: {fileID: 2099172717}
   m_Layer: 5
   m_Name: Start_Menu
   m_TagString: Untagged
@@ -3865,3 +3663,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2099172717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099172715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f9b0217d3fcc55193688d298395e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectMenu:
+  - {fileID: 2099172715}
+  - {fileID: 2053949747}
+  SelectCorners:
+  - {fileID: 1737908021}
+  - {fileID: 1003536578}
+  - {fileID: 325133461}

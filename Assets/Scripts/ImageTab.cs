@@ -13,12 +13,13 @@ public class ImageTab : MonoBehaviour
     private bool _lockPrevious = false;
     private bool _lockNext = false;
 
+
     public void Start()
     {
-        Debug.Log("in start");
         GetComponent<Image>().sprite = allImages[level];
         txt.GetComponent<TextMeshProUGUI>().text = imageTitles[level];
     }
+
 
     public void nextImage(){
         if (!_lockNext) {
@@ -34,6 +35,7 @@ public class ImageTab : MonoBehaviour
         }
     }
 
+
     public void previousImage(){
         if (!_lockPrevious) {
             _lockPrevious = true;
@@ -48,10 +50,12 @@ public class ImageTab : MonoBehaviour
         }
     }
 
+
     IEnumerator lockPrevious() {
         yield return new WaitForSeconds(0.25f);
         _lockPrevious = false;
     }
+
 
     IEnumerator lockNext() {
         yield return new WaitForSeconds(0.25f);
