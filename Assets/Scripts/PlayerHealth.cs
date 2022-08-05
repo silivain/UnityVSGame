@@ -76,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
     */
     private void Shield()
     {
-        if (!shield.activeSelf && shieldReady) {
+        if (!shield.activeSelf && shieldReady && this.enabled) {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());

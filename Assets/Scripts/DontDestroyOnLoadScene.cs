@@ -11,6 +11,7 @@ public class DontDestroyOnLoadScene : MonoBehaviour
 
     public static DontDestroyOnLoadScene instance;  // class instance (only 1 in the entire game)
 
+
     private void Awake()
     {
       if (instance != null)
@@ -25,6 +26,7 @@ public class DontDestroyOnLoadScene : MonoBehaviour
         DontDestroyOnLoad(element);   // sets the gameobjects to 'DontDestroyOnLoad'
       }
     }
+
 
     /* Remove gameobjects from the 'DontDestroyOnLoad' list
     */

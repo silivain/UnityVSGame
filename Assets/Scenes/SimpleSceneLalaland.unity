@@ -242,7 +242,6 @@ MonoBehaviour:
   countDownDisplay: {fileID: 528740929}
   p1: {fileID: 1506128870}
   p2: {fileID: 4594055404799816434}
-  go: 0
   start: 0
 --- !u!114 &353654848
 MonoBehaviour:
@@ -627,7 +626,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 217063268c5c2844092ce152c9d96927, type: 3}
   - {fileID: 8300000, guid: e978f61d91f02904782a1997f2976b32, type: 3}
   audioSource: {fileID: 405694609}
-  countdown: {fileID: 528740927}
   currentSceneManager: {fileID: 353654845}
   playlistIsStarted: 0
   isOn: 0
@@ -3852,7 +3850,6 @@ GameObject:
   - component: {fileID: 1016951691}
   - component: {fileID: 1016951694}
   - component: {fileID: 1016951693}
-  - component: {fileID: 1016951692}
   m_Layer: 5
   m_Name: pause_screen
   m_TagString: Untagged
@@ -3881,22 +3878,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1016951692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016951690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9812f7a6ff0bd41958203703369531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectCorners: []
-  textFinPartie: {fileID: 0}
-  currentMusic: {fileID: 0}
-  gameOverMusic: {fileID: 0}
 --- !u!114 &1016951693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5968,7 +5949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720376, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
       propertyPath: m_AnchoredPosition.y

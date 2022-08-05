@@ -1,72 +1,71 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-// TODO this script is not used yet
-// should start audio when a game is started
-// TODO set different playlists for menus, ingame, type of lvls etc
+// gère l'audio de la scène
 public class AudioManager : MonoBehaviour
 {
-	public AudioClip[] playlist;    // audio list
+	public AudioClip[] playlist;    			// contient les musique de la scène actuelle
+	public AudioSource audioSource;				// AudioManager
+	private int musicIndex = 0;					// index actuel dans le tab 'playlist'
+	public GameObject currentSceneManager;		// CurrentSceneManager
+	private CountDownTimer countDownTimer;		// script CountDownTimer
+	public bool playlistIsStarted = false;		// vrai si une musique est en lecture
+	public bool isOn = false;					// ??
+	//private bool playlistAsBegun = false;		// ??
+	public AudioMixerGroup soundEffectMixer;	// AudioMixerGroup gérant les effets sonores
 
-	public AudioSource audioSource; // audio source
-	private int musicIndex = 0;     // current index in the audio list
-	public GameObject countdown; //pour check la fin du countdown
-	public GameObject currentSceneManager;
-	public bool playlistIsStarted=false;
-	public bool isOn=false;
-	//private bool playlistAsBegun=false;
+	public static AudioManager instance;		// instance de la classe
 
 
-
-	public AudioMixerGroup soundEffectMixer;
-
-	public static AudioManager instance;
-
-	// évite les doublons -> classe "statique"
-    private void Awake()
-    {
-      if (instance != null)
-      {
-        Debug.LogWarning("Il y a plus d'une instance de CurrentSceneManager dans la scène.");
+	/* évite les doublons -> classe "statique"
+	* récupère le script 'CountDownTimer' de la scène
+	*/
+    private void Awake() {
+      if (instance != null) {
+        Debug.LogWarning("Il y a plus d'une instance de AudioManager dans la scène.");
         return;
       }
       instance = this;
+
+	  countDownTimer = currentSceneManager.GetComponent<CountDownTimer>();
     }
 
+
+	/* Lance la première musique de la playlist 'playlist'
+	*/
 	void Start() {
-		audioSource.clip = playlist[0];  // loads first song in audio list 'playlist'
-
+		audioSource.clip = playlist[0];
 	}
 
+
+	/* Lance la musique du compte à rebours (première musique de 'playlist')
+	* une fois le compte à rebours terminé, lance la musique de la scène
+	*/
 	void Update() {
-
-		if(!audioSource.isPlaying && currentSceneManager.GetComponent<CountDownTimer>().start==true )
-		{
+		if(!audioSource.isPlaying && countDownTimer.start) {
 			audioSource.Play();
-
 		}
-
-		if(!playlistIsStarted && currentSceneManager.GetComponent<CountDownTimer>().go==true )
-		{
-			isOn= true;
+		if(!playlistIsStarted && !countDownTimer.start) {
+			isOn = true;						// TODO : ???
 			audioSource.clip = playlist[1];
-			audioSource.Play();      
-			playlistIsStarted=true;
-
+			audioSource.Play();
+			playlistIsStarted = true;			// TODO : pq un bool alors qu'on a 'musicIndex' ?
 		}
-
 	}
 
-	/* Plays next song in 'playlist' using 'audioSource'
-	* loop on audio list, last song -> first song
+
+	/* lance la prochaine musique de 'playlist'
+	* boucle sur 'playlist'
 	*/
 	void PlayNextSong() {
 		audioSource.clip = playlist[(++ musicIndex) % playlist.Length];
 		audioSource.Play();
 	}
 
-	// tuto unity 2D fr ep #22
-	// finir l'ep (moitié environ)
+
+	/* tuto unity 2D fr ep #22
+	* finir l'ep (moitié environ)
+	*/
 	public AudioSource PlayClipAt(AudioClip clip, Vector3 pos) {
 
 		GameObject tempGO = new GameObject("TempAudio");

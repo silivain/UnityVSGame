@@ -202,6 +202,9 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
 	}
 
+
+    /* Applique une force de recul au joueur après avoir été frappé au cac
+	*/
     public void RecoilCac(Collider2D targetHit, Transform shooter)
     {
         // Vector3 recoilForce = new Vector3(bulletRB.velocity.x, bulletRB.velocity.y, 0);
@@ -217,13 +220,6 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             targetHit.attachedRigidbody.AddForce(force, ForceMode2D.Impulse);
 	}
 
-    /* affiche le groundCheck à l'écran (debug)
-    */
-    private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-    }
-
 
     /* Rend le dash à nouveau disponible
     * après 'dashCooldownTime' secondes
@@ -233,5 +229,13 @@ public class PlayerMovement : MonoBehaviour {	//video 2
             yield return new WaitForSeconds(dashCooldownTime);
             isDashReady = true;
         }
+    }
+
+
+    /* affiche le groundCheck à l'écran (debug)
+    */
+    private void OnDrawGizmos() { //Gizmos = indicateurs visuels de Unity
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }

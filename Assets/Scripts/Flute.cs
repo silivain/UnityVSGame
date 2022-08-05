@@ -11,23 +11,25 @@ public class Flute : MonoBehaviour
     private Transform transformParent;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log(transform.name + " rotation = " + transform.rotation);
+    /* récupère le rb de la flute
+    * récupère la transform du joueur qui a tiré le proj
+    * appelle la fct responsable de la traj du proj
+    */
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
         transformParent = GameObject.FindWithTag(transform.tag.Substring(4, transform.tag.Length - 4)).transform;
         reverseDelay();
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
+    // garde la vitesse de la flute constante
+    void Update() {
         rb.velocity = transform.right * fluteSpeed;
     }
 
 
+    /* modif la traj du proj pour lui donner une traj sinusoidale
+    */
     IEnumerator reverse() {
         float modif = 0.1f;
         if (transform.rotation.y >= transformParent.rotation.y) {
@@ -40,6 +42,9 @@ public class Flute : MonoBehaviour
     }
 
 
+    /* appelle 2 fois la fct qui modif la traj du proj
+    *       après un temps d'attente aléatoire
+    */
     IEnumerator reverseDelay() {
         float alea = Random.Range(0f, 0.15f);
         yield return new WaitForSeconds(0.25f + alea);

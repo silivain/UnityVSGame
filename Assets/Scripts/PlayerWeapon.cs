@@ -82,7 +82,7 @@ public class PlayerWeapon : MonoBehaviour
 
 
     private void Shoot() {
-        if (!playerShield.gameObject.activeSelf && isWeaponReady) {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady && this.enabled) {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());

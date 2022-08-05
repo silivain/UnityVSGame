@@ -435,18 +435,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 131177716760367127, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
   m_PrefabInstance: {fileID: 752683182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &353654846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353654845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3369e9669eb947a518ea2eb8618a3da5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &353654847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +451,6 @@ MonoBehaviour:
   countDownDisplay: {fileID: 528740929}
   p1: {fileID: 2128477523}
   p2: {fileID: 1142242142}
-  go: 0
   start: 0
 --- !u!114 &353654848
 MonoBehaviour:
@@ -821,7 +808,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98b51beac276e9742936c24f33c70e52, type: 3}
   - {fileID: 8300000, guid: 21cb422b17759844dbc9bd0aa72771e9, type: 3}
   audioSource: {fileID: 405694609}
-  countdown: {fileID: 528740927}
   currentSceneManager: {fileID: 353654845}
   playlistIsStarted: 0
   isOn: 0
@@ -1639,7 +1625,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurrentSceneManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1537449751, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
 --- !u!1 &776990532
 GameObject:

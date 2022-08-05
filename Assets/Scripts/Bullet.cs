@@ -2,28 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// manage instantiated bullet in game
-// deals damage when needed or destroy bullet
-// bullets are instantiated in 'PlayerMovement.cs'
+/* gère les 'bullet' instanciées dans la scène
+* applique les dégats ou détruit le proj
+* 'bullet' est instanciée dans 'PlayerWeapon'
+*/
 public class Bullet : MonoBehaviour
 {
-	public float bulletSpeed;          // bullet speed
-	public int damageOnCollision = 5;  // bullet damage
+	public float bulletSpeed;          // vitesse du proj
+	public int damageOnCollision = 5;  // dégats du proj
 	//public GameObject bulletEffect;  // TODO bullet visual effect
-	private Rigidbody2D rb;            // bullet rigidbody
+	private Rigidbody2D rb;            // Rigidbody2D du proj
 
 
-  // Start is called before the first frame update
-	void Start()
-	{
+	// récupère le Rigidbody2D du proj
+	void Start() {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
 
-	// Update is called once per frame
-	void Update()
-	{
-		// keeps the bullet movin
+	// garde la vitesse du proj constante
+	void Update() {
 		rb.velocity = transform.right * bulletSpeed;
 	}
 
