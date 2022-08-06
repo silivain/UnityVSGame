@@ -4949,6 +4949,10 @@ PrefabInstance:
       propertyPath: deviceNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 727129328, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1506128871, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
       propertyPath: SpeedBonusP1
       value: 
@@ -4973,6 +4977,10 @@ PrefabInstance:
       propertyPath: AmmunitionBonusP2
       value: 
       objectReference: {fileID: 2040381492}
+    - target: {fileID: 2056519634, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4594055403739195450, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
       propertyPath: healthBar
       value: 

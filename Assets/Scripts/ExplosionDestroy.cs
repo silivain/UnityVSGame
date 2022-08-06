@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// supprime le visuel de l'explosion une fois l'animation terminée
 public class ExplosionDestroy : MonoBehaviour
 {
-    // TODO : à mettre ds un autre script mdr
-    void FixedUpdate()
-    {
+    void Start() {
         Destroy(gameObject, .35f);
     }
 }

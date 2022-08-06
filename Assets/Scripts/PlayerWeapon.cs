@@ -222,9 +222,13 @@ public class PlayerWeapon : MonoBehaviour
 		UseAmmo();								// on utilise une munition
 		yield return new WaitForSeconds(0.3f);	// tempo le temps que l'anim finisse
 
-		// on remet l'anim "au repos"
+		/* on remet l'anim "au repos"
+        * vérifie qu'on a pas changé d'arme pdnt le WaitForSeconds
+        */
         AnimTrb1.SetActive(false);
-        AnimTrb0.SetActive(true);
+        if (weaponID == 3) {
+            AnimTrb0.SetActive(true);
+        }
 	}
 
 
@@ -374,10 +378,11 @@ public class PlayerWeapon : MonoBehaviour
             weapon = weaponsGO[weaponID];
             ammunition = maxAmmunition[0];
             AnimTrb0.SetActive(false);
+            AnimTrb1.SetActive(false);
             ammunitionCountText.text = "∞";
             ammunitionBar.sprite = weaponsItems[weaponID];
         }
-        if (weaponID != 0) {
+        if (weaponID != 0 /* TODO flute aussi non ? */  ) {
             ammunitionCountText.text = ammunition.ToString();
         }
 	}
