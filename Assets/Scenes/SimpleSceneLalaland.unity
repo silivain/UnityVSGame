@@ -1231,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 528740929}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: healSpawnTime
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: bonusSpawnTime
@@ -1243,7 +1243,7 @@ PrefabInstance:
       objectReference: {fileID: 528740927}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: weaponSpawnTime
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newHeal.Array.size
@@ -1292,15 +1292,15 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[0]
       value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
+      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[1]
       value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
+      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[2]
       value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
+      objectReference: {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06, type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[3]
       value: 
@@ -1308,7 +1308,7 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[4]
       value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
+      objectReference: {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[5]
       value: 

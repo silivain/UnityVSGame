@@ -19,6 +19,8 @@ public class GameOver_screen : MonoBehaviour
     public Text textFinPartie;                      // texte de fin de partie
     public AudioSource currentMusic;                // musique de combat
     public AudioSource gameOverMusic;               // musique du menu GameOver
+    private float delay = 1.5f;                     // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
+    private bool blockedControls = true;            // vrai si les controles sont bloqués
 
 
     // récupère la gestion des inputs
@@ -56,6 +58,7 @@ public class GameOver_screen : MonoBehaviour
         gameObject.SetActive(true);     // active l'écran de GameOver
         currentMusic.Stop();            // arrête la musique de combat
         gameOverMusic.Play();           // lance la musique de GameOver
+        Delay();   // bloque controles pour éviter missclick
     }
 
 
@@ -63,7 +66,7 @@ public class GameOver_screen : MonoBehaviour
     * met à jour l'index
     */
     private void selectUp() {
-        if (selectIndex != 0 && gameObject.activeSelf) {
+        if (selectIndex != 0 && gameObject.activeSelf && !blockedControls) {
             SelectCorners[selectIndex].SetActive(false);
             selectIndex = 0;
             SelectCorners[selectIndex].SetActive(true);
@@ -75,7 +78,7 @@ public class GameOver_screen : MonoBehaviour
     * met à jour l'index
     */
     private void selectDown() {
-        if (selectIndex != 1 && gameObject.activeSelf) {
+        if (selectIndex != 1 && gameObject.activeSelf && !blockedControls) {
             SelectCorners[selectIndex].SetActive(false);
             selectIndex = 1;
             SelectCorners[selectIndex].SetActive(true);
@@ -86,8 +89,23 @@ public class GameOver_screen : MonoBehaviour
     /* charge la scène sélectionnée par le joueur
     */
     public void selectScene() {
-        Time.timeScale = 1f;                    // temps en vitesse normale.
-        gameObject.SetActive(false);            // on désactive l'écran de GameOver
-        SceneManager.LoadScene("MainMenu");     // TODO : charger la scène en fonction de la selection
+        if (gameObject.activeSelf && !blockedControls) {
+            Time.timeScale = 1f;                    // temps en vitesse normale.
+            gameObject.SetActive(false);            // on désactive l'écran de GameOver
+            blockedControls = true;                 // rebloque les controles pour la prochaine iteration
+            SceneManager.LoadScene("MainMenu");     // TODO : charger la scène en fonction de la selection
+        }
+    }
+
+
+    /* bloque les contrôles pdnt 'delay' secs
+    * évite que les joueurs aillent instantanément au menu à cause d'un missclick
+    */
+    void Delay() {
+        Debug.Log("in Delay");
+        // TODO : le fcking WaitForSeconds marche pas, wtf
+        //yield return new WaitForSeconds(delay);
+        blockedControls = false;
+        Debug.Log("controls unlocked");
     }
 }

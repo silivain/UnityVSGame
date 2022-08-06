@@ -1443,7 +1443,7 @@ PrefabInstance:
       objectReference: {fileID: 528740929}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: healSpawnTime
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: bonusSpawnTime
@@ -1520,7 +1520,7 @@ PrefabInstance:
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: newWeapon.Array.data[4]
       value: 
-      objectReference: {fileID: 7335123227453051435, guid: e9eba8df47725c1d2b5ab810aa44e42c, type: 3}
+      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: isPlayerPresentByDefault
       value: 0
@@ -5129,10 +5129,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 290958905, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
-      propertyPath: deviceNumber
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1506128871, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
       propertyPath: SpeedBonusP1
       value: 
@@ -5173,10 +5169,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    - target: {fileID: 4594055403739195454, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
-      propertyPath: playerShield
-      value: 
-      objectReference: {fileID: 1360680686}
     - target: {fileID: 4594055403739195455, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5221,10 +5213,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
-      propertyPath: playerShield
-      value: 
-      objectReference: {fileID: 1360680686}
     - target: {fileID: 4594055403739195460, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
       propertyPath: ammunitionBar
       value: 
@@ -6369,10 +6357,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 546392928407802032, guid: 53a7cac2dfe3a813f9e2743ff885ee5a, type: 3}
-      propertyPath: playerShield
-      value: 
-      objectReference: {fileID: 1587638835}
-    - target: {fileID: 546392928407802032, guid: 53a7cac2dfe3a813f9e2743ff885ee5a, type: 3}
       propertyPath: ammunitionBar
       value: 
       objectReference: {fileID: 2061057502}
@@ -6384,10 +6368,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 546392928407802058, guid: 53a7cac2dfe3a813f9e2743ff885ee5a, type: 3}
-      propertyPath: playerShield
-      value: 
-      objectReference: {fileID: 1587638835}
     - target: {fileID: 546392928407802059, guid: 53a7cac2dfe3a813f9e2743ff885ee5a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6515,11 +6495,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1360680686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7711583698764938970, guid: 1edcedec53a8ef44cb720e83c79ce5de, type: 3}
-  m_PrefabInstance: {fileID: 970480621}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1375265011
 GameObject:
   m_ObjectHideFlags: 0
@@ -16497,11 +16472,6 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79, type: 3}
   m_PrefabInstance: {fileID: 1585559948}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1587638835 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6003717155932948014, guid: 53a7cac2dfe3a813f9e2743ff885ee5a, type: 3}
-  m_PrefabInstance: {fileID: 1324888275}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1588419967
 PrefabInstance:

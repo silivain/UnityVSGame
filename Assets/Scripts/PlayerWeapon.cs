@@ -43,9 +43,9 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject explosionVisual;              // visuel de l'explosion
 
     public  static string[] weapons         = {"Bullet", "Clarinet", "Grenade", "Trombone", "Sousa", "Tuba", "Flute"};	// armes du jeu, l'ordre des armes doit match leur weaponID
-    public         int[]    maxAmmunition   = {1000, 13, 7, 25, 21, 15, 1000};                                                  // nombre de munitions max/de départ pour chaque arme
-    public         int[]    bonusAmmunition = {1000, 6, 3, 12, 10, 7, 1000};                                                    // nombre du munitions apportés par l'item 'Ammunition'
-    private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                                 // Cooldown de chaque arme
+    public         int[]    maxAmmunition   = {1000, 6, 3, 7, 8, 6, 1000};                                              // nombre de munitions max/de départ pour chaque arme
+    public         int[]    bonusAmmunition = {1000, 3, 1, 3, 4, 3, 1000};                                              // nombre du munitions apportés par l'item 'Ammunition'
+    private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                         // Cooldown de chaque arme
 
     public float currentDamageBonus = 0;            // bonus de dégats actuel
 
