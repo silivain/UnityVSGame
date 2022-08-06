@@ -81,8 +81,13 @@ public class PlayerWeapon : MonoBehaviour
     }
 
 
+    /* tir avec l'arme équipée si cooldown ready
+    * vérifie que le compte à rebours est fini via this.Enabled
+    * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
+    * déclenche le cooldown de l'arme
+    */
     private void Shoot() {
-        if (!playerShield.gameObject.activeSelf && isWeaponReady && this.enabled) {
+        if (!playerShield.gameObject.activeSelf && isWeaponReady && this.enabled && Time.timeScale != 0f) {
             //cooldown du tir
             isWeaponReady = false;
             StartCoroutine(cooldownWeapon());

@@ -91,8 +91,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
         horizontalMovement = inputVector.x * (moveSpeed + currentSpeedBonus) * Time.fixedDeltaTime;
 
-        // changement de direction du joueur
-        if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0))
+        /* changement de direction du joueur
+        * vérifie que le compte à rebours est fini via this.Enabled
+        * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
+        */
+        if ((horizontalMovement > 0 && xDirection < 0) || (horizontalMovement < 0 && xDirection > 0)
+            && this.enabled && Time.timeScale != 0f)
         {
             Flip();
         }
@@ -125,10 +129,12 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
 
     /* fait dasher le joueur
+    * vérifie que le compte à rebours est fini via this.Enabled
+    * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
     */
     private void Dash() {
         // dash
-        if (!isClimbing && isDashReady)
+        if (!isClimbing && isDashReady && this.enabled && Time.timeScale != 0f)
         {
             isDashing = true;
         }
@@ -137,9 +143,11 @@ public class PlayerMovement : MonoBehaviour {	//video 2
 
     /* fait sauter le joueur
     * vérifie qu'il est bien au sol avant
+    * vérifie que le compte à rebours est fini via this.Enabled
+    * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
     */
     private void Jump() {
-        if (isGrounded && !isClimbing && rb.velocity.y < 0.1) {
+        if (isGrounded && !isClimbing && rb.velocity.y < 0.1 && this.enabled && Time.timeScale != 0) {
             isJumping = true;
         }
     }

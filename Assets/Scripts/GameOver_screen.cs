@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +19,7 @@ public class GameOver_screen : MonoBehaviour
     public Text textFinPartie;                      // texte de fin de partie
     public AudioSource currentMusic;                // musique de combat
     public AudioSource gameOverMusic;               // musique du menu GameOver
-    private float delay = 1.5f;                     // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
+    private float delay = 1f;                     // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
     private bool blockedControls = true;            // vrai si les controles sont bloqués
 
     public GameObject[] UIToDisable;                // éléments à désactiver lors de la fin de partie (barres vie, muns etc)
@@ -65,7 +65,7 @@ public class GameOver_screen : MonoBehaviour
         gameObject.SetActive(true);     // active l'écran de GameOver
         currentMusic.Stop();            // arrête la musique de combat
         gameOverMusic.Play();           // lance la musique de GameOver
-        Delay();   // bloque controles pour éviter missclick
+        StartCoroutine(Delay());        // bloque controles pour éviter missclick
     }
 
 
@@ -114,11 +114,8 @@ public class GameOver_screen : MonoBehaviour
     /* bloque les contrôles pdnt 'delay' secs
     * évite que les joueurs aillent instantanément au menu à cause d'un missclick
     */
-    void Delay() {
-        Debug.Log("in Delay");
-        // TODO : le fcking WaitForSeconds marche pas, wtf
-        //yield return new WaitForSeconds(delay);
+    IEnumerator Delay() {
+        yield return new WaitForSecondsRealtime(delay);     // /!\ WaitForSeconds marche pas si le temps est suspendu /!\
         blockedControls = false;
-        Debug.Log("controls unlocked");
     }
 }

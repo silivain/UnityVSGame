@@ -73,10 +73,12 @@ public class PlayerHealth : MonoBehaviour
 
     /* active le shield lorsque la touche correspondante est activée
     * déclenche le cooldown de 'shieldCooldown' secondes
+    * vérifie que le compte à rebours est fini via this.Enabled
+    * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
     */
     private void Shield()
     {
-        if (!shield.activeSelf && shieldReady && this.enabled) {
+        if (!shield.activeSelf && shieldReady && this.enabled && Time.timeScale != 0f) {
             shield.SetActive(true);
             shieldReady = false;
             StartCoroutine(cooldownShield());
