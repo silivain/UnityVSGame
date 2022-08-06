@@ -10,7 +10,7 @@ public class PlayerWeapon : MonoBehaviour
 {
 
     public GameObject weapon;						// arme utilisée par le player lorsque 'fire1' pressed
-    public GameObject[] weaponsGO;				// armes du jeu
+    public GameObject[] weaponsGO;                  // armes du jeu
     public Sprite[] weaponsItems;					// images des items des armes (les collectables)
     public int weaponID;							// ID de l'arme du player
     public Transform throwPoint;				    // point depuis lequel les projectiles sont instanciés
@@ -18,13 +18,13 @@ public class PlayerWeapon : MonoBehaviour
     public KeyCode changeWeapon; 					// changement d'arme (debug)
     public GameObject grenadeGO;					// TODO
     public static PlayerWeapon instance;     		// instance de la classe
-    public PlayerWeapon enemyPW;                  // script PlayerWeapon du joueur adverse
+    public PlayerWeapon enemyPW;                    // script PlayerWeapon du joueur adverse
 
-    public Transform tromboneRangePoint;          // transform délimitant la portée de la coulisse
-    public LayerMask playerLayers;                // layers définissant la catégorie d'objets ciblés par la coulisse
-    public int tromboneDamage = 8;                // dégats d'un coup de trombone
-    public GameObject AnimTrb0;                   // GameObject animation du coup de coulisse
-    public GameObject AnimTrb1;
+    public Transform tromboneRangePoint;            // transform délimitant la portée de la coulisse
+    public LayerMask playerLayers;                  // layers définissant la catégorie d'objets ciblés par la coulisse
+    public int tromboneDamage = 8;                  // dégats d'un coup de trombone
+    public GameObject AnimTrb0;                     // GameObject de la coulisse au repos
+    public GameObject AnimTrb1;                     // GameObject animation du coup de coulisse
 
     public bool mySolo = false;                     // vrai si mon joueur est équipé d'une flute et fait un solo
     public bool enemySolo = false;                  // vrai si le joueur adverse est équipé d'une flute et fait un solo
@@ -52,7 +52,7 @@ public class PlayerWeapon : MonoBehaviour
     private float startTime = 0f;
     //private float endTime=0f; TODO
 
-    private PlayerControls controls;                 // script gérant les inputs du joueur
+    private PlayerControls controls;                // script gérant les inputs du joueur
 
 
     private void Awake() {
@@ -123,14 +123,13 @@ public class PlayerWeapon : MonoBehaviour
     }
 
 
-    /* TODO
+    /* Tire le projectile de base
+    * trajectoire horizontale
     */
     void bullet() {
         GameObject bulletClone = (GameObject) Instantiate(weapon, throwPoint.position, throwPoint.rotation);
         bulletClone.tag = "Proj" + transform.tag;
-
         UseAmmo();
-
         //anim.SetTrigger("fire anim"); animation
     }
 

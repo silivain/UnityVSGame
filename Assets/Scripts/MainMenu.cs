@@ -36,7 +36,6 @@ public class MainMenu : MonoBehaviour
     */
     private void selectLeft() {
         if (selectIndex != 0 && gameObject.activeSelf) {
-            Debug.Log("in MainMenu/selectLeft");
             SelectCorners[selectIndex].SetActive(false);
             selectIndex = 0;
             SelectCorners[selectIndex].SetActive(true);
@@ -49,7 +48,6 @@ public class MainMenu : MonoBehaviour
     */
     private void selectRight() {
         if (selectIndex != 1 && gameObject.activeSelf) {
-            Debug.Log("in MainMenu/selectRight");
             SelectCorners[selectIndex].SetActive(false);
             selectIndex = 1;
             SelectCorners[selectIndex].SetActive(true);
@@ -62,7 +60,6 @@ public class MainMenu : MonoBehaviour
     */
     private void selectDown() {
         if (selectIndex != 2 && gameObject.activeSelf) {
-            Debug.Log("in MainMenu/selectDown");
             SelectCorners[selectIndex].SetActive(false);
             selectIndex = 2;
             SelectCorners[selectIndex].SetActive(true);

@@ -22,6 +22,8 @@ public class GameOver_screen : MonoBehaviour
     private float delay = 1.5f;                     // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
     private bool blockedControls = true;            // vrai si les controles sont bloqués
 
+    public GameObject[] UIToDisable;                // éléments à désactiver lors de la fin de partie (barres vie, muns etc)
+
 
     // récupère la gestion des inputs
     private void Awake() {
@@ -53,6 +55,11 @@ public class GameOver_screen : MonoBehaviour
             textFinPartie.text = "Le joueur 2 gagne !";
         }else {
             textFinPartie.text = "Le joueur 1 gagne !";
+        }
+
+        // désactive les UI ingame envahissants
+        foreach(GameObject go in UIToDisable) {
+            go.SetActive(false);
         }
 
         gameObject.SetActive(true);     // active l'écran de GameOver
@@ -93,6 +100,12 @@ public class GameOver_screen : MonoBehaviour
             Time.timeScale = 1f;                    // temps en vitesse normale.
             gameObject.SetActive(false);            // on désactive l'écran de GameOver
             blockedControls = true;                 // rebloque les controles pour la prochaine iteration
+
+            // réactive les UI désactivés à l'apparition du GOScreen
+            foreach(GameObject go in UIToDisable) {
+                go.SetActive(true);
+            }
+
             SceneManager.LoadScene("MainMenu");     // TODO : charger la scène en fonction de la selection
         }
     }
