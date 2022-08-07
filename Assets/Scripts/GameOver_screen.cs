@@ -106,6 +106,7 @@ public class GameOver_screen : MonoBehaviour
             }
 
             SceneManager.LoadScene("MainMenu");     // TODO : charger la scène en fonction de la selection
+            // TODO : musique main menu ?
         }
     }
 

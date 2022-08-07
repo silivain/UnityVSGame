@@ -81,6 +81,7 @@ public class game_paused : MonoBehaviour
                     gamePaused.SetActive(false);            // on désactive l'écran de GameOver
                     resetIndex();
                     controlInGame();
+                    GOAudio.GetComponent<AudioSource>().Play();
                     // TODO : git log pour vérifier ce qu'on désactivait dans 'PauseGame()'
                     break;
                 case 1:
@@ -88,6 +89,7 @@ public class game_paused : MonoBehaviour
                     gamePaused.SetActive(false);            // on désactive l'écran de GameOver
                     resetIndex();
                     controlInGame();
+                    GOAudio.GetComponent<AudioSource>().Play();
                     // TODO : link to settings
                     break;
                 case 2:
@@ -95,6 +97,7 @@ public class game_paused : MonoBehaviour
                     gamePaused.SetActive(false);            // on désactive l'écran de GameOver
                     resetIndex();
                     SceneManager.LoadScene("MainMenu");
+                    // TODO : musique main menu ?
                     break;
             }
         }
