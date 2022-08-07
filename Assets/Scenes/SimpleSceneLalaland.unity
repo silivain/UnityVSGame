@@ -270,6 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da2c0dc497060091b88721c790e031e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectCorners:
+  - {fileID: 1704138924286136694}
+  - {fileID: 1704138924286136693}
+  - {fileID: 1704138924286136692}
   gamePaused: {fileID: 1016951690}
   countdown: {fileID: 528740927}
   GOAudio: {fileID: 405694608}
@@ -5528,8 +5532,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: pause_screen
       objectReference: {fileID: 0}
+    - target: {fileID: 1704138924342944505, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+--- !u!1 &1704138924286136692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1513182273, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+  m_PrefabInstance: {fileID: 1704138924286136691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1704138924286136693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1472932039, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+  m_PrefabInstance: {fileID: 1704138924286136691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1704138924286136694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 422210236, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+  m_PrefabInstance: {fileID: 1704138924286136691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3656079184680550867
 PrefabInstance:
   m_ObjectHideFlags: 0

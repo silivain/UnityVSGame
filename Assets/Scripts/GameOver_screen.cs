@@ -8,7 +8,6 @@ using UnityEngine.UI;
 * affiché quand l'un des deux joueurs atteint 0 pv
 * situé dans le canvas de chaque scène
 * TODO : permet de retourner au 'MainMenu', d'aller dans les 'Settings' ou de recommencer la même scène
-* TODO : n'est pas en full screen yet
 */
 public class GameOver_screen : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class GameOver_screen : MonoBehaviour
     public Text textFinPartie;                      // texte de fin de partie
     public AudioSource currentMusic;                // musique de combat
     public AudioSource gameOverMusic;               // musique du menu GameOver
-    private float delay = 1f;                     // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
+    private float delay = 1f;                       // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
     private bool blockedControls = true;            // vrai si les controles sont bloqués
 
     public GameObject[] UIToDisable;                // éléments à désactiver lors de la fin de partie (barres vie, muns etc)
