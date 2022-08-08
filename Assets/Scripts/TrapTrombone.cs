@@ -63,7 +63,7 @@ public class TrapTrombone : MonoBehaviour
         PlayerHealth playerHealth = other.transform.GetComponent<PlayerHealth>();
         playerHealth.TakeDamage(Damage);
 
-        /* FallackForce
+        /* FallbackForce
         * Vecteur calculé selon la diff entre position du joueur et position du piège
         */
         Vector3 FallBackDirection = other.transform.position - transform.position;

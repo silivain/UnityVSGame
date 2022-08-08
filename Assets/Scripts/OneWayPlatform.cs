@@ -5,29 +5,29 @@ using UnityEngine.InputSystem;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    public GameObject currentOneWayPlatform;
-    [SerializeField] private CapsuleCollider2D playerCollider;
-    [SerializeField] private BoxCollider2D boxCollider1;
-    [SerializeField] private BoxCollider2D boxCollider2;
-    private PlayerControls controls;                             // script gérant les inputs du joueur
+    public GameObject currentOneWayPlatform;                        // dernière plateforme traversée par le joueur
+    [SerializeField] private CapsuleCollider2D playerCollider;      // CapsCollider du joueur
+    [SerializeField] private BoxCollider2D boxCollider1;            // BoxCollider 1 du joueur
+    [SerializeField] private BoxCollider2D boxCollider2;            // BoxCollider 2 du joueur
+    private PlayerControls controls;                                // script gérant les inputs du joueur
 
 
+    /* récupère les bons inputs
+    */
     private void Awake() {
-        controls = new PlayerControls();						    // on recup le script qui gère les inputs
-
-        if (transform.tag == "Player 1") {
-            controls.Player1.Enable();
-        }else{
-            controls.Player2.Enable();
-        }
+        controls = new PlayerControls();    // on recup le script qui gère les inputs
+        controlPlayer();                    // on active les bons inputs
     }
 
 
-    // capte la touche descente lorsque le joueur veut descendre d'une plateforme
-    void Update() {
+    /* active les inputs correspondant au joueur
+    */
+    void controlPlayer() {
         if (transform.tag == "Player 1") {
+            controls.Player1.Enable();
             controls.Player1.GoDown.performed += ctx => GoDown();
-        }else if (transform.tag == "Player 2") {
+        }else{
+            controls.Player2.Enable();
             controls.Player2.GoDown.performed += ctx => GoDown();
         }
     }

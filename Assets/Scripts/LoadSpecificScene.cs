@@ -3,7 +3,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// chargeur de scènes
+/* chargeur de scènes
+* TODO : à voir comment utiliser
+*/
 public class LoadSpecificScene : MonoBehaviour
 {
     public string sceneName;	// nom de la scène courante
@@ -32,7 +34,7 @@ public class LoadSpecificScene : MonoBehaviour
     * bloque les mouvements du joueur et appelle le mécanisme de chargement de scène
     */
     private void Update() {
-        if(isInRange && (controls.Player1.Start.triggered || controls.Player2.Start.triggered)) {
+        if (isInRange && (controls.Player1.Start.triggered || controls.Player2.Start.triggered)) {
             interactUI.enabled = false;
             isInRange = false;
             PlayerMovement.instance.enabled = false;
@@ -46,32 +48,29 @@ public class LoadSpecificScene : MonoBehaviour
 	/* collider détecte l'arrivée du joueur près de la fin du niveau
 	* affiche la touche d'interaction et modif les variables
 	*/
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-      if(collision.CompareTag("Player"))
-      {
-        interactUI.enabled = true;
-        isInRange = true;
-      }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Player")) {
+            interactUI.enabled = true;
+            isInRange = true;
+        }
     }
+
 
 	/* collider ne détecte plus le joueur près de la fin du niveau
 	* cache la touche d'interaction et modif les variables
 	*/
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-      interactUI.enabled = false;
-      isInRange = false;
+    private void OnTriggerExit2D(Collider2D collision) {
+        interactUI.enabled = false;
+        isInRange = false;
     }
 
 
-	/* charge la scène suivante avec un fondu
-	*/
-    public IEnumerator loadNextScene()
-    {
-      fadeSystem.SetTrigger("FadeIn");
-      yield return new WaitForSeconds(1f);
-      PlayerMovement.instance.enabled = true;
-      SceneManager.LoadScene(sceneName);
+    /* charge la scène suivante avec un fondu
+    */
+    public IEnumerator loadNextScene() {
+        fadeSystem.SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        PlayerMovement.instance.enabled = true;
+        SceneManager.LoadScene(sceneName);
     }
 }
