@@ -12,10 +12,8 @@ public class InputTools : MonoBehaviour
 
 
     // évite les doublons -> classe "statique"
-    private void Awake()
-    {
-      if (instance != null)
-      {
+    private void Awake() {
+      if (instance != null) {
         Debug.LogWarning("Il y a plus d'une instance de InputTools dans la scène.");
         return;
       }
