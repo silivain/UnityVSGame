@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 131177716760367125}
   - component: {fileID: 131177716760367124}
-  - component: {fileID: 1537449751}
+  - component: {fileID: 353654847}
+  - component: {fileID: 353654848}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -46,19 +47,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerPresentByDefault: 0
   coinsPickedUpInThisSceneCount: 0
-  maxItem: 1
-  newItem:
-  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  - {fileID: 77745769944575328, guid: 762415c09c340074e91f893e1aec9e74, type: 3}
-  itemSpawnPosition:
-  - {x: 40, y: -13.2, z: 0}
-  - {x: 65, y: -13.2, z: 0}
-  - {x: 80, y: -13.2, z: 0}
-  itemSpawnTime: 2
---- !u!114 &1537449751
+  maxWeapon: 2
+  maxHeal: 2
+  maxBonus: 2
+  newWeapon:
+  - {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
+  - {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
+  - {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06, type: 3}
+  - {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
+  - {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
+  newHeal:
+  - {fileID: 4367461666446876141, guid: f9f6bad1286f0b5d296cf63fb4beaffc, type: 3}
+  newBonus:
+  - {fileID: 4720647494406509854, guid: abefd5b3a1bd8912fb5e0d623b004ca1, type: 3}
+  - {fileID: 1490002812300720274, guid: 38bc9fd3af81701dca060a485a8635f7, type: 3}
+  - {fileID: 4723630182170877923, guid: 1acbc57c7771bf830b7a30f9b32909d6, type: 3}
+  weaponSpawnPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  healSpawnPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bonusSpawnPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  weaponSpawnTime: 10
+  healSpawnTime: 8
+  bonusSpawnTime: 8
+--- !u!114 &353654847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,6 +86,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 131177716760367127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4372c0dd18b18d7a2d2f11ae2cbdd3, type: 3}
+  m_Script: {fileID: 11500000, guid: ffb1afe9d4d70cf4196143b212f82361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countDownTime: 1
+  countDownDisplay: {fileID: 0}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+  start: 0
+--- !u!114 &353654848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131177716760367127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da2c0dc497060091b88721c790e031e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectCorners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gamePaused: {fileID: 0}
+  countdown: {fileID: 0}
+  GOAudio: {fileID: 0}
+  settingsWindow: {fileID: 0}

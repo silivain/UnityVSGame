@@ -471,6 +471,7 @@ MonoBehaviour:
   gamePaused: {fileID: 1301624557}
   countdown: {fileID: 528740927}
   GOAudio: {fileID: 405694608}
+  settingsWindow: {fileID: 1780904770}
 --- !u!1 &390079692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1489,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1537449751, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+    - {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+    - {fileID: 353654847, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
 --- !u!1 &776990532
 GameObject:
@@ -16740,6 +16743,11 @@ PrefabInstance:
 --- !u!224 &1780904769 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1704138924342944504, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+  m_PrefabInstance: {fileID: 1780904768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1780904770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3322838158736769622, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
   m_PrefabInstance: {fileID: 1780904768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1901873338 stripped

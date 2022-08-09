@@ -128,11 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7296429203390320506, guid: dc9f3e6b7bc1fc1d4bf207dd2368d502, type: 3}
   m_PrefabInstance: {fileID: 870522918}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &73962713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8953197184342650633, guid: 81a532ff440db2bc8b95485f7b29fa6f, type: 3}
-  m_PrefabInstance: {fileID: 8953197184408222672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &85950340 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5054521841305939511, guid: 7d9fcbea3587daaa689910e16d587eaf, type: 3}
@@ -241,42 +236,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 131177716760367127, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
   m_PrefabInstance: {fileID: 752683182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &353654847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353654845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb1afe9d4d70cf4196143b212f82361, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countDownTime: 1
-  countDownDisplay: {fileID: 528740929}
-  p1: {fileID: 1506128870}
-  p2: {fileID: 4594055404799816434}
-  start: 0
---- !u!114 &353654848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353654845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da2c0dc497060091b88721c790e031e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectCorners:
-  - {fileID: 1704138924286136694}
-  - {fileID: 1704138924286136693}
-  - {fileID: 1704138924286136692}
-  gamePaused: {fileID: 1016951690}
-  countdown: {fileID: 528740927}
-  GOAudio: {fileID: 405694608}
 --- !u!1 &390079692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,126 +1033,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: maxHeal
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: maxBonus
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: maxWeapon
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: text_counter
+    - target: {fileID: 353654847, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: p1
+      value: 
+      objectReference: {fileID: 1506128870}
+    - target: {fileID: 353654847, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: p2
+      value: 
+      objectReference: {fileID: 4594055404799816434}
+    - target: {fileID: 353654847, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: countDownDisplay
       value: 
       objectReference: {fileID: 528740929}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: healSpawnTime
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: bonusSpawnTime
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: text_counter_go
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: GOAudio
+      value: 
+      objectReference: {fileID: 405694608}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: countdown
       value: 
       objectReference: {fileID: 528740927}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: weaponSpawnTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newHeal.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newItem.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newBonus.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newHeal.Array.data[0]
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: gamePaused
       value: 
-      objectReference: {fileID: 4367461666446876141, guid: f9f6bad1286f0b5d296cf63fb4beaffc, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newItem.Array.data[0]
+      objectReference: {fileID: 1016951690}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: settingsWindow
       value: 
-      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newItem.Array.data[1]
+      objectReference: {fileID: 1704138924286136695}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: SelectCorners.Array.data[0]
       value: 
-      objectReference: {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newItem.Array.data[2]
+      objectReference: {fileID: 1704138924286136694}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: SelectCorners.Array.data[1]
       value: 
-      objectReference: {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newBonus.Array.data[0]
+      objectReference: {fileID: 1704138924286136693}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: SelectCorners.Array.data[2]
       value: 
-      objectReference: {fileID: 4720647494406509854, guid: abefd5b3a1bd8912fb5e0d623b004ca1, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newBonus.Array.data[1]
-      value: 
-      objectReference: {fileID: 1490002812300720274, guid: 38bc9fd3af81701dca060a485a8635f7, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newBonus.Array.data[2]
-      value: 
-      objectReference: {fileID: 4723630182170877923, guid: 1acbc57c7771bf830b7a30f9b32909d6, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[0]
-      value: 
-      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[1]
-      value: 
-      objectReference: {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[2]
-      value: 
-      objectReference: {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[3]
-      value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[4]
-      value: 
-      objectReference: {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[5]
-      value: 
-      objectReference: {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: newWeapon.Array.data[6]
-      value: 
-      objectReference: {fileID: 7335123227453051435, guid: e9eba8df47725c1d2b5ab810aa44e42c, type: 3}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: isPlayerPresentByDefault
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: healSpawnPosition.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: bonusSpawnPosition.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: weaponSpawnPosition.Array.size
-      value: 3
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1704138924286136692}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: healSpawnPosition.Array.data[0]
       value: 
@@ -1206,18 +1085,6 @@ PrefabInstance:
       propertyPath: healSpawnPosition.Array.data[2]
       value: 
       objectReference: {fileID: 1957932668}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: itemSpawnPosition.Array.data[0]
-      value: 
-      objectReference: {fileID: 73962713}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: itemSpawnPosition.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
-      propertyPath: itemSpawnPosition.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: bonusSpawnPosition.Array.data[0]
       value: 
@@ -1290,8 +1157,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurrentSceneManager
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1537449751, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
 --- !u!1001 &776396277
 PrefabInstance:
@@ -5532,10 +5398,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: pause_screen
       objectReference: {fileID: 0}
-    - target: {fileID: 1704138924342944505, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
 --- !u!1 &1704138924286136692 stripped
@@ -5551,6 +5413,11 @@ GameObject:
 --- !u!1 &1704138924286136694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 422210236, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
+  m_PrefabInstance: {fileID: 1704138924286136691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1704138924286136695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3322838158736769622, guid: c7e5f97304b17677ca33c29dc6412350, type: 3}
   m_PrefabInstance: {fileID: 1704138924286136691}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3656079184680550867

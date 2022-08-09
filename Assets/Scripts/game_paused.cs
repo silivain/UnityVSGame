@@ -11,6 +11,7 @@ public class game_paused : MonoBehaviour
     public GameObject gamePaused;               // Menu Pause
     public GameObject countdown;                // compte à rebours de début de scène
     public GameObject GOAudio;                  // AudioSource
+    public GameObject settingsWindow;           // fenêtre des settings via le menu pause
     private bool controlBlocked = false;        // vrai si le menu pause a été appelé il y a moins de 'delay' sec
     private float delay = 0.25f;                // délai avant de pouvoir rappeler le menu pause
     public PlayerControls controls;             // inputs
@@ -78,26 +79,25 @@ public class game_paused : MonoBehaviour
             switch(selectIndex) {
                 case 0:
                     Time.timeScale = 1f;                    // temps en vitesse normale.
-                    gamePaused.SetActive(false);            // on désactive l'écran de GameOver
+                    gamePaused.SetActive(false);            // on désactive l'écran de pause
                     resetIndex();
                     controlInGame();
                     GOAudio.GetComponent<AudioSource>().Play();
-                    // TODO : git log pour vérifier ce qu'on désactivait dans 'PauseGame()'
                     break;
                 case 1:
-                    Time.timeScale = 1f;                    // temps en vitesse normale.
-                    gamePaused.SetActive(false);            // on désactive l'écran de GameOver
+                    /* TODO : link to settings
                     resetIndex();
-                    controlInGame();
-                    GOAudio.GetComponent<AudioSource>().Play();
-                    // TODO : link to settings
+                    * on peut pas désactiver l'écran de pause si l'écran des settings
+                    * est un enfant du menu pause
+                    *
+                    settingsWindow.SetActive(true);         // on affiche l'écran des settings
+                    */
                     break;
                 case 2:
                     Time.timeScale = 1f;                    // temps en vitesse normale.
-                    gamePaused.SetActive(false);            // on désactive l'écran de GameOver
+                    gamePaused.SetActive(false);            // on désactive l'écran de pause
                     resetIndex();
                     SceneManager.LoadScene("MainMenu");
-                    // TODO : musique main menu ?
                     break;
             }
         }

@@ -518,7 +518,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &675931268
 GameObject:
@@ -810,6 +810,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b59902bf18825446aaca59db0f7aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad:
+  - SimpleSceneLalaland
+  - SimpleSceneOmen
+  - SimpleSceneSwing
   script: {fileID: 0}
 --- !u!114 &1309101304
 MonoBehaviour:
@@ -1171,6 +1175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3996510149673089074, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3996510149673089077, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1237,7 +1245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3996510149673089077, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3996510149673089077, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1254,6 +1262,14 @@ PrefabInstance:
     - target: {fileID: 3996510149673089077, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783975205765872904, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783975206004089669, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
@@ -1696,7 +1712,7 @@ RectTransform:
   - {fileID: 2053949748}
   - {fileID: 1535189576}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1936,10 +1952,6 @@ PrefabInstance:
     - target: {fileID: 3416243789170312294, guid: c332b3126ea33b2b9973e0092634ecb5, type: 3}
       propertyPath: m_Name
       value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3416243789170312294, guid: c332b3126ea33b2b9973e0092634ecb5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c332b3126ea33b2b9973e0092634ecb5, type: 3}
