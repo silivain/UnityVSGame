@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
   		playerPosition = transform.position;					// position de départ du joueur
   		powSign = 0f;											// puissance servant à calculer le sens du joueur
   		xDirection = Mathf.Pow(-1f, powSign);					// sens du joueur (facing left or right)
-  		instance = this;										// instance de la classe TODO : remove ?
+  		instance = this;										// instance de la classe
     }
 
 

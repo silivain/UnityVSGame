@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     // récupère la gestion des inputs
     private void Awake() {
-        controls = new PlayerControls();controls = new PlayerControls();    // on recup le script qui gère les inputs
+        controls = new PlayerControls();                                    // on recup le script qui gère les inputs
         controls.UI.Enable();                                               // on utilise l'InputActionMap 'UI'
         controls.UI.GoLeft.performed += ctx => selectLeft();
         controls.UI.GoRight.performed += ctx => selectRight();
@@ -77,7 +77,7 @@ public class MainMenu : MonoBehaviour
                     SelectMenu[0].SetActive(false); // désactive main menu
                     break;
                 case 1:
-                    SelectMenu[1].SetActive(true);  // active select scene TODO: settings menu
+                    SelectMenu[2].SetActive(true);  // active settings menu
                     SelectMenu[0].SetActive(false); // désactive main menu
                     break;
                 case 2:

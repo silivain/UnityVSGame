@@ -68,7 +68,7 @@ public class PlayerWeapon : MonoBehaviour
 
 
     /* active la bonne InputActionMap selon le joueur
-    * récupère l'input 'Shield'
+    * récupère l'input 'Shield' TODO ?
     */
     private void controlPlayer() {
         if (transform.tag == "Player 1") {
