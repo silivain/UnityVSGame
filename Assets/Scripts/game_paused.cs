@@ -15,13 +15,8 @@ public class game_paused : MonoBehaviour
     private bool controlBlocked = false;        // vrai si le menu pause a été appelé il y a moins de 'delay' sec
     private float delay = 0.25f;                // délai avant de pouvoir rappeler le menu pause
     public PlayerControls controls;             // inputs
-
-
-    // désactive le menu pause au démarrage
-    void Start() {
-        gamePaused.SetActive(false);
-        resetIndex();
-    }
+    public GameObject PlayerMovement1;           // access to Player1 PlayerMovement script
+    public GameObject PlayerMovement2;           // access to Player1 PlayerMovement script
 
 
     /* récupère les inputs
@@ -30,6 +25,13 @@ public class game_paused : MonoBehaviour
     private void Awake() {
         controls = new PlayerControls();
         controlInGame();
+    }
+
+
+    // désactive le menu pause au démarrage
+    private void Start() {
+        gamePaused.SetActive(false);
+        resetIndex();
     }
 
 
@@ -72,38 +74,6 @@ public class game_paused : MonoBehaviour
     }
 
 
-    /* charge la scène sélectionnée par le joueur
-    */
-    public void selectScene() {
-        if (gameObject.activeSelf && !controlBlocked) {
-            switch(selectIndex) {
-                case 0:
-                    Time.timeScale = 1f;                    // temps en vitesse normale.
-                    gamePaused.SetActive(false);            // on désactive l'écran de pause
-                    resetIndex();
-                    controlInGame();
-                    GOAudio.GetComponent<AudioSource>().Play();
-                    break;
-                case 1:
-                    /* TODO : link to settings
-                    resetIndex();
-                    * on peut pas désactiver l'écran de pause si l'écran des settings
-                    * est un enfant du menu pause
-                    *
-                    settingsWindow.SetActive(true);         // on affiche l'écran des settings
-                    */
-                    break;
-                case 2:
-                    Time.timeScale = 1f;                    // temps en vitesse normale.
-                    gamePaused.SetActive(false);            // on désactive l'écran de pause
-                    resetIndex();
-                    SceneManager.LoadScene("MainMenu");
-                    break;
-            }
-        }
-    }
-
-
     /* bloque les contrôles pdnt 'delay' secs
     * évite les doubles inputs quand les joueurs ont la même touche de pause
     */
@@ -129,7 +99,7 @@ public class game_paused : MonoBehaviour
     /* règle les inputs pour la phase dans le menu
     * permet de naviguer dans le menu et sélectionner le bouton voulu
     */
-    private void controlInMenu() {
+    public void controlInMenu() {
         controls.Player1.Disable();
         controls.Player2.Disable();
         controls.UI.Enable();
@@ -145,5 +115,45 @@ public class game_paused : MonoBehaviour
         SelectCorners[selectIndex].SetActive(false);
         selectIndex = 0;
         SelectCorners[selectIndex].SetActive(true);
+    }
+
+
+    /* charge la scène sélectionnée par le joueur
+    */
+    public void selectScene() {
+        if (gameObject.activeSelf && !controlBlocked) {
+            switch(selectIndex) {
+                case 0:
+                    Time.timeScale = 1f;                    // temps en vitesse normale.
+                    gamePaused.SetActive(false);            // on désactive l'écran de pause
+                    resetIndex();
+                    controlInGame();
+                    GOAudio.GetComponent<AudioSource>().Play();
+                    break;
+                case 1:
+                    resetIndex();
+                    gamePaused.SetActive(false);
+                    controls.UI.Disable();
+                    settingsWindow.SetActive(true);         // on affiche l'écran des settings
+                    // reactivate PauseMenu inputs if necessary
+                    if (!settingsWindow.GetComponent<SettingsMenu_InGame>().controls.UI.enabled) {
+                        settingsWindow.GetComponent<SettingsMenu_InGame>().Awake();
+                    }
+                    break;
+                case 2:
+                    Time.timeScale = 1f;                    // temps en vitesse normale.
+                    gamePaused.SetActive(false);            // on désactive l'écran de pause
+                    resetIndex();
+                    controls.Player1.Disable();             // disable InGame inputs
+                    controls.Player2.Disable();
+                    PlayerMovement1.GetComponent<PlayerMovement>().controls.Player1.Disable();
+                    PlayerMovement1.GetComponent<PlayerMovement>().controls.Player2.Disable();
+                    PlayerMovement2.GetComponent<PlayerMovement>().controls.Player1.Disable();
+                    PlayerMovement2.GetComponent<PlayerMovement>().controls.Player2.Disable();
+                    controls.UI.Disable();                  // disable PauseMenu inputs
+                    SceneManager.LoadScene("MainMenu");
+                    break;
+            }
+        }
     }
 }

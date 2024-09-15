@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {	//video 2
     public Transform playerShield;              // shield du joueur
 
     public static PlayerMovement instance;		// instance de la classe
-    private PlayerControls controls;            // script gérant les inputs globales
+    public PlayerControls controls;            // script gérant les inputs globales
     //private InputActionMap controlsPlayer;    // action map correspondant au joueur
 
 

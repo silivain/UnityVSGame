@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // menu des paramètres
-public class SettingsMenu : MonoBehaviour //video 17
+public class SettingsMenu_InGame : MonoBehaviour //video 17
 {
 	public GameObject[] SelectMenu;                 // tableau contenant les go des différents menus
 	public AudioMixer audioMixer;					// mixer audio du jeu
@@ -127,12 +127,12 @@ public class SettingsMenu : MonoBehaviour //video 17
                 case 2:
                 	break;
                 case 3:
-                	SelectMenu[1].SetActive(true);					// active main menu
+                	SelectMenu[1].SetActive(true);					// active pause menu
                     SelectMenu[0].SetActive(false);					// désactive settings menu
 					controls.UI.Disable();							// disable inputs
-                    // reactivate MainMenu inputs if necessary
-					if (!SelectMenu[1].GetComponent<MainMenu>().controls.UI.enabled) {
-						SelectMenu[1].GetComponent<MainMenu>().Awake();
+                    // reactivate PauseMenu inputs if necessary
+					if (!SelectMenu[2].GetComponent<game_paused>().controls.UI.enabled) {
+						SelectMenu[2].GetComponent<game_paused>().controlInMenu();
 					}
                     break;
             }

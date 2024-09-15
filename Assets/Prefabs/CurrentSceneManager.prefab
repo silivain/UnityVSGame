@@ -52,10 +52,10 @@ MonoBehaviour:
   maxBonus: 2
   newWeapon:
   - {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
-  - {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
+  - {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
   - {fileID: 5654219425305619297, guid: a4f69ba5bad7f58ef866722c920fdb06, type: 3}
   - {fileID: 4495105162055374408, guid: c28ecebf9fbe3c294870e489d2efad16, type: 3}
-  - {fileID: 6040823445680722470, guid: 401c605e5483f027a80a369df07860c7, type: 3}
+  - {fileID: 5994381633483018513, guid: 1b20fec808090282b8249e5aeb33b4ad, type: 3}
   newHeal:
   - {fileID: 4367461666446876141, guid: f9f6bad1286f0b5d296cf63fb4beaffc, type: 3}
   newBonus:
@@ -65,13 +65,11 @@ MonoBehaviour:
   weaponSpawnPosition:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   healSpawnPosition:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   bonusSpawnPosition:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   weaponSpawnTime: 10
@@ -114,3 +112,5 @@ MonoBehaviour:
   countdown: {fileID: 0}
   GOAudio: {fileID: 0}
   settingsWindow: {fileID: 0}
+  PlayerMovement1: {fileID: 0}
+  PlayerMovement2: {fileID: 0}

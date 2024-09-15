@@ -22,7 +22,7 @@ public class SelectSceneMenu : MonoBehaviour
 
     /* recup les inputs via l'InputActionMap 'UI'
     */
-    private void Awake() {
+    public void Awake() {
         controls = new PlayerControls();    // on recup les inputs
         controls.UI.Enable();
         controls.UI.GoLeft.performed += ctx => previousImage();
@@ -33,7 +33,7 @@ public class SelectSceneMenu : MonoBehaviour
 
     /* init image et nom du niveau
     */
-    public void Start() {
+    private void Start() {
         image.GetComponent<Image>().sprite = allImages[level];
         txt.GetComponent<TextMeshProUGUI>().text = imageTitles[level];
     }
@@ -73,6 +73,7 @@ public class SelectSceneMenu : MonoBehaviour
     */
     private void Launch() {
         if (gameObject.activeSelf) {
+            controls.UI.Disable();
             SceneManager.LoadScene(levelToLoad[level]);
         }
     }

@@ -11,20 +11,17 @@ public class MainMenu : MonoBehaviour
     public PlayerControls controls;                 // contrôles du joueur
 
 
-    // récupère la gestion des inputs
-    private void Awake() {
-        controls = new PlayerControls();                                    // on recup le script qui gère les inputs
-        controls.UI.Enable();                                               // on utilise l'InputActionMap 'UI'
+    /* récupère la gestion des inputs
+    */
+    public void Awake() {
+        controls = new PlayerControls();                        // on recup le script qui gère les inputs
+        controls.UI.Enable();                                   // on utilise l'InputActionMap 'UI'
         controls.UI.GoLeft.performed += ctx => selectLeft();
         controls.UI.GoRight.performed += ctx => selectRight();
         controls.UI.GoDown.performed += ctx => selectDown();
+        controls.UI.GoUp.performed += ctx => selectUp();
         controls.UI.Start.performed += ctx => selectScene();
-    }
 
-
-    /* sélectionne le bouton par défaut au démarrage
-    */
-    private void Start() {
         SelectCorners[selectIndex].SetActive(false);
         selectIndex = 0;
         SelectCorners[selectIndex].SetActive(true);
@@ -67,21 +64,43 @@ public class MainMenu : MonoBehaviour
     }
 
 
+    /* Déplace la sélection vers le haut
+    * met à jour l'index
+    */
+    private void selectUp() {
+        if (selectIndex == 2 && gameObject.activeSelf) {
+            SelectCorners[selectIndex].SetActive(false);
+            selectIndex = 0;
+            SelectCorners[selectIndex].SetActive(true);
+        }
+    }
+
+
     /* Active la scène rattachée au bouton actuellement sélectionné
     */
     private void selectScene() {
         if (gameObject.activeSelf) {
             switch(selectIndex) {
                 case 0:
-                    SelectMenu[1].SetActive(true);  // active select scene
-                    SelectMenu[0].SetActive(false); // désactive main menu
+                    SelectMenu[1].SetActive(true);                      // active select scene
+                    SelectMenu[0].SetActive(false);                     // désactive main menu
+                    controls.UI.Disable();                              // disable inputs
+                    // reactivate SelectSceneMenu inputs if necessary
+                    if (!SelectMenu[1].GetComponent<SelectSceneMenu>().controls.UI.enabled) {
+                        SelectMenu[1].GetComponent<SelectSceneMenu>().Awake();
+                    }
                     break;
                 case 1:
-                    SelectMenu[2].SetActive(true);  // active settings menu
-                    SelectMenu[0].SetActive(false); // désactive main menu
+                    SelectMenu[2].SetActive(true);                      // active settings menu
+                    SelectMenu[0].SetActive(false);                     // désactive main menu
+                    controls.UI.Disable();                              // disable inputs
+                    // reactivate SettingsMenu inputs if necessary
+                    if (!SelectMenu[2].GetComponent<SettingsMenu>().controls.UI.enabled) {
+                        SelectMenu[2].GetComponent<SettingsMenu>().Awake();
+                    }
                     break;
                 case 2:
-                    Application.Quit();             // quitte le jeu
+                    Application.Quit();                                 // leave game
                     break;
             }
         }
