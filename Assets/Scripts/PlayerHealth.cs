@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
 
-    private PlayerControls controls;             // script gérant les inputs du joueur
+    public PlayerControls controls;             // script gérant les inputs du joueur
 
 
     private void Awake() {
@@ -77,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
     * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
     */
     private void Shield()
-    {
+    {   
         if (!shield.activeSelf && shieldReady && this.enabled && Time.timeScale != 0f) {
             shield.SetActive(true);
             shieldReady = false;

@@ -742,6 +742,7 @@ MonoBehaviour:
   - {fileID: 6167896835190622286}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 8ab383efe4f3f6c5aacfeb31071eac03, type: 2}
   resolutionDropdown: {fileID: 6167896835846862527}
   SelectCorners:
@@ -1126,7 +1127,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back To Pause Menu
+  m_Text: Back
 --- !u!1 &6167896835577720873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +1944,7 @@ GameObject:
   - component: {fileID: 6167896836228212425}
   - component: {fileID: 6167896836228212424}
   m_Layer: 5
-  m_Name: ButtonPauseMenu
+  m_Name: ButtonBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1172,6 +1172,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 405694608}
     - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: Player1
+      value: 
+      objectReference: {fileID: 1506128870}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: Player2
+      value: 
+      objectReference: {fileID: 4594055404799816434}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: countdown
       value: 
       objectReference: {fileID: 528740927}
@@ -1230,11 +1238,6 @@ PrefabInstance:
       objectReference: {fileID: 979323255}
     - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
-      propertyPath: bonusSpawnPosition.Array.data[2]
-      value: 
-      objectReference: {fileID: 804797205}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
-        type: 3}
       propertyPath: weaponSpawnPosition.Array.data[0]
       value: 
       objectReference: {fileID: 724169463}
@@ -1243,11 +1246,6 @@ PrefabInstance:
       propertyPath: weaponSpawnPosition.Array.data[1]
       value: 
       objectReference: {fileID: 2034438060}
-    - target: {fileID: 131177716760367124, guid: 86ed43ec948a4d168af606ebc8a97104,
-        type: 3}
-      propertyPath: weaponSpawnPosition.Array.data[2]
-      value: 
-      objectReference: {fileID: 1338634384}
     - target: {fileID: 131177716760367125, guid: 86ed43ec948a4d168af606ebc8a97104,
         type: 3}
       propertyPath: m_RootOrder
@@ -1593,12 +1591,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51198bc0d11c83faeb2296673a805d79, type: 3}
---- !u!1 &804797205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79,
-    type: 3}
-  m_PrefabInstance: {fileID: 804797204}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &806738403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4460,12 +4452,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51198bc0d11c83faeb2296673a805d79, type: 3}
---- !u!1 &1338634384 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338634383}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1361945880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3656079183731955556, guid: fe05d35a61f23a972950c59f244a389f,
@@ -6274,6 +6260,11 @@ PrefabInstance:
       propertyPath: SelectMenu.Array.data[2]
       value: 
       objectReference: {fileID: 353654845}
+    - target: {fileID: 435353688056742923, guid: 7d602bb56539a85b7ae8af37519dc3ac,
+        type: 3}
+      propertyPath: SelectMenu.Array.data[3]
+      value: 
+      objectReference: {fileID: 7329899211895159797}
     - target: {fileID: 6167896835190622286, guid: 7d602bb56539a85b7ae8af37519dc3ac,
         type: 3}
       propertyPath: m_Name
@@ -6500,9 +6491,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
+      propertyPath: Player1
+      value: 
+      objectReference: {fileID: 1506128870}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: Player2
+      value: 
+      objectReference: {fileID: 4594055404799816434}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 353654845}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
       propertyPath: currentMusic
       value: 
       objectReference: {fileID: 405694609}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: SelectMenu.Array.data[1]
+      value: 
+      objectReference: {fileID: 948226600}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: UIToDisable.Array.data[0]

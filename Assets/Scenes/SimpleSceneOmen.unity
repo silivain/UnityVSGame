@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &72717661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981795850, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2016737203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &85950340 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5054521841305939511, guid: 7d9fcbea3587daaa689910e16d587eaf,
@@ -373,6 +379,11 @@ PrefabInstance:
       propertyPath: SelectMenu.Array.data[2]
       value: 
       objectReference: {fileID: 353654845}
+    - target: {fileID: 435353688056742923, guid: 7d602bb56539a85b7ae8af37519dc3ac,
+        type: 3}
+      propertyPath: SelectMenu.Array.data[3]
+      value: 
+      objectReference: {fileID: 2016737205}
     - target: {fileID: 6167896835190622284, guid: 7d602bb56539a85b7ae8af37519dc3ac,
         type: 3}
       propertyPath: SelectMenu.Array.size
@@ -1198,6 +1209,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528740927}
   m_CullTransparentMesh: 0
+--- !u!1 &573286442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5065740445588951867, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2016737203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &596156942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1594,6 +1611,14 @@ PrefabInstance:
       propertyPath: GOAudio
       value: 
       objectReference: {fileID: 405694608}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: Player1
+      value: 
+      objectReference: {fileID: 2128477523}
+    - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
+      propertyPath: Player2
+      value: 
+      objectReference: {fileID: 1142242142}
     - target: {fileID: 353654848, guid: 86ed43ec948a4d168af606ebc8a97104, type: 3}
       propertyPath: countdown
       value: 
@@ -17215,12 +17240,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1780904768}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1901873338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5065740445588951867, guid: 8ba9ec368b9648392a4a2efbe84239b1,
-    type: 3}
-  m_PrefabInstance: {fileID: 2016737203}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1957932668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9148653796187264514, guid: 51198bc0d11c83faeb2296673a805d79,
@@ -17234,6 +17253,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2116650901}
     m_Modifications:
+    - target: {fileID: 1981795850, guid: 8ba9ec368b9648392a4a2efbe84239b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583287391755316140, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5065740445588951867, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: m_IsActive
@@ -17346,9 +17374,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
+      propertyPath: Player1
+      value: 
+      objectReference: {fileID: 2128477523}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: Player2
+      value: 
+      objectReference: {fileID: 1142242142}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 353654845}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
       propertyPath: currentMusic
       value: 
       objectReference: {fileID: 405694609}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: SceneToReload
+      value: SimpleSceneOmen
+      objectReference: {fileID: 0}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: textFinPartie
@@ -17357,8 +17405,13 @@ PrefabInstance:
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: SelectCorners.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: SelectMenu.Array.data[1]
+      value: 
+      objectReference: {fileID: 262926153}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: UIToDisable.Array.data[0]
@@ -17383,12 +17436,17 @@ PrefabInstance:
         type: 3}
       propertyPath: SelectCorners.Array.data[0]
       value: 
-      objectReference: {fileID: 1901873338}
+      objectReference: {fileID: 72717661}
     - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: SelectCorners.Array.data[1]
       value: 
       objectReference: {fileID: 1311851448}
+    - target: {fileID: 7329899212154720377, guid: 8ba9ec368b9648392a4a2efbe84239b1,
+        type: 3}
+      propertyPath: SelectCorners.Array.data[2]
+      value: 
+      objectReference: {fileID: 573286442}
     - target: {fileID: 7329899212154720383, guid: 8ba9ec368b9648392a4a2efbe84239b1,
         type: 3}
       propertyPath: m_Name

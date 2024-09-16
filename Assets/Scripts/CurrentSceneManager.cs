@@ -11,17 +11,17 @@ public class CurrentSceneManager : MonoBehaviour
   public int coinsPickedUpInThisSceneCount;
 
   // armes, heals et bonus présents dans la scène
-  public int maxWeapon;                  // nb max d'armes présentes en même temps dans la scène
-  public int maxHeal;				     // nb max de heals présents en même temps dans la scène
-  public int maxBonus;				     // nb max de bonus présents en même temps dans la scène
+  public int maxWeapon;                     // nb max d'armes présentes en même temps dans la scène
+  public int maxHeal;				                // nb max de heals présents en même temps dans la scène
+  public int maxBonus;				              // nb max de bonus présents en même temps dans la scène
 
-  private int currentWeapon;            // nb courant d'armes présentes dans la scène
-  private int currentHeal;              // nb courant de heals présents dans la scène
-  private int currentBonus;             // nb courant de bonus présents dans la scène
+  private int currentWeapon;                // nb courant d'armes présentes dans la scène
+  private int currentHeal;                  // nb courant de heals présents dans la scène
+  private int currentBonus;                 // nb courant de bonus présents dans la scène
 
-  public GameObject [] newWeapon;       // tableau contenant les différentes armes pouvant apparaître sur la scène
-  public GameObject [] newHeal;         // tableau contenant les différents heals pouvant apparaître sur la scène
-  public GameObject [] newBonus;        // tableau contenant les différents bonus pouvant apparaître sur la scène
+  public GameObject [] newWeapon;           // tableau contenant les différentes armes pouvant apparaître sur la scène
+  public GameObject [] newHeal;             // tableau contenant les différents heals pouvant apparaître sur la scène
+  public GameObject [] newBonus;            // tableau contenant les différents bonus pouvant apparaître sur la scène
 
   public GameObject [] weaponSpawnPosition; // emplacements dans la scène où faire apparaître les armes
   public GameObject [] healSpawnPosition;   // emplacements dans la scène où faire apparaître les heals
@@ -31,13 +31,13 @@ public class CurrentSceneManager : MonoBehaviour
   private bool [] occupiedHealSpawn;        // emplacements de heal déjà occupés par un collectable
   private bool [] occupiedBonusSpawn;       // emplacements de bonus déjà occupés par un collectable
 
-  public int weaponSpawnTime;           // cooldown avant respawn de la prochaine arme
-  public int healSpawnTime;             // cooldown avant respawn du prochain heal
-  public int bonusSpawnTime;            // cooldown avant respawn du prochain bonus
+  public int weaponSpawnTime;               // cooldown avant respawn de la prochaine arme
+  public int healSpawnTime;                 // cooldown avant respawn du prochain heal
+  public int bonusSpawnTime;                // cooldown avant respawn du prochain bonus
 
-  private bool spawningWeapon = false;          // vrai si une arme est en train d'être générée
-  private bool spawningHeal = false;            // vrai si un heal est en train d'être généré
-  private bool spawningBonus = false;           // vrai si un bonus est en train d'être généré
+  private bool spawningWeapon = false;      // vrai si une arme est en train d'être générée
+  private bool spawningHeal = false;        // vrai si un heal est en train d'être généré
+  private bool spawningBonus = false;       // vrai si un bonus est en train d'être généré
 
 
   public static CurrentSceneManager instance; // instance de la classe

@@ -47,12 +47,12 @@ public class PlayerWeapon : MonoBehaviour
     public         int[]    bonusAmmunition = {1000, 3, 1, 3, 4, 3, 1000};                                              // nombre du munitions apportés par l'item 'Ammunition'
     private static float[]  cooldownTime    = {.5f, 1f, 2f, .5f, 1f, 1f, 0.5f};                                         // Cooldown de chaque arme
 
-    public float currentDamageBonus = 0;            // bonus de dégats actuel
+    public float currentDamageBonus = 0;    // bonus de dégats actuel
 
     private float startTime = 0f;
     //private float endTime=0f; TODO
 
-    private PlayerControls controls;                // script gérant les inputs du joueur
+    public PlayerControls controls;        // script gérant les inputs du joueur
 
 
     private void Awake() {
