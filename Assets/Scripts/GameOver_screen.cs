@@ -128,6 +128,11 @@ public class GameOver_screen : MonoBehaviour
                     break;
                 case 1:
                     SelectMenu[1].GetComponent<SettingsMenu_InGame>().Caller("GameOver_screen");
+
+                    // set the volume slider value in settings to the current volume value
+                    float currentVolume;
+                    SelectMenu[1].GetComponent<SettingsMenu_InGame>().audioMixer.GetFloat("Master", out currentVolume);
+                    SelectMenu[1].GetComponent<SettingsMenu_InGame>().synchroVolume(currentVolume);
                     SelectMenu[1].SetActive(true);          // active settings menu
                     SelectMenu[0].SetActive(false);         // désactive GO menu
                     controls.UI.Disable();                  // disable inputs

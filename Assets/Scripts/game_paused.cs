@@ -152,6 +152,11 @@ public class game_paused : MonoBehaviour
                     resetIndex();
                     gamePaused.SetActive(false);
                     controls.UI.Disable();
+
+                    // set the volume slider value in settings to the current volume value
+                    float currentVolume;
+                    settingsWindow.GetComponent<SettingsMenu_InGame>().audioMixer.GetFloat("Master", out currentVolume);
+                    settingsWindow.GetComponent<SettingsMenu_InGame>().synchroVolume(currentVolume);
                     settingsWindow.GetComponent<SettingsMenu_InGame>().Caller("game_paused");
                     settingsWindow.SetActive(true);         // on affiche l'écran des settings
                     // reactivate PauseMenu inputs if necessary

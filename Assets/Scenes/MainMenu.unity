@@ -1081,6 +1081,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714900194}
   m_CullTransparentMesh: 0
+--- !u!114 &1769586644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3056486554227295126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821793505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1555,71 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995671417}
     m_Modifications:
+    - target: {fileID: 3056486553483729908, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553483729908, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553483729908, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_MinValue
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984199, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553511984217, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486554139562518, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 1769586644}
     - target: {fileID: 3056486554139562518, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
       propertyPath: SelectMenu.Array.data[1]
@@ -1552,6 +1629,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486554139562729, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486554391932356, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3056486554923491806, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
@@ -1657,6 +1744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3056486555166781469, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00000074506
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}

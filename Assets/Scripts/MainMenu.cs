@@ -91,6 +91,10 @@ public class MainMenu : MonoBehaviour
                     }
                     break;
                 case 1:
+                    // set the volume slider value in settings to the current volume value
+                    float currentVolume;
+                    SelectMenu[2].GetComponent<SettingsMenu>().audioMixer.GetFloat("Master", out currentVolume);
+                    SelectMenu[2].GetComponent<SettingsMenu>().synchroVolume(currentVolume);
                     SelectMenu[2].SetActive(true);                      // active settings menu
                     SelectMenu[0].SetActive(false);                     // désactive main menu
                     controls.UI.Disable();                              // disable inputs
