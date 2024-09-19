@@ -9,10 +9,11 @@ using System.Linq;
 public class SettingsMenu_InGame : MonoBehaviour //video 17
 {
 	public GameObject[] SelectMenu;     // tableau contenant les go des différents menus
-	public Slider volumeSlider;		// volume slider
+	public Slider volumeSlider;			// volume slider
 	public AudioMixer audioMixer;		// mixer audio du jeu
 	public Dropdown resolutionDropdown;	// menu déroulant des résolutions
-	Resolution[] resolutions;			// liste des résolutions
+	private Resolution[] resolutions;			// liste des résolutions
+	private int resolutionIndex;		// index of current resolution in resolutions[]
     public PlayerControls controls;     // InputSystem
     public GameObject[] SelectCorners;  // tableau des images de selection de menu
     private int selectIndex = 0;        // indice désignant le menu actuellement sélectionné
@@ -29,8 +30,8 @@ public class SettingsMenu_InGame : MonoBehaviour //video 17
         controls.UI.Enable();
         controls.UI.GoUp.performed += ctx => selectUp();
         controls.UI.GoDown.performed += ctx => selectDown();
-        controls.UI.GoLeft.performed += ctx => volumeDown();
-        controls.UI.GoRight.performed += ctx => volumeUp();
+        controls.UI.GoLeft.performed += ctx => selectLeft();
+        controls.UI.GoRight.performed += ctx => selectRight();
         controls.UI.Start.performed += ctx => selectSetting();
 
         SelectCorners[selectIndex].SetActive(false);
@@ -46,7 +47,6 @@ public class SettingsMenu_InGame : MonoBehaviour //video 17
 	* passe en plein écran
 	*/
 	private void Start() {
-
 		resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 		resolutionDropdown.ClearOptions();
 
@@ -63,8 +63,8 @@ public class SettingsMenu_InGame : MonoBehaviour //video 17
 		}
 
 		resolutionDropdown.AddOptions(options);
-		resolutionDropdown.value = currentResolutionIndex;
-		resolutionDropdown.RefreshShownValue();
+		resolutionIndex = currentResolutionIndex;
+		SetResolution(resolutionIndex);
 
 		Screen.fullScreen = true;
 		_fullScreen = true;
@@ -91,6 +91,14 @@ public class SettingsMenu_InGame : MonoBehaviour //video 17
 	}
 
 
+	/* synchronise current audioMixer value,
+	   slideVolume and volume variable
+	*/
+	public void synchroVolume(float vol) {
+		volumeSlider.value = vol;
+	}
+
+
 	/* active ou désactive le plein écran
 	*/
 	public void SetFullScreen(bool isFullScreen) {
@@ -101,43 +109,52 @@ public class SettingsMenu_InGame : MonoBehaviour //video 17
 
 	/* règle la résolution sur resolutions['resolutionIndex']
 	*/
-	public void SetResolution(int resolutionIndex) {
-		Resolution resolution = resolutions[resolutionIndex];
-		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+	public void SetResolution(int resIndex) {
+		Resolution resolution = resolutions[resIndex];
+		bool backToFullScreen = false;
+		if (resolution.width == Screen.width && resolution.height == Screen.height
+			&& _fullScreen) {
+			SetFullScreen(!_fullScreen);
+			backToFullScreen = true;
+		}
+		resolutionDropdown.value = resIndex;
+		resolutionDropdown.RefreshShownValue();
+		Screen.SetResolution(resolution.width, resolution.height, _fullScreen);
+		if (backToFullScreen) {
+			SetFullScreen(!_fullScreen);
+		}
 	}
 
 
-	/* decreases volume by 5
+	/*  on resolution setting : apply previous resolution setting
+	* on volume setting : decreases volume by 5
 	*/
-	private void volumeDown() {
-		if (selectIndex == 2) {	//check if selectIndex is set on volume setting
+	private void selectLeft() {
+		if (selectIndex == 0) {	//check if selectIndex is set on resolution setting
+			resolutionIndex = (resolutionIndex - 1 + resolutions.Length) % resolutions.Length;
+			SetResolution(resolutionIndex);
+		}else if (selectIndex == 2) {	//check if selectIndex is set on volume setting
 			float currentVolume;
 			audioMixer.GetFloat("Master", out currentVolume);
 			float newVolume = Mathf.Max(currentVolume - 5f, -80f);
 			SetVolume(newVolume);
-			Debug.Log("current volume : " + newVolume);
 		}
 	}
 
 
-	/* increases volume by 5
+	/*  on resolution setting : apply next resolution setting
+	* on volume setting : increases volume by 5
 	*/
-	private void volumeUp() {
-		if (selectIndex == 2) {	//check if selectIndex is set on volume setting
+	private void selectRight() {
+		if (selectIndex == 0) {	//check if selectIndex is set on resolution setting
+			resolutionIndex = (resolutionIndex + 1) % resolutions.Length;
+			SetResolution(resolutionIndex);
+		}else if (selectIndex == 2) {	//check if selectIndex is set on volume setting
 			float currentVolume;
 			audioMixer.GetFloat("Master", out currentVolume);
 			float newVolume = Mathf.Min(currentVolume + 5f, 20f);
 			SetVolume(newVolume);
-			Debug.Log("current volume : " + newVolume);
 		}
-	}
-
-
-	/* synchronise current audioMixer value,
-	   slideVolume and volume variable
-	*/
-	public void synchroVolume(float vol) {
-		volumeSlider.value = vol;
 	}
 
 
