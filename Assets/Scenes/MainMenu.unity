@@ -1668,14 +1668,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 937000616931801672, guid: c332b3126ea33b2b9973e0092634ecb5,
         type: 3}
-      propertyPath: SelectMenu.Array.data[1]
-      value: 
-      objectReference: {fileID: 2053949747}
-    - target: {fileID: 937000616931801672, guid: c332b3126ea33b2b9973e0092634ecb5,
-        type: 3}
-      propertyPath: SelectMenu.Array.data[2]
+      propertyPath: SettingsMenu
       value: 
       objectReference: {fileID: 88527231}
+    - target: {fileID: 937000616931801672, guid: c332b3126ea33b2b9973e0092634ecb5,
+        type: 3}
+      propertyPath: SelectSceneMenu
+      value: 
+      objectReference: {fileID: 2053949747}
     - target: {fileID: 4385662091134997302, guid: c332b3126ea33b2b9973e0092634ecb5,
         type: 3}
       propertyPath: m_Pivot.x

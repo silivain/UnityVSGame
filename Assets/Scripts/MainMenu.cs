@@ -5,31 +5,52 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject[] SelectMenu;                 // tableau contenant les go des différents menus
-    public GameObject[] SelectCorners;              // tableau des images de selection de menu
-    private int selectIndex = 0;                    // indice désignant le menu actuellement sélectionné
-    public PlayerControls controls;                 // contrôles du joueur
+    public GameObject SelectSceneMenu;              // SelectSceneMenu window
+    public GameObject SettingsMenu;                 // SettingsMenu window
+    private SelectSceneMenu SelectSceneMenuScript;  // SelectSceneMenu.cs
+    private SettingsMenu SettingsMenuScript;        // SettingsMenu.cs
+
+    public GameObject[] SelectCorners;              // selection displays
+    private int selectIndex = 0;                    // index of currently selected display
+    public PlayerControls controls;                 // inputs
 
 
-    /* récupère la gestion des inputs
+    /* instantiate inputs
     */
     public void Awake() {
-        controls = new PlayerControls();                        // on recup le script qui gère les inputs
-        controls.UI.Enable();                                   // on utilise l'InputActionMap 'UI'
+        controls = new PlayerControls();    // link with script handling inputs
+        controls.UI.Enable();               // listen to 'UI' InputActionMap
         controls.UI.GoLeft.performed += ctx => selectLeft();
         controls.UI.GoRight.performed += ctx => selectRight();
         controls.UI.GoDown.performed += ctx => selectDown();
         controls.UI.GoUp.performed += ctx => selectUp();
-        controls.UI.Start.performed += ctx => selectScene();
-
-        SelectCorners[selectIndex].SetActive(false);
-        selectIndex = 0;
-        SelectCorners[selectIndex].SetActive(true);
+        controls.UI.Start.performed += ctx => selectSetting();
     }
 
 
-    /* Déplace la sélection vers la gauche
-    * met à jour l'index
+    /* initialize selectIndex and SelectCorners
+    * initialize SettingsMenuScript
+    */
+    public void Start() {
+        // selection display visible and set to default selection
+        SelectCorners[selectIndex].SetActive(false);
+        selectIndex = 0;
+        SelectCorners[selectIndex].SetActive(true);
+
+        // link to SelectSceneMenu.cs
+        if (!SelectSceneMenu.TryGetComponent<SelectSceneMenu>(out SelectSceneMenuScript)) {
+            Debug.Log("failed to pull SelectSceneMenu.cs in MainMenu.cs");
+        }
+
+        // link to SettingsMenu.cs
+        if (!SettingsMenu.TryGetComponent<SettingsMenu>(out SettingsMenuScript)) {
+            Debug.Log("failed to pull SettingsMenu.cs in MainMenu.cs");
+        }
+    }
+
+
+    /* Move selection display to the left
+    * update index
     */
     private void selectLeft() {
         if (selectIndex != 0 && gameObject.activeSelf) {
@@ -40,8 +61,8 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    /* Déplace la sélection vers la droite
-    * met à jour l'index
+    /* Move selection display to the right
+    * update index
     */
     private void selectRight() {
         if (selectIndex != 1 && gameObject.activeSelf) {
@@ -52,8 +73,8 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    /* Déplace la sélection vers le bas
-    * met à jour l'index
+    /* Move selection display downward
+    * update index
     */
     private void selectDown() {
         if (selectIndex != 2 && gameObject.activeSelf) {
@@ -64,8 +85,8 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    /* Déplace la sélection vers le haut
-    * met à jour l'index
+    /* Move selection display upward
+    * update index
     */
     private void selectUp() {
         if (selectIndex == 2 && gameObject.activeSelf) {
@@ -76,35 +97,42 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    /* Active la scène rattachée au bouton actuellement sélectionné
+    /* Interacts with currently selected setting
     */
-    private void selectScene() {
+    private void selectSetting() {
         if (gameObject.activeSelf) {
             switch(selectIndex) {
-                case 0:
-                    SelectMenu[1].SetActive(true);                      // active select scene
-                    SelectMenu[0].SetActive(false);                     // désactive main menu
-                    controls.UI.Disable();                              // disable inputs
+                case 0: // Start
+                    SelectSceneMenu.SetActive(true);    // enable SelectScene window
+                    this.gameObject.SetActive(false);   // disable MainMenu window
+                    controls.UI.Disable();              // disable MainMenu inputs
+
                     // reactivate SelectSceneMenu inputs if necessary
-                    if (!SelectMenu[1].GetComponent<SelectSceneMenu>().controls.UI.enabled) {
-                        SelectMenu[1].GetComponent<SelectSceneMenu>().Awake();
+                    if (!SelectSceneMenuScript.controls.UI.enabled) {
+                        SelectSceneMenuScript.Awake();
                     }
                     break;
-                case 1:
+
+                case 1: // Settings
                     // set the volume slider value in settings to the current volume value
                     float currentVolume;
-                    SelectMenu[2].GetComponent<SettingsMenu>().audioMixer.GetFloat("Master", out currentVolume);
-                    SelectMenu[2].GetComponent<SettingsMenu>().synchroVolume(currentVolume);
-                    SelectMenu[2].SetActive(true);                      // active settings menu
-                    SelectMenu[0].SetActive(false);                     // désactive main menu
-                    controls.UI.Disable();                              // disable inputs
+                    SettingsMenuScript.audioMixer.GetFloat("Master", out currentVolume);
+                    SettingsMenuScript.synchroVolume(currentVolume);
+
+                    // call SettingsMenu so it goes back to current script when finished
+                    SettingsMenuScript.Caller("MainMenu");
+                    SettingsMenu.SetActive(true);       // enable SettingsMenu window
+                    this.gameObject.SetActive(false);   // disable MainMenu window
+                    controls.UI.Disable();              // disable MainMenu inputs
+
                     // reactivate SettingsMenu inputs if necessary
-                    if (!SelectMenu[2].GetComponent<SettingsMenu>().controls.UI.enabled) {
-                        SelectMenu[2].GetComponent<SettingsMenu>().Awake();
+                    if (!SettingsMenuScript.controls.UI.enabled) {
+                        SettingsMenuScript.Awake();
                     }
                     break;
-                case 2:
-                    Application.Quit();                                 // leave game
+
+                case 2: // Quit
+                    Application.Quit(); // leave game
                     break;
             }
         }

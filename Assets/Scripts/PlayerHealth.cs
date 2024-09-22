@@ -31,7 +31,8 @@ public class PlayerHealth : MonoBehaviour
     public float shieldCooldown = 5f;           // délai avant réactivation possible du bouclier
     public bool trapResistance = false;         // vrai si le joueur est invulnérable aux pièges
 
-    public GameOver_screen GameOver_Screen;     // Gestion de l'affichage de GameOver
+    public GameObject GameOver;                 // GameOver window
+    private GameOver GameOverScript;            // GameOver.cs
 
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
@@ -54,6 +55,11 @@ public class PlayerHealth : MonoBehaviour
     void Start() {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        // link to GameOver.cs
+        if (!GameOver.TryGetComponent<GameOver>(out GameOverScript)) {
+            Debug.Log("failed to pull GameOver.cs in PlayerHealth.cs");
+        }
     }
 
 
@@ -130,8 +136,8 @@ public class PlayerHealth : MonoBehaviour
 
     /* Appele l'écran de GameOver
     */
-    public void GameOver(string _tag) {
-        GameOver_Screen.Setup(_tag);
+    public void CallGameOver(string _tag) {
+        GameOverScript.Setup(_tag);
     }
 
 
@@ -151,7 +157,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if(currentHealth<=0) {
-            GameOver(transform.tag);
+            CallGameOver(transform.tag);
         }
 
         /*

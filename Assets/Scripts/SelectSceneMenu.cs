@@ -7,31 +7,31 @@ using TMPro;
 
 public class SelectSceneMenu : MonoBehaviour
 {
-    public Sprite[] allImages;              // images des niveaux
-    public string[] imageTitles;            // nom des niveaux
-    public GameObject txt;                  // go du texte du nom des niveaux
-    public GameObject image;                // go de l'image du niveau
-    public int level;                       // indice du niveau actuellement sélectionné
-    private bool _lockPrevious = false;     // lock sur previous
-    private bool _lockNext = false;         // lock sur next
+    public Sprite[] allImages;              // levels pictures
+    public string[] imageTitles;            // pictures names
+    public GameObject txt;                  // level name gameobject
+    public GameObject image;                // level picture gameobject
+    public int level;                       // index of currently selected level
+    private bool _lockPrevious = false;     // lock on previous level
+    private bool _lockNext = false;         // lock on next level
 
     // TODO : SimpleSceneSwing
     private string[] levelToLoad = {"SimpleSceneLalaland","SimpleSceneOmen","SimpleSceneOmen"};
     public PlayerControls controls;         // InputSystem
 
 
-    /* recup les inputs via l'InputActionMap 'UI'
+    /* instantiate inputs
     */
     public void Awake() {
-        controls = new PlayerControls();    // on recup les inputs
-        controls.UI.Enable();
+        controls = new PlayerControls();    // link with script handling inputs
+        controls.UI.Enable();               // listen to 'UI' InputActionMap
         controls.UI.GoLeft.performed += ctx => previousImage();
         controls.UI.GoRight.performed += ctx => nextImage();
         controls.UI.Start.performed += ctx => Launch();
     }
 
 
-    /* init image et nom du niveau
+    /* initialize name and picture of currently selected level
     */
     private void Start() {
         image.GetComponent<Image>().sprite = allImages[level];
@@ -39,8 +39,8 @@ public class SelectSceneMenu : MonoBehaviour
     }
 
 
-    /* affiche l'image et le nom du niveau suivant
-    * lock pour éviter le spam
+    /* display name and picture of next level
+    * lock to avoid spamming
     */
     public void nextImage(){
         if (!_lockNext && gameObject.activeSelf) {
@@ -53,8 +53,8 @@ public class SelectSceneMenu : MonoBehaviour
     }
 
 
-    /* affiche l'image et le nom du niveau précédent
-    * lock pour éviter le spam
+    /* display name and picture of previous level
+    * lock to avoid spamming
     */
     public void previousImage(){
         if (!_lockPrevious && gameObject.activeSelf) {
@@ -69,7 +69,7 @@ public class SelectSceneMenu : MonoBehaviour
     }
 
 
-    /* charge le niveau sélectionné
+    /* load selected level
     */
     private void Launch() {
         if (gameObject.activeSelf) {
@@ -79,7 +79,7 @@ public class SelectSceneMenu : MonoBehaviour
     }
 
 
-    /* lock sur previous
+    /* lock on previous
     */
     IEnumerator lockPrevious() {
         yield return new WaitForSeconds(0.25f);
@@ -87,7 +87,7 @@ public class SelectSceneMenu : MonoBehaviour
     }
 
 
-    /* lock sur next
+    /* lock on next
     */
     IEnumerator lockNext() {
         yield return new WaitForSeconds(0.25f);

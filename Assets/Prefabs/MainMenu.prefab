@@ -406,10 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f9b0217d3fcc55193688d298395e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectMenu:
-  - {fileID: 4385662093025991876}
-  - {fileID: 0}
-  - {fileID: 0}
+  SelectSceneMenu: {fileID: 0}
+  SettingsMenu: {fileID: 0}
   SelectCorners:
   - {fileID: 7603169902592022207}
   - {fileID: 4771643629109089807}

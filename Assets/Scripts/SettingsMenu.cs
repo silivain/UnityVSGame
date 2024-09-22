@@ -5,51 +5,48 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
 
-// menu des paramètres
 public class SettingsMenu : MonoBehaviour //video 17
 {
-	public GameObject[] SelectMenu;     	// tableau contenant les go des différents menus
+	public GameObject[] SelectMenu;     	// gameobjects of all Menus able to call SettingsMenu
 	public Slider volumeSlider;				// volume slider
-	public AudioMixer audioMixer;			// mixer audio du jeu
-	public Dropdown resolutionDropdown;		// menu déroulant des résolutions
-	private Resolution[] resolutions;		// liste des résolutions
+	public AudioMixer audioMixer;			// main AudioMixer
+	public Dropdown resolutionDropdown;		// resolutions dropdown
+	private Resolution[] resolutions;		// resolution list
 	private int resolutionIndex;			// index of current resolution in resolutions[]
     public PlayerControls controls;    		// InputSystem
-    public GameObject[] SelectCorners;  	// tableau des images de selection de menu
-    private int selectIndex = 0;        	// indice désignant le menu actuellement sélectionné
-    private int cornersNb = 4;				// TODO : nombre de settings
-    private bool _fullScreen;				// plein écran
-    public GameObject checkmark;			// checkmarck active si full screen
+    public GameObject[] SelectCorners;  	// selection displays
+    private int selectIndex = 0;        	// index of currently selected display
+    private int cornersNb = 4;				// number of settings
+    private bool _fullScreen;				// full screen
+    public GameObject checkmark;			// checkmarck, active if full screen
     private int called_by = 0;				// index of script to return to (according to SelectMenu array)
     private MainMenu MainMenuScript;		// MainMenu.cs
-    private game_paused PauseMenuScript;	// game_paused.cs
-    private GameOver_screen GameOverScript;	// GameOver_screen.cs
+    private PauseMenu PauseMenuScript;		// PauseMenu.cs
+    private GameOver GameOverScript;		// GameOver.cs
 
 
-    /* recup les inputs via l'InputActionMap 'UI'
+    /* instantiate inputs
     */
     public void Awake() {
-    	controls = new PlayerControls();    // on recup les inputs
-        controls.UI.Enable();
+    	controls = new PlayerControls();	// link with script handling inputs
+        controls.UI.Enable();				// listen to 'UI' InputActionMap
         controls.UI.GoUp.performed += ctx => selectUp();
         controls.UI.GoDown.performed += ctx => selectDown();
         controls.UI.GoLeft.performed += ctx => selectLeft();
         controls.UI.GoRight.performed += ctx => selectRight();
         controls.UI.Start.performed += ctx => selectSetting();
-
-        SelectCorners[selectIndex].SetActive(false);
-        selectIndex = 0;
-        SelectCorners[selectIndex].SetActive(true);
     }
 
 
-	/* au démarrage :
-	* récupère les résolutions de l'écran avec un taux de rafraichissement à 60Hz
-	* crée le menu déroulant correspondant à ces résolutions
-	* applique la résolution par défaut de l'écran
-	* passe en plein écran
+	/* collect available resolutions
+	* create corresponding dropdown
+	* set current resolution to monitor resolution
+	* enable full screen
+
+
 	*/
 	private void Start() {
+		// collect available resolutions
 		resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 		resolutionDropdown.ClearOptions();
 
@@ -60,6 +57,7 @@ public class SettingsMenu : MonoBehaviour //video 17
 			string option = resolutions[i].width + "x" + resolutions[i].height;
 			options.Add(option);
 
+			// look for monitor resolution
 			if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height) {
 				currentResolutionIndex = i;
 			}
@@ -71,6 +69,11 @@ public class SettingsMenu : MonoBehaviour //video 17
 
 		Screen.fullScreen = true;
 		_fullScreen = true;
+
+		// selection display visible and set to default selection
+        SelectCorners[selectIndex].SetActive(false);
+        selectIndex = 0;
+        SelectCorners[selectIndex].SetActive(true);
 	}
 
 
@@ -78,12 +81,12 @@ public class SettingsMenu : MonoBehaviour //video 17
 		so we can go back to the right menu afterwards
 	*/
 	public void Caller(string caller) {
-		if (caller == "game_paused") {
-			called_by = 0;	// index of game_paused in SelectMenu[]
-			PauseMenuScript = SelectMenu[1].GetComponent<game_paused>();
-		}else if (caller == "GameOver_screen") {
-			called_by = 2;	// index of GameOver_screen in SelectMenu[]
-			GameOverScript = SelectMenu[2].GetComponent<GameOver_screen>();
+		if (caller == "PauseMenu") {
+			called_by = 0;	// index of PauseMenu in SelectMenu[]
+			PauseMenuScript = SelectMenu[1].GetComponent<PauseMenu>();
+		}else if (caller == "GameOver") {
+			called_by = 2;	// index of GameOver in SelectMenu[]
+			GameOverScript = SelectMenu[2].GetComponent<GameOver>();
 		}else if (caller == "MainMenu") {
 			called_by = 3;	// index of MainMenu in SelectMenu[]
 			MainMenuScript = SelectMenu[3].GetComponent<MainMenu>();
@@ -91,7 +94,7 @@ public class SettingsMenu : MonoBehaviour //video 17
 	}
 
 
-	/* règle le volume à 'volume'
+	/* set volume to 'volume'
 	*/
 	public void SetVolume(float volume) {
 		audioMixer.SetFloat("Master", volume);
@@ -107,7 +110,7 @@ public class SettingsMenu : MonoBehaviour //video 17
 	}
 
 
-	/* active ou désactive le plein écran
+	/* enable/disable full screen
 	*/
 	public void SetFullScreen(bool isFullScreen) {
 		Screen.fullScreen = isFullScreen;
@@ -115,11 +118,17 @@ public class SettingsMenu : MonoBehaviour //video 17
 	}
 
 
-	/* règle la résolution sur resolutions['resolutionIndex']
+	/* set resolution to resolutions['resIndex']
 	*/
 	public void SetResolution(int resIndex) {
 		Resolution resolution = resolutions[resIndex];
 		bool backToFullScreen = false;
+
+		/* TODO : this was an attempt to avoid a buggy window when
+		* setting resolution to monitor resolution
+		* similar bug happens when switching to non full screen and not in monitor resolution
+		* not working so far, see Build0.13
+		*/
 		if (resolution.width == Screen.width && resolution.height == Screen.height
 			&& _fullScreen) {
 			SetFullScreen(!_fullScreen);
@@ -128,6 +137,8 @@ public class SettingsMenu : MonoBehaviour //video 17
 		resolutionDropdown.value = resIndex;
 		resolutionDropdown.RefreshShownValue();
 		Screen.SetResolution(resolution.width, resolution.height, _fullScreen);
+
+		// TODO : read above
 		if (backToFullScreen) {
 			SetFullScreen(!_fullScreen);
 		}
@@ -166,8 +177,8 @@ public class SettingsMenu : MonoBehaviour //video 17
 	}
 
 
-	/* Déplace la sélection vers le haut
-    * met à jour l'index
+	/* Move selection display upward
+    * update index
     */
     private void selectUp() {
         int tempIndex = selectIndex;
@@ -177,8 +188,8 @@ public class SettingsMenu : MonoBehaviour //video 17
     }
 
 
-    /* Déplace la sélection vers le bas
-    * met à jour l'index
+    /* Move selection display downward
+    * update index
     */
     private void selectDown() {
         int tempIndex = selectIndex;
@@ -193,18 +204,26 @@ public class SettingsMenu : MonoBehaviour //video 17
     private void selectSetting() {
         if (gameObject.activeSelf) {
             switch(selectIndex) {
-                case 0:		// resolution
+                case 0:	// resolution
                     break;
-                case 1:		// full screen
+
+                case 1:	// full screen
                 	checkmark.SetActive(!_fullScreen);	// enable or disable checkmarck
                     SetFullScreen(!_fullScreen);		// enable or disable full screen
                     break;
-                case 2:		// volume
+
+                case 2:	// volume
                 	break;
-                case 3:		// back to previous menu
+
+                case 3:	// back to previous menu
                 	SelectMenu[called_by].SetActive(true);	// enable calling menu
                     this.gameObject.SetActive(false);		// disable settings menu
 					controls.UI.Disable();					// disable inputs
+
+					// selection display visible and set to default selection
+        			SelectCorners[selectIndex].SetActive(false);
+			        selectIndex = 0;
+        			SelectCorners[selectIndex].SetActive(true);
 
 					// enable inputs of calling script if necessary
 					switch(called_by) {

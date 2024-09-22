@@ -75,7 +75,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     // nombre actuel de collectables dans la scène
     currentWeapon = GameObject.FindGameObjectsWithTag("Weapon").Length;
-	currentHeal = GameObject.FindGameObjectsWithTag("Heal").Length;
+	  currentHeal = GameObject.FindGameObjectsWithTag("Heal").Length;
     currentBonus = GameObject.FindGameObjectsWithTag("AmmunitionBonus").Length
         + GameObject.FindGameObjectsWithTag("DamageBonus").Length
         + GameObject.FindGameObjectsWithTag("SpeedBonus").Length;
