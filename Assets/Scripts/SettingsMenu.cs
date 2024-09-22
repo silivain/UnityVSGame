@@ -8,18 +8,22 @@ using System.Linq;
 // menu des paramètres
 public class SettingsMenu : MonoBehaviour //video 17
 {
-	public GameObject[] SelectMenu;                 // tableau contenant les go des différents menus
-	public Slider volumeSlider;						// volume slider
-	public AudioMixer audioMixer;					// mixer audio du jeu
-	public Dropdown resolutionDropdown;				// menu déroulant des résolutions
-	private Resolution[] resolutions;				// liste des résolutions
-	private int resolutionIndex;					// index of current resolution in resolutions[]
-    public PlayerControls controls;     			// InputSystem
-    public GameObject[] SelectCorners;  			// tableau des images de selection de menu
-    private int selectIndex;        				// indice désignant le menu actuellement sélectionné
-    private int cornersNb = 4;						// TODO : nombre de settings
-    private bool _fullScreen;						// plein écran
-    public GameObject checkmark;					// checkmarck active si full screen
+	public GameObject[] SelectMenu;     	// tableau contenant les go des différents menus
+	public Slider volumeSlider;				// volume slider
+	public AudioMixer audioMixer;			// mixer audio du jeu
+	public Dropdown resolutionDropdown;		// menu déroulant des résolutions
+	private Resolution[] resolutions;		// liste des résolutions
+	private int resolutionIndex;			// index of current resolution in resolutions[]
+    public PlayerControls controls;    		// InputSystem
+    public GameObject[] SelectCorners;  	// tableau des images de selection de menu
+    private int selectIndex = 0;        	// indice désignant le menu actuellement sélectionné
+    private int cornersNb = 4;				// TODO : nombre de settings
+    private bool _fullScreen;				// plein écran
+    public GameObject checkmark;			// checkmarck active si full screen
+    private int called_by = 0;				// index of script to return to (according to SelectMenu array)
+    private MainMenu MainMenuScript;		// MainMenu.cs
+    private game_paused PauseMenuScript;	// game_paused.cs
+    private GameOver_screen GameOverScript;	// GameOver_screen.cs
 
 
     /* recup les inputs via l'InputActionMap 'UI'
@@ -67,6 +71,23 @@ public class SettingsMenu : MonoBehaviour //video 17
 
 		Screen.fullScreen = true;
 		_fullScreen = true;
+	}
+
+
+	/*	Register the script activating settings menu
+		so we can go back to the right menu afterwards
+	*/
+	public void Caller(string caller) {
+		if (caller == "game_paused") {
+			called_by = 0;	// index of game_paused in SelectMenu[]
+			PauseMenuScript = SelectMenu[1].GetComponent<game_paused>();
+		}else if (caller == "GameOver_screen") {
+			called_by = 2;	// index of GameOver_screen in SelectMenu[]
+			GameOverScript = SelectMenu[2].GetComponent<GameOver_screen>();
+		}else if (caller == "MainMenu") {
+			called_by = 3;	// index of MainMenu in SelectMenu[]
+			MainMenuScript = SelectMenu[3].GetComponent<MainMenu>();
+		}
 	}
 
 
@@ -167,27 +188,41 @@ public class SettingsMenu : MonoBehaviour //video 17
     }
 
 
-    /* Active la scène rattachée au bouton actuellement sélectionné
+    /* Interacts with currently selected setting
     */
     private void selectSetting() {
         if (gameObject.activeSelf) {
             switch(selectIndex) {
-                case 0:
-                    // TODO : affiche le menu déroulant
+                case 0:		// resolution
                     break;
-                case 1:
-                	checkmark.SetActive(!_fullScreen);	// active ou désactive la checkmarck
-                    SetFullScreen(!_fullScreen);		// active ou désactive le plein écran
+                case 1:		// full screen
+                	checkmark.SetActive(!_fullScreen);	// enable or disable checkmarck
+                    SetFullScreen(!_fullScreen);		// enable or disable full screen
                     break;
-                case 2:
+                case 2:		// volume
                 	break;
-                case 3:
-                	SelectMenu[1].SetActive(true);					// active main menu
-                    SelectMenu[0].SetActive(false);					// désactive settings menu
-					controls.UI.Disable();							// disable inputs
-                    // reactivate MainMenu inputs if necessary
-					if (!SelectMenu[1].GetComponent<MainMenu>().controls.UI.enabled) {
-						SelectMenu[1].GetComponent<MainMenu>().Awake();
+                case 3:		// back to previous menu
+                	SelectMenu[called_by].SetActive(true);	// enable calling menu
+                    this.gameObject.SetActive(false);		// disable settings menu
+					controls.UI.Disable();					// disable inputs
+
+					// enable inputs of calling script if necessary
+					switch(called_by) {
+						case 0:
+							if (!PauseMenuScript.controls.UI.enabled) {
+								PauseMenuScript.controls.UI.Enable();
+							}
+							break;
+						case 2:
+							if (!GameOverScript.controls.UI.enabled) {
+								GameOverScript.controls.UI.Enable();
+							}
+							break;
+						case 3:
+							if (!MainMenuScript.controls.UI.enabled) {
+								MainMenuScript.controls.UI.Enable();
+							}
+							break;
 					}
                     break;
             }

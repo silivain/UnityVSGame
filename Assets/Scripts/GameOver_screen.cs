@@ -11,20 +11,21 @@ using UnityEngine.UI;
 */
 public class GameOver_screen : MonoBehaviour
 {   
-    public GameObject[] SelectMenu;     // array with menus to enable/disable
-    public GameObject[] SelectCorners;  // tableau des images de selection de menu
-    private int selectIndex = 0;        // indice désignant le menu actuellement sélectionné
-    public PlayerControls controls;     // contrôles du joueur
+    public GameObject[] SelectCorners;      // tableau des images de selection de menu
+    private int selectIndex = 0;            // indice désignant le menu actuellement sélectionné
+    public PlayerControls controls;         // contrôles du joueur
 
-    public Text textFinPartie;          // texte de fin de partie
-    public AudioSource currentMusic;    // musique de combat
-    public AudioSource gameOverMusic;   // musique du menu GameOver
-    private float delay = 1f;           // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
+    public Text textFinPartie;              // texte de fin de partie
+    public AudioSource currentMusic;        // musique de combat
+    public AudioSource gameOverMusic;       // musique du menu GameOver
+    private float delay = 1f;               // durée pdnt laquelle les ctrls sont bloqués à l'apparition du GO screen
 
-    public GameObject[] UIToDisable;    // éléments à désactiver lors de la fin de partie (barres vie, muns etc)
-    public GameObject Player1;          // access to Player1 scripts
-    public GameObject Player2;          // access to Player2 scripts
-    public GameObject PauseMenu;        // access to PauseMenu
+    public GameObject[] UIToDisable;        // éléments à désactiver lors de la fin de partie (barres vie, muns etc)
+    public GameObject Player1;              // access to Player1 scripts
+    public GameObject Player2;              // access to Player2 scripts
+    public GameObject PauseMenu;            // access to PauseMenu
+    public GameObject SettingsMenu;         // SettingsMenu window
+    private SettingsMenu SettingsMenuScript;   // SettingsMenu.cs
 
 
     // récupère la gestion des inputs
@@ -43,6 +44,10 @@ public class GameOver_screen : MonoBehaviour
         SelectCorners[selectIndex].SetActive(false);
         selectIndex = 0;
         SelectCorners[selectIndex].SetActive(true);
+
+        if (!SettingsMenu.TryGetComponent<SettingsMenu>(out SettingsMenuScript)) {
+            Debug.Log("failed to pull SettingsMenu.cs in game_paused.cs");
+        }
     }
 
 
@@ -127,19 +132,19 @@ public class GameOver_screen : MonoBehaviour
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  // reload current level
                     break;
                 case 1:
-                    SelectMenu[1].GetComponent<SettingsMenu_InGame>().Caller("GameOver_screen");
+                    SettingsMenuScript.Caller("GameOver_screen");
 
                     // set the volume slider value in settings to the current volume value
                     float currentVolume;
-                    SelectMenu[1].GetComponent<SettingsMenu_InGame>().audioMixer.GetFloat("Master", out currentVolume);
-                    SelectMenu[1].GetComponent<SettingsMenu_InGame>().synchroVolume(currentVolume);
-                    SelectMenu[1].SetActive(true);          // active settings menu
-                    SelectMenu[0].SetActive(false);         // désactive GO menu
+                    SettingsMenuScript.audioMixer.GetFloat("Master", out currentVolume);
+                    SettingsMenuScript.synchroVolume(currentVolume);
+                    SettingsMenu.SetActive(true);          // active settings menu
+                    this.gameObject.SetActive(false);       // désactive GO menu
                     controls.UI.Disable();                  // disable inputs
 
                     // reactivate SettingsMenu inputs if necessary
-                    if (!SelectMenu[1].GetComponent<SettingsMenu_InGame>().controls.UI.enabled) {
-                        SelectMenu[1].GetComponent<SettingsMenu_InGame>().Awake();
+                    if (!SettingsMenuScript.controls.UI.enabled) {
+                        SettingsMenuScript.Awake();
                     }
                     break;
                 case 2:

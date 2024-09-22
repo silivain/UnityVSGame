@@ -1543,30 +1543,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995671417}
     m_Modifications:
-    - target: {fileID: 3056486554139562518, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: SelectMenu.Array.data[1]
+    - target: {fileID: 88527232, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
+      propertyPath: SelectMenu.Array.data[3]
       value: 
       objectReference: {fileID: 206871198}
     - target: {fileID: 3056486554139562729, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
       propertyPath: m_Name
       value: SettingsMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486554160104247, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486554160104247, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486554160104247, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3056486554923491806, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
