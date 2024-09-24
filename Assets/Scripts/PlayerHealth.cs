@@ -4,32 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// système de vie des joueurs
+// Handles players health
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;	// vie max du joueur
-    public int currentHealth;	// vie courante du joueur
+    public int maxHealth = 100;	// player max hp
+    public int currentHealth;	// player current hp
 
-    /* système d'invincibilité après prise de dégats
+    /* TODO : invincibility system after hit
     public float invincibilityTimeAfterHit = 3f;
     public float invincibilityFlashDelay = 0.15f;
     public bool isInvincible = false;
     */
 
     //public SpriteRenderer graphics;
-    public HealthBar healthBar;	// barre de vie du joueur
-    public Transform player;	// transform du joueur
+    public HealthBar healthBar;	// player health bar
+    public Transform player;	// player transform
 
-    public static PlayerHealth instance;    	// instance de la classe
-	public static string[] heals = {"Bandage"};	// noms des différents heals
-	private static int[] healValues = {5};		// puissance des différents heals
+    public static PlayerHealth instance;    	// class instance
+	public static string[] heals = {"Bandage"};	// names of different heal types
+	private static int[] healValues = {5};		// power of different heal types
 
 
-    public GameObject shield;                   // shield du joueur
-    public KeyCode shieldKey;                   // touche du shield
-    private bool shieldReady = true;            // booléen vrai si le bouclier est prêt à être utilisé
-    public float shieldCooldown = 5f;           // délai avant réactivation possible du bouclier
-    public bool trapResistance = false;         // vrai si le joueur est invulnérable aux pièges
+    public GameObject shield;                   // player shield GO
+    public KeyCode shieldKey;                   // shield key code
+    private bool shieldReady = true;            // true if shield not on cooldown
+    public float shieldCooldown = 5f;           // shield cooldown
+    public bool trapResistance = false;         // true if player not vulnerable to traps
 
     public GameObject GameOver;                 // GameOver window
     private GameOver GameOverScript;            // GameOver.cs
@@ -37,20 +37,30 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip shieldAudio;               // audio list
     public AudioSource audioSource;             // audio source
 
-    public PlayerControls controls;             // script gérant les inputs du joueur
+    public PlayerControls controls;             // player inputs
+    private bool devMode = false;               // can call KillP2 if true
 
 
+    /* instantiate inputs
+    */
     private void Awake() {
-        controls = new PlayerControls();    // on recup le script qui gère les inputs
-        controlPlayer();                    // récupère les inputs du joueur
-                                            // attente passive -> pas besoin d'être dans update
+        controls = new PlayerControls();    // link with script handling inputs
+        if (transform.tag == "Player 1") {  // listen to appropriate InputActionMap
+            controls.Player1.Enable();
+            controls.Player1.Shield.performed += ctx => Shield();
+        }else if (transform.tag == "Player 2"){
+            controls.Player2.Enable();
+            controls.Player2.Shield.performed += ctx => Shield();
+        }
+        controls.DevMode.Enable();
+        controls.DevMode.KillP2.performed += ctx => KillP2();
 
-        // récupère les devices propres au joueur : clavier, souris et sa manette
+        // link proper device to the player (mouse + keyboard/controler)
         controls.devices = InputTools.inputSelect(transform.tag);
     }
 
 
-    /* remplit la vie et la barre de vie du joueur au démarrage
+    /* set player health and health bar to full capacity
 	*/
     void Start() {
         currentHealth = maxHealth;
@@ -63,24 +73,9 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    /* active la bonne InputActionMap selon le joueur
-    * récupère l'input 'Shield'
-    */
-    private void controlPlayer() {
-        if (transform.tag == "Player 1") {
-            controls.Player1.Enable();
-            controls.Player1.Shield.performed += ctx => Shield();
-        }else if (transform.tag == "Player 2"){
-            controls.Player2.Enable();
-            controls.Player2.Shield.performed += ctx => Shield();
-        }
-    }
-
-
-    /* active le shield lorsque la touche correspondante est activée
-    * déclenche le cooldown de 'shieldCooldown' secondes
-    * vérifie que le compte à rebours est fini via this.Enabled
-    * vérifie qu'on est pas sur le menu pause ou gameover via Time.timeScale
+    /* active shield on button pressed, check if cooldown finished
+    * initiate shield cooldown
+    * check if game is playing (and not paused)
     */
     private void Shield()
     {   
@@ -92,7 +87,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    /* heal le joueur de 'amount' pv, et met à jour la barre de vie
+    /* heal player 'amount' hp, update health bar
     */
     public void HealPlayer(int amount) {
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
@@ -100,11 +95,11 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    /* heal le joueur en fonction du GO ramassé
+    /* heal player depending on collectable
     */
     public void HealPlayerGO(GameObject heal) {
 
-        // on récupère le nom du heal ramassé
+        // collected heal name
         string hName = heal.name;
         if (hName.Substring(0, Math.Min(4, hName.Length)) == "Heal") {
             hName = hName.Substring(4, hName.Length - 4);
@@ -114,7 +109,7 @@ public class PlayerHealth : MonoBehaviour
             hName = hName.Substring(0, hName.Length - 5);
         }
 
-        // on récupère la taille du plus petit nom de heal
+        // shortest heal name
         int shortestHealName = heals[0].Length;
         for(int i = 1; i < heals.Length; ++i) {
             if (heals[i].Length < shortestHealName) {
@@ -122,8 +117,8 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        /* on récupère le healID correspondant au nom du heal
-        * on applique le soin correspondant
+        /* find healID corresponding to collected heal
+        * heal player, update health bar
         */
         Predicate<string> checkHeal = arrayEl => arrayEl.Substring(0, shortestHealName) == hName.Substring(0, shortestHealName);
         int healID = Array.FindIndex(heals, checkHeal);
@@ -134,22 +129,20 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    /* Appele l'écran de GameOver
+    /* Call GameOver screen
     */
     public void CallGameOver(string _tag) {
         GameOverScript.Setup(_tag);
     }
 
 
-    /* inflige 'damage' dégats au joueur, et met à jour la barre de vie
+    /* deals 'damage' dmgs to the player, update health bar
     */
     public void TakeDamage(int damage) {
 
         if (!shield.activeSelf) {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthBar.SetHealth(currentHealth);
-            /*Debug.Log("dégats infligés : " + damage
-                + "\ncurrentHealth = " + currentHealth);*/
         }
 
         if (shield.activeSelf) {
@@ -178,8 +171,8 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-	/* respawn le joueur au respawn point courant à la mort du joueur
-	* reset ses stats
+	/* respawn player at respawn location
+	* reset his stats
 	*/
     public void Respawn() { //video16
       PlayerMovement.instance.enabled = true;
@@ -192,7 +185,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     /*
-	* affichage d'un clignotement pdnt la période d'invincibilité
+	* flashy display during invincibility timelapse
     public IEnumerator InvincibilityFlash()
     {
       while(isInvincible)
@@ -205,8 +198,9 @@ public class PlayerHealth : MonoBehaviour
     }
     */
 
+
     /*
-	* mécanisme de durée de l'invincibilité
+	* handle invincibility duration
     public IEnumerator HandleInvincibilityDelay()
     {
       yield return new WaitForSeconds(invincibilityTimeAfterHit);
@@ -214,6 +208,9 @@ public class PlayerHealth : MonoBehaviour
     }
     */
 
+
+    /* handle shield cooldown
+    */
     IEnumerator cooldownShield() {
         if (!shieldReady) {
             yield return new WaitForSeconds(1f);
@@ -225,15 +222,25 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-	/* appelle la méthode de heal avec le nom du GO
-    * lorsque le joueur entre en contact avec un heal
-    * détruit le heal après l'appel
+	/* when collecting a heal
+    * call proper heal function with GO name
+    * destroy collectable
     */
 	private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Heal")) {
 			HealPlayerGO(collision.gameObject);
 			CurrentSceneManager.instance.CollectedHeal(collision.transform.position);
     		Destroy(collision.gameObject);
+        }
+    }
+
+
+    /* call "CallGameOver" with tag "Player2"
+    * direct ingame access to GameOver screen
+    */
+    private void KillP2() {
+        if (devMode) {
+            CallGameOver("Player 2");
         }
     }
 }

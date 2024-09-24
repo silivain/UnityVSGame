@@ -822,6 +822,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DevMode",
+            "id": "9d7ab7d9-f584-4dc3-bdd4-0c18352ae68f",
+            "actions": [
+                {
+                    "name": "KillP2",
+                    "type": "Button",
+                    "id": "6bca8857-41cc-4654-b803-d5e1ba313870",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2ca7f58b-27f1-49ee-aad4-f713a22a1184",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "KillP2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

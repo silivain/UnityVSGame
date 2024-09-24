@@ -844,6 +844,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""DevMode"",
+            ""id"": ""9d7ab7d9-f584-4dc3-bdd4-0c18352ae68f"",
+            ""actions"": [
+                {
+                    ""name"": ""KillP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""6bca8857-41cc-4654-b803-d5e1ba313870"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2ca7f58b-27f1-49ee-aad4-f713a22a1184"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""KillP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -896,6 +924,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_UI_GoUp = m_UI.FindAction("GoUp", throwIfNotFound: true);
         m_UI_GoDown = m_UI.FindAction("GoDown", throwIfNotFound: true);
         m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
+        // DevMode
+        m_DevMode = asset.FindActionMap("DevMode", throwIfNotFound: true);
+        m_DevMode_KillP2 = m_DevMode.FindAction("KillP2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1178,6 +1209,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // DevMode
+    private readonly InputActionMap m_DevMode;
+    private IDevModeActions m_DevModeActionsCallbackInterface;
+    private readonly InputAction m_DevMode_KillP2;
+    public struct DevModeActions
+    {
+        private @PlayerControls m_Wrapper;
+        public DevModeActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @KillP2 => m_Wrapper.m_DevMode_KillP2;
+        public InputActionMap Get() { return m_Wrapper.m_DevMode; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DevModeActions set) { return set.Get(); }
+        public void SetCallbacks(IDevModeActions instance)
+        {
+            if (m_Wrapper.m_DevModeActionsCallbackInterface != null)
+            {
+                @KillP2.started -= m_Wrapper.m_DevModeActionsCallbackInterface.OnKillP2;
+                @KillP2.performed -= m_Wrapper.m_DevModeActionsCallbackInterface.OnKillP2;
+                @KillP2.canceled -= m_Wrapper.m_DevModeActionsCallbackInterface.OnKillP2;
+            }
+            m_Wrapper.m_DevModeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @KillP2.started += instance.OnKillP2;
+                @KillP2.performed += instance.OnKillP2;
+                @KillP2.canceled += instance.OnKillP2;
+            }
+        }
+    }
+    public DevModeActions @DevMode => new DevModeActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -1223,5 +1287,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnGoUp(InputAction.CallbackContext context);
         void OnGoDown(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
+    }
+    public interface IDevModeActions
+    {
+        void OnKillP2(InputAction.CallbackContext context);
     }
 }
