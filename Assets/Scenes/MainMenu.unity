@@ -1545,43 +1545,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1995671417}
     m_Modifications:
     - target: {fileID: 88527232, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
+      propertyPath: InputSettingsMenu
+      value: 
+      objectReference: {fileID: 4074896633819860257}
+    - target: {fileID: 88527232, guid: 22652c626b9c39b1bbc9ecacd22be8e1, type: 3}
       propertyPath: SelectMenu.Array.data[3]
       value: 
       objectReference: {fileID: 206871198}
-    - target: {fileID: 3056486553483729908, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486553483729908, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486553581689817, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3056486554139562729, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
       propertyPath: m_Name
       value: SettingsMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3056486554139562729, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3056486554923491806, guid: 22652c626b9c39b1bbc9ecacd22be8e1,
         type: 3}
@@ -1708,11 +1682,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputSettings
       objectReference: {fileID: 0}
-    - target: {fileID: 1420639195141145945, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1420639196051502702, guid: b23a466e37f96a1e19898ae5d30d4847,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1818,43 +1787,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
+    - target: {fileID: 4074896633819860258, guid: b23a466e37f96a1e19898ae5d30d4847,
         type: 3}
-      propertyPath: checkmark
+      propertyPath: SettingsMenu
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: volumeSlider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: resolutionDropdown
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: SelectMenu.Array.data[3]
-      value: 
-      objectReference: {fileID: 206871198}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: SelectCorners.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: SelectCorners.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4169714786249688624, guid: b23a466e37f96a1e19898ae5d30d4847,
-        type: 3}
-      propertyPath: SelectCorners.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 88527231}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23a466e37f96a1e19898ae5d30d4847, type: 3}
+--- !u!1 &4074896633819860257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1420639195141145945, guid: b23a466e37f96a1e19898ae5d30d4847,
+    type: 3}
+  m_PrefabInstance: {fileID: 4074896633819860256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4385662093095945818
 PrefabInstance:
   m_ObjectHideFlags: 0

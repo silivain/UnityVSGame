@@ -225,14 +225,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420639196051502702}
-  - component: {fileID: 4169714786249688624}
+  - component: {fileID: 4074896633819860258}
   m_Layer: 5
   m_Name: InputSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1420639196051502702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420639195141145945}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -257,7 +257,7 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: -25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4169714786249688624
+--- !u!114 &4074896633819860258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,23 +266,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1420639195141145945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63cd48a77817cf31bb5ff4445ff3c529, type: 3}
+  m_Script: {fileID: 11500000, guid: e29e4d4e66b58ce44a0da8286c103d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectMenu:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  volumeSlider: {fileID: 0}
-  audioMixer: {fileID: 24100000, guid: 8ab383efe4f3f6c5aacfeb31071eac03, type: 2}
-  resolutionDropdown: {fileID: 0}
   SelectCorners:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1420639195882767016}
-  checkmark: {fileID: 0}
+  SettingsMenu: {fileID: 0}
 --- !u!1 &1420639195272126796
 GameObject:
   m_ObjectHideFlags: 0

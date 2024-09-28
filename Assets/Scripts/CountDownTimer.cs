@@ -14,7 +14,7 @@ public class CountDownTimer : MonoBehaviour
     public GameObject p1;           // Player1 GameObject
     public GameObject p2;           // Player2 GameObject
     public bool start = true;       // true as long as countdown aint finished
-    private bool devMode = false;   // skip countdown if true
+    private bool devMode = true;   // skip countdown if true
 
 
     /* display "ready ?" on screen

@@ -16,13 +16,15 @@ public class SettingsMenu : MonoBehaviour //video 17
     public PlayerControls controls;    		// InputSystem
     public GameObject[] SelectCorners;  	// selection displays
     private int selectIndex = 0;        	// index of currently selected display
-    private int cornersNb = 4;				// number of settings
+    private int cornersNb = 5;				// number of settings
     private bool _fullScreen;				// full screen
     public GameObject checkmark;			// checkmarck, active if full screen
     private int called_by = 0;				// index of script to return to (according to SelectMenu array)
+    public GameObject InputSettingsMenu;	// inputs settings menu gameobject
     private MainMenu MainMenuScript;		// MainMenu.cs
     private PauseMenu PauseMenuScript;		// PauseMenu.cs
     private GameOver GameOverScript;		// GameOver.cs
+    private InputSettingsMenu InputSettingsMenuScript; // InputSettingsMenu.cs
 
 
     /* instantiate inputs
@@ -42,8 +44,6 @@ public class SettingsMenu : MonoBehaviour //video 17
 	* create corresponding dropdown
 	* set current resolution to monitor resolution
 	* enable full screen
-
-
 	*/
 	private void Start() {
 		// collect available resolutions
@@ -74,6 +74,11 @@ public class SettingsMenu : MonoBehaviour //video 17
         SelectCorners[selectIndex].SetActive(false);
         selectIndex = 0;
         SelectCorners[selectIndex].SetActive(true);
+
+        // link to InputSettingsMenu.cs
+        if (!InputSettingsMenu.TryGetComponent<InputSettingsMenu>(out InputSettingsMenuScript)) {
+            Debug.Log("failed to pull InputSettingsMenu.cs in SettingsMenu.cs");
+        }
 	}
 
 
@@ -215,7 +220,18 @@ public class SettingsMenu : MonoBehaviour //video 17
                 case 2:	// volume
                 	break;
 
-                case 3:	// back to previous menu
+                case 3: // Input settings
+                	InputSettingsMenu.SetActive(true);		// enable input settings menu
+                    this.gameObject.SetActive(false);		// disable settings menu
+					controls.UI.Disable();					// disable inputs
+
+        			// enable inputs of settings menu script if necessary
+        			if (!InputSettingsMenuScript.controls.UI.enabled) {
+						InputSettingsMenuScript.controls.UI.Enable();
+					}
+        			break;
+
+                case 4:	// back to previous menu
                 	SelectMenu[called_by].SetActive(true);	// enable calling menu
                     this.gameObject.SetActive(false);		// disable settings menu
 					controls.UI.Disable();					// disable inputs
